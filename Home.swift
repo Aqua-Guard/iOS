@@ -19,8 +19,18 @@ struct Home: View {
             Drawer(animation: animation)
             // Main View
             
-            TabView{
-                Text("Home")
+            TabView(selection: $menuData.selectedMenu){
+                
+                My_Calendar()
+                    .tag("My Calendar")
+                Notification()
+                    .tag("Notification")
+                My_Posts()
+                    .tag("My Events")
+                My_Events()
+                    .tag("My Posts")
+                Command()
+                    .tag("My Command")
             }
             .frame(width: UIScreen.main.bounds.width)
         }
