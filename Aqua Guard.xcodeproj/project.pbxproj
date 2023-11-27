@@ -10,6 +10,8 @@
 		D45E7A922B14B0F2000F0A9C /* SplashScreen2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E7A912B14B0F2000F0A9C /* SplashScreen2View.swift */; };
 		D45E7A942B14B16D000F0A9C /* SplashScreen3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E7A932B14B16D000F0A9C /* SplashScreen3View.swift */; };
 		D45E7A962B14B290000F0A9C /* SplashScreen4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E7A952B14B290000F0A9C /* SplashScreen4View.swift */; };
+		D4BFF9852B14FE710050DC80 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BFF9842B14FE710050DC80 /* Event.swift */; };
+		D4BFF9872B15005D0050DC80 /* Participation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BFF9862B15005D0050DC80 /* Participation.swift */; };
 		D4C23E332B148B30002B0E10 /* Aqua_GuardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E322B148B30002B0E10 /* Aqua_GuardApp.swift */; };
 		D4C23E352B148B30002B0E10 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E342B148B30002B0E10 /* ContentView.swift */; };
 		D4C23E372B148B31002B0E10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4C23E362B148B31002B0E10 /* Assets.xcassets */; };
@@ -44,6 +46,8 @@
 		D45E7A912B14B0F2000F0A9C /* SplashScreen2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen2View.swift; sourceTree = "<group>"; };
 		D45E7A932B14B16D000F0A9C /* SplashScreen3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen3View.swift; sourceTree = "<group>"; };
 		D45E7A952B14B290000F0A9C /* SplashScreen4View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen4View.swift; sourceTree = "<group>"; };
+		D4BFF9842B14FE710050DC80 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		D4BFF9862B15005D0050DC80 /* Participation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Participation.swift; sourceTree = "<group>"; };
 		D4C23E2F2B148B30002B0E10 /* Aqua Guard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Aqua Guard.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4C23E322B148B30002B0E10 /* Aqua_GuardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aqua_GuardApp.swift; sourceTree = "<group>"; };
 		D4C23E342B148B30002B0E10 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -111,6 +115,15 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		D4BFF9832B14FE530050DC80 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D4BFF9842B14FE710050DC80 /* Event.swift */,
+				D4BFF9862B15005D0050DC80 /* Participation.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		D4C23E262B148B30002B0E10 = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +147,7 @@
 		D4C23E312B148B30002B0E10 /* Aqua Guard */ = {
 			isa = PBXGroup;
 			children = (
+				D4BFF9832B14FE530050DC80 /* Models */,
 				D45E7A992B14BEBB000F0A9C /* view */,
 				D45E7A982B14BD41000F0A9C /* menu */,
 				D45E7A972B14BCAB000F0A9C /* splashScreens */,
@@ -305,7 +319,9 @@
 				D45E7A922B14B0F2000F0A9C /* SplashScreen2View.swift in Sources */,
 				D4C23E3C2B148B31002B0E10 /* Persistence.swift in Sources */,
 				D4C23E3F2B148B31002B0E10 /* Aqua_Guard.xcdatamodeld in Sources */,
+				D4BFF9872B15005D0050DC80 /* Participation.swift in Sources */,
 				D45E7A942B14B16D000F0A9C /* SplashScreen3View.swift in Sources */,
+				D4BFF9852B14FE710050DC80 /* Event.swift in Sources */,
 				D4C23E642B149FDC002B0E10 /* SplashScreenView.swift in Sources */,
 				D4C23E352B148B30002B0E10 /* ContentView.swift in Sources */,
 				D45E7A962B14B290000F0A9C /* SplashScreen4View.swift in Sources */,
