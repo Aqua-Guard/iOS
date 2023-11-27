@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D45E7A922B14B0F2000F0A9C /* SplashScreen2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E7A912B14B0F2000F0A9C /* SplashScreen2View.swift */; };
+		D45E7A942B14B16D000F0A9C /* SplashScreen3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E7A932B14B16D000F0A9C /* SplashScreen3View.swift */; };
+		D45E7A962B14B290000F0A9C /* SplashScreen4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E7A952B14B290000F0A9C /* SplashScreen4View.swift */; };
 		D4C23E332B148B30002B0E10 /* Aqua_GuardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E322B148B30002B0E10 /* Aqua_GuardApp.swift */; };
 		D4C23E352B148B30002B0E10 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E342B148B30002B0E10 /* ContentView.swift */; };
 		D4C23E372B148B31002B0E10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4C23E362B148B31002B0E10 /* Assets.xcassets */; };
@@ -16,6 +19,8 @@
 		D4C23E492B148B31002B0E10 /* Aqua_GuardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E482B148B31002B0E10 /* Aqua_GuardTests.swift */; };
 		D4C23E532B148B31002B0E10 /* Aqua_GuardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E522B148B31002B0E10 /* Aqua_GuardUITests.swift */; };
 		D4C23E552B148B31002B0E10 /* Aqua_GuardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E542B148B31002B0E10 /* Aqua_GuardUITestsLaunchTests.swift */; };
+		D4C23E642B149FDC002B0E10 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E632B149FDC002B0E10 /* SplashScreenView.swift */; };
+		D4C23E662B14A8A3002B0E10 /* SplashScreen1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E652B14A8A3002B0E10 /* SplashScreen1View.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +41,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D45E7A912B14B0F2000F0A9C /* SplashScreen2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen2View.swift; sourceTree = "<group>"; };
+		D45E7A932B14B16D000F0A9C /* SplashScreen3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen3View.swift; sourceTree = "<group>"; };
+		D45E7A952B14B290000F0A9C /* SplashScreen4View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen4View.swift; sourceTree = "<group>"; };
 		D4C23E2F2B148B30002B0E10 /* Aqua Guard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Aqua Guard.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4C23E322B148B30002B0E10 /* Aqua_GuardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aqua_GuardApp.swift; sourceTree = "<group>"; };
 		D4C23E342B148B30002B0E10 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -48,6 +56,8 @@
 		D4C23E4E2B148B31002B0E10 /* Aqua GuardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Aqua GuardUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4C23E522B148B31002B0E10 /* Aqua_GuardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aqua_GuardUITests.swift; sourceTree = "<group>"; };
 		D4C23E542B148B31002B0E10 /* Aqua_GuardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aqua_GuardUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D4C23E632B149FDC002B0E10 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
+		D4C23E652B14A8A3002B0E10 /* SplashScreen1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen1View.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +85,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D45E7A972B14BCAB000F0A9C /* splashScreens */ = {
+			isa = PBXGroup;
+			children = (
+				D4C23E632B149FDC002B0E10 /* SplashScreenView.swift */,
+				D4C23E652B14A8A3002B0E10 /* SplashScreen1View.swift */,
+				D45E7A912B14B0F2000F0A9C /* SplashScreen2View.swift */,
+				D45E7A932B14B16D000F0A9C /* SplashScreen3View.swift */,
+				D45E7A952B14B290000F0A9C /* SplashScreen4View.swift */,
+			);
+			path = splashScreens;
+			sourceTree = "<group>";
+		};
+		D45E7A982B14BD41000F0A9C /* menu */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = menu;
+			sourceTree = "<group>";
+		};
+		D45E7A992B14BEBB000F0A9C /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		D4C23E262B148B30002B0E10 = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +134,9 @@
 		D4C23E312B148B30002B0E10 /* Aqua Guard */ = {
 			isa = PBXGroup;
 			children = (
+				D45E7A992B14BEBB000F0A9C /* view */,
+				D45E7A982B14BD41000F0A9C /* menu */,
+				D45E7A972B14BCAB000F0A9C /* splashScreens */,
 				D4C23E322B148B30002B0E10 /* Aqua_GuardApp.swift */,
 				D4C23E342B148B30002B0E10 /* ContentView.swift */,
 				D4C23E362B148B31002B0E10 /* Assets.xcassets */,
@@ -263,10 +302,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D45E7A922B14B0F2000F0A9C /* SplashScreen2View.swift in Sources */,
 				D4C23E3C2B148B31002B0E10 /* Persistence.swift in Sources */,
 				D4C23E3F2B148B31002B0E10 /* Aqua_Guard.xcdatamodeld in Sources */,
+				D45E7A942B14B16D000F0A9C /* SplashScreen3View.swift in Sources */,
+				D4C23E642B149FDC002B0E10 /* SplashScreenView.swift in Sources */,
 				D4C23E352B148B30002B0E10 /* ContentView.swift in Sources */,
+				D45E7A962B14B290000F0A9C /* SplashScreen4View.swift in Sources */,
 				D4C23E332B148B30002B0E10 /* Aqua_GuardApp.swift in Sources */,
+				D4C23E662B14A8A3002B0E10 /* SplashScreen1View.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
