@@ -13,7 +13,7 @@ struct Aqua_GuardApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Home()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

@@ -21,6 +21,14 @@
 		D4C23E552B148B31002B0E10 /* Aqua_GuardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E542B148B31002B0E10 /* Aqua_GuardUITestsLaunchTests.swift */; };
 		D4C23E642B149FDC002B0E10 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E632B149FDC002B0E10 /* SplashScreenView.swift */; };
 		D4C23E662B14A8A3002B0E10 /* SplashScreen1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E652B14A8A3002B0E10 /* SplashScreen1View.swift */; };
+		E86DDBF82B1515040055E6A9 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86DDBF72B1515040055E6A9 /* Home.swift */; };
+		E86DDBFA2B1515320055E6A9 /* Drawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86DDBF92B1515320055E6A9 /* Drawer.swift */; };
+		E86DDBFC2B151D770055E6A9 /* DrawerMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86DDBFB2B151D770055E6A9 /* DrawerMenuButton.swift */; };
+		E86DDC002B151F6F0055E6A9 /* DrawerMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86DDBFF2B151F6F0055E6A9 /* DrawerMenuModel.swift */; };
+		E86DDC032B154EFA0055E6A9 /* MyCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86DDC022B154EFA0055E6A9 /* MyCalendar.swift */; };
+		E86DDC052B154F220055E6A9 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86DDC042B154F220055E6A9 /* Notification.swift */; };
+		E86DDC072B154F350055E6A9 /* MyEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86DDC062B154F350055E6A9 /* MyEvents.swift */; };
+		E86DDC092B154F600055E6A9 /* MyPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86DDC082B154F600055E6A9 /* MyPosts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +66,14 @@
 		D4C23E542B148B31002B0E10 /* Aqua_GuardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aqua_GuardUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D4C23E632B149FDC002B0E10 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		D4C23E652B14A8A3002B0E10 /* SplashScreen1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen1View.swift; sourceTree = "<group>"; };
+		E86DDBF72B1515040055E6A9 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = SOURCE_ROOT; };
+		E86DDBF92B1515320055E6A9 /* Drawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drawer.swift; sourceTree = SOURCE_ROOT; };
+		E86DDBFB2B151D770055E6A9 /* DrawerMenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMenuButton.swift; sourceTree = SOURCE_ROOT; };
+		E86DDBFF2B151F6F0055E6A9 /* DrawerMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMenuModel.swift; sourceTree = "<group>"; };
+		E86DDC022B154EFA0055E6A9 /* MyCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCalendar.swift; sourceTree = "<group>"; };
+		E86DDC042B154F220055E6A9 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		E86DDC062B154F350055E6A9 /* MyEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEvents.swift; sourceTree = "<group>"; };
+		E86DDC082B154F600055E6A9 /* MyPosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPosts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,15 +116,19 @@
 		D45E7A982B14BD41000F0A9C /* menu */ = {
 			isa = PBXGroup;
 			children = (
+				E86DDBFB2B151D770055E6A9 /* DrawerMenuButton.swift */,
 			);
 			path = menu;
 			sourceTree = "<group>";
 		};
-		D45E7A992B14BEBB000F0A9C /* view */ = {
+		D45E7A992B14BEBB000F0A9C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E86DDC012B154E800055E6A9 /* SubViews */,
+				E86DDBF72B1515040055E6A9 /* Home.swift */,
+				E86DDBF92B1515320055E6A9 /* Drawer.swift */,
 			);
-			path = view;
+			path = View;
 			sourceTree = "<group>";
 		};
 		D4C23E262B148B30002B0E10 = {
@@ -134,7 +154,8 @@
 		D4C23E312B148B30002B0E10 /* Aqua Guard */ = {
 			isa = PBXGroup;
 			children = (
-				D45E7A992B14BEBB000F0A9C /* view */,
+				E86DDBFE2B151F430055E6A9 /* ViewModel */,
+				D45E7A992B14BEBB000F0A9C /* View */,
 				D45E7A982B14BD41000F0A9C /* menu */,
 				D45E7A972B14BCAB000F0A9C /* splashScreens */,
 				D4C23E322B148B30002B0E10 /* Aqua_GuardApp.swift */,
@@ -170,6 +191,25 @@
 				D4C23E542B148B31002B0E10 /* Aqua_GuardUITestsLaunchTests.swift */,
 			);
 			path = "Aqua GuardUITests";
+			sourceTree = "<group>";
+		};
+		E86DDBFE2B151F430055E6A9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E86DDBFF2B151F6F0055E6A9 /* DrawerMenuModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E86DDC012B154E800055E6A9 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				E86DDC022B154EFA0055E6A9 /* MyCalendar.swift */,
+				E86DDC042B154F220055E6A9 /* Notification.swift */,
+				E86DDC062B154F350055E6A9 /* MyEvents.swift */,
+				E86DDC082B154F600055E6A9 /* MyPosts.swift */,
+			);
+			path = SubViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,10 +344,18 @@
 			files = (
 				D45E7A922B14B0F2000F0A9C /* SplashScreen2View.swift in Sources */,
 				D4C23E3C2B148B31002B0E10 /* Persistence.swift in Sources */,
+				E86DDBF82B1515040055E6A9 /* Home.swift in Sources */,
+				E86DDBFC2B151D770055E6A9 /* DrawerMenuButton.swift in Sources */,
 				D4C23E3F2B148B31002B0E10 /* Aqua_Guard.xcdatamodeld in Sources */,
+				E86DDC072B154F350055E6A9 /* MyEvents.swift in Sources */,
+				E86DDBFA2B1515320055E6A9 /* Drawer.swift in Sources */,
 				D45E7A942B14B16D000F0A9C /* SplashScreen3View.swift in Sources */,
+				E86DDC092B154F600055E6A9 /* MyPosts.swift in Sources */,
 				D4C23E642B149FDC002B0E10 /* SplashScreenView.swift in Sources */,
+				E86DDC032B154EFA0055E6A9 /* MyCalendar.swift in Sources */,
 				D4C23E352B148B30002B0E10 /* ContentView.swift in Sources */,
+				E86DDC002B151F6F0055E6A9 /* DrawerMenuModel.swift in Sources */,
+				E86DDC052B154F220055E6A9 /* Notification.swift in Sources */,
 				D45E7A962B14B290000F0A9C /* SplashScreen4View.swift in Sources */,
 				D4C23E332B148B30002B0E10 /* Aqua_GuardApp.swift in Sources */,
 				D4C23E662B14A8A3002B0E10 /* SplashScreen1View.swift in Sources */,
