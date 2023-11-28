@@ -10,9 +10,19 @@ import SwiftUI
 struct Notification: View {
     var body: some View {
         NavigationView{
-            Text("")
-                .navigationTitle("Notification")
+            ZStack {
+                           // Background image
+                           Image("background_splash_screen")
+                               .resizable()
+                               .aspectRatio(contentMode: .fill)
+                               .edgesIgnoringSafeArea(.all)
+                           
+                           // Your content here
+                           Text("Notification")
+                               .navigationTitle("Notification")
+                       }
         }
+        
     }
 }
 

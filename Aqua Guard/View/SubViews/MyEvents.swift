@@ -10,9 +10,18 @@ import SwiftUI
 struct My_Events: View {
     var body: some View {
         NavigationView{
-            Text("")
-                .navigationTitle("My Events")
+            ZStack {
+                           // Background image
+                           Image("background_splash_screen")
+                               .resizable()
+                               .aspectRatio(contentMode: .fill)
+                               .edgesIgnoringSafeArea(.all)
+                           
+                           // Your content here
+                           Text("MY Events")
+                .navigationTitle("My Events")                       }
         }
+    
     }
 }
 

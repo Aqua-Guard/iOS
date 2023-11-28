@@ -22,9 +22,9 @@ struct DrawerMenuButton: View {
             HStack(spacing: 10){
                 Image(systemName: image)
                     .font(.title2)
-                    .foregroundColor(selectedMenu == name ? .black:.white)
+                    .foregroundColor(selectedMenu == name ? .white:.darkBlue)
                 Text(name)
-                    .foregroundColor(selectedMenu==name ? .black: .white)
+                    .foregroundColor(selectedMenu==name ? .white: .darkBlue)
             }
             .padding(.horizontal)
             .padding(.vertical,12)
@@ -33,7 +33,7 @@ struct DrawerMenuButton: View {
             .background(
                 ZStack{
                     if selectedMenu == name{
-                        Color.white
+                        Color.darkBlue
                             .cornerRadius(10)
                             .matchedGeometryEffect(id: "TAB", in: animation)
                     }

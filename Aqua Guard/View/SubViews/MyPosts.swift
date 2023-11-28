@@ -7,15 +7,24 @@
 
 import SwiftUI
 
-struct My_Posts: View {
+struct MyPosts: View {
     var body: some View {
         NavigationView{
-            Text("")
-                .navigationTitle("My Posts")
+            ZStack {
+                           // Background image
+                           Image("background_splash_screen")
+                               .resizable()
+                               .aspectRatio(contentMode: .fill)
+                               .edgesIgnoringSafeArea(.all)
+                           
+                           // Your content here
+                           Text("My Posts")
+                .navigationTitle("MyPosts")                       }
         }
     }
 }
 
 #Preview {
-    My_Posts()
+    MyPosts()
 }
+

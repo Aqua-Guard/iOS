@@ -16,26 +16,28 @@ struct Home: View {
     @Namespace var animation
     var body: some View {
         HStack(spacing: 0){
+        
             Drawer(animation: animation)
             // Main View
             
             TabView(selection: $menuData.selectedMenu){
-                
+                My_Events()
+                    .tag("My Events")
+    
+                Command()
+                    .tag("Command")
                 My_Calendar()
                     .tag("My Calendar")
                 Notification()
                     .tag("Notification")
-                My_Posts()
-                    .tag("My Events")
-                My_Events()
-                    .tag("My Posts")
-                Command()
-                    .tag("My Command")
+                MyPosts()
+                    .tag("MyPosts")
             }
             .frame(width: UIScreen.main.bounds.width)
         }
         .frame(width: UIScreen.main.bounds.width)
         .offset(x: menuData.showDrawer ?  130 : -130)
+        //.offset(x:130)
         .overlay(
         
             ZStack{
@@ -49,7 +51,6 @@ struct Home: View {
         // Setting
         .environmentObject(menuData)
        
-        
     }
 }
 

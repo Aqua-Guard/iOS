@@ -7,39 +7,67 @@
 
 import SwiftUI
 
+
 struct Drawer: View {
     @EnvironmentObject var menuData:DrawerMenuViewModel
+    
     var animation : Namespace.ID
     var body: some View {
+        
         VStack{
-            HStack{
-                
-                Image("youssef")
+            ZStack {
+                // Background image
+                Image("nav_header")
                     .resizable()
-                    .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
-                    .frame(width: 65,height: 65)
-                    .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-                Spacer()
-                // Close Button
-                
-                if menuData.showDrawer {
-                    DrawerCloseButton(animation: animation)
+                    .scaledToFill()
+                    .frame(width: 260, height: 200) // Set the width to match the drawer width
+                    .edgesIgnoringSafeArea(.all) // Modified to fill the entire top area
+
+                VStack {
+                  
+                    // Profile image, moved up to overlap with the background
+                    Image("youssef")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 65, height: 65)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                        .offset(y: -40) // Modified to adjust the position of the image
+
+                    // Name label, moved up closer to the profile image
+                    Text("Youssef Farhat")
+                        .fontWeight(.heavy)
+                        .foregroundColor(.white)
+                        .offset(y: -40) // Modified to adjust the position of the label
+                    Text("Youssef.farhat@esprit. tn")
+                        .fontWeight(.light)
+                        .foregroundColor(.white)
+                        .offset(y: -40) // Modified to adjust the position of the label
+                }
+                .frame(width: 260, height: 200)
+    
+
+                // Moved here to position the close button independently
+                HStack {
+                    Spacer()
+                    // Close Button
+                    if menuData.showDrawer {
+                        DrawerCloseButton(animation: animation)
+                            .padding(.trailing)
+                            .offset(y: -70)
+                    }
+                         
                 }
             }
-            .padding()
-            VStack(alignment: .leading, spacing: 10,content: {
-            Text("Home")
-                    .font(.title2)
-            Text("Youssef Farhat")
-                    .font(.title)
-                    .fontWeight(.heavy)
-            })
-            .foregroundColor(.white)
-            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,alignment: .leading)
-            .padding(.horizontal)
-            .padding(.top,5)
+
+
+           
+            //.foregroundColor(.white)
+            //.frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,alignment: .leading)
+            //.padding(.horizontal)
+            //.padding(.top,1)
             // menue button
-            VStack(spacing: 10){
+            VStack(spacing: 5){
                 DrawerMenuButton(name:"My Calendar",image: "calendar",selectedMenu: $menuData.selectedMenu,animation: animation)
                     
                 DrawerMenuButton(name:"Notification",image: "bell.fill",selectedMenu: $menuData.selectedMenu,animation: animation)
@@ -49,13 +77,14 @@ struct Drawer: View {
 
 
             }
-            .padding(.leading)
-            .frame(width: 260,alignment: .leading)
-            .padding(.top,30)
+            // ----------el menu mte3i setup--------
+           // .padding(.leading)
+            //.frame(width: 260,alignment: .leading)
+            //.padding(.top,30)
             
             Divider()
                 .frame(height: 2)
-                .background(Color.white)
+                .background(Color.darkBlue)
                 .padding(.top,30)
                 .padding(.horizontal,25)
             Spacer()
@@ -64,7 +93,7 @@ struct Drawer: View {
         }
         .frame(width: 260)
         .background(
-        Color("babyBlue")
+            Color.white
             .ignoresSafeArea(.all,edges: .vertical))
     }
 }
@@ -85,7 +114,7 @@ struct DrawerCloseButton :View {
         }, label: {
             VStack(spacing: 5){
                 Capsule()
-                    .fill(menuData.showDrawer ? Color.white : Color.primary)
+                    .fill(menuData.showDrawer ? Color.white : Color.darkBlue)
                     .frame(width: 35,height: 3)
                     .rotationEffect(.init(degrees: menuData.showDrawer ? -50 : 0))
                 // nraka7 fel X
@@ -93,10 +122,10 @@ struct DrawerCloseButton :View {
                     .offset(x:menuData.showDrawer ? 2 : 0 , y: menuData.showDrawer ? 9 : 0)
                 VStack(spacing: 5){
                     Capsule()
-                        .fill(menuData.showDrawer ? Color.white : Color.primary)
+                        .fill(menuData.showDrawer ? Color.white : Color.darkBlue)
                         .frame(width: 35,height: 3)
                     Capsule()
-                        .fill(menuData.showDrawer ? Color.white : Color.primary)
+                        .fill(menuData.showDrawer ? Color.white : Color.darkBlue)
                         .frame(width: 35,height: 3)
                     // Moving This View To Hide
                         .offset(y:menuData.showDrawer ? -8 : 0)
@@ -105,8 +134,9 @@ struct DrawerCloseButton :View {
                 .rotationEffect(.init(degrees: menuData.showDrawer ? 50 : 0))
             }
         })
-        // bech ns8er fiha chwaya
+        // bech ns8er fiha X chwaya
         .scaleEffect(0.8)
         .matchedGeometryEffect(id: "MENU_BUTTON", in: animation)
     }
+        
 }
