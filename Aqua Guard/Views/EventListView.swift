@@ -36,12 +36,13 @@ struct EventListView: View {
                         .listRowInsets(EdgeInsets(top: 5, leading: 5, bottom: 4, trailing: 4))
                 }
             }
-            .background(Image("background_splash_screen")
-                            .resizable()
-                            .scaledToFill()
-                            .edgesIgnoringSafeArea(.all))
-            .navigationTitle("Events").navigationBarTitleDisplayMode(.inline)
+         
+            .navigationBarTitle("Events").navigationBarTitleDisplayMode(.inline)
         }
+        .background(Image("background_splash_screen")
+                                 .resizable()
+                                 .scaledToFill()
+                                 .edgesIgnoringSafeArea(.all))
     }
 }
 

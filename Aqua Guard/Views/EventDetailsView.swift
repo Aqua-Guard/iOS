@@ -53,11 +53,11 @@ struct EventDetailsView: View {
                     Text("Participate")
                         .font(.system(size: 20))
                         .foregroundColor(.white)
-                        // Set your color
-                        .frame(width: 148, height: .infinity)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 50)
                         .background(Color.lightBlue)
                         .cornerRadius(50)
-                        .padding(.leading,20)
+                        .padding(.leading,0)
                       
                     
                 }
@@ -67,11 +67,11 @@ struct EventDetailsView: View {
                     Text("Cancel")
                         .font(.system(size: 20))
                         .foregroundColor(.white)
-                        .frame(maxWidth: .infinity) // Make the button full width
-                           .frame(height: 50) // Set your desired height
+                        .frame(maxWidth: .infinity)
+                           .frame(height: 50)
                         .background(Color.red)
                         .cornerRadius(50)
-                        .padding(.leading,20)
+                        .padding(.leading,0)
                       
                     
                 }
@@ -83,6 +83,7 @@ struct EventDetailsView: View {
         .cornerRadius(8)
         .shadow(radius: 4)
         .padding(8)
+        .navigationBarTitle("Event Details", displayMode: .inline)
     }
 }
 
