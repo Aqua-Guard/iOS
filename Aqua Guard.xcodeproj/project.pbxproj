@@ -26,6 +26,15 @@
 		D4C23E552B148B31002B0E10 /* Aqua_GuardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E542B148B31002B0E10 /* Aqua_GuardUITestsLaunchTests.swift */; };
 		D4C23E642B149FDC002B0E10 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E632B149FDC002B0E10 /* SplashScreenView.swift */; };
 		D4C23E662B14A8A3002B0E10 /* SplashScreen1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E652B14A8A3002B0E10 /* SplashScreen1View.swift */; };
+		E816FF662B16475C007538BF /* DrawerMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF652B16475C007538BF /* DrawerMenuModel.swift */; };
+		E816FF692B1647C6007538BF /* DrawerMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF682B1647C6007538BF /* DrawerMenuButton.swift */; };
+		E816FF6B2B164839007538BF /* Drawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF6A2B164839007538BF /* Drawer.swift */; };
+		E816FF6D2B164870007538BF /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF6C2B164870007538BF /* Home.swift */; };
+		E816FF702B1648E8007538BF /* MyCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF6F2B1648E8007538BF /* MyCalendar.swift */; };
+		E816FF722B164905007538BF /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF712B164905007538BF /* Notification.swift */; };
+		E816FF742B164938007538BF /* MyEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF732B164938007538BF /* MyEvents.swift */; };
+		E816FF762B164956007538BF /* MyPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF752B164956007538BF /* MyPosts.swift */; };
+		E816FF782B16496E007538BF /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF772B16496E007538BF /* Command.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +77,15 @@
 		D4C23E542B148B31002B0E10 /* Aqua_GuardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aqua_GuardUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D4C23E632B149FDC002B0E10 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		D4C23E652B14A8A3002B0E10 /* SplashScreen1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen1View.swift; sourceTree = "<group>"; };
+		E816FF652B16475C007538BF /* DrawerMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMenuModel.swift; sourceTree = "<group>"; };
+		E816FF682B1647C6007538BF /* DrawerMenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMenuButton.swift; sourceTree = "<group>"; };
+		E816FF6A2B164839007538BF /* Drawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drawer.swift; sourceTree = "<group>"; };
+		E816FF6C2B164870007538BF /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		E816FF6F2B1648E8007538BF /* MyCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCalendar.swift; sourceTree = "<group>"; };
+		E816FF712B164905007538BF /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		E816FF732B164938007538BF /* MyEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEvents.swift; sourceTree = "<group>"; };
+		E816FF752B164956007538BF /* MyPosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPosts.swift; sourceTree = "<group>"; };
+		E816FF772B16496E007538BF /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,9 +137,12 @@
 		D4BFF9882B1500F30050DC80 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E816FF6E2B1648A4007538BF /* SubViews */,
 				D4BFF98B2B15020C0050DC80 /* EventCardView.swift */,
 				D4BFF98D2B15059D0050DC80 /* EventListView.swift */,
 				D4BFF98F2B1507510050DC80 /* EventDetailsView.swift */,
+				E816FF6A2B164839007538BF /* Drawer.swift */,
+				E816FF6C2B164870007538BF /* Home.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -149,6 +170,8 @@
 		D4C23E312B148B30002B0E10 /* Aqua Guard */ = {
 			isa = PBXGroup;
 			children = (
+				E816FF672B1647A7007538BF /* Menu */,
+				E816FF622B1645FC007538BF /* ViewModel */,
 				D4BFF9882B1500F30050DC80 /* Views */,
 				D4BFF9832B14FE530050DC80 /* Models */,
 				D45E7A972B14BCAB000F0A9C /* splashScreens */,
@@ -185,6 +208,34 @@
 				D4C23E542B148B31002B0E10 /* Aqua_GuardUITestsLaunchTests.swift */,
 			);
 			path = "Aqua GuardUITests";
+			sourceTree = "<group>";
+		};
+		E816FF622B1645FC007538BF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E816FF652B16475C007538BF /* DrawerMenuModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E816FF672B1647A7007538BF /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				E816FF682B1647C6007538BF /* DrawerMenuButton.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		E816FF6E2B1648A4007538BF /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				E816FF6F2B1648E8007538BF /* MyCalendar.swift */,
+				E816FF712B164905007538BF /* Notification.swift */,
+				E816FF732B164938007538BF /* MyEvents.swift */,
+				E816FF752B164956007538BF /* MyPosts.swift */,
+				E816FF772B16496E007538BF /* Command.swift */,
+			);
+			path = SubViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,16 +372,25 @@
 				D4C23E3C2B148B31002B0E10 /* Persistence.swift in Sources */,
 				D4C23E3F2B148B31002B0E10 /* Aqua_Guard.xcdatamodeld in Sources */,
 				D4BFF9872B15005D0050DC80 /* Participation.swift in Sources */,
+				E816FF6D2B164870007538BF /* Home.swift in Sources */,
+				E816FF762B164956007538BF /* MyPosts.swift in Sources */,
+				E816FF742B164938007538BF /* MyEvents.swift in Sources */,
 				D45E7A942B14B16D000F0A9C /* SplashScreen3View.swift in Sources */,
 				D4BFF9852B14FE710050DC80 /* Event.swift in Sources */,
+				E816FF662B16475C007538BF /* DrawerMenuModel.swift in Sources */,
+				E816FF692B1647C6007538BF /* DrawerMenuButton.swift in Sources */,
 				D4BFF9902B1507510050DC80 /* EventDetailsView.swift in Sources */,
 				D4C23E642B149FDC002B0E10 /* SplashScreenView.swift in Sources */,
 				D4C23E352B148B30002B0E10 /* ContentView.swift in Sources */,
 				D4BFF98E2B15059D0050DC80 /* EventListView.swift in Sources */,
 				D45E7A962B14B290000F0A9C /* SplashScreen4View.swift in Sources */,
 				D4BFF98C2B15020C0050DC80 /* EventCardView.swift in Sources */,
+				E816FF702B1648E8007538BF /* MyCalendar.swift in Sources */,
+				E816FF722B164905007538BF /* Notification.swift in Sources */,
+				E816FF782B16496E007538BF /* Command.swift in Sources */,
 				D4C23E332B148B30002B0E10 /* Aqua_GuardApp.swift in Sources */,
 				D4C23E662B14A8A3002B0E10 /* SplashScreen1View.swift in Sources */,
+				E816FF6B2B164839007538BF /* Drawer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
