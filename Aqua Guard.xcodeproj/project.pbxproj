@@ -115,12 +115,12 @@
 			path = splashScreens;
 			sourceTree = "<group>";
 		};
-		D45E7A982B14BD41000F0A9C /* Menu */ = {
+		D45E7A982B14BD41000F0A9C /* MenuDrawer */ = {
 			isa = PBXGroup;
 			children = (
 				E86DDBFB2B151D770055E6A9 /* DrawerMenuButton.swift */,
 			);
-			path = Menu;
+			path = MenuDrawer;
 			sourceTree = "<group>";
 		};
 		D45E7A992B14BEBB000F0A9C /* View */ = {
@@ -158,7 +158,7 @@
 			children = (
 				E86DDBFE2B151F430055E6A9 /* ViewModel */,
 				D45E7A992B14BEBB000F0A9C /* View */,
-				D45E7A982B14BD41000F0A9C /* Menu */,
+				D45E7A982B14BD41000F0A9C /* MenuDrawer */,
 				D45E7A972B14BCAB000F0A9C /* splashScreens */,
 				D4C23E322B148B30002B0E10 /* Aqua_GuardApp.swift */,
 				D4C23E342B148B30002B0E10 /* ContentView.swift */,
