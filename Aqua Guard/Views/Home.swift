@@ -30,7 +30,7 @@ struct Home: View {
                 Notification()
                     .tag("Notification")
                 MyPosts()
-                    .tag("MyPosts")
+                    .tag("My Posts")
             }
             .frame(width: UIScreen.main.bounds.width)
         }

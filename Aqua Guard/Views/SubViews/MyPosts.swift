@@ -9,7 +9,18 @@ import SwiftUI
 
 struct MyPosts: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView{
+            ZStack {
+                           // Background image
+                           Image("background_splash_screen")
+                               .resizable()
+                               .aspectRatio(contentMode: .fill)
+                               .edgesIgnoringSafeArea(.all)
+                           
+                           // Your content here
+                           Text("My Posts")
+                .navigationTitle("MyPosts")                       }
+        }
     }
 }
 
