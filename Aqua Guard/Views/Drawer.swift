@@ -70,16 +70,16 @@ struct Drawer: View {
                 DrawerMenuButton(name:"My Calendar",image: "calendar",selectedMenu: $menuData.selectedMenu,animation: animation)
                     
                 DrawerMenuButton(name:"Notification",image: "bell.fill",selectedMenu: $menuData.selectedMenu,animation: animation)
-                DrawerMenuButton(name:"My Event",image: "calendar.badge.clock",selectedMenu: $menuData.selectedMenu,animation: animation)
-                DrawerMenuButton(name:"My Post",image: "rectangle.3.group.bubble",selectedMenu: $menuData.selectedMenu,animation: animation)
+                DrawerMenuButton(name:"MyEvents",image: "calendar.badge.clock",selectedMenu: $menuData.selectedMenu,animation: animation)
+                DrawerMenuButton(name:"MyPosts",image: "rectangle.3.group.bubble",selectedMenu: $menuData.selectedMenu,animation: animation)
                 DrawerMenuButton(name:"Command",image: "bag.circle",selectedMenu: $menuData.selectedMenu,animation: animation)
 
 
             }
             // ----------el menu mte3i setup--------
-           // .padding(.leading)
-            //.frame(width: 260,alignment: .leading)
-            //.padding(.top,30)
+            .padding(.leading)
+            .frame(width: 260,alignment: .leading)
+            
             
             Divider()
                 .frame(height: 2)
