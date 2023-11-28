@@ -47,7 +47,7 @@ struct EventCardView: View {
                     
                     // Button with the "info.circle" icon
                    NavigationLink( destination: EventDetailsView()) {
-                       Image(systemName: "info.circle")
+                      
                     }
 
                     
