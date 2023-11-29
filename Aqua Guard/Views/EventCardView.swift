@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct EventCardView: View {
+    let event: Event
+
     var body: some View {
        
         VStack(alignment: .leading, spacing: 8) {
             // Event image
-            Image("sidi_bou_said")
+            Image(event.eventImage)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(height: 200)
@@ -21,42 +23,41 @@ struct EventCardView: View {
             // event details
             VStack(alignment: .leading, spacing: 8) {
                 // Event title
-                Text("clean - up")
+                Text(event.eventName)
                     .font(.title)
                     .fontWeight(.medium)
 
                 // Event description
-                Text("Une initiative communautaire pour nettoyer les plages et protéger l'environnement.")
+                Text(event.description)
                     .font(.body)
                     .foregroundColor(.secondary)
 
                 // HStack for date, location, and info icons
                 HStack {
-                    // Calendar icon and event date
-                    Image(systemName: "calendar")
-                    Text("2023-11-11 to 2023-11-12")
-                        .font(.body)
-                        .fontWeight(.medium)
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack {
+                            // Calendar icon and event date
+                            Image(systemName: "calendar")
+                            Text("\(formatDate(event.dateDebut)) to \(formatDate(event.dateFin))")
 
-                    // Location icon and event location
-                    Image(systemName: "location")
-                    Text("location")
-                        .font(.body)
-                        .fontWeight(.medium)
-                    Spacer()
+                            .font(.body)
+                            .fontWeight(.medium)
+                        }
+                        HStack {
+                            // Location icon and event location
+                            Image(systemName: "location")
+                            Text(event.lieu)
+                            .font(.body)
+                            .fontWeight(.medium)
+                        }
+                                            
+                    }
+          
                     
-                    // Button with the "info.circle" icon
-                   NavigationLink( destination: EventDetailsView()) {
+                   
+                    NavigationLink( destination: EventDetailsView(event: event)) {
                       
                     }
-
-                    
-                    Button(action: {
-                     
-                    }) {
-                        Image(systemName: "ellipsis")
-                    }
-               
                    
                 }
             }
@@ -69,8 +70,30 @@ struct EventCardView: View {
     }
 }
 
+func formatDate(_ date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd" 
+    return dateFormatter.string(from: date)
+}
 
 
-#Preview {
-    EventCardView()
+
+struct EventCardView_Previews: PreviewProvider {
+    static var previews: some View {
+        let sampleEvent = Event(
+            idEvent: "1",
+            userName: "John Doe",
+            userImage: "john_image",
+            eventName: "Sample Event",
+            description: "This is a sample event description.",
+            eventImage: "sidi_bou_said",
+            dateDebut: Date(),
+            dateFin: Date(),
+            lieu: "Sample Location"
+        )
+
+        return EventCardView(event: sampleEvent)
+            .previewLayout(.sizeThatFits)
+            .padding()
+    }
 }
