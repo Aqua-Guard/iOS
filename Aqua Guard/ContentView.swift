@@ -29,7 +29,7 @@ struct ContentView: View {
                     }
 
 
-                Text("Forum")
+                MyPosts()
                     .tabItem {
                         Label("Forum", systemImage: "text.bubble.fill")
                     }

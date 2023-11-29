@@ -22,7 +22,6 @@ struct Home: View {
             TabView(selection: $menuData.selectedMenu){
                 MyEvents()
                     .tag("My Events")
-    
                 Command()
                     .tag("Command")
                 MyCalendar()
@@ -30,9 +29,11 @@ struct Home: View {
                 Notification()
                     .tag("Notification")
                 MyPosts()
-                    .tag("My Posts")
+                    .tag("MyPosts")
+            
             }
             .frame(width: UIScreen.main.bounds.width)
+        
         }
         .frame(width: UIScreen.main.bounds.width)
         .offset(x: menuData.showDrawer ?  130 : -130)
@@ -42,16 +43,40 @@ struct Home: View {
             ZStack{
                 if !menuData.showDrawer{
                     DrawerCloseButton(animation: animation).padding()
+                    
                 }
             },
             alignment: .topLeading
-        
         )
         // Setting
         .environmentObject(menuData)
-       
+        // this is for my bottom navigation bar help me bind between my drawer and this navigation bottom
+        HStack {
+            Text("Home")
+                .tabItem {
+                    Label("Home", systemImage: "house")
+                }
+            Text("event")
+                .tabItem {
+                    Label("Events", systemImage: "calendar")
+                }
+            Text("Forum")
+                .tabItem {
+                    Label("Forum", systemImage: "text.bubble.fill")
+                }
+            Text("Store")
+                .tabItem {
+                    Label("Store", systemImage: "bag")
+                }
+        }
+        .accentColor(.darkBlue)
+        
+        }
+    
+    
     }
-}
+    
+
 
 #Preview {
     Home()

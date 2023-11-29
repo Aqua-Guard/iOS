@@ -8,19 +8,22 @@
 import SwiftUI
 
 struct MyPosts: View {
+    var posts : [Post] = PostList.postList
+    
     var body: some View {
         NavigationView{
-            ZStack {
-                           // Background image
-                           Image("background_splash_screen")
-                               .resizable()
-                               .aspectRatio(contentMode: .fill)
-                               .edgesIgnoringSafeArea(.all)
-                           
-                           // Your content here
-                           Text("My Posts")
-                .navigationTitle("MyPosts")                       }
+            List(posts,id: \.id){post in
+                PostCardView(post: post) // it show me alway the first post1
+                    .listRowInsets(EdgeInsets())
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
+                    .padding(.vertical)
+                    
+            }
+            .navigationTitle("My Posts")
+            .frame(width: UIScreen.main.bounds.width)
         }
+        
     }
 }
 

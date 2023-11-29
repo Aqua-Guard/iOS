@@ -23,9 +23,7 @@ struct Notification: View {
             }
         }
     }
-       
 }
-
 
 #Preview {
     Notification()

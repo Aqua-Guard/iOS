@@ -18,9 +18,9 @@ struct MyEvents: View {
                     .aspectRatio(contentMode: .fill)
                     .edgesIgnoringSafeArea(.all)
                 
-                // Your content here
-                Text("MY Events")
+                Text("")
                     .navigationTitle("My Events")
+                
             }
         }
     }
