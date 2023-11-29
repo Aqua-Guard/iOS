@@ -7,14 +7,18 @@
 
 import Foundation
 
-struct Event {
-    let idEvent: String
-    let userName: String
-    let userImage: String
-    let eventName: String
-    let description: String
-    let eventImage: String
-    let dateDebut: Date
-    let dateFin: Date
-    let lieu: String
+struct Event: Identifiable  {
+    var idEvent: String
+    var userName: String
+    var userImage: String
+    var eventName: String
+    var description: String
+    var eventImage: String
+    var dateDebut: Date
+    var dateFin: Date
+    var lieu: String
+    
+    var id: String {
+            return idEvent
+        }
 }

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D44CD79E2B173C0D002294CE /* EventEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CD79D2B173C0D002294CE /* EventEditView.swift */; };
+		D44CD7A02B174490002294CE /* EventAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CD79F2B174490002294CE /* EventAddView.swift */; };
+		D44CD7A22B174EF2002294CE /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CD7A12B174EF2002294CE /* EventViewModel.swift */; };
+		D44CD7A42B175D23002294CE /* MyEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CD7A32B175D23002294CE /* MyEventViewModel.swift */; };
 		D45E7A922B14B0F2000F0A9C /* SplashScreen2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E7A912B14B0F2000F0A9C /* SplashScreen2View.swift */; };
 		D45E7A942B14B16D000F0A9C /* SplashScreen3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E7A932B14B16D000F0A9C /* SplashScreen3View.swift */; };
 		D45E7A962B14B290000F0A9C /* SplashScreen4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E7A952B14B290000F0A9C /* SplashScreen4View.swift */; };
@@ -55,6 +59,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D44CD79D2B173C0D002294CE /* EventEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditView.swift; sourceTree = "<group>"; };
+		D44CD79F2B174490002294CE /* EventAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAddView.swift; sourceTree = "<group>"; };
+		D44CD7A12B174EF2002294CE /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
+		D44CD7A32B175D23002294CE /* MyEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEventViewModel.swift; sourceTree = "<group>"; };
 		D45E7A912B14B0F2000F0A9C /* SplashScreen2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen2View.swift; sourceTree = "<group>"; };
 		D45E7A932B14B16D000F0A9C /* SplashScreen3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen3View.swift; sourceTree = "<group>"; };
 		D45E7A952B14B290000F0A9C /* SplashScreen4View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen4View.swift; sourceTree = "<group>"; };
@@ -143,6 +151,8 @@
 				D4BFF98F2B1507510050DC80 /* EventDetailsView.swift */,
 				E816FF6A2B164839007538BF /* Drawer.swift */,
 				E816FF6C2B164870007538BF /* Home.swift */,
+				D44CD79D2B173C0D002294CE /* EventEditView.swift */,
+				D44CD79F2B174490002294CE /* EventAddView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -214,6 +224,8 @@
 			isa = PBXGroup;
 			children = (
 				E816FF652B16475C007538BF /* DrawerMenuModel.swift */,
+				D44CD7A12B174EF2002294CE /* EventViewModel.swift */,
+				D44CD7A32B175D23002294CE /* MyEventViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -369,6 +381,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D45E7A922B14B0F2000F0A9C /* SplashScreen2View.swift in Sources */,
+				D44CD7A02B174490002294CE /* EventAddView.swift in Sources */,
 				D4C23E3C2B148B31002B0E10 /* Persistence.swift in Sources */,
 				D4C23E3F2B148B31002B0E10 /* Aqua_Guard.xcdatamodeld in Sources */,
 				D4BFF9872B15005D0050DC80 /* Participation.swift in Sources */,
@@ -377,6 +390,7 @@
 				E816FF742B164938007538BF /* MyEvents.swift in Sources */,
 				D45E7A942B14B16D000F0A9C /* SplashScreen3View.swift in Sources */,
 				D4BFF9852B14FE710050DC80 /* Event.swift in Sources */,
+				D44CD79E2B173C0D002294CE /* EventEditView.swift in Sources */,
 				E816FF662B16475C007538BF /* DrawerMenuModel.swift in Sources */,
 				E816FF692B1647C6007538BF /* DrawerMenuButton.swift in Sources */,
 				D4BFF9902B1507510050DC80 /* EventDetailsView.swift in Sources */,
@@ -388,7 +402,9 @@
 				E816FF702B1648E8007538BF /* MyCalendar.swift in Sources */,
 				E816FF722B164905007538BF /* Notification.swift in Sources */,
 				E816FF782B16496E007538BF /* Command.swift in Sources */,
+				D44CD7A42B175D23002294CE /* MyEventViewModel.swift in Sources */,
 				D4C23E332B148B30002B0E10 /* Aqua_GuardApp.swift in Sources */,
+				D44CD7A22B174EF2002294CE /* EventViewModel.swift in Sources */,
 				D4C23E662B14A8A3002B0E10 /* SplashScreen1View.swift in Sources */,
 				E816FF6B2B164839007538BF /* Drawer.swift in Sources */,
 			);
