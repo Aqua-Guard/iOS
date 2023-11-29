@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct Comment {
+struct Comment : Identifiable{
     let id: String
     let idUser: String
     let idPost: String
@@ -15,6 +15,6 @@ struct Comment {
     let comment: String
 }
 
-let comment1 = Comment(id: "c1", idUser: "u1", idPost: "p1", commentAvatar: "cavatar1.png", commentUsername: "cuser1", comment: "Nice post!")
-let comment2 = Comment(id: "c2", idUser: "u2", idPost: "p2", commentAvatar: "cavatar2.png", commentUsername: "cuser2", comment: "Great work!")
+let comment1 = Comment(id: "c1", idUser: "u1", idPost: "p1", commentAvatar: "user", commentUsername: "cuser1", comment: "Nice post!")
+let comment2 = Comment(id: "c2", idUser: "u2", idPost: "p2", commentAvatar: "youssef", commentUsername: "cuser2", comment: "Great work!")
 

@@ -81,23 +81,23 @@ struct PostCardView: View {
                     Image(systemName: isLiked ? "heart.fill" : "heart")
                         .foregroundColor(isLiked ? .pink : .pink)
                 }
-                .padding(.trailing, -6) 
+                .padding(.trailing, -6)
                 Text("Like \(self.likeCount)")
-                    
-                // this don't want to chage their 
+                
+                // this don't want to chage their
                 Spacer()
                 
                 Image(systemName: commentCount > 0 ? "text.bubble.fill" : "text.bubble")
                     .foregroundColor(commentCount > 0 ? .yellow : .yellow )
-                    .padding(.trailing, -6) 
+                    .padding(.trailing, -6)
                 Text("Comment \(commentCount)")
                 
                 Spacer()
                 
-                                
+                
                 // Share icon with label and count
                 Image(systemName: "square.and.arrow.up") .foregroundColor(Color("babyBlue"))
-                    .padding(.trailing, -6) 
+                    .padding(.trailing, -6)
                 Text("Share 0")
                 
             }
@@ -144,7 +144,14 @@ struct PostCardView: View {
             .padding(.horizontal, 5)
             .padding(.vertical, 8)
             
-            // TODO: Comments list would be represented by a ScrollView of comment views
+            ScrollView {
+                VStack(spacing: 8) {
+                    ForEach(post.comments) { comment in
+                        CommentCardView(comment: comment)
+                    }
+                }
+            }
+            .padding(.horizontal, 5)
         }
         .padding()
         .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))

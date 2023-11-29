@@ -39,6 +39,7 @@
 		E857A6BD2B17008200EC62DE /* Like.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857A6BC2B17008200EC62DE /* Like.swift */; };
 		E857A6BF2B1700C400EC62DE /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857A6BE2B1700C400EC62DE /* Comment.swift */; };
 		E857A6C22B1702E400EC62DE /* PostCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857A6C12B1702E400EC62DE /* PostCardView.swift */; };
+		E857A6C42B174C5800EC62DE /* CommentCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857A6C32B174C5800EC62DE /* CommentCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		E857A6BC2B17008200EC62DE /* Like.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Like.swift; sourceTree = "<group>"; };
 		E857A6BE2B1700C400EC62DE /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		E857A6C12B1702E400EC62DE /* PostCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCardView.swift; sourceTree = "<group>"; };
+		E857A6C32B174C5800EC62DE /* CommentCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				E857A6C12B1702E400EC62DE /* PostCardView.swift */,
+				E857A6C32B174C5800EC62DE /* CommentCardView.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				E816FF722B164905007538BF /* Notification.swift in Sources */,
 				E857A6BF2B1700C400EC62DE /* Comment.swift in Sources */,
 				E816FF782B16496E007538BF /* Command.swift in Sources */,
+				E857A6C42B174C5800EC62DE /* CommentCardView.swift in Sources */,
 				D4C23E332B148B30002B0E10 /* Aqua_GuardApp.swift in Sources */,
 				D4C23E662B14A8A3002B0E10 /* SplashScreen1View.swift in Sources */,
 				E816FF6B2B164839007538BF /* Drawer.swift in Sources */,
