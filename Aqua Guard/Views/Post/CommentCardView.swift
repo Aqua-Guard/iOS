@@ -9,6 +9,13 @@ import SwiftUI
 
 struct CommentCardView: View {
     let comment:Comment
+    
+    
+    
+    
+    
+    
+    
     var body: some View {
         VStack(spacing: 2) {
             Divider()
