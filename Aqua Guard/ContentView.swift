@@ -23,13 +23,12 @@ struct ContentView: View {
                     .tabItem {
                         Label("Home", systemImage: "house")
                     }
-                EventListView()
+               // EventListView()
                     .tabItem {
                         Label("Events", systemImage: "calendar")
                     }
 
-
-                Text("Forum")
+                    PostListView()
                     .tabItem {
                         Label("Forum", systemImage: "text.bubble.fill")
                     }

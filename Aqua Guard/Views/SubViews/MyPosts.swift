@@ -8,19 +8,16 @@
 import SwiftUI
 
 struct MyPosts: View {
+    
     var body: some View {
         NavigationView{
-            ZStack {
-                           // Background image
-                           Image("background_splash_screen")
-                               .resizable()
-                               .aspectRatio(contentMode: .fill)
-                               .edgesIgnoringSafeArea(.all)
-                           
-                           // Your content here
-                           Text("My Posts")
-                .navigationTitle("MyPosts")                       }
-        }
+            Text("my Post")
+                .navigationTitle("My Posts")
+            }
+            
+            
+        
+        
     }
 }
 
