@@ -13,6 +13,7 @@ struct Home: View {
     }
     @StateObject var menuData = DrawerMenuViewModel()
     @Namespace var animation
+    @StateObject var eventViewModel = MyEventViewModel()
     var body: some View {
         HStack(spacing: 0){
         
@@ -20,8 +21,9 @@ struct Home: View {
             // Main View
             
             TabView(selection: $menuData.selectedMenu){
-               // MyEvents()
-                  //  .tag("My Events")
+                MyEvents()
+                   .tag("My Events")
+                   .environmentObject(eventViewModel)
     
                 Command()
                     .tag("Command")

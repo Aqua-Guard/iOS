@@ -8,12 +8,36 @@
 import SwiftUI
 
 struct EventEditView: View {
-    @State private var eventName = ""
-       @State private var eventDescription = ""
-       @State private var startDate = ""
-       @State private var endDate = ""
-       @State private var eventLocation = ""
-       @State private var errorMessage = ""
+    @EnvironmentObject var viewModel: MyEventViewModel
+    let event: Event
+    @State private var eventName: String
+        @State private var eventDescription: String
+        @State private var startDate: Date
+        @State private var endDate: Date
+    @State private var eventImage: String
+        @State private var eventLocation: String
+        @State private var errorMessage: String
+    
+    @State private var isStartDatePickerPresented = false
+    @State private var isEndDatePickerPresented = false
+    
+    @Environment(\.presentationMode) var presentationMode
+    
+    @State private var showAlert = false
+     @State private var alertMessage = ""
+
+        init(event: Event) {
+            self.event = event
+            
+            // Set up initial state based on the provided event
+            _eventName = State(initialValue: event.eventName)
+            _eventDescription = State(initialValue: event.description)
+            _startDate = State(initialValue: event.dateDebut)
+            _endDate = State(initialValue: event.dateFin)
+            _eventImage = State(initialValue: event.eventImage)
+            _eventLocation = State(initialValue: event.lieu)
+            _errorMessage = State(initialValue: "")
+        }
        
        var body: some View {
            NavigationView {
@@ -22,7 +46,7 @@ struct EventEditView: View {
                        
                        ScrollView {
                            VStack(alignment: .leading, spacing: 10) {
-                               Image(systemName: "photo")
+                               Image(event.eventImage)
                                    .resizable()
                                    .frame(width: 150, height: 150)
                                    .foregroundColor(.darkBlue)
@@ -43,15 +67,70 @@ struct EventEditView: View {
                                    .textFieldStyle(RoundedBorderTextFieldStyle())
                                    .padding(.top, 10)
                                
-                               TextField("Start Date", text: $startDate)
+                               VStack {
+                                   TextField("Start Date", text: Binding(
+                                       get: {
+                                           let dateFormatter = DateFormatter()
+                                           dateFormatter.dateFormat = "yyyy-MM-dd"
+                                           return dateFormatter.string(from: startDate)
+                                       },
+                                       set: { newDateString in
+                                           let dateFormatter = DateFormatter()
+                                           dateFormatter.dateFormat = "yyyy-MM-dd"
+                                           if let newDate = dateFormatter.date(from: newDateString) {
+                                               startDate = newDate
+                                           }
+                                       }
+                                   ))
                                    .textFieldStyle(RoundedBorderTextFieldStyle())
                                    .padding(.top, 10)
-                                   .disabled(true) // You may need to implement a date picker.
-                               
-                               TextField("End Date", text: $endDate)
+
+                                   Button(action: {
+                                       // Show the DatePicker with confirmation
+                                       isStartDatePickerPresented.toggle()
+                                   }) {
+                                       Text("Select Start Date")
+                                   }
+                                   .padding()
+
+                                   // Present the DatePicker in a sheet
+                                   if isStartDatePickerPresented {
+                                       DatePickerSheet(selectedDate: $startDate, isPresented: $isStartDatePickerPresented)
+                                   }
+                               }
+
+                               VStack {
+                                   TextField("End Date", text: Binding(
+                                       get: {
+                                           let dateFormatter = DateFormatter()
+                                           dateFormatter.dateFormat = "yyyy-MM-dd"
+                                           return dateFormatter.string(from: endDate)
+                                       },
+                                       set: { newDateString in
+                                           let dateFormatter = DateFormatter()
+                                           dateFormatter.dateFormat = "yyyy-MM-dd"
+                                           if let newDate = dateFormatter.date(from: newDateString) {
+                                               endDate = newDate
+                                           }
+                                       }
+                                   ))
                                    .textFieldStyle(RoundedBorderTextFieldStyle())
                                    .padding(.top, 10)
-                                   .disabled(true) // You may need to implement a date picker.
+
+                                   Button(action: {
+                                       // Show the DatePicker with confirmation
+                                       isEndDatePickerPresented.toggle()
+                                   }) {
+                                       Text("Select End Date")
+                                   }
+                                   .padding()
+
+                                   // Present the DatePicker in a sheet
+                                   if isEndDatePickerPresented {
+                                       DatePickerSheet(selectedDate: $endDate, isPresented: $isEndDatePickerPresented)
+                                   }
+                               }
+
                                
                                TextField("Event Location", text: $eventLocation)
                                    .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -65,6 +144,10 @@ struct EventEditView: View {
                                Button(action: {
                                    // Action for submitting event
                                    print("Submit Event")
+                                   viewModel.updateEvent(eventID: event.idEvent, newUserName: "String", newUserImage: "String", newEventName: eventName, newDescription: eventDescription, newEventImage: eventImage, newDateDebut: startDate, newDateFin: endDate, newLieu: eventLocation)
+                                   // Show alert
+                                               alertMessage = "Event Updated successfully !"
+                                               showAlert = true
                                }) {
                                    Text("Submit")
                                        .frame(maxWidth: .infinity)
@@ -73,6 +156,16 @@ struct EventEditView: View {
                                        .foregroundColor(.white)
                                        .cornerRadius(10)
                                }
+                               .alert(isPresented: $showAlert) {
+                                 Alert(
+                                     title: Text("Success"),
+                                     message: Text(alertMessage),
+                                     dismissButton: .default(Text("OK")) {
+                                         // Dismiss the current view
+                                         presentationMode.wrappedValue.dismiss()
+                                     }
+                                 )
+                             }
                                .padding(.top, 20)
                            }
                            .padding(20)
@@ -92,6 +185,47 @@ struct EventEditView: View {
 }
 
 
-#Preview {
-    EventEditView()
+struct DatePickerSheet: View {
+    @Binding var selectedDate: Date
+    @Binding var isPresented: Bool
+
+    var body: some View {
+        VStack {
+            DatePicker("Select End Date", selection: $selectedDate, in: Date()..., displayedComponents: .date)
+                .datePickerStyle(WheelDatePickerStyle())
+                .padding()
+
+            Button(action: {
+                // Dismiss the sheet when the user taps Done
+                isPresented.toggle()
+            }) {
+                Text("Done")
+                    .padding()
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+        }
+        .padding()
+    }
+}
+
+struct EventEditView_Previews: PreviewProvider {
+    static var previews: some View {
+        let sampleEvent = Event(
+            idEvent: "1",
+            userName: "John Doe",
+            userImage: "john_image",
+            eventName: "Sample Event",
+            description: "This is a sample event description.",
+            eventImage: "sidi_bou_said",
+            dateDebut: Date(),
+            dateFin: Date(),
+            lieu: "Sample Location"
+        )
+
+        return EventEditView(event: sampleEvent)
+          
+        
+    }
 }

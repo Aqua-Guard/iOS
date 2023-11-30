@@ -8,12 +8,18 @@
 import SwiftUI
 
 struct EventAddView: View {
+    @EnvironmentObject var viewModel: MyEventViewModel
     @State private var eventName = ""
        @State private var eventDescription = ""
-       @State private var startDate = ""
-       @State private var endDate = ""
+    @State private var startDate = Date()
+     @State private var endDate = Date()
        @State private var eventLocation = ""
        @State private var errorMessage = ""
+    @Environment(\.presentationMode) var presentationMode
+    @State private var isDatePickerPresented = false
+    
+    @State private var showAlert = false
+     @State private var alertMessage = ""
     var body: some View {
         NavigationView {
             ZStack {
@@ -45,16 +51,72 @@ struct EventAddView: View {
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .padding(.top, 10)
                             
-                            TextField("Start Date", text: $startDate)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .padding(.top, 10)
-                                .disabled(true) // You may need to implement a date picker.
-                            
-                            TextField("End Date", text: $endDate)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .padding(.top, 10)
-                                .disabled(true) // You may need to implement a date picker.
-                            
+                            VStack {
+                                        TextField("Start Date", text: Binding(
+                                            get: {
+                                                // Convert the Date to String with the desired format
+                                                let dateFormatter = DateFormatter()
+                                                dateFormatter.dateFormat = "yyyy-MM-dd"
+                                                return dateFormatter.string(from: startDate)
+                                            },
+                                            set: { newDateString in
+                                                // Convert the String to Date with the desired format
+                                                let dateFormatter = DateFormatter()
+                                                dateFormatter.dateFormat = "yyyy-MM-dd"
+                                                if let newDate = dateFormatter.date(from: newDateString) {
+                                                    startDate = newDate
+                                                }
+                                            }
+                                        ))
+                                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                                            .padding(.top, 10)
+
+                                        Button(action: {
+                                            // Show the DatePicker with confirmation
+                                            isDatePickerPresented.toggle()
+                                        }) {
+                                            Text("Select Start Date")
+                                        }
+                                        .padding()
+
+                                        // Present the DatePicker in a sheet
+                                        if isDatePickerPresented {
+                                            DatePickerSheet(selectedDate: $startDate, isPresented: $isDatePickerPresented)
+                                        }
+                                    }
+                            VStack {
+                                        TextField("End Date", text: Binding(
+                                            get: {
+                                                // Convert the Date to String with the desired format
+                                                let dateFormatter = DateFormatter()
+                                                dateFormatter.dateFormat = "yyyy-MM-dd"
+                                                return dateFormatter.string(from: endDate)
+                                            },
+                                            set: { newDateString in
+                                                // Convert the String to Date with the desired format
+                                                let dateFormatter = DateFormatter()
+                                                dateFormatter.dateFormat = "yyyy-MM-dd"
+                                                if let newDate = dateFormatter.date(from: newDateString) {
+                                                    endDate = newDate
+                                                }
+                                            }
+                                        ))
+                                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                                            .padding(.top, 10)
+
+                                        Button(action: {
+                                            // Show the DatePicker with confirmation
+                                            isDatePickerPresented.toggle()
+                                        }) {
+                                            Text("Select End Date")
+                                        }
+                                        .padding()
+
+                                        // Present the DatePicker in a sheet
+                                        if isDatePickerPresented {
+                                            DatePickerSheet(selectedDate: $endDate, isPresented: $isDatePickerPresented)
+                                        }
+                                    }
                             TextField("Event Location", text: $eventLocation)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .padding(.top, 10)
@@ -67,6 +129,11 @@ struct EventAddView: View {
                             Button(action: {
                                 // Action for submitting event
                                 print("Submit Event")
+                                viewModel.createEvent(userName: "String", userImage: "String", eventName: eventName, description: eventDescription, eventImage: "sidi_bou_said", dateDebut: startDate, dateFin: endDate, lieu: eventLocation)
+                                // Show alert
+                                            alertMessage = "Event added successfully"
+                                            showAlert = true
+                              
                             }) {
                                 Text("Submit")
                                     .frame(maxWidth: .infinity)
@@ -74,6 +141,15 @@ struct EventAddView: View {
                                     .background(Color.blue)
                                     .foregroundColor(.white)
                                     .cornerRadius(10)
+                            }   .alert(isPresented: $showAlert) {
+                                Alert(
+                                    title: Text("Success"),
+                                    message: Text(alertMessage),
+                                    dismissButton: .default(Text("OK")) {
+                                        // Dismiss the current view
+                                        presentationMode.wrappedValue.dismiss()
+                                    }
+                                )
                             }
                             .padding(.top, 20)
                         }

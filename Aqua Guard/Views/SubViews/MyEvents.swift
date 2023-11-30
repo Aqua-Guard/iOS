@@ -12,7 +12,8 @@ struct MyEvents: View {
     @State private var showAlert = false
     @State private var eventToDelete: Event? = nil
     @State private var showToast = false
-
+    @State private var isEditing = false
+    @State private var selectedEvent: Event?
     var body: some View {
         NavigationView{
              
@@ -38,13 +39,16 @@ struct MyEvents: View {
                 ForEach(viewModel.events) { event in
                     EventCardView(event: event)
                         .listRowInsets(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
+                       
                         .swipeActions(edge: .leading) {
-                            NavigationLink(destination: EventEditView()) {
-                                  Label("Edit", systemImage: "pencil")
-                              }
-                              .tint(.blue)
-                        
-                        }
+                                           Button(action: {
+                                               selectedEvent = event
+                                               isEditing = true
+                                           }) {
+                                               Label("Edit", systemImage: "pencil")
+                                           }
+                                           .tint(.blue)
+                                       }
                         .swipeActions(edge: .trailing){
                             Button(action: {
                               eventToDelete = event
@@ -54,6 +58,9 @@ struct MyEvents: View {
                             }
                             .tint(.red)
                         }
+                        
+                } .sheet(isPresented: $isEditing) {
+                    EventEditView(event: selectedEvent ?? Event(idEvent: "00", userName: "bdhd", userImage: "String", eventName: "String", description: "String", eventImage: "String", dateDebut: Date(), dateFin: Date(), lieu: "String"))
                 }
                 
             
