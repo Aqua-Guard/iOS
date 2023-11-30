@@ -1,13 +1,13 @@
 //
-//  PostCardView.swift
+//  PostDetailView.swift
 //  Aqua Guard
 //
-//  Created by Youssef Farhat on 29/11/2023.
+//  Created by Youssef Farhat on 30/11/2023.
 //
 
 import SwiftUI
 
-struct PostCardView: View {
+struct PostDetailView: View {
     let post: Post
     @State private var isLiked = false
     @State private var likeCount: Int = 0
@@ -18,12 +18,11 @@ struct PostCardView: View {
         _likeCount = State(initialValue: post.nbLike)
     }
     
-    
     var body: some View {
         let commentCount: Int = post.nbComments
         
         // MaterialCardView equivalent in SwiftUI is a VStack inside a RoundedRectangle
-        VStack(alignment: .leading, spacing: 2) {
+        VStack(alignment: .leading) {
             // User info and post image
             HStack {
                 // User image
@@ -43,11 +42,8 @@ struct PostCardView: View {
                         .foregroundColor(.secondary)
                 }
                 .padding(16)
-                Spacer()
-                NavigationLink( destination: PostDetailView(post: post)) {
-                    Image(systemName:"info.circle").foregroundColor(.blue)
-                  
-                }
+                // i want to add 3cirlcle like option  "..."
+                
             }
             
             Divider()
@@ -71,25 +67,21 @@ struct PostCardView: View {
             
             HStack {
                 // Like icon with label and count
-               
-                    Button(action: {
-                        // Toggle the isLiked state
-                        self.isLiked.toggle()
-                        if self.isLiked {
-                            self.likeCount += 1
-                        
-                        } else {
-                            self.likeCount -= 1
-                        }
-                    }) {
-                        Image(systemName: isLiked ? "heart.fill" : "heart")
-                            .foregroundColor(isLiked ? .pink : .pink)
-                        Text("Like \(self.likeCount)").foregroundStyle(Color.black)
+                
+                Button(action: {
+                    // Toggle the isLiked state
+                    self.isLiked.toggle()
+                    if self.isLiked {
+                        self.likeCount += 1
+                    } else {
+                        self.likeCount -= 1
                     }
-                    .padding(.trailing, -6)
-                    
-                    
-               
+                }) {
+                    Image(systemName: isLiked ? "heart.fill" : "heart")
+                        .foregroundColor(isLiked ? .pink : .pink)
+                }
+                .padding(.trailing, -6)
+                Text("Like \(self.likeCount)")
                 
                 // this don't want to chage their
                 Spacer()
@@ -148,39 +140,29 @@ struct PostCardView: View {
                         .stroke(Color.blue, lineWidth: 1)
                 )
             }
-            .padding(.horizontal, 5)
+            
             .padding(.vertical, 8)
             
-            
-            VStack(spacing: 8) {
-                ForEach(post.comments) { comment in
-                    CommentCardView(comment: comment)
+            ScrollView(){
+                VStack(spacing: 8) {
+                    ForEach(post.comments) { comment in
+                        CommentCardView(comment: comment)
+                    }
                 }
+                .padding(.vertical, 5)
             }
-            .padding(.vertical, 5)
-            
-            
+        
         }
         .padding()
         .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
         
         .cornerRadius(8)
         .shadow(radius: 4)
-       // .padding(5)
+        .padding(10)
     }
     
     
-}
-struct RoundedButtonStyle: ButtonStyle {
-    func makeBody(configuration: Self.Configuration) -> some View {
-        configuration.label
-            .padding()
-            .background(Color.darkBlue)
-            .foregroundColor(.white)
-            .clipShape(RoundedRectangle(cornerRadius: 10))
-    }
 }
 #Preview {
-    PostCardView(post: post1) // is this correct ?
-        .previewLayout(.sizeThatFits)
+    PostDetailView(post: post1)
 }

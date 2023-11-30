@@ -9,49 +9,49 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    @StateObject var postViewModel = PostViewModel()
+    @StateObject var eventViewModel = EventViewModel()
     @Environment(\.managedObjectContext) private var viewContext
-    // Uncomment the line below with the appropriate initialization for forumDetailsViewModel
-    // @StateObject var forumDetailsViewModel = ForumDetailsViewModel()
-
-   // private var items: FetchedResults<Item>
-
+    
     var body: some View {
         NavigationView {
             TabView {
-               
+                
                 Text("Home")
                     .tabItem {
                         Label("Home", systemImage: "house")
                     }
-               // EventListView()
+                EventListView()
                     .tabItem {
                         Label("Events", systemImage: "calendar")
-                    }
-
-                    PostListView()
+                    }.environmentObject(eventViewModel)
+                
+                PostListView()
                     .tabItem {
                         Label("Forum", systemImage: "text.bubble.fill")
-                    }
-
+                    }.environmentObject(postViewModel)
+                
+                
                 Text("Store")
                     .tabItem {
                         Label("Store", systemImage: "bag")
                     }
-
-               
+                
+                
             }
             .accentColor(.darkBlue)
-          
             
-        
+            
+            
             // .environmentObject(forumDetailsViewModel)
         }.navigationBarColor(.darkBlue, textColor: UIColor.white)
-          
+        
             .background(Image("background_splash_screen")
-                                      .resizable()
-                                      .scaledToFill()
-                                      .edgesIgnoringSafeArea(.all))
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all))
     }
+    
 }
 
 extension View {
@@ -64,12 +64,12 @@ extension View {
 struct NavigationBarModifier: ViewModifier {
     var backgroundColor: UIColor
     var textColor: UIColor
-
+    
     init(backgroundColor: UIColor, textColor: UIColor) {
         self.backgroundColor = backgroundColor
         self.textColor = textColor
     }
-
+    
     func body(content: Content) -> some View {
         content
             .onAppear {
@@ -78,7 +78,7 @@ struct NavigationBarModifier: ViewModifier {
                 coloredAppearance.backgroundColor = backgroundColor
                 coloredAppearance.titleTextAttributes = [.foregroundColor: textColor]
                 coloredAppearance.largeTitleTextAttributes = [.foregroundColor: textColor]
-
+                
                 UINavigationBar.appearance().standardAppearance = coloredAppearance
                 UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
             }

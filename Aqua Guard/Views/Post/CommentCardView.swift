@@ -20,7 +20,7 @@ struct CommentCardView: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 60, height: 60)
                     .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.blue, lineWidth: 3)) // Blue border for the profile picture
+                    .overlay(Circle().stroke(Color.darkBlue, lineWidth: 3)) // Blue border for the profile picture
                 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(comment.commentUsername)

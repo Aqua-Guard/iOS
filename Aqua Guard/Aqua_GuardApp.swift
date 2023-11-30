@@ -14,7 +14,8 @@ struct Aqua_GuardApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(PostViewModel())
+               // .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
