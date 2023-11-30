@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE7621EF2B1536DA005D5BF6 /* ActualiteCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7621EE2B1536DA005D5BF6 /* ActualiteCardView.swift */; };
+		CE7621F12B1546A9005D5BF6 /* ActualiteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7621F02B1546A9005D5BF6 /* ActualiteListView.swift */; };
+		CE7621F32B154888005D5BF6 /* ActualiteDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7621F22B154888005D5BF6 /* ActualiteDetailsView.swift */; };
+		CE7621F52B155B8D005D5BF6 /* Actualite.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7621F42B155B8D005D5BF6 /* Actualite.swift */; };
+		CE7621F72B155C5A005D5BF6 /* Avis.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7621F62B155C5A005D5BF6 /* Avis.swift */; };
 		D45E7A922B14B0F2000F0A9C /* SplashScreen2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E7A912B14B0F2000F0A9C /* SplashScreen2View.swift */; };
 		D45E7A942B14B16D000F0A9C /* SplashScreen3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E7A932B14B16D000F0A9C /* SplashScreen3View.swift */; };
 		D45E7A962B14B290000F0A9C /* SplashScreen4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45E7A952B14B290000F0A9C /* SplashScreen4View.swift */; };
@@ -46,6 +51,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE7621EE2B1536DA005D5BF6 /* ActualiteCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualiteCardView.swift; sourceTree = "<group>"; };
+		CE7621F02B1546A9005D5BF6 /* ActualiteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualiteListView.swift; sourceTree = "<group>"; };
+		CE7621F22B154888005D5BF6 /* ActualiteDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualiteDetailsView.swift; sourceTree = "<group>"; };
+		CE7621F42B155B8D005D5BF6 /* Actualite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actualite.swift; sourceTree = "<group>"; };
+		CE7621F62B155C5A005D5BF6 /* Avis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avis.swift; sourceTree = "<group>"; };
 		D45E7A912B14B0F2000F0A9C /* SplashScreen2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen2View.swift; sourceTree = "<group>"; };
 		D45E7A932B14B16D000F0A9C /* SplashScreen3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen3View.swift; sourceTree = "<group>"; };
 		D45E7A952B14B290000F0A9C /* SplashScreen4View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen4View.swift; sourceTree = "<group>"; };
@@ -112,6 +122,8 @@
 			children = (
 				D4BFF9842B14FE710050DC80 /* Event.swift */,
 				D4BFF9862B15005D0050DC80 /* Participation.swift */,
+				CE7621F42B155B8D005D5BF6 /* Actualite.swift */,
+				CE7621F62B155C5A005D5BF6 /* Avis.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -122,6 +134,9 @@
 				D4BFF98B2B15020C0050DC80 /* EventCardView.swift */,
 				D4BFF98D2B15059D0050DC80 /* EventListView.swift */,
 				D4BFF98F2B1507510050DC80 /* EventDetailsView.swift */,
+				CE7621EE2B1536DA005D5BF6 /* ActualiteCardView.swift */,
+				CE7621F02B1546A9005D5BF6 /* ActualiteListView.swift */,
+				CE7621F22B154888005D5BF6 /* ActualiteDetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -317,11 +332,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE7621EF2B1536DA005D5BF6 /* ActualiteCardView.swift in Sources */,
 				D45E7A922B14B0F2000F0A9C /* SplashScreen2View.swift in Sources */,
 				D4C23E3C2B148B31002B0E10 /* Persistence.swift in Sources */,
 				D4C23E3F2B148B31002B0E10 /* Aqua_Guard.xcdatamodeld in Sources */,
 				D4BFF9872B15005D0050DC80 /* Participation.swift in Sources */,
+				CE7621F12B1546A9005D5BF6 /* ActualiteListView.swift in Sources */,
+				CE7621F52B155B8D005D5BF6 /* Actualite.swift in Sources */,
 				D45E7A942B14B16D000F0A9C /* SplashScreen3View.swift in Sources */,
+				CE7621F32B154888005D5BF6 /* ActualiteDetailsView.swift in Sources */,
 				D4BFF9852B14FE710050DC80 /* Event.swift in Sources */,
 				D4BFF9902B1507510050DC80 /* EventDetailsView.swift in Sources */,
 				D4C23E642B149FDC002B0E10 /* SplashScreenView.swift in Sources */,
@@ -331,6 +350,7 @@
 				D4BFF98C2B15020C0050DC80 /* EventCardView.swift in Sources */,
 				D4C23E332B148B30002B0E10 /* Aqua_GuardApp.swift in Sources */,
 				D4C23E662B14A8A3002B0E10 /* SplashScreen1View.swift in Sources */,
+				CE7621F72B155C5A005D5BF6 /* Avis.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
