@@ -12,6 +12,8 @@ struct PostDetailView: View {
     @State private var isLiked = false
     @State private var likeCount: Int = 0
     @State private var commentText: String = ""
+    @State var showingLikeBottomSeet = false
+    @State var showingCommentBottomSeet = false
     init(post: Post) {
         self.post = post
         // Initialize the likeCount state with the initial like count of the post
@@ -69,28 +71,35 @@ struct PostDetailView: View {
                 // Like icon with label and count
                 
                 Button(action: {
-                    // Toggle the isLiked state
-                    self.isLiked.toggle()
-                    if self.isLiked {
-                        self.likeCount += 1
-                    } else {
-                        self.likeCount -= 1
-                    }
-                }) {
+                    showingLikeBottomSeet.toggle()
+                })
+                {
                     Image(systemName: isLiked ? "heart.fill" : "heart")
                         .foregroundColor(isLiked ? .pink : .pink)
+                    Text("Like \(post.nbLike)")
+                        .foregroundStyle(Color.black)
                 }
                 .padding(.trailing, -6)
-                Text("Like \(self.likeCount)")
+                .sheet(isPresented: $showingLikeBottomSeet){
+                    LikeBottomSheetView(likes: post.likes)
+                        .presentationDetents([.medium,.large])
+                    
+                }
                 
                 // this don't want to chage their
                 Spacer()
-                
-                Image(systemName: commentCount > 0 ? "text.bubble.fill" : "text.bubble")
-                    .foregroundColor(commentCount > 0 ? .yellow : .yellow )
-                    .padding(.trailing, -6)
-                Text("Comment \(commentCount)")
-                
+                Button(action: {
+                    showingCommentBottomSeet.toggle()
+                }) {
+                    Image(systemName: commentCount > 0 ? "text.bubble.fill" : "text.bubble")
+                        .foregroundColor(commentCount > 0 ? .yellow : .yellow )
+                        .padding(.trailing, -6)
+                    Text("Comment \(commentCount)")
+                        .foregroundStyle(Color.black)
+                } .sheet(isPresented: $showingCommentBottomSeet){
+                    CommentBottomSheetView(comments: post.comments)
+                        .presentationDetents([.medium,.large])
+                }
                 Spacer()
                 
                 
@@ -107,62 +116,118 @@ struct PostDetailView: View {
             
             
             
-            Divider()
-                .background(Color.darkBlue)
             
-            HStack {
-                // Text field for the comment
-                TextField("Add your comment", text:$commentText)
-                    .padding(10)
-                    .background(Color.gray.opacity(0.1)) // Light gray background
-                    .cornerRadius(10)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.gray, lineWidth: 1)
-                    )
-                
-                // Send button
-                Button(action: {
-                    // Handle send comment action
-                    // TODO: Implement the action
-                }) {
-                    Image(systemName: "paperplane.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 20, height: 20) // Adjust size of the icon
-                        .padding(10)
-                }
-                .background(Color.blue) // Use a more appealing color
-                .foregroundColor(.white) // White color for the icon
-                .clipShape(Circle())
-                .overlay(
-                    Circle()
-                        .stroke(Color.blue, lineWidth: 1)
-                )
-            }
             
-            .padding(.vertical, 8)
             
-            ScrollView(){
-                VStack(spacing: 8) {
-                    ForEach(post.comments) { comment in
-                        CommentCardView(comment: comment)
-                    }
-                }
-                .padding(.vertical, 5)
-            }
-        
         }
         .padding()
         .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
-        
         .cornerRadius(8)
         .shadow(radius: 4)
         .padding(10)
+        .navigationBarTitle("Post Details").navigationBarTitleDisplayMode(.inline)
     }
     
     
 }
+struct LikeBottomSheetView: View {
+    let likes: [Like]
+    
+    var body: some View {
+        VStack {
+            Image(systemName: "heart.fill")
+                .resizable()
+                .frame(width: 50, height: 50)
+                .aspectRatio(contentMode: .fit)
+                .foregroundColor(.pink)
+            
+            
+            Text("Post liked by ")
+                .font(.title)
+                .foregroundColor(Color.black) +
+            Text("\(likes.count) ")
+                .font(.title)
+                .bold()
+                .foregroundColor(Color.pink) +
+            Text(" people").font(.title)
+                .foregroundColor(Color.black)
+            
+            
+            // Display like card views if there are likes
+            if likes.count > 0 {
+                ForEach(likes, id: \.id) { like in // Assuming 'Like' has an 'id' property
+                    LikeCardView(like: like)
+                }
+            } else {
+                Image("heartbroke_amico_pink")
+                    .resizable()
+                    .frame(width: 250, height: 250)
+                    .aspectRatio(contentMode: .fit)
+                Text("No Likes")
+                    .foregroundColor(Color.pink)
+                    .font(.title)
+            }
+        }
+        //.padding(.top,2)
+        .background(Color.white)
+        .cornerRadius(10)
+    }
+}
+
+struct CommentBottomSheetView: View {
+    let comments: [Comment]
+    
+    
+    var body: some View {
+        VStack {
+            Image(systemName: "text.bubble.fill")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 50, height: 50)
+                .foregroundColor(.orange)
+            
+            Text("Post commented by \(comments.count) people")
+                .font(.title)
+                .foregroundColor(.black)
+            
+            if comments.count > 0 {
+                List {
+                    ForEach(comments) { comment in
+                        CommentCardView(comment: comment)
+                            .swipeActions(edge: .leading) {
+                                Button(role: .destructive) {
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
+                            }
+                    }
+                }
+                .listStyle(PlainListStyle())
+            } else {
+                Spacer()
+                Text("No Comment")
+                    .foregroundColor(.orange)
+                    .font(.title)
+                Spacer()
+            }
+        }
+        .padding()
+        // nothing epear
+        .background(
+            Image("splashScreenImage") // Use your splash screen image name here
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+        )
+        .cornerRadius(10)
+        .shadow(radius: 2)
+        // nothing epear as title
+        .navigationBarTitle("Post Details").navigationBarTitleDisplayMode(.inline)
+    }
+    
+    
+}
+
 #Preview {
     PostDetailView(post: post1)
 }

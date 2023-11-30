@@ -51,6 +51,7 @@
 		E857A6D32B17EA4600EC62DE /* PostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857A6D22B17EA4600EC62DE /* PostListView.swift */; };
 		E8C391F82B188C6100EA3872 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C391F72B188C6100EA3872 /* PostViewModel.swift */; };
 		E8C391FA2B1899FB00EA3872 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C391F92B1899FB00EA3872 /* PostDetailView.swift */; };
+		E8F5FA3A2B19199800F5B9E0 /* LikeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F5FA392B19199800F5B9E0 /* LikeCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +119,7 @@
 		E857A6D22B17EA4600EC62DE /* PostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListView.swift; sourceTree = "<group>"; };
 		E8C391F72B188C6100EA3872 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		E8C391F92B1899FB00EA3872 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
+		E8F5FA392B19199800F5B9E0 /* LikeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -294,10 +296,11 @@
 		E857A6CD2B17E64800EC62DE /* Post */ = {
 			isa = PBXGroup;
 			children = (
-				E857A6CE2B17E66000EC62DE /* PostCardView.swift */,
 				E857A6D02B17E69500EC62DE /* CommentCardView.swift */,
 				E857A6D22B17EA4600EC62DE /* PostListView.swift */,
+				E857A6CE2B17E66000EC62DE /* PostCardView.swift */,
 				E8C391F92B1899FB00EA3872 /* PostDetailView.swift */,
+				E8F5FA392B19199800F5B9E0 /* LikeCardView.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				D4C23E3F2B148B31002B0E10 /* Aqua_Guard.xcdatamodeld in Sources */,
 				D4BFF9872B15005D0050DC80 /* Participation.swift in Sources */,
 				E816FF6D2B164870007538BF /* Home.swift in Sources */,
+				E8F5FA3A2B19199800F5B9E0 /* LikeCardView.swift in Sources */,
 				E8C391F82B188C6100EA3872 /* PostViewModel.swift in Sources */,
 				E816FF762B164956007538BF /* MyPosts.swift in Sources */,
 				E816FF742B164938007538BF /* MyEvents.swift in Sources */,
