@@ -21,9 +21,9 @@ struct Drawer: View {
                     .scaledToFill()
                     .frame(width: 260, height: 200) // Set the width to match the drawer width
                     .edgesIgnoringSafeArea(.all) // Modified to fill the entire top area
-
+                
                 VStack {
-                  
+                    
                     // Profile image, moved up to overlap with the background
                     Image("youssef")
                         .resizable()
@@ -32,7 +32,7 @@ struct Drawer: View {
                         .clipShape(Circle())
                         .overlay(Circle().stroke(Color.white, lineWidth: 2))
                         .offset(y: -40) // Modified to adjust the position of the image
-
+                    
                     // Name label, moved up closer to the profile image
                     Text("Youssef Farhat")
                         .fontWeight(.heavy)
@@ -44,8 +44,8 @@ struct Drawer: View {
                         .offset(y: -40) // Modified to adjust the position of the label
                 }
                 .frame(width: 260, height: 200)
-    
-
+                
+                
                 // Moved here to position the close button independently
                 HStack {
                     Spacer()
@@ -55,12 +55,12 @@ struct Drawer: View {
                             .padding(.trailing)
                             .offset(y: -70)
                     }
-                         
+                    
                 }
             }
-
-
-           
+            
+            
+            
             //.foregroundColor(.white)
             //.frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,alignment: .leading)
             //.padding(.horizontal)
@@ -68,15 +68,12 @@ struct Drawer: View {
             // menue button
             VStack(spacing: 5){
                 DrawerMenuButton(name:"My Calendar",image: "calendar",selectedMenu: $menuData.selectedMenu,animation: animation)
-                    
+                
                 DrawerMenuButton(name:"Notification",image: "bell.fill",selectedMenu: $menuData.selectedMenu,animation: animation)
                 DrawerMenuButton(name:"MyEvents",image: "calendar.badge.clock",selectedMenu: $menuData.selectedMenu,animation: animation)
                 DrawerMenuButton(name:"MyPosts",image: "rectangle.3.group.bubble",selectedMenu: $menuData.selectedMenu,animation: animation)
                 DrawerMenuButton(name:"Command",image: "bag.circle",selectedMenu: $menuData.selectedMenu,animation: animation)
-
-
             }
-            // ----------el menu mte3i setup--------
             .padding(.leading)
             .frame(width: 260,alignment: .leading)
             
@@ -93,13 +90,41 @@ struct Drawer: View {
         .frame(width: 260)
         .background(
             Color.white
-            .ignoresSafeArea(.all,edges: .vertical))
+                .ignoresSafeArea(.all,edges: .vertical))
+        VStack(){
+            TabView {
+                
+                Text("Home")
+                    .tabItem {
+                        Label("Home", systemImage: "house")
+                    }
+                Text("event")
+                    .tabItem {
+                        Label("Events", systemImage: "calendar")
+                    }
+                
+                Text("post")
+                    .tabItem {
+                        Label("Forum", systemImage: "text.bubble.fill")
+                    }
+                
+                Text("Store")
+                    .tabItem {
+                        Label("Store", systemImage: "bag")
+                    }
+                
+                
+            }
+            .accentColor(.darkBlue)
+            
+        }
     }
+        
 }
 
 #Preview {
     Home()
-        
+    
 }
 // Close button
 struct DrawerCloseButton :View {
@@ -108,8 +133,8 @@ struct DrawerCloseButton :View {
     var body: some View {
         Button(action: {
             withAnimation(.easeInOut){
-                       menuData.showDrawer.toggle()
-        }
+                menuData.showDrawer.toggle()
+            }
         }, label: {
             VStack(spacing: 5){
                 Capsule()
@@ -137,5 +162,5 @@ struct DrawerCloseButton :View {
         .scaleEffect(0.8)
         .matchedGeometryEffect(id: "MENU_BUTTON", in: animation)
     }
-        
+    
 }

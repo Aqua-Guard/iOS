@@ -20,8 +20,8 @@ struct Home: View {
             // Main View
             
             TabView(selection: $menuData.selectedMenu){
-                MyEvents()
-                    .tag("My Events")
+               // MyEvents()
+                  //  .tag("My Events")
     
                 Command()
                     .tag("Command")
