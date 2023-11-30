@@ -13,9 +13,10 @@ struct Aqua_GuardApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(PostViewModel())
-               // .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            //ContentView()
+                //.environment(\.managedObjectContext, persistenceController.container.viewContext)
+            SplashScreenView()
+
         }
     }
 }

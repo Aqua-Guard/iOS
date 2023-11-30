@@ -11,37 +11,38 @@ struct SplashScreenView: View {
     @State private var isActive = false
     @State private var size = 0.8
     @State private var opacity = 0.5
+    var screenWidth = UIScreen.main.bounds.width
     
     var body: some View {
-        ZStack {
-            Image("background_splash_screen")
-                .resizable()
-                .scaledToFill()
-                .edgesIgnoringSafeArea(.all)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-            
-            VStack {
-            
-                
-                Image("logo")
+        if isActive{
+            LoginView()
+        }
+        else{
+            ZStack {
+                Image("background_splash_screen")
                     .resizable()
-                    .scaledToFit()
-                    .frame(width: 400, height: 400) // Adjust the size as needed
-                
-                
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+                    .frame(width: screenWidth * 1.11, height: screenWidth * 1)
+                VStack {
+                    Image("logo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: screenWidth * 0.8, height: screenWidth * 0.8)
+                }
             }
-        }
-        .scaleEffect(size)
-        .opacity(opacity)
-        .onAppear {
-            withAnimation(.easeIn(duration: 1.2)) {
-                self.size = 0.9
-                self.opacity = 1.0
+            .scaleEffect(size)
+            .opacity(opacity)
+            .onAppear {
+                withAnimation(.easeIn(duration: 1.2)) {
+                    self.size = 0.9
+                    self.opacity = 1.0
+                }
             }
-        }
-        .onAppear{
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
-                self.isActive = true
+            .onAppear{
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+                    self.isActive = true
+                }
             }
         }
     }

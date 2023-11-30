@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		822CBECC2B18008F00769D45 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822CBECA2B18008F00769D45 /* RegisterView.swift */; };
+		822CBECD2B18008F00769D45 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822CBECB2B18008F00769D45 /* LoginView.swift */; };
+		822CBED32B18025800769D45 /* PasswordInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822CBED12B18025800769D45 /* PasswordInputField.swift */; };
+		822CBED42B18025800769D45 /* TextInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822CBED22B18025800769D45 /* TextInputField.swift */; };
 		D44CD79E2B173C0D002294CE /* EventEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CD79D2B173C0D002294CE /* EventEditView.swift */; };
 		D44CD7A02B174490002294CE /* EventAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CD79F2B174490002294CE /* EventAddView.swift */; };
 		D44CD7A22B174EF2002294CE /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CD7A12B174EF2002294CE /* EventViewModel.swift */; };
@@ -67,6 +71,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		822CBECA2B18008F00769D45 /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		822CBECB2B18008F00769D45 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		822CBED12B18025800769D45 /* PasswordInputField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordInputField.swift; sourceTree = "<group>"; };
+		822CBED22B18025800769D45 /* TextInputField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputField.swift; sourceTree = "<group>"; };
 		D44CD79D2B173C0D002294CE /* EventEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditView.swift; sourceTree = "<group>"; };
 		D44CD79F2B174490002294CE /* EventAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAddView.swift; sourceTree = "<group>"; };
 		D44CD7A12B174EF2002294CE /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
@@ -137,6 +145,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		822CBED52B18026000769D45 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				822CBED12B18025800769D45 /* PasswordInputField.swift */,
+				822CBED22B18025800769D45 /* TextInputField.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		D45E7A972B14BCAB000F0A9C /* splashScreens */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +190,8 @@
 				E816FF6C2B164870007538BF /* Home.swift */,
 				D44CD79D2B173C0D002294CE /* EventEditView.swift */,
 				D44CD79F2B174490002294CE /* EventAddView.swift */,
+				822CBECB2B18008F00769D45 /* LoginView.swift */,
+				822CBECA2B18008F00769D45 /* RegisterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -200,6 +219,7 @@
 		D4C23E312B148B30002B0E10 /* Aqua Guard */ = {
 			isa = PBXGroup;
 			children = (
+				822CBED52B18026000769D45 /* Components */,
 				E816FF672B1647A7007538BF /* Menu */,
 				E816FF622B1645FC007538BF /* ViewModel */,
 				D4BFF9882B1500F30050DC80 /* Views */,
@@ -413,6 +433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D45E7A922B14B0F2000F0A9C /* SplashScreen2View.swift in Sources */,
+				822CBECD2B18008F00769D45 /* LoginView.swift in Sources */,
 				D44CD7A02B174490002294CE /* EventAddView.swift in Sources */,
 				D4C23E3C2B148B31002B0E10 /* Persistence.swift in Sources */,
 				D4C23E3F2B148B31002B0E10 /* Aqua_Guard.xcdatamodeld in Sources */,
@@ -433,6 +454,8 @@
 				E857A6D32B17EA4600EC62DE /* PostListView.swift in Sources */,
 				D4C23E352B148B30002B0E10 /* ContentView.swift in Sources */,
 				D4BFF98E2B15059D0050DC80 /* EventListView.swift in Sources */,
+				822CBECC2B18008F00769D45 /* RegisterView.swift in Sources */,
+				822CBED42B18025800769D45 /* TextInputField.swift in Sources */,
 				D45E7A962B14B290000F0A9C /* SplashScreen4View.swift in Sources */,
 				D4BFF98C2B15020C0050DC80 /* EventCardView.swift in Sources */,
 				E857A6C82B17E5BD00EC62DE /* Post.swift in Sources */,
@@ -446,6 +469,7 @@
 				D44CD7A22B174EF2002294CE /* EventViewModel.swift in Sources */,
 				D4C23E662B14A8A3002B0E10 /* SplashScreen1View.swift in Sources */,
 				E857A6CA2B17E5E900EC62DE /* Like.swift in Sources */,
+				822CBED32B18025800769D45 /* PasswordInputField.swift in Sources */,
 				E816FF6B2B164839007538BF /* Drawer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
