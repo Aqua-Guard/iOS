@@ -17,7 +17,7 @@ struct ContentView: View {
         NavigationView {
             TabView {
                 
-                Text("Home")
+               ActualiteListView()
                     .tabItem {
                         Label("Home", systemImage: "house")
                     }
