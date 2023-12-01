@@ -21,9 +21,12 @@ struct ReclamationListView: View {
                    .padding(8)
                    .listStyle(PlainListStyle()) // Use PlainListStyle to remove the default list appearance
                    .navigationTitle("Reclamation").navigationBarTitleDisplayMode(.inline)
-               }
+               }.background(Image("background_splash_screen")
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all))
                 
-               }
+            }
            }
        }
 #Preview {

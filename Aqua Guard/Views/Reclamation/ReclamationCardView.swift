@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct ReclamationCardView: View {
+    @State private var isDetailVisible = false
+
+    @State private var isDetailExpanded = false
+
     var body: some View {
-          VStack(spacing: 0) {
+          VStack(spacing: 0 ) {
               ZStack {
         
                                  
@@ -30,38 +34,55 @@ struct ReclamationCardView: View {
                       .font(.system(size: 14, weight: .bold))
                       .foregroundColor(.black)
                       .multilineTextAlignment(.leading) // Align text to the left
-                      .padding(EdgeInsets(top:-27, leading: -100, bottom: 0, trailing: 10))
+                      .padding(EdgeInsets(top: isDetailExpanded ? -25 : -27, leading: -100, bottom: 0, trailing: 10))
+                                         .onTapGesture {
+                                             withAnimation {
+                                                 isDetailExpanded.toggle()
+                                                 isDetailVisible.toggle()
+                                             }
+                                         }
                     
                   
               }.cornerRadius(15)
+                  
+
           
               VStack {
                   Text("« Texte « Texte » est issu du mot latin « textum », dérivé du ve«« Texte » est issu du mot latin « textum », dérivé du ve« Texte » est issu du mot latin « textum », dérivé du verbe « texere » qui signifie « tisser »..« Texte » est issu du mot latin « textum », dérivé du verbe « texere » qui signifie « tisser »..rbe « texere » qui signifie « tisser ».. Texte » est issu du mot latin « textum », dérivé du verbe « texere » qui signifie « tisser »..rbe « texere » qui signifie « tisser »..» est issu du mot latin « textum », dérivé du verbe « texere » qui signifie « tisser »...")
-                      .padding(EdgeInsets(top:-5, leading: 15, bottom: 50, trailing: 15))
+                      .id("detail")
+                      .opacity(isDetailVisible ? 1 : 0)
+                      .padding(EdgeInsets(top: isDetailExpanded ? -5 : -110, leading: isDetailExpanded ? 15:-15000, bottom: isDetailExpanded ? 50 : 0, trailing:isDetailExpanded ? 15:-30000))
+
+                      
                   
                   Text("le 29/11/2023 at 12:06")
-                      
+                      .id("date_et_heure")
                       .font(.system(size: 16, weight: .light))
                       .padding(EdgeInsets(top:-27, leading: -10, bottom: 0, trailing: 10))
                       .foregroundColor(Color(#colorLiteral(red: 0.5019607843, green: 0.5019607843, blue: 0.5019607843, alpha: 1)))
                       .multilineTextAlignment(.leading) // Align text to the left
                       .padding(.leading, -160)
                   
-                  Button(action: {
-                      // Action when the button is tapped
-                  }) {
-                      Text("voir la discution ")
-                          .foregroundColor(.white)
-                          .padding()
-                          .frame(maxWidth: .infinity)
-                          .frame(height:45)
-                          .background(Color.darkBlue)
-                  }
+                 
+                  NavigationLink(destination: Conversation()) {
+                                      Text("Conversation")
+                                      
+                                          .background(Color.darkBlue)
+                                          .foregroundColor(.white)
+                                          .cornerRadius(8)
+                                          .opacity(isDetailVisible ? 1 : 0)
+                                          .padding(EdgeInsets(top: isDetailExpanded ? 7 : -100, leading: isDetailExpanded ? 15:-15000, bottom: isDetailExpanded ? 10 : 0, trailing:isDetailExpanded ? 15:-30000))
+                       
+                           .frame(maxWidth: .infinity)
+                           
+                           .background(Color.darkBlue)
+                                  }
                   
               }
               .background(Color.white)
               
           }
+          .id("card")
           .frame(maxWidth: .infinity)
           .cornerRadius(15)
           .padding([.top, .leading], 10)
