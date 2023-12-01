@@ -14,6 +14,8 @@ struct RegisterView: View {
     @State var errorValue: String = ""
     @State private var isActive = false
 
+
+
     var body: some View {
         NavigationView {
             

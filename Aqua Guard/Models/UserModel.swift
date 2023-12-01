@@ -7,6 +7,9 @@
 
 import Foundation
 
+
+
+
 class UserModel: Codable{
     let email: String
     let firstName: String

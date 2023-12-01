@@ -10,6 +10,11 @@ import Foundation
 let URLString:String = "http://192.168.1.13:9090"
 
 
+
+
+
+
+
 extension NSMutableData {
     func appendString(_ string: String) {
         if let data = string.data(using: .utf8) {

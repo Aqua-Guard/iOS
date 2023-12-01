@@ -15,6 +15,8 @@ struct LoginView: View {
     @State var errorValue: String = ""
     @State private var isActive = false
 
+
+
     var body: some View {
         NavigationView {
             
@@ -105,7 +107,6 @@ struct LoginView: View {
                                     .font(.system(size: 20))
                                     .foregroundColor(Color.lightBlue)
                                 }
-
                         }
                         .padding(.bottom)
                     }

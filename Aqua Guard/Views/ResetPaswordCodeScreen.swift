@@ -12,6 +12,11 @@ struct ResetPaswordCodeScreen: View {
     @State var textValue: String = ""
     @State var errorValue: String = ""
     
+
+
+
+
+    
     var body: some View {
         ScrollView {
             VStack {
