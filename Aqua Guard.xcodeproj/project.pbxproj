@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		76E3ED812B19B3C900464B7F /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E3ED802B19B3C900464B7F /* Conversation.swift */; };
+		76E9BDD22B194E4000B512A9 /* ActualiteCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E9BDD12B194E4000B512A9 /* ActualiteCardView.swift */; };
+		76E9BDD42B194E7C00B512A9 /* ActualiteDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E9BDD32B194E7C00B512A9 /* ActualiteDetailsView.swift */; };
+		76E9BDD62B194EDB00B512A9 /* ActualiteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E9BDD52B194EDB00B512A9 /* ActualiteListView.swift */; };
+		76E9BDD82B19527800B512A9 /* Actualite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E9BDD72B19527800B512A9 /* Actualite.swift */; };
+		76E9BDDB2B19558500B512A9 /* ReclamationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E9BDDA2B19558500B512A9 /* ReclamationCardView.swift */; };
+		76E9BDDD2B1972D300B512A9 /* ReclamationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E9BDDC2B1972D300B512A9 /* ReclamationListView.swift */; };
 		822CBECC2B18008F00769D45 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822CBECA2B18008F00769D45 /* RegisterView.swift */; };
 		822CBECD2B18008F00769D45 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822CBECB2B18008F00769D45 /* LoginView.swift */; };
 		822CBED32B18025800769D45 /* PasswordInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822CBED12B18025800769D45 /* PasswordInputField.swift */; };
@@ -72,6 +79,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		76E3ED802B19B3C900464B7F /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
+		76E9BDD12B194E4000B512A9 /* ActualiteCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualiteCardView.swift; sourceTree = "<group>"; };
+		76E9BDD32B194E7C00B512A9 /* ActualiteDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualiteDetailsView.swift; sourceTree = "<group>"; };
+		76E9BDD52B194EDB00B512A9 /* ActualiteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualiteListView.swift; sourceTree = "<group>"; };
+		76E9BDD72B19527800B512A9 /* Actualite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actualite.swift; sourceTree = "<group>"; };
+		76E9BDDA2B19558500B512A9 /* ReclamationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReclamationCardView.swift; sourceTree = "<group>"; };
+		76E9BDDC2B1972D300B512A9 /* ReclamationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReclamationListView.swift; sourceTree = "<group>"; };
 		822CBECA2B18008F00769D45 /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		822CBECB2B18008F00769D45 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		822CBED12B18025800769D45 /* PasswordInputField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordInputField.swift; sourceTree = "<group>"; };
@@ -147,6 +161,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		76E9BDD02B194DF100B512A9 /* Actualite */ = {
+			isa = PBXGroup;
+			children = (
+				76E9BDD12B194E4000B512A9 /* ActualiteCardView.swift */,
+				76E9BDD32B194E7C00B512A9 /* ActualiteDetailsView.swift */,
+				76E9BDD52B194EDB00B512A9 /* ActualiteListView.swift */,
+			);
+			path = Actualite;
+			sourceTree = "<group>";
+		};
+		76E9BDD92B19553E00B512A9 /* Reclamation */ = {
+			isa = PBXGroup;
+			children = (
+				76E9BDDA2B19558500B512A9 /* ReclamationCardView.swift */,
+				76E9BDDC2B1972D300B512A9 /* ReclamationListView.swift */,
+				76E3ED802B19B3C900464B7F /* Conversation.swift */,
+			);
+			path = Reclamation;
+			sourceTree = "<group>";
+		};
 		822CBED52B18026000769D45 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +210,7 @@
 				E857A6C72B17E5BD00EC62DE /* Post.swift */,
 				E857A6C92B17E5E900EC62DE /* Like.swift */,
 				E857A6CB2B17E5FA00EC62DE /* Comment.swift */,
+				76E9BDD72B19527800B512A9 /* Actualite.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -183,6 +218,8 @@
 		D4BFF9882B1500F30050DC80 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				76E9BDD92B19553E00B512A9 /* Reclamation */,
+				76E9BDD02B194DF100B512A9 /* Actualite */,
 				E857A6CD2B17E64800EC62DE /* Post */,
 				E816FF6E2B1648A4007538BF /* SubViews */,
 				D4BFF98B2B15020C0050DC80 /* EventCardView.swift */,
@@ -435,7 +472,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76E9BDDB2B19558500B512A9 /* ReclamationCardView.swift in Sources */,
 				D45E7A922B14B0F2000F0A9C /* SplashScreen2View.swift in Sources */,
+				76E3ED812B19B3C900464B7F /* Conversation.swift in Sources */,
+				76E9BDD62B194EDB00B512A9 /* ActualiteListView.swift in Sources */,
 				822CBECD2B18008F00769D45 /* LoginView.swift in Sources */,
 				D44CD7A02B174490002294CE /* EventAddView.swift in Sources */,
 				D4C23E3C2B148B31002B0E10 /* Persistence.swift in Sources */,
@@ -443,6 +483,7 @@
 				D4BFF9872B15005D0050DC80 /* Participation.swift in Sources */,
 				E816FF6D2B164870007538BF /* Home.swift in Sources */,
 				E8F5FA3A2B19199800F5B9E0 /* LikeCardView.swift in Sources */,
+				76E9BDDD2B1972D300B512A9 /* ReclamationListView.swift in Sources */,
 				E8C391F82B188C6100EA3872 /* PostViewModel.swift in Sources */,
 				E816FF762B164956007538BF /* MyPosts.swift in Sources */,
 				E816FF742B164938007538BF /* MyEvents.swift in Sources */,
@@ -460,8 +501,10 @@
 				D4BFF98E2B15059D0050DC80 /* EventListView.swift in Sources */,
 				822CBECC2B18008F00769D45 /* RegisterView.swift in Sources */,
 				822CBED42B18025800769D45 /* TextInputField.swift in Sources */,
+				76E9BDD42B194E7C00B512A9 /* ActualiteDetailsView.swift in Sources */,
 				D45E7A962B14B290000F0A9C /* SplashScreen4View.swift in Sources */,
 				D4BFF98C2B15020C0050DC80 /* EventCardView.swift in Sources */,
+				76E9BDD82B19527800B512A9 /* Actualite.swift in Sources */,
 				E857A6C82B17E5BD00EC62DE /* Post.swift in Sources */,
 				E816FF702B1648E8007538BF /* MyCalendar.swift in Sources */,
 				E816FF722B164905007538BF /* Notification.swift in Sources */,
@@ -471,6 +514,7 @@
 				D4C23E332B148B30002B0E10 /* Aqua_GuardApp.swift in Sources */,
 				E857A6CC2B17E5FA00EC62DE /* Comment.swift in Sources */,
 				D44CD7A22B174EF2002294CE /* EventViewModel.swift in Sources */,
+				76E9BDD22B194E4000B512A9 /* ActualiteCardView.swift in Sources */,
 				D4C23E662B14A8A3002B0E10 /* SplashScreen1View.swift in Sources */,
 				E857A6CA2B17E5E900EC62DE /* Like.swift in Sources */,
 				822CBED32B18025800769D45 /* PasswordInputField.swift in Sources */,

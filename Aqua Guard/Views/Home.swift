@@ -25,8 +25,8 @@ struct Home: View {
                    .tag("My Events")
                    .environmentObject(eventViewModel)
     
-                Command()
-                    .tag("Command")
+                ReclamationListView()
+                    .tag("Reclamation")
                 MyCalendar()
                     .tag("My Calendar")
                 Notification()
