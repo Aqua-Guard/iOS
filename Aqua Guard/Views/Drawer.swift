@@ -72,7 +72,7 @@ struct Drawer: View {
                 DrawerMenuButton(name:"Notification",image: "bell.fill",selectedMenu: $menuData.selectedMenu,animation: animation)
                 DrawerMenuButton(name:"MyEvents",image: "calendar.badge.clock",selectedMenu: $menuData.selectedMenu,animation: animation)
                 DrawerMenuButton(name:"MyPosts",image: "rectangle.3.group.bubble",selectedMenu: $menuData.selectedMenu,animation: animation)
-                DrawerMenuButton(name:"Command",image: "bag.circle",selectedMenu: $menuData.selectedMenu,animation: animation)
+                DrawerMenuButton(name:"Reclamation",image: "exclamationmark.triangle.fill",selectedMenu: $menuData.selectedMenu,animation: animation)
             }
             .padding(.leading)
             .frame(width: 260,alignment: .leading)
