@@ -13,5 +13,5 @@ struct Like {
     let likeUsername: String
 }
 
-let like1 = Like(likeAvatar: "avatar1.png", likeUsername: "user1")
-let like2 = Like(likeAvatar: "avatar2.png", likeUsername: "user2")
+let like1 = Like(likeAvatar: "yousseff", likeUsername: "Youssef Farhat")
+let like2 = Like(likeAvatar: "user", likeUsername: "Malek Labidi")

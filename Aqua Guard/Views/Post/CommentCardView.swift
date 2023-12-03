@@ -33,31 +33,29 @@ struct CommentCardView: View {
                         .lineLimit(3) // Limit the number of lines to prevent very long comments from taking up too much space
                         .multilineTextAlignment(.leading)
                 }
-                .padding(.leading, 8) // Reduced padding to bring the text closer to the image
+                .padding(.leading, 2) // Reduced padding to bring the text closer to the image
                 
                 Spacer()
                 
-                HStack(spacing: 16) { // Increase spacing for better touch targets
-                    Button(action: {
-                        // Handle edit action
-                    }) {
-                        Image(systemName: "pencil")
-                            .foregroundColor(Color.blue) // Use the same blue as the image border for consistency
-                    }
-                    
-                    Button(action: {
-                        // Handle delete action
-                    }) {
-                        Image(systemName: "trash")
-                            .foregroundColor(Color.red)
-                    }
-                }
+//                HStack(spacing: 1) { // Increase spacing for better touch targets
+//                    Button(action: {
+//                        // Handle edit action
+//                    }) {
+//                        Image(systemName: "pencil")
+//                            .foregroundColor(Color.blue) // Use the same blue as the image border for consistency
+//                    }
+//                    
+//                    Button(action: {
+//                        // Handle delete action
+//                    }) {
+//                        Image(systemName: "trash")
+//                            .foregroundColor(Color.red)
+//                    }
+//                }
             }
             .padding() // Padding inside the HStack for spacing around the content
         }
-        .background(Color.white) // White background for the card
-        .cornerRadius(10) // Rounded corners for the card
-        .shadow(radius: 2) // Subtle shadow for a lift effect
+        
         //.padding(.horizontal)
     }
 }

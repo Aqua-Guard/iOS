@@ -33,4 +33,19 @@ class PostViewModel : ObservableObject {
        func likeCount(for post: Post) -> Int {
            likeCounts[post.id] ?? 0
        }
+    func deleteComment(with commentID: String, fromPostWith postID: String) {
+            // Find the index of the post
+            if let postIndex = posts.firstIndex(where: { $0.id == postID }) {
+                // Find the index of the comment
+                if let commentIndex = posts[postIndex].comments.firstIndex(where: { $0.id == commentID }) {
+                    // Remove the comment from the post's comments array
+                    DispatchQueue.main.async {
+                        self.posts[postIndex].comments.remove(at: commentIndex)
+                        // Also decrement the nbComments count for the post
+                        self.posts[postIndex].nbComments -= 1
+                    }
+                }
+            }
+        }
 }
+

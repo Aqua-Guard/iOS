@@ -138,7 +138,7 @@ struct PostCardView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 20, height: 20) // Adjust size of the icon
-                        .padding(10)
+                       .padding(10)
                 }
                 .background(Color.blue) // Use a more appealing color
                 .foregroundColor(.white) // White color for the icon
