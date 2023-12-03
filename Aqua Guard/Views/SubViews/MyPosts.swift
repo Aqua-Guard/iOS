@@ -22,7 +22,7 @@ struct MyPosts: View {
                             .padding(.vertical, 4)
                         
                     }.listStyle(PlainListStyle())
-                        .navigationTitle("My Posts")
+                        .navigationTitle("My Posts").navigationBarTitleDisplayMode(.inline)
                         .padding()
                 }
                 .background(

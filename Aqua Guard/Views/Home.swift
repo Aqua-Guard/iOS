@@ -14,6 +14,7 @@ struct Home: View {
     @StateObject var menuData = DrawerMenuViewModel()
     @Namespace var animation
     @StateObject var eventViewModel = MyEventViewModel()
+    @StateObject var postViewModel = PostViewModel()
     var body: some View {
         HStack(spacing: 0){
         
@@ -32,7 +33,8 @@ struct Home: View {
                 Notification()
                     .tag("Notification")
                 MyPosts()
-                    .tag("My Posts")
+                    .tag("MyPosts")
+                    .environmentObject(postViewModel)
             }
             .frame(width: UIScreen.main.bounds.width)
         }

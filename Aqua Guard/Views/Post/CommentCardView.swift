@@ -37,21 +37,21 @@ struct CommentCardView: View {
                 
                 Spacer()
                 
-                HStack(spacing: 1) { // Increase spacing for better touch targets
-                    Button(action: {
-                        // Handle edit action
-                    }) {
-                        Image(systemName: "pencil")
-                            .foregroundColor(Color.blue) // Use the same blue as the image border for consistency
-                    }
-                    
-                    Button(action: {
-                        // Handle delete action
-                    }) {
-                        Image(systemName: "trash")
-                            .foregroundColor(Color.red)
-                    }
-                }
+//                HStack(spacing: 1) { // Increase spacing for better touch targets
+//                    Button(action: {
+//                        // Handle edit action
+//                    }) {
+//                        Image(systemName: "pencil")
+//                            .foregroundColor(Color.blue) // Use the same blue as the image border for consistency
+//                    }
+//                    
+//                    Button(action: {
+//                        // Handle delete action
+//                    }) {
+//                        Image(systemName: "trash")
+//                            .foregroundColor(Color.red)
+//                    }
+//                }
             }
             .padding() // Padding inside the HStack for spacing around the content
         }

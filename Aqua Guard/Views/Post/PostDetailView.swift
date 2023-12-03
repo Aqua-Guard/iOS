@@ -194,11 +194,17 @@ struct CommentBottomSheetView: View {
                 List {
                     ForEach(comments) { comment in
                         CommentCardView(comment: comment)
-                            .swipeActions(edge: .leading) {
+                            .swipeActions(edge: .trailing) {
                                 Button(role: .destructive) {
                                 } label: {
                                     Label("Delete", systemImage: "trash")
                                 }
+                            }
+                            .swipeActions(edge: .leading) {
+                                Button(role: .cancel) {
+                                } label: {
+                                    Label("Edit", systemImage: "pencil")
+                                }.tint(.blue)
                             }
                     }
                 }
