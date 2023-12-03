@@ -11,6 +11,7 @@ import SwiftUI
 struct LoginView: View {
     var screenWidth = UIScreen.main.bounds.width
     var screenHeight = UIScreen.main.bounds.height
+    @StateObject var modelView: LoginViewModell = LoginViewModell()
     @State var textValue: String = ""
     @State var errorValue: String = ""
     @State private var isActive = false
@@ -30,14 +31,14 @@ struct LoginView: View {
                         .resizable()
                         .frame(width: screenWidth * 0.8, height: screenWidth * 0.8)
                     VStack {
-                        TextInputField("Email", text: $textValue, error: $errorValue)
+                        TextInputField("Email", text: $modelView.email, error: $modelView.emailError)
                         //.padding(.top)
                         
-                        PasswordInputField("Password", text: $textValue, error: $errorValue)
+                        PasswordInputField("Password", text: $modelView.password, error: $modelView.passwordError)
                         Spacer()
                         
                         Button(action: {
-                            
+                            self.modelView.validate()
                         }, label: {
                             Text("Login")
                                 .foregroundColor(.white)
@@ -50,13 +51,15 @@ struct LoginView: View {
                         .cornerRadius(30)
                         .padding(.top)
                         
-                        Button(action: {
-                            
-                        }){
-                            Text("Forgot password?")
-                                .font(.system(size: 20))
-                                .foregroundColor(Color.lightBlue)
-                        }
+                        //Button(action: {
+                        
+                        //}){
+                        NavigationLink(destination: ForgotPasswordEmailScreen()){
+                        Text("Forgot password?")
+                            .font(.system(size: 20))
+                            .foregroundColor(Color.lightBlue)
+                        //
+                    }
                         .padding(.top)
                         
                         HStack {
@@ -111,7 +114,7 @@ struct LoginView: View {
                     }
                 }
             }
-        }
+        }.navigationBarBackButtonHidden(true)
     }
 }
 
