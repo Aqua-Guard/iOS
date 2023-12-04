@@ -153,9 +153,25 @@ struct PostCardView: View {
             
             
             VStack(spacing: 8) {
-                ForEach(post.comments) { comment in
+                ForEach(post.comments.prefix(2)) { comment in
                     CommentCardView(comment: comment)
                 }
+                
+                if post.comments.count > 2 {
+                    Divider()
+                        .background(Color.darkBlue)
+                        HStack {
+                          
+                            Spacer() // Pushes the content to center
+                            Text("...")
+                                .foregroundColor(Color.darkBlue)
+                            NavigationLink(destination: PostDetailView(post: post)) {
+                                Text("View more")
+                                    .foregroundColor(.darkBlue)
+                            }
+                            Spacer() // Pushes the content to center
+                        }
+                    }
             }
             .padding(.vertical, 5)
             
