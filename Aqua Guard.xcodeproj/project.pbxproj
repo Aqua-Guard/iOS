@@ -41,10 +41,6 @@
 		D4C23E552B148B31002B0E10 /* Aqua_GuardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E542B148B31002B0E10 /* Aqua_GuardUITestsLaunchTests.swift */; };
 		D4C23E642B149FDC002B0E10 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E632B149FDC002B0E10 /* SplashScreenView.swift */; };
 		D4C23E662B14A8A3002B0E10 /* SplashScreen1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E652B14A8A3002B0E10 /* SplashScreen1View.swift */; };
-		E816FF662B16475C007538BF /* DrawerMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF652B16475C007538BF /* DrawerMenuModel.swift */; };
-		E816FF692B1647C6007538BF /* DrawerMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF682B1647C6007538BF /* DrawerMenuButton.swift */; };
-		E816FF6B2B164839007538BF /* Drawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF6A2B164839007538BF /* Drawer.swift */; };
-		E816FF6D2B164870007538BF /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF6C2B164870007538BF /* Home.swift */; };
 		E816FF702B1648E8007538BF /* MyCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF6F2B1648E8007538BF /* MyCalendar.swift */; };
 		E816FF722B164905007538BF /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF712B164905007538BF /* Notification.swift */; };
 		E816FF742B164938007538BF /* MyEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF732B164938007538BF /* MyEvents.swift */; };
@@ -60,6 +56,7 @@
 		E8ABB35C2B1D0F670051B72F /* ForgotPasswordEmailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ABB35B2B1D0F670051B72F /* ForgotPasswordEmailScreen.swift */; };
 		E8ABB35E2B1D0FCA0051B72F /* ForgotPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ABB35D2B1D0FCA0051B72F /* ForgotPasswordScreen.swift */; };
 		E8ABB3602B1D10680051B72F /* ForgotPaswordCodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ABB35F2B1D10680051B72F /* ForgotPaswordCodeScreen.swift */; };
+		E8ABB3622B1DD7C80051B72F /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ABB3612B1DD7C80051B72F /* Profile.swift */; };
 		E8C391F82B188C6100EA3872 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C391F72B188C6100EA3872 /* PostViewModel.swift */; };
 		E8C391FA2B1899FB00EA3872 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C391F92B1899FB00EA3872 /* PostDetailView.swift */; };
 		E8F5FA3A2B19199800F5B9E0 /* LikeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F5FA392B19199800F5B9E0 /* LikeCardView.swift */; };
@@ -120,10 +117,6 @@
 		D4C23E542B148B31002B0E10 /* Aqua_GuardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aqua_GuardUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D4C23E632B149FDC002B0E10 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		D4C23E652B14A8A3002B0E10 /* SplashScreen1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen1View.swift; sourceTree = "<group>"; };
-		E816FF652B16475C007538BF /* DrawerMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMenuModel.swift; sourceTree = "<group>"; };
-		E816FF682B1647C6007538BF /* DrawerMenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMenuButton.swift; sourceTree = "<group>"; };
-		E816FF6A2B164839007538BF /* Drawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drawer.swift; sourceTree = "<group>"; };
-		E816FF6C2B164870007538BF /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		E816FF6F2B1648E8007538BF /* MyCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCalendar.swift; sourceTree = "<group>"; };
 		E816FF712B164905007538BF /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		E816FF732B164938007538BF /* MyEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEvents.swift; sourceTree = "<group>"; };
@@ -139,6 +132,7 @@
 		E8ABB35B2B1D0F670051B72F /* ForgotPasswordEmailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordEmailScreen.swift; sourceTree = "<group>"; };
 		E8ABB35D2B1D0FCA0051B72F /* ForgotPasswordScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordScreen.swift; sourceTree = "<group>"; };
 		E8ABB35F2B1D10680051B72F /* ForgotPaswordCodeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPaswordCodeScreen.swift; sourceTree = "<group>"; };
+		E8ABB3612B1DD7C80051B72F /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		E8C391F72B188C6100EA3872 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		E8C391F92B1899FB00EA3872 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
 		E8F5FA392B19199800F5B9E0 /* LikeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCardView.swift; sourceTree = "<group>"; };
@@ -233,8 +227,7 @@
 				D4BFF98B2B15020C0050DC80 /* EventCardView.swift */,
 				D4BFF98D2B15059D0050DC80 /* EventListView.swift */,
 				D4BFF98F2B1507510050DC80 /* EventDetailsView.swift */,
-				E816FF6A2B164839007538BF /* Drawer.swift */,
-				E816FF6C2B164870007538BF /* Home.swift */,
+				E8ABB3612B1DD7C80051B72F /* Profile.swift */,
 				D44CD79D2B173C0D002294CE /* EventEditView.swift */,
 				D44CD79F2B174490002294CE /* EventAddView.swift */,
 				822CBECB2B18008F00769D45 /* LoginView.swift */,
@@ -270,7 +263,6 @@
 			isa = PBXGroup;
 			children = (
 				822CBED52B18026000769D45 /* Components */,
-				E816FF672B1647A7007538BF /* Menu */,
 				E816FF622B1645FC007538BF /* ViewModel */,
 				D4BFF9882B1500F30050DC80 /* Views */,
 				D4BFF9832B14FE530050DC80 /* Models */,
@@ -313,21 +305,12 @@
 		E816FF622B1645FC007538BF /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				E816FF652B16475C007538BF /* DrawerMenuModel.swift */,
 				D44CD7A12B174EF2002294CE /* EventViewModel.swift */,
 				D44CD7A32B175D23002294CE /* MyEventViewModel.swift */,
 				E8C391F72B188C6100EA3872 /* PostViewModel.swift */,
 				E8ABB3592B1D0EA80051B72F /* LoginViewModell.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		E816FF672B1647A7007538BF /* Menu */ = {
-			isa = PBXGroup;
-			children = (
-				E816FF682B1647C6007538BF /* DrawerMenuButton.swift */,
-			);
-			path = Menu;
 			sourceTree = "<group>";
 		};
 		E816FF6E2B1648A4007538BF /* SubViews */ = {
@@ -494,7 +477,6 @@
 				D4C23E3C2B148B31002B0E10 /* Persistence.swift in Sources */,
 				D4C23E3F2B148B31002B0E10 /* Aqua_Guard.xcdatamodeld in Sources */,
 				D4BFF9872B15005D0050DC80 /* Participation.swift in Sources */,
-				E816FF6D2B164870007538BF /* Home.swift in Sources */,
 				E8ABB35E2B1D0FCA0051B72F /* ForgotPasswordScreen.swift in Sources */,
 				E8F5FA3A2B19199800F5B9E0 /* LikeCardView.swift in Sources */,
 				76E9BDDD2B1972D300B512A9 /* ReclamationListView.swift in Sources */,
@@ -507,12 +489,11 @@
 				E857A6CF2B17E66000EC62DE /* PostCardView.swift in Sources */,
 				E8ABB3602B1D10680051B72F /* ForgotPaswordCodeScreen.swift in Sources */,
 				D44CD79E2B173C0D002294CE /* EventEditView.swift in Sources */,
-				E816FF662B16475C007538BF /* DrawerMenuModel.swift in Sources */,
-				E816FF692B1647C6007538BF /* DrawerMenuButton.swift in Sources */,
 				D4BFF9902B1507510050DC80 /* EventDetailsView.swift in Sources */,
 				D4C23E642B149FDC002B0E10 /* SplashScreenView.swift in Sources */,
 				E857A6D32B17EA4600EC62DE /* PostListView.swift in Sources */,
 				D4C23E352B148B30002B0E10 /* ContentView.swift in Sources */,
+				E8ABB3622B1DD7C80051B72F /* Profile.swift in Sources */,
 				D4BFF98E2B15059D0050DC80 /* EventListView.swift in Sources */,
 				822CBECC2B18008F00769D45 /* RegisterView.swift in Sources */,
 				822CBED42B18025800769D45 /* TextInputField.swift in Sources */,
@@ -534,7 +515,6 @@
 				D4C23E662B14A8A3002B0E10 /* SplashScreen1View.swift in Sources */,
 				E857A6CA2B17E5E900EC62DE /* Like.swift in Sources */,
 				822CBED32B18025800769D45 /* PasswordInputField.swift in Sources */,
-				E816FF6B2B164839007538BF /* Drawer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

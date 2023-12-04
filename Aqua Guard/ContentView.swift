@@ -30,13 +30,16 @@ struct ContentView: View {
                     .tabItem {
                         Label("Forum", systemImage: "text.bubble.fill")
                     }.environmentObject(postViewModel)
-                
+              
                 
                 Text("Store")
                     .tabItem {
                         Label("Store", systemImage: "bag")
                     }
-                
+                Profile()
+                    .tabItem {
+                        Label("Profile", systemImage: "person.fill")
+                    }
                 
             }
             .accentColor(.darkBlue)
