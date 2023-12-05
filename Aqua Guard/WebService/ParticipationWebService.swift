@@ -61,6 +61,41 @@ final class ParticipationWebService {
            
         }.resume()
     }
+    
+    func isParticipated(eventId: String, token: String) async throws -> Bool {
+        // Define the API endpoint URL with the eventId as a query parameter
+        let apiUrlString = "\(baseURL)/participations/participate/\(eventId)"
+        
+        // Create the URL
+        guard let url = URL(string: apiUrlString) else {
+            throw URLError(.badURL)
+        }
+        
+        // Create the request
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization") // Add the token to the request header
+
+        // Perform the request
+        let (_, response) = try await URLSession.shared.data(for: request)
+        
+        // Check for a successful HTTP response
+        guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 404 {
+                // User is not participating (status code 404)
+                return false
+            } else {
+                // Other status codes indicate an error
+                throw URLError(.badServerResponse)
+            }
+        }
+        
+        // User is participating
+        return true
+    }
+
+
+    
 
     
 }

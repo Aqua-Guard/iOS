@@ -18,5 +18,15 @@ class ParticipationViewModel: ObservableObject {
        
         ParticipationWebService.shared.deleteParticipation(eventId: eventId, token: token)
     }
+    func isParticipated(eventId: String) async throws -> Bool {
+           do {
+               return try await ParticipationWebService.shared.isParticipated(eventId: eventId, token: token)
+           } catch {
+               // Handle errors
+               print("Error: \(error)")
+               throw error
+           }
+       }
+
     
 }
