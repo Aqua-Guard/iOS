@@ -14,5 +14,9 @@ class ParticipationViewModel: ObservableObject {
        
         ParticipationWebService.shared.addParticipation(eventId: eventId, token: token) 
     }
+    func deleteParticipation(eventId : String) {
+       
+        ParticipationWebService.shared.deleteParticipation(eventId: eventId, token: token)
+    }
     
 }

@@ -34,6 +34,33 @@ final class ParticipationWebService {
            
         }.resume()
     }
+    
+    
+    
+    func deleteParticipation(eventId: String, token: String) {
+        // Define the API endpoint URL with the eventId as a query parameter
+        let apiUrlString = "\(baseURL)/participations/participate/\(eventId)"
+        
+        // Create the URL
+        guard let url = URL(string: apiUrlString) else {
+            return
+        }
+        
+        // Create the request
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization") // Add the token to the request header
+
+        // Perform the request
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            // Check for errors
+            if let error = error {
+                print("Error deleting participation: \(error)")
+                return
+            }
+           
+        }.resume()
+    }
 
     
 }

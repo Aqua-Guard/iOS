@@ -87,7 +87,7 @@ struct EventDetailsView: View {
                     
                 }
                 Button(action: {
-                   
+                    ParticipationViewModel().deleteParticipation(eventId: event.idEvent)
                 }) {
                     Text("Cancel")
                         .font(.system(size: 20))
