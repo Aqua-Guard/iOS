@@ -129,7 +129,7 @@ struct EventAddView: View {
                             Button(action: {
                                 // Action for submitting event
                                 print("Submit Event")
-                                viewModel.createEvent(userName: "String", userImage: "String", eventName: eventName, description: eventDescription, eventImage: "sidi_bou_said", dateDebut: startDate, dateFin: endDate, lieu: eventLocation)
+                              /*  viewModel.createEvent(userName: "String", userImage: "String", eventName: eventName, description: eventDescription, eventImage: "sidi_bou_said", dateDebut: startDate, dateFin: endDate, lieu: eventLocation)*/
                                 // Show alert
                                             alertMessage = "Event added successfully"
                                             showAlert = true
