@@ -108,8 +108,8 @@ struct PostDetailView: View {
                     showingLikeBottomSeet.toggle()
                 })
                 {
-                    Image(systemName: isLiked ? "heart.fill" : "heart")
-                        .foregroundColor(isLiked ? .pink : .pink)
+                    Image(systemName: post.nbLike > 0 ? "heart.fill" : "heart")
+                        .foregroundColor(.pink)
                     Text("Like \(post.nbLike)")
                         .foregroundStyle(Color.black)
                 }
@@ -194,6 +194,7 @@ struct LikeBottomSheetView: View {
                     .foregroundColor(Color.pink)
                     .font(.title)
             }
+            
         }
         //.padding(.top,2)
         .background(Color.white)
@@ -203,19 +204,28 @@ struct LikeBottomSheetView: View {
 
 struct CommentBottomSheetView: View {
     let comments: [Comment]
-    let viewModel: PostViewModel
+    @ObservedObject var viewModel: PostViewModel
     let postId: String
     @State private var showingDeleteConfirmation: Bool = false
     @State private var commentIdToDelete: String?
     @State private var toastMessage: String = ""
     @State private var showToast: Bool = false
     
+    @State private var showToastComment: Bool = false
+    
+    
+    @State private var isEditing: Bool = false
+    @State private var editingCommentId: String? = nil
+    @State private var editingCommentText: String = ""
+    
+    
+    
     private let toastOptions = SimpleToastOptions(
-       
+        
         alignment:  .bottom, // Position the toast at the bottom
         hideAfter:  3 // Auto hide after 3 seconds, adjust as needed
-               // Add more options as required for
-       )
+        // Add more options as required for
+    )
     var body: some View {
         VStack {
             Image(systemName: "text.bubble.fill")
@@ -242,15 +252,18 @@ struct CommentBottomSheetView: View {
                             }
                         
                             .swipeActions(edge: .leading) {
-                                Button(role: .cancel) {
+                                Button(role: .none) {
+                                    editingCommentText = comment.comment ?? ""
+                                    editingCommentId = comment.idComment
+                                    isEditing = true
                                 } label: {
                                     Label("Edit", systemImage: "pencil")
                                 }.tint(.blue)
                             }
                     }
                 }.listStyle(PlainListStyle())
-                .confirmationDialog("Are you sure you want to delete this comment?",
-                    isPresented: $showingDeleteConfirmation,titleVisibility: .visible) {
+                    .confirmationDialog("Are you sure you want to delete this comment?",
+                                        isPresented: $showingDeleteConfirmation,titleVisibility: .visible) {
                         Button("Delete", role: .destructive) {
                             if let commentId = commentIdToDelete {
                                 Task {
@@ -263,15 +276,8 @@ struct CommentBottomSheetView: View {
                             // i want to distuctive this comment after the delete
                         }
                         Button("Cancel", role: .cancel) {}
-                }.simpleToast(isPresented: $showToast, options: toastOptions) {
-                        Label(toastMessage, systemImage: "info.circle")
-                        .padding()
-                        .background(Color.darkBlue)
-                        .foregroundColor(Color.white)
-                        .cornerRadius(10)
-                        //.padding(.top)
                     }
-                    
+                
                 
             } else {
                 Spacer()
@@ -280,6 +286,47 @@ struct CommentBottomSheetView: View {
                     .font(.title)
                 Spacer()
             }
+            if isEditing {
+                
+                EditCommentView(
+                    text: $editingCommentText,
+                    onSave: {
+                        // Implement the save action
+                        Task {
+                            
+                      
+                                await viewModel.updateComment(postId: postId, commentId: editingCommentId!, newCommentText: editingCommentText)
+                                                         
+                          
+                              
+            
+                                    }
+                        
+                        isEditing = false
+                    },
+                    onCancel: {
+                        isEditing = false
+                    }
+                )
+                
+                .transition(.scale) // Add a nice transition effect
+                
+                
+            }
+        }.simpleToast(isPresented: $showToast, options: toastOptions) {
+            Label(toastMessage, systemImage: "info.circle")
+                .padding()
+                .background(Color.green)
+                .foregroundColor(Color.white)
+                .cornerRadius(10)
+            //.padding(.top)
+        }
+        .simpleToast(isPresented: $viewModel.showToastComment , options: toastOptions) {
+            Label(viewModel.toastMessageComment , systemImage: "info.circle")
+                .padding()
+                .background(viewModel.toastMessageComment == "Comment updated successfully" ? Color.green : Color.red)
+                .foregroundColor(Color.white)
+                .cornerRadius(10)
         }
         .padding()
         // nothing epear
@@ -297,6 +344,65 @@ struct CommentBottomSheetView: View {
     
     
 }
+// Custom Edit Comment View
+struct EditCommentView: View {
+    @Binding var text: String
+    var onSave: () -> Void
+    var onCancel: () -> Void
+    let darkBlue = Color("darkBlue") // Ensure this color is defined in your asset catalog
+    
+    var body: some View {
+        VStack(spacing: 20) {
+            HStack {
+                Image(systemName: "pencil.circle.fill")
+                    .foregroundColor(darkBlue).font(.title2)
+                Text("Edit Comment")
+                    .font(.title2)
+                    .bold()
+                    .foregroundColor(darkBlue)
+            }
+            .padding(.top, 20)
+            
+            TextField("Enter comment", text: $text)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding(.horizontal, 20)
+            
+            Divider()
+            
+            HStack {
+                Button(action: onCancel) {
+                    HStack {
+                        Image(systemName: "xmark.circle.fill")
+                        Text("Cancel")
+                    }
+                }
+                .buttonStyle(PlainButtonStyle())
+                .foregroundColor(.red)
+                
+                Spacer()
+                
+                Button(action: onSave) {
+                    HStack {
+                        Image(systemName: "checkmark.circle.fill")
+                        Text("Save")
+                    }
+                }
+                .buttonStyle(PlainButtonStyle())
+                .foregroundColor(.green)
+            }
+            .padding()
+            
+            
+        }
+        .frame(minWidth: 300, minHeight: 200)
+        .background(Color(UIColor.systemBackground)) // Use dynamic colors for light/dark mode
+        .cornerRadius(20)
+        .shadow(radius: 10)
+        .padding() // Add padding around the entire view for better spacing
+    }
+}
+
+
 
 #Preview {
     PostDetailView(post: post1)

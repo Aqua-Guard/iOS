@@ -87,5 +87,40 @@ final class PostWebService{
                 throw PostErrorHandler.invalidResponse
             }
         }
+    
+    static func updateComment(commentId: String, newComment: String, token: String) async throws {
+        let urlString = "http://localhost:9090/comments/\(commentId)"
+        guard let url = URL(string: urlString) else {
+            throw PostErrorHandler.invalidURL
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT" // Use PUT method for update
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        // Encode the new comment text into JSON
+        let body = ["comment": newComment]
+        request.httpBody = try JSONEncoder().encode(body)
+
+        // Perform the network task
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw PostErrorHandler.invalidResponse
+        }
+
+        // Check for success status code and handle it
+        switch httpResponse.statusCode {
+        case 200:
+            print("Comment updated successfully")
+        case 400:
+            // If the server returns a 400 status, throw an appropriate error
+            throw PostErrorHandler.inappropriateLanguage(data)
+        default:
+            // Handle other status codes as general errors
+            throw PostErrorHandler.invalidResponse
+        }
+    }
+
 
 }
