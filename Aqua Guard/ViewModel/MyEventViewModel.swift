@@ -13,7 +13,7 @@ class MyEventViewModel: ObservableObject {
     @Published var eventToUpdate: Event? = nil
     @Published var isPresented: Bool = false
     
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTRkZjE4YjUzNWVjMDRlZmVkYWJiMGIiLCJ1c2VybmFtZSI6Im1hbGVrIiwiaWF0IjoxNzAxODA3Mjk5LCJleHAiOjE3MDE4MTQ0OTl9.8MR-QXrPQ7i66C8J5ougLEOS3KzSIcw-LNs_XWQzvWU"
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTRkZjE4YjUzNWVjMDRlZmVkYWJiMGIiLCJ1c2VybmFtZSI6Im1hbGVrIiwiaWF0IjoxNzAxODE1MjkyLCJleHAiOjE3MDE4MjI0OTJ9.NffGyhxaN9C1uQdzJU1t7kCHMyJmJ9vTQ2iKWBNadQU"
 
     init()  {
       /*  let event1 = Event(idEvent: UUID().uuidString, userName: "John Doe", userImage: "john_image", eventName: "Event 1", description: "Une initiative communautaire pour nettoyer les plages et protéger l'environnement.", eventImage: "sidi_bou_said", dateDebut: Date(), dateFin: Date(), lieu: "Location 1")
@@ -35,11 +35,27 @@ class MyEventViewModel: ObservableObject {
     }
 
 
+   /* func createEvent(userName: String, userImage: String, eventName: String, description: String, eventImage: String, dateDebut: Date, dateFin: Date, lieu: String) {
+        // Convert the eventImage String to a URL
+        if let imageURL = URL(string: eventImage) {
+            // Create a new Event instance
+            let newEvent = Event(idEvent: UUID().uuidString, userName: userName, userImage: userImage, eventName: eventName, description: description, eventImage: eventImage, dateDebut: dateDebut, dateFin: dateFin, lieu: lieu)
+            eventWebService.addEvent(token: token, event: newEvent, image: imageURL) { result in
+                       switch result {
+                       case .success:
+                           // Handle success, if needed
+                           print("Event added successfully.")
+                       case .failure(let error):
+                           // Handle the error
+                           print("Error adding event: \(error)")
+                       }
+                   }
+        } else {
+            // Handle the case where eventImage is not a valid URL
+            print("Invalid image URL")
+        }
+    }*/
 
-    func createEvent(userName: String, userImage: String, eventName: String, description: String, eventImage: String, dateDebut: Date, dateFin: Date, lieu: String) {
-       /* let newEvent = Event(idEvent: UUID().uuidString, userName: userName, userImage: userImage, eventName: eventName, description: description, eventImage: eventImage, dateDebut: dateDebut, dateFin: dateFin, lieu: lieu)
-        events.append(newEvent)*/
-    }
 
     func updateEvent(eventID: String, newUserName: String, newUserImage: String, newEventName: String, newDescription: String, newEventImage: String, newDateDebut: Date, newDateFin: Date, newLieu: String) {
         if let index = events.firstIndex(where: { $0.idEvent == eventID }) {

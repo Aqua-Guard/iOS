@@ -73,7 +73,7 @@ struct EventDetailsView: View {
                 
                 
                 Button(action: {
-                   
+                    ParticipationViewModel().addParticipation(eventId: event.idEvent)
                 }) {
                     Text("Participate")
                         .font(.system(size: 20))
