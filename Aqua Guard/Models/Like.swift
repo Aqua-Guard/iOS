@@ -7,11 +7,13 @@
 
 import Foundation
 
-struct Like {
-    let id = UUID()
-    let likeAvatar: String
-    let likeUsername: String
+struct Like : Decodable{
+    
+    let idLike : String?
+    let likeAvatar: String?
+    let likeUsername: String?
+    
 }
+let like1 = Like(idLike:"1",likeAvatar: "yousseff", likeUsername: "Youssef Farhat")
+let like2 = Like(idLike:"2",likeAvatar: "user", likeUsername: "Malek Labidi")
 
-let like1 = Like(likeAvatar: "yousseff", likeUsername: "Youssef Farhat")
-let like2 = Like(likeAvatar: "user", likeUsername: "Malek Labidi")

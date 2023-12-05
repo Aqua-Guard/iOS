@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct PostDetailView: View {
-    let post: Post
+    let post: PostModel
     @State private var isLiked = false
     @State private var likeCount: Int = 0
     @State private var commentText: String = ""
     @State var showingLikeBottomSeet = false
     @State var showingCommentBottomSeet = false
-    init(post: Post) {
+    init(post: PostModel) {
         self.post = post
         // Initialize the likeCount state with the initial like count of the post
         _likeCount = State(initialValue: post.nbLike)
@@ -27,14 +27,25 @@ struct PostDetailView: View {
         VStack(alignment: .leading) {
             // User info and post image
             HStack {
-                // User image
-                Image(post.userImage)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 65, height: 65)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.darkBlue, lineWidth: 2))
                 
+                AsyncImage(url: URL(string: "http://127.0.0.1:9090/images/user/\(post.userImage ?? "")")) { phase in
+                    switch phase {
+                    case .success(let image):
+                        image.resizable() // Make the image resizable
+                            .aspectRatio(contentMode: .fill) // Fill the frame while maintaining aspect ratio
+                    case .failure(_):
+                        Image(systemName: "photo") // A fallback image in case of failure
+                            .foregroundColor(.gray)
+                    case .empty:
+                        ProgressView() // An activity indicator while the image is loading
+                    @unknown default:
+                        EmptyView() // A default view for unknown phase
+                    }
+                }
+                .frame(width: 65, height: 65) // Set the frame size for the image
+                .clipShape(Circle()) // Clip the image to a circle
+                .overlay(Circle().stroke(Color.darkBlue, lineWidth: 2)) // Add a border around the image
+
                 // User name and role
                 VStack(alignment: .leading, spacing: 8) {
                     Text(post.userName)
@@ -57,12 +68,30 @@ struct PostDetailView: View {
                 .foregroundColor(.secondary)
             
             //  i want ti center this image
-            Image(post.postImage)
-                .resizable()
-                .scaledToFit()
-                .frame(height: 200)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .padding(.bottom)
+            AsyncImage(url: URL(string: "http://127.0.0.1:9090/images/post/\(post.postImage)")) { phase in
+                switch phase {
+                case .success(let image):
+                    image.resizable() // Make the image resizable
+                        .aspectRatio(contentMode: .fit) // Fit the content in the current view size
+                        .frame(height: 200) // Set the frame height
+                        .frame(maxWidth: .infinity, alignment: .center) // Set the frame width to be as wide as possible and align it to the center
+                case .failure(_):
+                    Image(systemName: "photo") // An image to display in case of failure to load
+                        .foregroundColor(.gray)
+                        .frame(height: 200)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                case .empty:
+                    ProgressView() // An activity indicator until the image loads
+                        .frame(height: 200)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                @unknown default:
+                    EmptyView() // Default view in case of unknown phase
+                }
+            }
+            .padding(.bottom)
+            
+            
+            
             Divider()
                 .background(Color.darkBlue)
             
@@ -155,7 +184,7 @@ struct LikeBottomSheetView: View {
             
             // Display like card views if there are likes
             if likes.count > 0 {
-                ForEach(likes, id: \.id) { like in // Assuming 'Like' has an 'id' property
+                ForEach(likes ?? [],id: \.idLike) { like in
                     LikeCardView(like: like)
                 }
             } else {
@@ -192,7 +221,7 @@ struct CommentBottomSheetView: View {
             
             if comments.count > 0 {
                 List {
-                    ForEach(comments) { comment in
+                    ForEach(comments ?? [],id: \.idComment) { comment in
                         CommentCardView(comment: comment)
                             .swipeActions(edge: .trailing) {
                                 Button(role: .destructive) {

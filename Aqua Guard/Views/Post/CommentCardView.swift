@@ -15,19 +15,38 @@ struct CommentCardView: View {
                 .background(Color.gray.opacity(0.5))
             
             HStack {
-                Image(comment.commentAvatar) // Replace with your actual image name
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 60, height: 60)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.darkBlue, lineWidth: 3)) // Blue border for the profile picture
                 
+                if let avatarName = comment.commentAvatar, let url = URL(string: "http://127.0.0.1:9090/images/user/" + avatarName) {
+                    AsyncImage(url: url) { phase in
+                        switch phase {
+                        case .success(let image):
+                            image.resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 60, height: 60)
+                                .clipShape(Circle())
+                                .overlay(Circle().stroke(Color.darkBlue, lineWidth: 3))
+                        case .failure(_):
+                            Image(systemName: "person.circle.fill") // Placeholder for failure
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 60, height: 60)
+                                .clipShape(Circle())
+                                .overlay(Circle().stroke(Color.darkBlue, lineWidth: 3))
+                        case .empty:
+                            ProgressView() // Loading indicator
+                        @unknown default:
+                            EmptyView()
+                        }
+                    }
+                } else {
+                    Image(systemName: "person.circle") // Placeholder for nil
+                }
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(comment.commentUsername)
+                    Text(comment.commentUsername!)
                         .font(.headline) // Slightly larger font for the name
                         .fontWeight(.bold)
                     
-                    Text(comment.comment)
+                    Text(comment.comment!)
                         .font(.subheadline) // Smaller font for the comment body
                         .foregroundColor(Color.gray) // A softer color for the comment text
                         .lineLimit(3) // Limit the number of lines to prevent very long comments from taking up too much space

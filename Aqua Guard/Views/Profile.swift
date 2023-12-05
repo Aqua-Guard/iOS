@@ -78,23 +78,22 @@ struct Profile: View {
     }
 
     private func destinationView(for menuItem: MenuItem) -> some View {
-        // Return the appropriate destination view based on the menu item
-        // For example:
-        switch menuItem.name {
-//        case "My Calendar":
-//            return Text("Calendar View")
-        case "My Events":
-            return MyEvents().tag("My Events")
-                .environmentObject(eventViewModel)
-        case "My Posts":
-            return MyPosts().tag("MyPosts")
-                .environmentObject(postViewModel)
-        case "My Reclamtion":
-            return ReclamationListView()
-        default:
-            return Text("Placeholder")
+        Group {
+            switch menuItem.name {
+            case "My Events":
+                MyEvents()
+                    .environmentObject(eventViewModel)
+            case "My Posts":
+                MyPosts()
+                    .environmentObject(postViewModel)
+            case "My Reclamtion":
+                ReclamationListView()
+            default:
+                Text("Placeholder")
+            }
         }
     }
+
 }
 
 struct MenuItem: Hashable {

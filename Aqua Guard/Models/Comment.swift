@@ -6,15 +6,19 @@
 //
 
 import Foundation
-struct Comment : Identifiable{
-    let id: String
-    let idUser: String
-    let idPost: String
-    let commentAvatar: String
-    let commentUsername: String
-    let comment: String
+struct Comment: Decodable , Identifiable{
+    
+    var id: String { idComment }
+    let idComment: String
+    let idUser: String?
+    let idPost: String?
+    let commentAvatar: String?
+    let commentUsername: String?
+    let comment: String?
+    
+   
 }
 
-let comment1 = Comment(id: "c1", idUser: "u1", idPost: "p1", commentAvatar: "user", commentUsername: "cuser1", comment: "Nice post!")
-let comment2 = Comment(id: "c2", idUser: "u2", idPost: "p2", commentAvatar: "youssef", commentUsername: "cuser2", comment: "Great work!")
+let comment1 = Comment( idComment: "p1",idUser: "c1", idPost: "u1", commentAvatar: "user", commentUsername: "cuser1", comment: "Nice post!")
+let comment2 = Comment( idComment: "p2",idUser: "c2", idPost: "u2", commentAvatar: "youssef", commentUsername: "cuser2", comment: "Great work!")
 
