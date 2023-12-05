@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct MyPosts: View {
-    @EnvironmentObject var postViewModel : PostViewModel
+    @ObservedObject var postViewModel = PostViewModel()
     var body: some View {
         
         NavigationView{
             ScrollView {
                 VStack(spacing: 0) {
-                    ForEach(postViewModel.posts,id: \.id){post in
+                    ForEach(postViewModel.posts ?? [] ,id: \.idPost){post in
                         PostCardView(post: post) // it show me alway the first post1
                             .listRowInsets(EdgeInsets())
                             .listRowBackground(Color.clear)
