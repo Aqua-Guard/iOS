@@ -6,7 +6,7 @@
 //
 
 import Foundation
-class EventWebService {
+final class EventWebService {
     static let shared = EventWebService()
     private let baseURL = "http://192.168.43.253:9090"
 
@@ -73,7 +73,37 @@ class EventWebService {
              }
          }.resume()
      }
-    
+
+            func deleteEvent(eventId: String, token: String) async throws {
+                 let urlString = "\(baseURL)/events/\(eventId)"
+                 guard let url = URL(string: urlString) else {
+                     throw PostErrorHandler.invalidURL
+                 }
+
+                 var request = URLRequest(url: url)
+                 request.httpMethod = "DELETE"
+                 request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
+                 let (data, response) = try await URLSession.shared.data(for: request)
+                 guard let httpResponse = response as? HTTPURLResponse else {
+                     throw EventErrorHandler.invalidResponse
+                 }
+
+                 switch httpResponse.statusCode {
+                 case 204:
+                     // Successfully deleted the event
+                     return
+
+                 case 403:
+                     // If the server returns a 403 status, throw an appropriate error
+                     throw EventErrorHandler.inappropriateLanguage(data)
+
+                 default:
+                     // Handle other status codes as general errors
+                     throw EventErrorHandler.invalidResponse
+                 }
+             }
     
  }
 
+    

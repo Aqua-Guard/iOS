@@ -14,6 +14,8 @@ struct MyEvents: View {
     @State private var showToast = false
     @State private var isEditing = false
     @State private var selectedEvent: Event?
+    @State private var deletionID: UUID?
+   
     var body: some View {
         NavigationView{
              
@@ -59,7 +61,9 @@ struct MyEvents: View {
                                 .tint(.red)
                             }
                         
-                    } .sheet(isPresented: $isEditing) {
+                    } 
+                    .id(deletionID)
+                    .sheet(isPresented: $isEditing) {
                         /*EventEditView(event: selectedEvent ?? Event(idEvent: "00", userName: "bdhd", userImage: "String", eventName: "String", description: "String", eventImage: "String", dateDebut: Date(), dateFin: Date(), lieu: "String"))*/
                     }
             }
@@ -81,15 +85,16 @@ struct MyEvents: View {
                                       primaryButton: .destructive(
                                           Text("Delete"),
                                           action: {
-                                                  viewModel.deleteEvent(eventID: eventToDelete!.idEvent)
+                                                  viewModel.deleteEvent(eventId: eventToDelete!.idEvent)
                                               showToast = true
+                                              deletionID = UUID()
                                               
                                           }
                                       ),
                                       secondaryButton: .cancel()
                             
                     )
-                          }
+                          }.id(deletionID)
                 .overlay(
                               VStack {
                                   if showToast {
@@ -114,7 +119,7 @@ struct MyEvents: View {
         }
     }
 }
-
+/*
 struct MyEvents_Previews: PreviewProvider {
     static var previews: some View {
         // Create an instance of EventViewModel
@@ -123,4 +128,4 @@ struct MyEvents_Previews: PreviewProvider {
         MyEvents()
             .environmentObject(viewModel)
     }
-}
+}*/
