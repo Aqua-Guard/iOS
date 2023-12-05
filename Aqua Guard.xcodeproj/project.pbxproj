@@ -264,7 +264,7 @@
 		D4C23E312B148B30002B0E10 /* Aqua Guard */ = {
 			isa = PBXGroup;
 			children = (
-				D4E692BF2B1F3D2400A6AC0A /* Networkk */,
+				D4E692BF2B1F3D2400A6AC0A /*  WebService */,
 				822CBED52B18026000769D45 /* Components */,
 				E816FF622B1645FC007538BF /* ViewModel */,
 				D4BFF9882B1500F30050DC80 /* Views */,
@@ -305,12 +305,12 @@
 			path = "Aqua GuardUITests";
 			sourceTree = "<group>";
 		};
-		D4E692BF2B1F3D2400A6AC0A /* Networkk */ = {
+		D4E692BF2B1F3D2400A6AC0A /*  WebService */ = {
 			isa = PBXGroup;
 			children = (
 				D4E692C02B1F3D4500A6AC0A /* EventService.swift */,
 			);
-			path = Networkk;
+			path = " WebService";
 			sourceTree = "<group>";
 		};
 		E816FF622B1645FC007538BF /* ViewModel */ = {
