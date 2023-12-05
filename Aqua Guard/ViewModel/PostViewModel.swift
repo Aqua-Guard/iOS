@@ -14,7 +14,11 @@ class PostViewModel : ObservableObject {
     @Published var alertMessage: String = ""
     @Published var showAlert: Bool = false
     
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTZlMzQ4MDJiNTA3YzgyNTVmZmQ5YzYiLCJ1c2VybmFtZSI6InlvdXNzZWYiLCJpYXQiOjE3MDE4MDc5NDIsImV4cCI6MTcwMTgxNTE0Mn0.s2yOdxRxG09Wqss9jzOFouptqKOa7Q-T6djWtVYQDx8"
+    @Published var toastMessageComment: String = ""
+    @Published var showToastComment: Bool = false
+    
+    
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTZlMzQ4MDJiNTA3YzgyNTVmZmQ5YzYiLCJ1c2VybmFtZSI6InlvdXNzZWYiLCJpYXQiOjE3MDE4MTU2MjEsImV4cCI6MTcwMTgyMjgyMX0.iDZ6caSWDESUBRhhS0R077AIYazoKB69S6xkzia8Rig"
     func getPosts() async {
         do {
             let posts = try await PostWebService.getPostsData(token: token)
@@ -61,14 +65,25 @@ class PostViewModel : ObservableObject {
         }
 
     func updateComment(postId: String, commentId: String, newCommentText: String) async {
-        // Implement the logic to update the comment
-        // This usually involves making a network request to your backend
-        // After successful update, update the local state:
-        DispatchQueue.main.async {
-            if let postIndex = self.posts!.firstIndex(where: { $0.idPost == postId }),
-               let commentIndex = self.posts![postIndex].comments.firstIndex(where: { $0.idComment == commentId }) {
-                self.posts![postIndex].comments[commentIndex].comment = newCommentText
+        do {
+           try await PostWebService.updateComment(commentId: commentId, newComment: newCommentText, token: self.token)
+            DispatchQueue.main.async {
+                if let postIndex = self.posts!.firstIndex(where: { $0.idPost == postId }),
+                   let commentIndex = self.posts![postIndex].comments.firstIndex(where: { $0.idComment == commentId }) {
+                    self.posts![postIndex].comments[commentIndex].comment = newCommentText
+                }
             }
+            DispatchQueue.main.async {
+                       // Update the comment in your local array if needed
+                       self.toastMessageComment = "Comment updated successfully"
+                       self.showToastComment = true
+                
+                   }
+        } catch {
+            DispatchQueue.main.async {
+                       self.toastMessageComment = "Failed to update comment: \(error.localizedDescription)"
+                       self.showToastComment = true
+                   }
         }
     }
 
