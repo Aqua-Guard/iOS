@@ -6,14 +6,19 @@
 //
 
 import SwiftUI
+import SimpleToast
 
 struct PostDetailView: View {
     let post: PostModel
+    @StateObject var viewModel = PostViewModel()
     @State private var isLiked = false
     @State private var likeCount: Int = 0
     @State private var commentText: String = ""
     @State var showingLikeBottomSeet = false
     @State var showingCommentBottomSeet = false
+    
+    
+    
     init(post: PostModel) {
         self.post = post
         // Initialize the likeCount state with the initial like count of the post
@@ -45,7 +50,7 @@ struct PostDetailView: View {
                 .frame(width: 65, height: 65) // Set the frame size for the image
                 .clipShape(Circle()) // Clip the image to a circle
                 .overlay(Circle().stroke(Color.darkBlue, lineWidth: 2)) // Add a border around the image
-
+                
                 // User name and role
                 VStack(alignment: .leading, spacing: 8) {
                     Text(post.userName)
@@ -126,7 +131,7 @@ struct PostDetailView: View {
                     Text("Comment \(commentCount)")
                         .foregroundStyle(Color.black)
                 } .sheet(isPresented: $showingCommentBottomSeet){
-                    CommentBottomSheetView(comments: post.comments)
+                    CommentBottomSheetView(comments: post.comments, viewModel: viewModel , postId: post.idPost)
                         .presentationDetents([.medium,.large])
                 }
                 Spacer()
@@ -141,13 +146,6 @@ struct PostDetailView: View {
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
-            
-            
-            
-            
-            
-            
-            
         }
         .padding()
         .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
@@ -205,8 +203,19 @@ struct LikeBottomSheetView: View {
 
 struct CommentBottomSheetView: View {
     let comments: [Comment]
+    let viewModel: PostViewModel
+    let postId: String
+    @State private var showingDeleteConfirmation: Bool = false
+    @State private var commentIdToDelete: String?
+    @State private var toastMessage: String = ""
+    @State private var showToast: Bool = false
     
-    
+    private let toastOptions = SimpleToastOptions(
+       
+        alignment:  .bottom, // Position the toast at the bottom
+        hideAfter:  3 // Auto hide after 3 seconds, adjust as needed
+               // Add more options as required for
+       )
     var body: some View {
         VStack {
             Image(systemName: "text.bubble.fill")
@@ -225,10 +234,13 @@ struct CommentBottomSheetView: View {
                         CommentCardView(comment: comment)
                             .swipeActions(edge: .trailing) {
                                 Button(role: .destructive) {
+                                    commentIdToDelete = comment.idComment
+                                    showingDeleteConfirmation = true
                                 } label: {
                                     Label("Delete", systemImage: "trash")
                                 }
                             }
+                        
                             .swipeActions(edge: .leading) {
                                 Button(role: .cancel) {
                                 } label: {
@@ -236,8 +248,31 @@ struct CommentBottomSheetView: View {
                                 }.tint(.blue)
                             }
                     }
-                }
-                .listStyle(PlainListStyle())
+                }.listStyle(PlainListStyle())
+                .confirmationDialog("Are you sure you want to delete this comment?",
+                    isPresented: $showingDeleteConfirmation,titleVisibility: .visible) {
+                        Button("Delete", role: .destructive) {
+                            if let commentId = commentIdToDelete {
+                                Task {
+                                    await viewModel.deleteComment(postId: postId, commentId: commentId)
+                                    toastMessage = "Comment deleted successfully"
+                                    showToast = true
+                                }
+                            }
+                            commentIdToDelete = nil // Reset the selected comment
+                            // i want to distuctive this comment after the delete
+                        }
+                        Button("Cancel", role: .cancel) {}
+                }.simpleToast(isPresented: $showToast, options: toastOptions) {
+                        Label(toastMessage, systemImage: "info.circle")
+                        .padding()
+                        .background(Color.darkBlue)
+                        .foregroundColor(Color.white)
+                        .cornerRadius(10)
+                        //.padding(.top)
+                    }
+                    
+                
             } else {
                 Spacer()
                 Text("No Comment")

@@ -50,6 +50,7 @@
 		E816FF742B164938007538BF /* MyEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF732B164938007538BF /* MyEvents.swift */; };
 		E816FF762B164956007538BF /* MyPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF752B164956007538BF /* MyPosts.swift */; };
 		E816FF782B16496E007538BF /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF772B16496E007538BF /* Command.swift */; };
+		E83A72E32B1F9C5E00A9F955 /* SimpleToast in Frameworks */ = {isa = PBXBuildFile; productRef = E83A72E22B1F9C5E00A9F955 /* SimpleToast */; };
 		E857A6C82B17E5BD00EC62DE /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857A6C72B17E5BD00EC62DE /* PostModel.swift */; };
 		E857A6CA2B17E5E900EC62DE /* Like.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857A6C92B17E5E900EC62DE /* Like.swift */; };
 		E857A6CC2B17E5FA00EC62DE /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857A6CB2B17E5FA00EC62DE /* Comment.swift */; };
@@ -155,6 +156,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E83A72E32B1F9C5E00A9F955 /* SimpleToast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +389,9 @@
 			dependencies = (
 			);
 			name = "Aqua Guard";
+			packageProductDependencies = (
+				E83A72E22B1F9C5E00A9F955 /* SimpleToast */,
+			);
 			productName = "Aqua Guard";
 			productReference = D4C23E2F2B148B30002B0E10 /* Aqua Guard.app */;
 			productType = "com.apple.product-type.application";
@@ -459,6 +464,9 @@
 				Base,
 			);
 			mainGroup = D4C23E262B148B30002B0E10;
+			packageReferences = (
+				E83A72E12B1F9C5E00A9F955 /* XCRemoteSwiftPackageReference "SimpleToast" */,
+			);
 			productRefGroup = D4C23E302B148B30002B0E10 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -878,6 +886,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E83A72E12B1F9C5E00A9F955 /* XCRemoteSwiftPackageReference "SimpleToast" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sanzaru/SimpleToast";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.8.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E83A72E22B1F9C5E00A9F955 /* SimpleToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E83A72E12B1F9C5E00A9F955 /* XCRemoteSwiftPackageReference "SimpleToast" */;
+			productName = SimpleToast;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		D4C23E3D2B148B31002B0E10 /* Aqua_Guard.xcdatamodeld */ = {

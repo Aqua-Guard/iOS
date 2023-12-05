@@ -64,5 +64,28 @@ final class PostWebService{
         }
     }
 
+    static func deleteComment(commentId: String, token: String) async throws {
+            let urlString = "http://localhost:9090/comments/\(commentId)"
+            guard let url = URL(string: urlString) else {
+                throw PostErrorHandler.invalidURL
+            }
+
+            var request = URLRequest(url: url)
+            request.httpMethod = "DELETE"
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
+            let (data, response) = try await URLSession.shared.data(for: request)
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw PostErrorHandler.invalidResponse
+            }
+
+            switch httpResponse.statusCode {
+            case 200:
+                print("Comment deleted successfully")
+            default:
+                // Handle other status codes appropriately
+                throw PostErrorHandler.invalidResponse
+            }
+        }
 
 }
