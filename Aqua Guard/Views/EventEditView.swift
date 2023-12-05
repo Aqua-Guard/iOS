@@ -209,7 +209,7 @@ struct DatePickerSheet: View {
         .padding()
     }
 }
-
+/*
 struct EventEditView_Previews: PreviewProvider {
     static var previews: some View {
         let sampleEvent = Event(
@@ -228,4 +228,4 @@ struct EventEditView_Previews: PreviewProvider {
           
         
     }
-}
+}*/

@@ -41,6 +41,7 @@
 		D4C23E552B148B31002B0E10 /* Aqua_GuardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E542B148B31002B0E10 /* Aqua_GuardUITestsLaunchTests.swift */; };
 		D4C23E642B149FDC002B0E10 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E632B149FDC002B0E10 /* SplashScreenView.swift */; };
 		D4C23E662B14A8A3002B0E10 /* SplashScreen1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E652B14A8A3002B0E10 /* SplashScreen1View.swift */; };
+		D4E692C12B1F3D4500A6AC0A /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E692C02B1F3D4500A6AC0A /* EventService.swift */; };
 		E816FF702B1648E8007538BF /* MyCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF6F2B1648E8007538BF /* MyCalendar.swift */; };
 		E816FF722B164905007538BF /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF712B164905007538BF /* Notification.swift */; };
 		E816FF742B164938007538BF /* MyEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF732B164938007538BF /* MyEvents.swift */; };
@@ -117,6 +118,7 @@
 		D4C23E542B148B31002B0E10 /* Aqua_GuardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aqua_GuardUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D4C23E632B149FDC002B0E10 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		D4C23E652B14A8A3002B0E10 /* SplashScreen1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen1View.swift; sourceTree = "<group>"; };
+		D4E692C02B1F3D4500A6AC0A /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		E816FF6F2B1648E8007538BF /* MyCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCalendar.swift; sourceTree = "<group>"; };
 		E816FF712B164905007538BF /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		E816FF732B164938007538BF /* MyEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEvents.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 		D4C23E312B148B30002B0E10 /* Aqua Guard */ = {
 			isa = PBXGroup;
 			children = (
+				D4E692BF2B1F3D2400A6AC0A /* Networkk */,
 				822CBED52B18026000769D45 /* Components */,
 				E816FF622B1645FC007538BF /* ViewModel */,
 				D4BFF9882B1500F30050DC80 /* Views */,
@@ -300,6 +303,14 @@
 				D4C23E542B148B31002B0E10 /* Aqua_GuardUITestsLaunchTests.swift */,
 			);
 			path = "Aqua GuardUITests";
+			sourceTree = "<group>";
+		};
+		D4E692BF2B1F3D2400A6AC0A /* Networkk */ = {
+			isa = PBXGroup;
+			children = (
+				D4E692C02B1F3D4500A6AC0A /* EventService.swift */,
+			);
+			path = Networkk;
 			sourceTree = "<group>";
 		};
 		E816FF622B1645FC007538BF /* ViewModel */ = {
@@ -480,6 +491,7 @@
 				E8ABB35E2B1D0FCA0051B72F /* ForgotPasswordScreen.swift in Sources */,
 				E8F5FA3A2B19199800F5B9E0 /* LikeCardView.swift in Sources */,
 				76E9BDDD2B1972D300B512A9 /* ReclamationListView.swift in Sources */,
+				D4E692C12B1F3D4500A6AC0A /* EventService.swift in Sources */,
 				E8C391F82B188C6100EA3872 /* PostViewModel.swift in Sources */,
 				E816FF762B164956007538BF /* MyPosts.swift in Sources */,
 				E816FF742B164938007538BF /* MyEvents.swift in Sources */,
