@@ -8,15 +8,24 @@
 import SwiftUI
 
 struct PostCardView: View {
-    let post: PostModel
+    
+    @ObservedObject var viewModel = PostViewModel()
+    //let post: PostModel
+    let postIndex: Int
     @State private var isLiked = false
     @State private var likeCount: Int = 0
     @State private var commentText: String = ""
-    init(post: PostModel) {
-        self.post = post
-        // Initialize the likeCount state with the initial like count of the post
-        _likeCount = State(initialValue: post.nbLike)
-    }
+    
+    private var post: PostModel {
+        viewModel.posts![postIndex]
+        }
+    
+    
+    init(viewModel: PostViewModel, postIndex: Int) {
+           self.viewModel = viewModel
+           self.postIndex = postIndex
+            self._likeCount = State(initialValue: viewModel.posts![postIndex].nbLike)
+       }
     
     
     var body: some View {
@@ -44,7 +53,7 @@ struct PostCardView: View {
                 .frame(width: 65, height: 65) // Set the frame size for the image
                 .clipShape(Circle()) // Clip the image to a circle
                 .overlay(Circle().stroke(Color.darkBlue, lineWidth: 2)) // Add a border around the image
-
+                
                 // User name and role
                 VStack(alignment: .leading, spacing: 8) {
                     Text(post.userName)
@@ -57,7 +66,7 @@ struct PostCardView: View {
                 Spacer()
                 NavigationLink( destination: PostDetailView(post: post)) {
                     Image(systemName:"info.circle").foregroundColor(.blue)
-                  
+                    
                 }
             }
             Divider()
@@ -90,7 +99,7 @@ struct PostCardView: View {
                 }
             }
             .padding(.bottom) // Add some padding at the bottom
-
+            
             
             Divider()
                 .background(Color.darkBlue)
@@ -98,25 +107,25 @@ struct PostCardView: View {
             
             HStack {
                 // Like icon with label and count
-               
-                    Button(action: {
-                        // Toggle the isLiked state
-                        self.isLiked.toggle()
-                        if self.isLiked {
-                            self.likeCount += 1
+                
+                Button(action: {
+                    // Toggle the isLiked state
+                    self.isLiked.toggle()
+                    if self.isLiked {
+                        self.likeCount += 1
                         
-                        } else {
-                            self.likeCount -= 1
-                        }
-                    }) {
-                        Image(systemName: isLiked ? "heart.fill" : "heart")
-                            .foregroundColor(isLiked ? .pink : .pink)
-                        Text("Like \(self.likeCount)").foregroundStyle(Color.black)
+                    } else {
+                        self.likeCount -= 1
                     }
-                    .padding(.trailing, -6)
-                    
-                    
-               
+                }) {
+                    Image(systemName: isLiked ? "heart.fill" : "heart")
+                        .foregroundColor(isLiked ? .pink : .pink)
+                    Text("Like \(self.likeCount)").foregroundStyle(Color.black)
+                }
+                .padding(.trailing, -6)
+                
+                
+                
                 
                 // this don't want to chage their
                 Spacer()
@@ -158,14 +167,18 @@ struct PostCardView: View {
                 
                 // Send button
                 Button(action: {
-                    // Handle send comment action
-                    // TODO: Implement the action
+                    Task {
+                        await viewModel.addComment(postId:post.idPost, comment: commentText)
+                        // static user id
+                                           commentText = "" // Clear the text field on send
+                    }
+                    
                 }) {
                     Image(systemName: "paperplane.fill")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 20, height: 20) // Adjust size of the icon
-                       .padding(10)
+                        .padding(10)
                 }
                 .background(Color.blue) // Use a more appealing color
                 .foregroundColor(.white) // White color for the icon
@@ -177,28 +190,32 @@ struct PostCardView: View {
             }
             .padding(.horizontal, 5)
             .padding(.vertical, 8)
-            
+            .alert(isPresented: $viewModel.showAlert) {
+                        Alert(title: Text("Message"), message: Text(viewModel.alertMessage), dismissButton: .default(Text("OK")))
+                    }
             
             VStack(spacing: 8) {
-                ForEach(post.comments.prefix(2) ?? [],id: \.idComment) { comment in
+                // here i fetch all paosts
+                ForEach(post.comments.prefix(2), id: \.id) { comment in
                     CommentCardView(comment: comment)
                 }
+
                 
                 if post.comments.count > 2 {
                     Divider()
                         .background(Color.darkBlue)
-                        HStack {
-                          
-                            Spacer() // Pushes the content to center
-                            Text("...")
-                                .foregroundColor(Color.darkBlue)
-                            NavigationLink(destination: PostDetailView(post: post)) {
-                                Text("View more")
-                                    .foregroundColor(.darkBlue)
-                            }
-                            Spacer() // Pushes the content to center
+                    HStack {
+                        
+                        Spacer() // Pushes the content to center
+                        Text("...")
+                            .foregroundColor(Color.darkBlue)
+                        NavigationLink(destination: PostDetailView(post: post)) {
+                            Text("View more")
+                                .foregroundColor(.darkBlue)
                         }
+                        Spacer() // Pushes the content to center
                     }
+                }
             }
             .padding(.vertical, 5)
             
@@ -209,7 +226,7 @@ struct PostCardView: View {
         
         .cornerRadius(8)
         .shadow(radius: 4)
-       // .padding(5)
+        // .padding(5)
     }
     
     
@@ -224,6 +241,26 @@ struct RoundedButtonStyle: ButtonStyle {
     }
 }
 #Preview {
-    PostCardView(post: post1) // is this correct ?
-        .previewLayout(.sizeThatFits)
+    let samplePost = PostModel(
+                idPost: "sampleID",
+                userName: "Sample User",
+                userRole: "User Role",
+                description: "Sample Description",
+                userImage: "sampleImage",
+                postImage: "sampleImage",
+                nbLike: 10,
+                nbComments: 5,
+                nbShare: 3,
+                likes: [],
+                comments: []
+            )
+
+    let viewModel = PostViewModel()
+            viewModel.posts = [samplePost]
+
+         
+        
+
+    return PostCardView(viewModel: viewModel, postIndex: 0)
+                .previewLayout(.sizeThatFits)
 }

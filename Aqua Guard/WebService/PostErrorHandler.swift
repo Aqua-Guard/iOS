@@ -11,7 +11,7 @@ enum PostErrorHandler: LocalizedError {
     case invalidURL
        case invalidResponse
        case invalidData
-       case custom(error: Error)
+       case inappropriateLanguage(Data)
        
        var errorDescription: String? {
            switch self {
@@ -23,11 +23,29 @@ enum PostErrorHandler: LocalizedError {
                
            case .invalidData:
                return "Invalid data"
+            
+        
                
-           case .custom(let error):
-               return error.localizedDescription
-           }
+           case .inappropriateLanguage(let data):
+                      return extractErrorMessage(from: data)
+                  }
        }
+    private func extractErrorMessage(from data: Data) -> String {
+        if let serverError = try? JSONDecoder().decode(ServerErrorMessage.self, from: data),
+           let firstError = serverError.errors.first {
+            return firstError.msg
+        } else {
+            return "An error occurred"
+        }
+    }
+
     
 }
+// To handel Bad word error
+struct ServerErrorMessage: Decodable {
+    let errors: [ErrorDetail]
+}
 
+struct ErrorDetail: Decodable {
+    let msg: String
+}
