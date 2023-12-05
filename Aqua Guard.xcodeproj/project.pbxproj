@@ -42,6 +42,7 @@
 		D4C23E642B149FDC002B0E10 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E632B149FDC002B0E10 /* SplashScreenView.swift */; };
 		D4C23E662B14A8A3002B0E10 /* SplashScreen1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E652B14A8A3002B0E10 /* SplashScreen1View.swift */; };
 		D4F5A1B62B1F782B0096346A /* EventWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F5A1B52B1F782B0096346A /* EventWebService.swift */; };
+		D4F5A1BC2B1F8AE80096346A /* EventErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F5A1BB2B1F8AE80096346A /* EventErrorHandler.swift */; };
 		E816FF702B1648E8007538BF /* MyCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF6F2B1648E8007538BF /* MyCalendar.swift */; };
 		E816FF722B164905007538BF /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF712B164905007538BF /* Notification.swift */; };
 		E816FF742B164938007538BF /* MyEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF732B164938007538BF /* MyEvents.swift */; };
@@ -121,6 +122,7 @@
 		D4C23E632B149FDC002B0E10 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		D4C23E652B14A8A3002B0E10 /* SplashScreen1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen1View.swift; sourceTree = "<group>"; };
 		D4F5A1B52B1F782B0096346A /* EventWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventWebService.swift; sourceTree = "<group>"; };
+		D4F5A1BB2B1F8AE80096346A /* EventErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventErrorHandler.swift; sourceTree = "<group>"; };
 		E816FF6F2B1648E8007538BF /* MyCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCalendar.swift; sourceTree = "<group>"; };
 		E816FF712B164905007538BF /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		E816FF732B164938007538BF /* MyEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEvents.swift; sourceTree = "<group>"; };
@@ -358,6 +360,7 @@
 				E8B083862B1E74FF00CDCFD9 /* PostWebService.swift */,
 				E8B083882B1E76D700CDCFD9 /* PostErrorHandler.swift */,
 				D4F5A1B52B1F782B0096346A /* EventWebService.swift */,
+				D4F5A1BB2B1F8AE80096346A /* EventErrorHandler.swift */,
 			);
 			path = WebService;
 			sourceTree = "<group>";
@@ -500,6 +503,7 @@
 				822CBECD2B18008F00769D45 /* LoginView.swift in Sources */,
 				D44CD7A02B174490002294CE /* EventAddView.swift in Sources */,
 				D4C23E3C2B148B31002B0E10 /* Persistence.swift in Sources */,
+				D4F5A1BC2B1F8AE80096346A /* EventErrorHandler.swift in Sources */,
 				D4C23E3F2B148B31002B0E10 /* Aqua_Guard.xcdatamodeld in Sources */,
 				D4BFF9872B15005D0050DC80 /* Participation.swift in Sources */,
 				E8ABB35E2B1D0FCA0051B72F /* ForgotPasswordScreen.swift in Sources */,
