@@ -14,7 +14,7 @@ class PostViewModel : ObservableObject {
     @Published var alertMessage: String = ""
     @Published var showAlert: Bool = false
     
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTZlMzQ4MDJiNTA3YzgyNTVmZmQ5YzYiLCJ1c2VybmFtZSI6InlvdXNzZWYiLCJpYXQiOjE3MDE3ODUzMDQsImV4cCI6MTcwMTc5MjUwNH0.p8GI4v6CCI65mYqBTy_bjHLiqgA9hdqLiirKKHd8zTw"
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTZlMzQ4MDJiNTA3YzgyNTVmZmQ5YzYiLCJ1c2VybmFtZSI6InlvdXNzZWYiLCJpYXQiOjE3MDE4MDc5NDIsImV4cCI6MTcwMTgxNTE0Mn0.s2yOdxRxG09Wqss9jzOFouptqKOa7Q-T6djWtVYQDx8"
     func getPosts() async {
         do {
             let posts = try await PostWebService.getPostsData(token: token)
@@ -41,6 +41,36 @@ class PostViewModel : ObservableObject {
         showAlert = true
     }
 
+
+    func deleteComment(postId: String, commentId: String) async {
+            do {
+                // Call the network service to delete the comment
+                try await PostWebService.deleteComment(commentId: commentId, token: self.token)
+
+                
+                DispatchQueue.main.async {
+                    if let postIndex = self.posts!.firstIndex(where: { $0.idPost == postId }),
+                       let commentIndex = self.posts![postIndex].comments.firstIndex(where: { $0.idComment == commentId }) {
+                        self.posts![postIndex].comments.remove(at: commentIndex)
+                    }
+                }
+            } catch {
+                // Handle any errors, e.g., show an error message
+                print("Error deleting comment: \(error.localizedDescription)")
+            }
+        }
+
+    func updateComment(postId: String, commentId: String, newCommentText: String) async {
+        // Implement the logic to update the comment
+        // This usually involves making a network request to your backend
+        // After successful update, update the local state:
+        DispatchQueue.main.async {
+            if let postIndex = self.posts!.firstIndex(where: { $0.idPost == postId }),
+               let commentIndex = self.posts![postIndex].comments.firstIndex(where: { $0.idComment == commentId }) {
+                self.posts![postIndex].comments[commentIndex].comment = newCommentText
+            }
+        }
+    }
 
     //
     //    init(){
