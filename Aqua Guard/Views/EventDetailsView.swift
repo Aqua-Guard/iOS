@@ -9,15 +9,31 @@ import SwiftUI
 
 struct EventDetailsView: View {
     let event: Event
+
     var body: some View {
-       
+
         VStack(alignment: .leading, spacing: 8) {
             // Event image
-            Image(event.eventImage)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(height: 200)
-                .clipped()
+            AsyncImage(url: URL(string: "http://192.168.43.253:9090/images/event/\(event.eventImage)")) { phase in
+                     switch phase {
+                     case .empty:
+                         ProgressView()
+                     case .success(let image):
+                         image
+                             .resizable()
+                             .aspectRatio(contentMode: .fill)
+                             .frame(height: 200)
+                             .clipped()
+                     case .failure:
+                         Image(systemName: "photo") // You can use a placeholder image here
+                             .resizable()
+                             .aspectRatio(contentMode: .fill)
+                             .frame(height: 200)
+                             .clipped()
+                     @unknown default:
+                         EmptyView()
+                     }
+                 }
 
             // event details
             VStack(alignment: .leading, spacing: 8) {
@@ -97,7 +113,7 @@ struct EventDetailsView: View {
 }
 
 
-
+/*
 struct EventDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         let sampleEvent = Event(
@@ -116,4 +132,4 @@ struct EventDetailsView_Previews: PreviewProvider {
             .previewLayout(.sizeThatFits)
             .padding()
     }
-}
+}*/
