@@ -18,13 +18,13 @@ class MyEventViewModel: ObservableObject {
         let event2 = Event(idEvent: UUID().uuidString, userName: "Jane Doe", userImage: "jane_image", eventName: "Event 2", description: "Description for Event 2", eventImage: "sidi_bou_said", dateDebut: Date(), dateFin: Date(), lieu: "Location 2")*/
 
         // Initialize the list of events with default data
-        fetchEvents()
+        fetchMyEvents()
     }
     
   
-    func fetchEvents() {
+    func fetchMyEvents() {
         let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTRkZjE4YjUzNWVjMDRlZmVkYWJiMGIiLCJ1c2VybmFtZSI6Im1hbGVrIiwiaWF0IjoxNzAxNzkxMDM1LCJleHAiOjE3MDE3OTgyMzV9.K5Mi3VE8X-2m5BeBNMNW00I6rMUDIaDuLYdkJfMUSbs"
-        EventWebService.shared.fetchEvents(token: token) { [weak self] events in
+        EventWebService.shared.fetchUserEvents(token: token) { [weak self] events in
             // Update the events array on the main thread
             DispatchQueue.main.async {
                 self?.events = events ?? []

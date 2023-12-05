@@ -41,5 +41,39 @@ class EventWebService {
              }
          }.resume()
      }
+    
+    func fetchUserEvents(token: String,completion: @escaping ([Event]?) -> Void) {
+         let url = URL(string: "\(baseURL)/events/eventByCurrentUser")!
+        
+        var request = URLRequest(url: url)
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let data = data, error == nil else {
+                    print("Error fetching events:", error?.localizedDescription ?? "Unknown error")
+                    completion(nil)
+                    return
+                }
+
+             do {
+                 if let jsonArray = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
+                     print("jsonArray-----------")
+                     print(jsonArray)
+                     let events = jsonArray.compactMap {
+                        Event(json: $0) }
+                     print("events---------------")
+                     print(events)
+                     completion(events)
+                 } else {
+                     completion(nil)
+                 }
+             } catch let error{
+                 print("*****User creation failed with error: \(error)")
+                 completion(nil)
+             }
+         }.resume()
+     }
+    
+    
  }
 
