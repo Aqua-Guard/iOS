@@ -60,7 +60,7 @@ struct MyEvents: View {
                         }
                         
                 } .sheet(isPresented: $isEditing) {
-                    EventEditView(event: selectedEvent ?? Event(idEvent: "00", userName: "bdhd", userImage: "String", eventName: "String", description: "String", eventImage: "String", dateDebut: Date(), dateFin: Date(), lieu: "String"))
+                    /*EventEditView(event: selectedEvent ?? Event(idEvent: "00", userName: "bdhd", userImage: "String", eventName: "String", description: "String", eventImage: "String", dateDebut: Date(), dateFin: Date(), lieu: "String"))*/
                 }
                 
             

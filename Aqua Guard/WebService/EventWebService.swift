@@ -6,8 +6,8 @@
 //
 
 import Foundation
-class EventService {
-    static let shared = EventService()
+class EventWebService {
+    static let shared = EventWebService()
     private let baseURL = "http://192.168.43.253:9090"
 
     func fetchEvents(token: String,completion: @escaping ([Event]?) -> Void) {
@@ -16,7 +16,7 @@ class EventService {
         var request = URLRequest(url: url)
         request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        URLSession.shared.dataTask(with: request) { data, response, error in
                 guard let data = data, error == nil else {
                     print("Error fetching events:", error?.localizedDescription ?? "Unknown error")
                     completion(nil)
