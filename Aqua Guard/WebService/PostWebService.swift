@@ -203,5 +203,30 @@ final class PostWebService{
 
            return try JSONDecoder().decode(Bool.self, from: data)
        }
+    static func deletePost(postId: String, token: String) async throws {
+           let urlString = "http://127.0.0.1:9090/posts/\(postId)"
+           guard let url = URL(string: urlString) else {
+               throw PostErrorHandler.invalidURL
+           }
+
+           var request = URLRequest(url: url)
+           request.httpMethod = "DELETE"
+           request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
+           let (data, response) = try await URLSession.shared.data(for: request)
+
+           guard let httpResponse = response as? HTTPURLResponse else {
+               throw PostErrorHandler.invalidResponse
+           }
+
+           switch httpResponse.statusCode {
+           case 200:
+               // Successfully deleted the post
+               break
+           default:
+               // Handle other status codes as needed
+               throw PostErrorHandler.postNotFound
+           }
+       }
 
 }
