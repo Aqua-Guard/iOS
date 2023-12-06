@@ -18,10 +18,21 @@ class PostViewModel : ObservableObject {
     @Published var showToastComment: Bool = false
     
     
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTZlMzQ4MDJiNTA3YzgyNTVmZmQ5YzYiLCJ1c2VybmFtZSI6InlvdXNzZWYiLCJpYXQiOjE3MDE4MTU2MjEsImV4cCI6MTcwMTgyMjgyMX0.iDZ6caSWDESUBRhhS0R077AIYazoKB69S6xkzia8Rig"
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTZlMzQ4MDJiNTA3YzgyNTVmZmQ5YzYiLCJ1c2VybmFtZSI6InlvdXNzZWYiLCJpYXQiOjE3MDE4MjM5NDIsImV4cCI6MTcwMTgzMTE0Mn0.gC1c2KXxnZRLSxpsLEL698ivuvsu1v9LutdVRPOOF2o"
     func getPosts() async {
         do {
             let posts = try await PostWebService.getPostsData(token: token)
+            DispatchQueue.main.async {
+                       self.posts = posts
+             
+                   }
+        }catch (let error){
+            print(error.localizedDescription)
+        }
+    }
+    func getMyPosts() async {
+        do {
+            let posts = try await PostWebService.getMyPostsData(token: token)
             DispatchQueue.main.async {
                        self.posts = posts
              

@@ -33,6 +33,29 @@ final class PostWebService{
             }
         }
     
+    static func getMyPostsData(token: String) async throws -> [PostModel] {
+            let urlString = "http://127.0.0.1:9090/posts/postByCurrentUser"
+            guard let url = URL(string: urlString) else {
+                throw PostErrorHandler.invalidURL
+            }
+
+            var request = URLRequest(url: url)
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
+            let (data, response) = try await URLSession.shared.data(for: request)
+
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                throw PostErrorHandler.invalidResponse
+            }
+
+            do {
+                let decoder = JSONDecoder()
+                return try decoder.decode([PostModel].self, from: data)
+            } catch {
+                throw PostErrorHandler.invalidData
+            }
+        }
+    
     static func addComment(postId: String, comment: String, token: String) async throws -> Comment {
         let urlString = "http://127.0.0.1:9090/posts/\(postId)/comments"
         guard let url = URL(string: urlString) else {

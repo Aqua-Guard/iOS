@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct MyPosts: View {
     @ObservedObject var postViewModel = PostViewModel()
     var body: some View {
@@ -15,7 +16,7 @@ struct MyPosts: View {
             ScrollView {
                 VStack(spacing: 0) {
                     ForEach(postViewModel.posts!.indices, id: \.self) { index in
-                        PostCardView(viewModel: postViewModel, postIndex: index)
+                        MySinglePostView(viewModel: postViewModel, postIndex: index)
                             .listRowInsets(EdgeInsets())
                             .listRowBackground(Color.clear)
                             .listRowSeparator(.hidden)
@@ -32,6 +33,10 @@ struct MyPosts: View {
                 )
                 
                 
+            }.onAppear{
+                Task{
+                    await postViewModel.getMyPosts()
+                }
             }
             
         }
@@ -42,6 +47,6 @@ struct MyPosts: View {
 
 #Preview {
     
-    MyPosts()
-        .environmentObject(PostViewModel())
+    
+    MyPosts().environmentObject(PostViewModel())
 }
