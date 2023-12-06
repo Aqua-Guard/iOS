@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		176360BF2B2091B800388277 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176360BE2B2091B800388277 /* Product.swift */; };
+		176360C12B2091E700388277 /* ProductCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176360C02B2091E700388277 /* ProductCard.swift */; };
+		176360C32B20920F00388277 /* CartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176360C22B20920F00388277 /* CartButton.swift */; };
+		176360C52B20922900388277 /* ProductRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176360C42B20922900388277 /* ProductRow.swift */; };
+		176360C72B20925400388277 /* PaymentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176360C62B20925400388277 /* PaymentButton.swift */; };
+		176360CA2B20927300388277 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176360C92B20927300388277 /* CartView.swift */; };
+		176360CC2B20928900388277 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176360CB2B20928900388277 /* ContentView.swift */; };
+		176360CE2B2092AE00388277 /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176360CD2B2092AE00388277 /* CartManager.swift */; };
+		176360D02B2092D200388277 /* PaymentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176360CF2B2092D200388277 /* PaymentHandler.swift */; };
 		76E3ED812B19B3C900464B7F /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E3ED802B19B3C900464B7F /* Conversation.swift */; };
 		76E9BDD22B194E4000B512A9 /* ActualiteCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E9BDD12B194E4000B512A9 /* ActualiteCardView.swift */; };
 		76E9BDD42B194E7C00B512A9 /* ActualiteDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E9BDD32B194E7C00B512A9 /* ActualiteDetailsView.swift */; };
@@ -83,6 +92,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		176360BE2B2091B800388277 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		176360C02B2091E700388277 /* ProductCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCard.swift; sourceTree = "<group>"; };
+		176360C22B20920F00388277 /* CartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartButton.swift; sourceTree = "<group>"; };
+		176360C42B20922900388277 /* ProductRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRow.swift; sourceTree = "<group>"; };
+		176360C62B20925400388277 /* PaymentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentButton.swift; sourceTree = "<group>"; };
+		176360C92B20927300388277 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
+		176360CB2B20928900388277 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		176360CD2B2092AE00388277 /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
+		176360CF2B2092D200388277 /* PaymentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentHandler.swift; sourceTree = "<group>"; };
 		76E3ED802B19B3C900464B7F /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		76E9BDD12B194E4000B512A9 /* ActualiteCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualiteCardView.swift; sourceTree = "<group>"; };
 		76E9BDD32B194E7C00B512A9 /* ActualiteDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualiteDetailsView.swift; sourceTree = "<group>"; };
@@ -169,6 +187,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		176360C82B20926000388277 /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				176360C92B20927300388277 /* CartView.swift */,
+				176360CB2B20928900388277 /* ContentView.swift */,
+			);
+			path = Product;
+			sourceTree = "<group>";
+		};
 		76E9BDD02B194DF100B512A9 /* Actualite */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,7 +220,11 @@
 			isa = PBXGroup;
 			children = (
 				822CBED12B18025800769D45 /* PasswordInputField.swift */,
+				176360C42B20922900388277 /* ProductRow.swift */,
+				176360C62B20925400388277 /* PaymentButton.swift */,
 				822CBED22B18025800769D45 /* TextInputField.swift */,
+				176360C02B2091E700388277 /* ProductCard.swift */,
+				176360C22B20920F00388277 /* CartButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -219,6 +250,7 @@
 				E857A6C92B17E5E900EC62DE /* Like.swift */,
 				E857A6CB2B17E5FA00EC62DE /* Comment.swift */,
 				76E9BDD72B19527800B512A9 /* Actualite.swift */,
+				176360BE2B2091B800388277 /* Product.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -226,6 +258,7 @@
 		D4BFF9882B1500F30050DC80 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				176360C82B20926000388277 /* Product */,
 				76E9BDD92B19553E00B512A9 /* Reclamation */,
 				76E9BDD02B194DF100B512A9 /* Actualite */,
 				E857A6CD2B17E64800EC62DE /* Post */,
@@ -269,6 +302,8 @@
 		D4C23E312B148B30002B0E10 /* Aqua Guard */ = {
 			isa = PBXGroup;
 			children = (
+				176360CD2B2092AE00388277 /* CartManager.swift */,
+				176360CF2B2092D200388277 /* PaymentHandler.swift */,
 				822CBED52B18026000769D45 /* Components */,
 				E816FF672B1647A7007538BF /* Menu */,
 				E816FF622B1645FC007538BF /* ViewModel */,
@@ -484,12 +519,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				176360CE2B2092AE00388277 /* CartManager.swift in Sources */,
 				76E9BDDB2B19558500B512A9 /* ReclamationCardView.swift in Sources */,
 				E8ABB35A2B1D0EA80051B72F /* LoginViewModell.swift in Sources */,
 				D45E7A922B14B0F2000F0A9C /* SplashScreen2View.swift in Sources */,
 				76E3ED812B19B3C900464B7F /* Conversation.swift in Sources */,
 				76E9BDD62B194EDB00B512A9 /* ActualiteListView.swift in Sources */,
+				176360C32B20920F00388277 /* CartButton.swift in Sources */,
 				822CBECD2B18008F00769D45 /* LoginView.swift in Sources */,
+				176360C52B20922900388277 /* ProductRow.swift in Sources */,
 				D44CD7A02B174490002294CE /* EventAddView.swift in Sources */,
 				D4C23E3C2B148B31002B0E10 /* Persistence.swift in Sources */,
 				D4C23E3F2B148B31002B0E10 /* Aqua_Guard.xcdatamodeld in Sources */,
@@ -506,9 +544,13 @@
 				E8C391FA2B1899FB00EA3872 /* PostDetailView.swift in Sources */,
 				E857A6CF2B17E66000EC62DE /* PostCardView.swift in Sources */,
 				E8ABB3602B1D10680051B72F /* ForgotPaswordCodeScreen.swift in Sources */,
+				176360C72B20925400388277 /* PaymentButton.swift in Sources */,
 				D44CD79E2B173C0D002294CE /* EventEditView.swift in Sources */,
+				176360CC2B20928900388277 /* ContentView.swift in Sources */,
 				E816FF662B16475C007538BF /* DrawerMenuModel.swift in Sources */,
 				E816FF692B1647C6007538BF /* DrawerMenuButton.swift in Sources */,
+				176360BF2B2091B800388277 /* Product.swift in Sources */,
+				176360D02B2092D200388277 /* PaymentHandler.swift in Sources */,
 				D4BFF9902B1507510050DC80 /* EventDetailsView.swift in Sources */,
 				D4C23E642B149FDC002B0E10 /* SplashScreenView.swift in Sources */,
 				E857A6D32B17EA4600EC62DE /* PostListView.swift in Sources */,
@@ -516,6 +558,7 @@
 				D4BFF98E2B15059D0050DC80 /* EventListView.swift in Sources */,
 				822CBECC2B18008F00769D45 /* RegisterView.swift in Sources */,
 				822CBED42B18025800769D45 /* TextInputField.swift in Sources */,
+				176360CA2B20927300388277 /* CartView.swift in Sources */,
 				76E9BDD42B194E7C00B512A9 /* ActualiteDetailsView.swift in Sources */,
 				D45E7A962B14B290000F0A9C /* SplashScreen4View.swift in Sources */,
 				D4BFF98C2B15020C0050DC80 /* EventCardView.swift in Sources */,
@@ -530,6 +573,7 @@
 				D4C23E332B148B30002B0E10 /* Aqua_GuardApp.swift in Sources */,
 				E857A6CC2B17E5FA00EC62DE /* Comment.swift in Sources */,
 				D44CD7A22B174EF2002294CE /* EventViewModel.swift in Sources */,
+				176360C12B2091E700388277 /* ProductCard.swift in Sources */,
 				76E9BDD22B194E4000B512A9 /* ActualiteCardView.swift in Sources */,
 				D4C23E662B14A8A3002B0E10 /* SplashScreen1View.swift in Sources */,
 				E857A6CA2B17E5E900EC62DE /* Like.swift in Sources */,
