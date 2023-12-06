@@ -12,22 +12,22 @@ import SimpleToast
 struct MySinglePostView: View {
     @ObservedObject var viewModel = PostViewModel()
     
-    let postIndex: Int
+    let post: PostModel
 
     
-
+    
     @State var showingLikeBottomSeet = false
     @State var showingCommentBottomSeet = false
     
-    private var post: PostModel {
-        viewModel.posts![postIndex]
-    }
-    
+    @State private var showingDeleteAlert = false
+    @State private var postToDeleteId: String?
     
   
     
+    
+    
     var body: some View {
-      
+        
         
         // MaterialCardView equivalent in SwiftUI is a VStack inside a RoundedRectangle
         VStack(alignment: .leading) {
@@ -62,6 +62,22 @@ struct MySinglePostView: View {
                 }
                 .padding(16)
                 // i want to add 3cirlcle like option  "..."
+                // Task {
+                //await viewModel.deletePost(postId: post.idPost)
+                //}
+                
+                Spacer()
+    
+                    
+                    Image(systemName: "trash")
+                        .foregroundColor(.red)
+                        .onTapGesture {
+                            self.postToDeleteId = self.post.idPost
+                            self.showingDeleteAlert = true
+                        }
+                   
+                
+                
                 
             }
             
@@ -154,6 +170,21 @@ struct MySinglePostView: View {
         .shadow(radius: 4)
         .padding(10)
         .navigationBarTitle("Post Details").navigationBarTitleDisplayMode(.inline)
+        .alert(isPresented: $showingDeleteAlert) {
+                    Alert(
+                        title: Text("Confirm Delete"),
+                        message: Text("Are you sure you want to delete this post?"),
+                        primaryButton: .destructive(Text("Delete")) {
+                            if let postId = postToDeleteId {
+                                Task {
+                                    print("----------",postId)
+                                    await viewModel.deletePost(postId: postId)
+                                }
+                            }
+                        },
+                        secondaryButton: .cancel()
+                    )
+                }
     }
     
     
@@ -163,27 +194,27 @@ struct MySinglePostView: View {
 
 
 #Preview {
-   
-           // Create a sample PostModel
-           let samplePost = PostModel(
-               idPost: "sampleID",
-               userName: "Sample User",
-               userRole: "User Role",
-               description: "Sample Description",
-               userImage: "sampleImage",
-               postImage: "sampleImage",
-               nbLike: 10,
-               nbComments: 5,
-               nbShare: 3,
-               likes: [],
-               comments: []
-           )
-
-           // Create an instance of PostViewModel
-           let viewModel = PostViewModel()
-           viewModel.posts = [samplePost]
-
-           // Pass the viewModel and the index of the post to preview
-          return MySinglePostView(viewModel: viewModel, postIndex: 0)
-       
+    
+    // Create a sample PostModel
+    let samplePost = PostModel(
+        idPost: "sampleID",
+        userName: "Sample User",
+        userRole: "User Role",
+        description: "Sample Description",
+        userImage: "sampleImage",
+        postImage: "sampleImage",
+        nbLike: 10,
+        nbComments: 5,
+        nbShare: 3,
+        likes: [],
+        comments: []
+    )
+    
+    // Create an instance of PostViewModel
+    let viewModel = PostViewModel()
+    viewModel.posts = [samplePost]
+    
+    // Pass the viewModel and the index of the post to preview
+    return MySinglePostView(viewModel: viewModel, post: post1)
+    
 }
