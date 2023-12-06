@@ -86,7 +86,36 @@ class PostViewModel : ObservableObject {
                    }
         }
     }
+    
+    func likePost(postId: String) async {
+           do {
+               try await PostWebService.addLike(to: postId, withToken: self.token)
+               // Update local post model to reflect the like
+           } catch {
+               // Handle errors such as displaying an alert to the user
+           }
+       }
+    
+    func dislikePost(postId: String) async {
+            do {
+                try await PostWebService.dislikePost(with: postId, andToken: self.token)
+                // Update local post model to reflect the dislike
+            } catch {
+                // Handle errors such as displaying an alert to the user
+            }
+        }
+    
+    func checkIfPostIsLiked(postId: String) async -> Bool {
+        do {
+            return try await PostWebService.isPostLiked(by: postId, withToken: self.token)
+        } catch {
+            // Handle error
+            print("Error checking if post is liked: \(error)")
+            return false
+        }
+    }
 
+    
     //
     //    init(){
     //        let post1 = PostModel(id: "p1", userName: "Youssef Farhat", userRole: "Partner", description: "Dive into the serene beauty of aquatic life with AquaGard! 🐠💧 Whether you're a seasoned aquarist or just starting your water gardening journey, our latest post offers a treasure trove of insights", userImage: "youssef", postImage: "post1", nbLike: 0, nbComments: 1, nbShare: 10, likes: [], comments: [comment1])

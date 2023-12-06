@@ -18,15 +18,21 @@ struct PostCardView: View {
     
     private var post: PostModel {
         viewModel.posts![postIndex]
-        }
+    }
     
     
     init(viewModel: PostViewModel, postIndex: Int) {
-           self.viewModel = viewModel
-           self.postIndex = postIndex
-            self._likeCount = State(initialValue: viewModel.posts![postIndex].nbLike)
-       }
-    
+        self.viewModel = viewModel
+        self.postIndex = postIndex
+        self._likeCount = State(initialValue: viewModel.posts![postIndex].nbLike)
+        
+        
+    }
+    private func checkIfLiked() {
+        Task {
+            isLiked = await viewModel.checkIfPostIsLiked(postId: post.idPost)
+        }
+    }
     
     var body: some View {
         let commentCount: Int = post.nbComments
@@ -109,14 +115,19 @@ struct PostCardView: View {
                 // Like icon with label and count
                 
                 Button(action: {
-                    // Toggle the isLiked state
-                    self.isLiked.toggle()
-                    if self.isLiked {
-                        self.likeCount += 1
-                        
+                    if isLiked {
+                        Task {
+                            await viewModel.dislikePost(postId: post.idPost)
+                            likeCount -= 1
+                        }
                     } else {
-                        self.likeCount -= 1
+                        // Like the post
+                        Task {
+                            await viewModel.likePost(postId: post.idPost)
+                            likeCount += 1
+                        }
                     }
+                    isLiked.toggle()
                 }) {
                     Image(systemName: isLiked ? "heart.fill" : "heart")
                         .foregroundColor(isLiked ? .pink : .pink)
@@ -170,7 +181,7 @@ struct PostCardView: View {
                     Task {
                         await viewModel.addComment(postId:post.idPost, comment: commentText)
                         // static user id
-                                           commentText = "" // Clear the text field on send
+                        commentText = "" // Clear the text field on send
                     }
                     
                 }) {
@@ -191,15 +202,15 @@ struct PostCardView: View {
             .padding(.horizontal, 5)
             .padding(.vertical, 8)
             .alert(isPresented: $viewModel.showAlert) {
-                        Alert(title: Text("Message"), message: Text(viewModel.alertMessage), dismissButton: .default(Text("OK")))
-                    }
+                Alert(title: Text("Message"), message: Text(viewModel.alertMessage), dismissButton: .default(Text("OK")))
+            }
             
             VStack(spacing: 8) {
                 // here i fetch all paosts
                 ForEach(post.comments.prefix(2), id: \.id) { comment in
                     CommentCardView(comment: comment)
                 }
-
+                
                 
                 if post.comments.count > 2 {
                     Divider()
@@ -227,6 +238,11 @@ struct PostCardView: View {
         .cornerRadius(8)
         .shadow(radius: 4)
         // .padding(5)
+        .onAppear {
+            checkIfLiked() // Calling the function when the view appears
+            
+        }
+        
     }
     
     
@@ -242,25 +258,25 @@ struct RoundedButtonStyle: ButtonStyle {
 }
 #Preview {
     let samplePost = PostModel(
-                idPost: "sampleID",
-                userName: "Sample User",
-                userRole: "User Role",
-                description: "Sample Description",
-                userImage: "sampleImage",
-                postImage: "sampleImage",
-                nbLike: 10,
-                nbComments: 5,
-                nbShare: 3,
-                likes: [],
-                comments: []
-            )
-
+        idPost: "sampleID",
+        userName: "Sample User",
+        userRole: "User Role",
+        description: "Sample Description",
+        userImage: "sampleImage",
+        postImage: "sampleImage",
+        nbLike: 10,
+        nbComments: 5,
+        nbShare: 3,
+        likes: [],
+        comments: []
+    )
+    
     let viewModel = PostViewModel()
-            viewModel.posts = [samplePost]
-
-         
-        
-
+    viewModel.posts = [samplePost]
+    
+    
+    
+    
     return PostCardView(viewModel: viewModel, postIndex: 0)
-                .previewLayout(.sizeThatFits)
+        .previewLayout(.sizeThatFits)
 }
