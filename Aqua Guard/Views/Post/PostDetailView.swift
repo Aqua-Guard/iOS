@@ -363,8 +363,10 @@ struct EditCommentView: View {
             }
             .padding(.top, 20)
             
-            TextField("Enter comment", text: $text)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+            TextEditor(text: $text)
+                .frame(minHeight: 100) // Set the desired height
+                .padding(4)
+                .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 1))
                 .padding(.horizontal, 20)
             
             Divider()

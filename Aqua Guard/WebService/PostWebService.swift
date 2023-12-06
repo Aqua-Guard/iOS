@@ -122,5 +122,63 @@ final class PostWebService{
         }
     }
 
+    static func addLike(to postId: String, withToken token: String) async throws {
+            let likeURL = "http://localhost:9090/posts/like/\(postId)"
+            guard let url = URL(string: likeURL) else {
+                throw PostErrorHandler.invalidURL
+            }
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            
+            let (_, response) = try await URLSession.shared.data(for: request)
+            
+            guard let httpResponse = response as? HTTPURLResponse,
+                  httpResponse.statusCode == 201 else {
+                throw PostErrorHandler.invalidResponse
+            }
+            
+            // Handle the successful response here if needed
+        }
+    static func dislikePost(with postId: String, andToken token: String) async throws {
+            let dislikeURL = "http://localhost:9090/posts/dislike/\(postId)"
+            guard let url = URL(string: dislikeURL) else {
+                throw PostErrorHandler.invalidURL
+            }
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            
+            let (_, response) = try await URLSession.shared.data(for: request)
+            
+            guard let httpResponse = response as? HTTPURLResponse,
+                  httpResponse.statusCode == 200 else {
+                throw PostErrorHandler.invalidResponse
+            }
+            
+            // Handle the successful response here if needed
+        }
+    
+    static func isPostLiked(by postId: String, withToken token: String) async throws -> Bool {
+           let checkLikeURL = "http://localhost:9090/posts/isLiked/\(postId)"
+           guard let url = URL(string: checkLikeURL) else {
+               throw PostErrorHandler.invalidURL
+           }
+
+           var request = URLRequest(url: url)
+           request.httpMethod = "GET"
+           request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
+           let (data, response) = try await URLSession.shared.data(for: request)
+
+           guard let httpResponse = response as? HTTPURLResponse,
+                 httpResponse.statusCode == 200 else {
+               throw PostErrorHandler.invalidResponse
+           }
+
+           return try JSONDecoder().decode(Bool.self, from: data)
+       }
 
 }
