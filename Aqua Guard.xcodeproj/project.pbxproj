@@ -54,6 +54,7 @@
 		E857A6CF2B17E66000EC62DE /* PostCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857A6CE2B17E66000EC62DE /* PostCardView.swift */; };
 		E857A6D12B17E69500EC62DE /* CommentCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857A6D02B17E69500EC62DE /* CommentCardView.swift */; };
 		E857A6D32B17EA4600EC62DE /* PostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857A6D22B17EA4600EC62DE /* PostListView.swift */; };
+		E864C6752B1FF8FB0099E99A /* MySinglePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E864C6742B1FF8FB0099E99A /* MySinglePostView.swift */; };
 		E8ABB35A2B1D0EA80051B72F /* LoginViewModell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ABB3592B1D0EA80051B72F /* LoginViewModell.swift */; };
 		E8ABB35C2B1D0F670051B72F /* ForgotPasswordEmailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ABB35B2B1D0F670051B72F /* ForgotPasswordEmailScreen.swift */; };
 		E8ABB35E2B1D0FCA0051B72F /* ForgotPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ABB35D2B1D0FCA0051B72F /* ForgotPasswordScreen.swift */; };
@@ -133,6 +134,7 @@
 		E857A6CE2B17E66000EC62DE /* PostCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCardView.swift; sourceTree = "<group>"; };
 		E857A6D02B17E69500EC62DE /* CommentCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCardView.swift; sourceTree = "<group>"; };
 		E857A6D22B17EA4600EC62DE /* PostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListView.swift; sourceTree = "<group>"; };
+		E864C6742B1FF8FB0099E99A /* MySinglePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySinglePostView.swift; sourceTree = "<group>"; };
 		E8ABB3592B1D0EA80051B72F /* LoginViewModell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModell.swift; sourceTree = "<group>"; };
 		E8ABB35B2B1D0F670051B72F /* ForgotPasswordEmailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordEmailScreen.swift; sourceTree = "<group>"; };
 		E8ABB35D2B1D0FCA0051B72F /* ForgotPasswordScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordScreen.swift; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 				E857A6CE2B17E66000EC62DE /* PostCardView.swift */,
 				E8C391F92B1899FB00EA3872 /* PostDetailView.swift */,
 				E8F5FA392B19199800F5B9E0 /* LikeCardView.swift */,
+				E864C6742B1FF8FB0099E99A /* MySinglePostView.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -506,6 +509,7 @@
 				76E3ED812B19B3C900464B7F /* Conversation.swift in Sources */,
 				76E9BDD62B194EDB00B512A9 /* ActualiteListView.swift in Sources */,
 				822CBECD2B18008F00769D45 /* LoginView.swift in Sources */,
+				E864C6752B1FF8FB0099E99A /* MySinglePostView.swift in Sources */,
 				D44CD7A02B174490002294CE /* EventAddView.swift in Sources */,
 				D4C23E3C2B148B31002B0E10 /* Persistence.swift in Sources */,
 				D4C23E3F2B148B31002B0E10 /* Aqua_Guard.xcdatamodeld in Sources */,
