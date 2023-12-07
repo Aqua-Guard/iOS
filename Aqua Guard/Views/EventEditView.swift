@@ -66,7 +66,7 @@ struct EventEditView: View {
                                                .foregroundColor(.darkBlue)
                                        }
                                        .sheet(isPresented: $isImagePickerPresented) {
-                                           ImagePicker(didImagePicked: { image in
+                                           ImagePickerEvent(didImagePicked: { image in
                                                self.selectedImage = image
                                            }, isImagePickerPresented: $isImagePickerPresented)
                                        }

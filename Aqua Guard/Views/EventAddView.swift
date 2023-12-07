@@ -8,12 +8,12 @@
 import SwiftUI
 import UIKit
 
-struct ImagePicker: UIViewControllerRepresentable {
+struct ImagePickerEvent: UIViewControllerRepresentable {
     class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-        var parent: ImagePicker
+        var parent: ImagePickerEvent
         var didImagePicked: (UIImage) -> Void
 
-        init(parent: ImagePicker, didImagePicked: @escaping (UIImage) -> Void) {
+        init(parent: ImagePickerEvent, didImagePicked: @escaping (UIImage) -> Void) {
             self.parent = parent
             self.didImagePicked = didImagePicked
         }
@@ -94,7 +94,7 @@ struct EventAddView: View {
                                     .foregroundColor(.darkBlue)
                             }
                             .sheet(isPresented: $isImagePickerPresented) {
-                                ImagePicker(didImagePicked: { image in
+                                ImagePickerEvent(didImagePicked: { image in
                                     self.selectedImage = image
                                 }, isImagePickerPresented: $isImagePickerPresented)
                             }
