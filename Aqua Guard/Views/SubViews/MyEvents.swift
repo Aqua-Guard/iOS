@@ -64,7 +64,12 @@ struct MyEvents: View {
                     } 
                     .id(deletionID)
                     .sheet(isPresented: $isEditing) {
-                        /*EventEditView(event: selectedEvent ?? Event(idEvent: "00", userName: "bdhd", userImage: "String", eventName: "String", description: "String", eventImage: "String", dateDebut: Date(), dateFin: Date(), lieu: "String"))*/
+                        if let unwrappedEvent = selectedEvent {
+                               EventEditView(event: unwrappedEvent)
+                           } else {
+                               // Handle the case where selectedEvent is nil
+                               // You might want to present an error or take other appropriate action
+                           }
                     }
             }
             

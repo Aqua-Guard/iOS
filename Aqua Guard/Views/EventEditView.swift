@@ -25,6 +25,9 @@ struct EventEditView: View {
     
     @State private var showAlert = false
      @State private var alertMessage = ""
+    @State private var isImagePickerPresented: Bool = false
+
+    @State private var selectedImage: UIImage?
 
         init(event: Event) {
             self.event = event
@@ -46,19 +49,29 @@ struct EventEditView: View {
                        
                        ScrollView {
                            VStack(alignment: .leading, spacing: 10) {
-                               Image(event.eventImage)
-                                   .resizable()
-                                   .frame(width: 150, height: 150)
-                                   .foregroundColor(.darkBlue)
                                
-                               Button(action: {
-                                   // Action for updating event image
-                                   print("Update Event Image")
-                               }) {
-                                   Label("Update Event image", systemImage: "photo.on.rectangle")
-                                       .foregroundColor(.darkBlue)
-                               }
-                               
+                                       Image(uiImage: selectedImage ?? (URL(string: "http://192.168.43.253:9090/images/event/\(event.eventImage)")
+                                                                   .flatMap { try? Data(contentsOf: $0) }
+                                                                   .flatMap { UIImage(data: $0) }
+                                                                   ?? UIImage(systemName: "photo"))!)
+                                           .resizable()
+                                           .frame(width: 150, height: 150)
+                                           .foregroundColor(.darkBlue)
+
+                                       Button(action: {
+                                           // Action for updating event image
+                                           self.isImagePickerPresented.toggle() // Toggle the boolean state to open/close the image picker
+                                       }) {
+                                           Label("Add Event image", systemImage: "photo.on.rectangle")
+                                               .foregroundColor(.darkBlue)
+                                       }
+                                       .sheet(isPresented: $isImagePickerPresented) {
+                                           ImagePicker(didImagePicked: { image in
+                                               self.selectedImage = image
+                                           }, isImagePickerPresented: $isImagePickerPresented)
+                                       }
+                                   
+
                                TextField("Event Name", text: $eventName)
                                    .textFieldStyle(RoundedBorderTextFieldStyle())
                                    .padding(.top, 10)
@@ -144,7 +157,13 @@ struct EventEditView: View {
                                Button(action: {
                                    // Action for submitting event
                                    print("Submit Event")
-                                   viewModel.updateEvent(eventID: event.idEvent, newUserName: "String", newUserImage: "String", newEventName: eventName, newDescription: eventDescription, newEventImage: eventImage, newDateDebut: startDate, newDateFin: endDate, newLieu: eventLocation)
+                                   if let imageData = selectedImage?.jpegData(compressionQuality: 0.8) {
+                                       
+                                       print("Base64 representation of UIImage: \(imageData)")
+                                       viewModel.updateEvent(eventId: event.idEvent,  eventName: eventName, description: eventDescription, eventImage: imageData, dateDebut: startDate, dateFin: endDate, lieu: eventLocation)
+                                   } else {
+                                       print("Failed to convert UIImage to data")
+                                   }
                                    // Show alert
                                                alertMessage = "Event Updated successfully !"
                                                showAlert = true

@@ -13,7 +13,7 @@ class MyEventViewModel: ObservableObject {
     @Published var eventToUpdate: Event? = nil
     @Published var isPresented: Bool = false
     
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTRkZjE4YjUzNWVjMDRlZmVkYWJiMGIiLCJ1c2VybmFtZSI6Im1hbGVrIiwiaWF0IjoxNzAxODE1MjkyLCJleHAiOjE3MDE4MjI0OTJ9.NffGyhxaN9C1uQdzJU1t7kCHMyJmJ9vTQ2iKWBNadQU"
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTRkZjE4YjUzNWVjMDRlZmVkYWJiMGIiLCJ1c2VybmFtZSI6Im1hbGVrIiwiaWF0IjoxNzAxOTc0MzM4LCJleHAiOjE3MDE5ODE1Mzh9.64C_kBmyHxhNbEjzSLodm4Mt9O6_3U2V3mCT6cPinqk"
 
     init()  {
       /*  let event1 = Event(idEvent: UUID().uuidString, userName: "John Doe", userImage: "john_image", eventName: "Event 1", description: "Une initiative communautaire pour nettoyer les plages et protéger l'environnement.", eventImage: "sidi_bou_said", dateDebut: Date(), dateFin: Date(), lieu: "Location 1")
@@ -34,47 +34,66 @@ class MyEventViewModel: ObservableObject {
         }
     }
 
-
-   /* func createEvent(userName: String, userImage: String, eventName: String, description: String, eventImage: String, dateDebut: Date, dateFin: Date, lieu: String) {
+    func createEvent(eventName: String, description: String, eventImage: Data, dateDebut: Date, dateFin: Date, lieu: String) {
         // Convert the eventImage String to a URL
-        if let imageURL = URL(string: eventImage) {
+        if let imageURL = URL(string: eventImage.base64EncodedString()) {
             // Create a new Event instance
-            let newEvent = Event(idEvent: UUID().uuidString, userName: userName, userImage: userImage, eventName: eventName, description: description, eventImage: eventImage, dateDebut: dateDebut, dateFin: dateFin, lieu: lieu)
-            eventWebService.addEvent(token: token, event: newEvent, image: imageURL) { result in
-                       switch result {
-                       case .success:
-                           // Handle success, if needed
-                           print("Event added successfully.")
-                       case .failure(let error):
-                           // Handle the error
-                           print("Error adding event: \(error)")
-                       }
-                   }
+            let newEvent = EventRequest(idEvent: UUID().uuidString, eventName: eventName, description: description, eventImage: imageURL.path(), dateDebut: dateDebut, dateFin: dateFin, lieu: lieu)
+
+            eventWebService.addEvent(token: token, event: newEvent, image: eventImage ) { result in
+                switch result {
+                case .success:
+                    // Handle success, if needed
+                    print("Event added successfully.")
+                case .failure(let error):
+                    // Handle the error
+                    print("Error adding event: \(error)")
+                }
+            }
         } else {
             // Handle the case where eventImage is not a valid URL
             print("Invalid image URL")
         }
-    }*/
+    }
 
 
-    func updateEvent(eventID: String, newUserName: String, newUserImage: String, newEventName: String, newDescription: String, newEventImage: String, newDateDebut: Date, newDateFin: Date, newLieu: String) {
-        if let index = events.firstIndex(where: { $0.idEvent == eventID }) {
-            events[index].userName = newUserName
-            events[index].userImage = newUserImage
-            events[index].eventName = newEventName
-            events[index].description = newDescription
-            events[index].eventImage = newEventImage
-//            events[index].dateDebut = newDateDebut
-//            events[index].dateFin = newDateFin
-            events[index].lieu = newLieu
+    func updateEvent(eventId: String,eventName: String,description: String,eventImage: Data,dateDebut: Date,dateFin: Date,lieu: String) {
+        if let imageURL = URL(string: eventImage.base64EncodedString()) {
+            let updatedEvent = EventRequest(
+                idEvent: eventId,
+                eventName: eventName,
+                description: description,
+                eventImage: imageURL.path(),
+                dateDebut: dateDebut,
+                dateFin: dateFin,
+                lieu: lieu
+            )
+
+            eventWebService.updateEvent(
+                token: token,
+                eventId: eventId,
+                event: updatedEvent,
+                image: eventImage
+            ) { result in
+                switch result {
+                case .success:
+                    // Handle success, if needed
+                    print("Event updated successfully.")
+                case .failure(let error):
+                    // Handle the error
+                    print("Error updating event: \(error)")
+                }
+            }
+        } else {
+            print("Invalid image URL")
         }
     }
+
  
     func deleteEvent(eventId: String)  {
         Task {
             do {
               
-                
                 // Call the asynchronous deleteEvent method
                 try await eventWebService.deleteEvent(eventId: eventId, token: token)
                 
