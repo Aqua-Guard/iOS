@@ -8,33 +8,78 @@
 import SwiftUI
 
 struct MyPosts: View {
+    
     @ObservedObject var postViewModel = PostViewModel()
+    
+    private var toastView: some View {
+        Text("Post Created Successfully")
+            .padding()
+            .background(Color.black.opacity(0.7))
+            .foregroundColor(Color.white)
+            .cornerRadius(10)
+    }
+    
     var body: some View {
         
         NavigationView{
             ScrollView {
                 VStack(spacing: 0) {
-                    ForEach(postViewModel.posts!.indices, id: \.self) { index in
-                        PostCardView(viewModel: postViewModel, postIndex: index)
-                            .listRowInsets(EdgeInsets())
-                            .listRowBackground(Color.clear)
-                            .listRowSeparator(.hidden)
-                            .padding(.vertical, 4)
-                    }.listStyle(PlainListStyle())
-                        .navigationTitle("My Posts").navigationBarTitleDisplayMode(.inline)
-                        .padding()
+                    if postViewModel.createdwithSucsess {
+                                   toastView
+                                       .transition(.opacity)
+                                       .zIndex(1) // Make sure it's above other content
+                               }
+                    
+                    if let posts = postViewModel.posts, !posts.isEmpty {
+                        // Display the list of posts
+                        ForEach(postViewModel.posts ?? [], id: \.idPost) { post in
+                            MySinglePostView(viewModel: postViewModel, post: post)
+                                .listRowInsets(EdgeInsets())
+                                .listRowBackground(Color.clear)
+                                .listRowSeparator(.hidden)
+                                .padding(.vertical, 4)
+                        }
+                    } else {
+                        // Display error message and image
+                        VStack {
+                            Image(systemName: "exclamationmark.triangle") // Your error image
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 100, height: 100)
+                                .foregroundColor(.red)
+                            Text("No Post")
+                                .padding()
+                        }
+                    }
                 }
-                .background(
-                    Image("background_splash_screen") // Replace with your image name
-                        .resizable() // Make the image resizable
-                        .scaledToFill() // Fill the space without distorting aspect ratio
-                        .edgesIgnoringSafeArea(.all) // Ignore safe area to extend to edges
-                )
+                .listStyle(PlainListStyle())
+                .navigationTitle("My Posts")
+                .navigationBarTitleDisplayMode(.inline)
+            
+
                 
                 
             }
+            .background(
+                Image("background_splash_screen")
+                  
+                    .scaledToFill() // Fill the space without distorting aspect ratio
+                    .edgesIgnoringSafeArea(.all) // Ignore safe area to extend to edges
+            )
+            .onAppear{
+                Task{
+                    await postViewModel.getMyPosts()
+                }
+            }
             
-        }
+        }.navigationBarItems(trailing:
+                                NavigationLink(destination: AddPostView(viewModel: postViewModel)
+                                              ) {
+                                    Image(systemName: "plus.circle")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 24, height: 24)
+                })
         
     }
     
@@ -42,6 +87,7 @@ struct MyPosts: View {
 
 #Preview {
     
-    MyPosts()
-        .environmentObject(PostViewModel())
+    
+    MyPosts().environmentObject(PostViewModel())
+    
 }

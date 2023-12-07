@@ -14,7 +14,7 @@ struct Comment: Decodable , Identifiable{
     let idPost: String?
     let commentAvatar: String?
     let commentUsername: String?
-    let comment: String?
+    var comment: String?
     
    
 }

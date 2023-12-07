@@ -50,12 +50,16 @@
 		E816FF742B164938007538BF /* MyEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF732B164938007538BF /* MyEvents.swift */; };
 		E816FF762B164956007538BF /* MyPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF752B164956007538BF /* MyPosts.swift */; };
 		E816FF782B16496E007538BF /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF772B16496E007538BF /* Command.swift */; };
+		E81805992B2203D0008F78FD /* AddPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81805982B2203D0008F78FD /* AddPostView.swift */; };
+		E818059B2B222743008F78FD /* UpdatePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E818059A2B222743008F78FD /* UpdatePostView.swift */; };
+		E83A72E32B1F9C5E00A9F955 /* SimpleToast in Frameworks */ = {isa = PBXBuildFile; productRef = E83A72E22B1F9C5E00A9F955 /* SimpleToast */; };
 		E857A6C82B17E5BD00EC62DE /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857A6C72B17E5BD00EC62DE /* PostModel.swift */; };
 		E857A6CA2B17E5E900EC62DE /* Like.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857A6C92B17E5E900EC62DE /* Like.swift */; };
 		E857A6CC2B17E5FA00EC62DE /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857A6CB2B17E5FA00EC62DE /* Comment.swift */; };
 		E857A6CF2B17E66000EC62DE /* PostCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857A6CE2B17E66000EC62DE /* PostCardView.swift */; };
 		E857A6D12B17E69500EC62DE /* CommentCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857A6D02B17E69500EC62DE /* CommentCardView.swift */; };
 		E857A6D32B17EA4600EC62DE /* PostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857A6D22B17EA4600EC62DE /* PostListView.swift */; };
+		E864C6752B1FF8FB0099E99A /* MySinglePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E864C6742B1FF8FB0099E99A /* MySinglePostView.swift */; };
 		E8ABB35A2B1D0EA80051B72F /* LoginViewModell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ABB3592B1D0EA80051B72F /* LoginViewModell.swift */; };
 		E8ABB35C2B1D0F670051B72F /* ForgotPasswordEmailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ABB35B2B1D0F670051B72F /* ForgotPasswordEmailScreen.swift */; };
 		E8ABB35E2B1D0FCA0051B72F /* ForgotPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ABB35D2B1D0FCA0051B72F /* ForgotPasswordScreen.swift */; };
@@ -132,12 +136,15 @@
 		E816FF732B164938007538BF /* MyEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEvents.swift; sourceTree = "<group>"; };
 		E816FF752B164956007538BF /* MyPosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPosts.swift; sourceTree = "<group>"; };
 		E816FF772B16496E007538BF /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
+		E81805982B2203D0008F78FD /* AddPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostView.swift; sourceTree = "<group>"; };
+		E818059A2B222743008F78FD /* UpdatePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePostView.swift; sourceTree = "<group>"; };
 		E857A6C72B17E5BD00EC62DE /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		E857A6C92B17E5E900EC62DE /* Like.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Like.swift; sourceTree = "<group>"; };
 		E857A6CB2B17E5FA00EC62DE /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		E857A6CE2B17E66000EC62DE /* PostCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCardView.swift; sourceTree = "<group>"; };
 		E857A6D02B17E69500EC62DE /* CommentCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCardView.swift; sourceTree = "<group>"; };
 		E857A6D22B17EA4600EC62DE /* PostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListView.swift; sourceTree = "<group>"; };
+		E864C6742B1FF8FB0099E99A /* MySinglePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySinglePostView.swift; sourceTree = "<group>"; };
 		E8ABB3592B1D0EA80051B72F /* LoginViewModell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModell.swift; sourceTree = "<group>"; };
 		E8ABB35B2B1D0F670051B72F /* ForgotPasswordEmailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordEmailScreen.swift; sourceTree = "<group>"; };
 		E8ABB35D2B1D0FCA0051B72F /* ForgotPasswordScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordScreen.swift; sourceTree = "<group>"; };
@@ -155,6 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E83A72E32B1F9C5E00A9F955 /* SimpleToast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +363,9 @@
 				E857A6CE2B17E66000EC62DE /* PostCardView.swift */,
 				E8C391F92B1899FB00EA3872 /* PostDetailView.swift */,
 				E8F5FA392B19199800F5B9E0 /* LikeCardView.swift */,
+				E864C6742B1FF8FB0099E99A /* MySinglePostView.swift */,
+				E81805982B2203D0008F78FD /* AddPostView.swift */,
+				E818059A2B222743008F78FD /* UpdatePostView.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -387,6 +398,9 @@
 			dependencies = (
 			);
 			name = "Aqua Guard";
+			packageProductDependencies = (
+				E83A72E22B1F9C5E00A9F955 /* SimpleToast */,
+			);
 			productName = "Aqua Guard";
 			productReference = D4C23E2F2B148B30002B0E10 /* Aqua Guard.app */;
 			productType = "com.apple.product-type.application";
@@ -459,6 +473,9 @@
 				Base,
 			);
 			mainGroup = D4C23E262B148B30002B0E10;
+			packageReferences = (
+				E83A72E12B1F9C5E00A9F955 /* XCRemoteSwiftPackageReference "SimpleToast" */,
+			);
 			productRefGroup = D4C23E302B148B30002B0E10 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -507,12 +524,14 @@
 				76E3ED812B19B3C900464B7F /* Conversation.swift in Sources */,
 				76E9BDD62B194EDB00B512A9 /* ActualiteListView.swift in Sources */,
 				822CBECD2B18008F00769D45 /* LoginView.swift in Sources */,
+				E864C6752B1FF8FB0099E99A /* MySinglePostView.swift in Sources */,
 				D44CD7A02B174490002294CE /* EventAddView.swift in Sources */,
 				D4C23E3C2B148B31002B0E10 /* Persistence.swift in Sources */,
 				D4F5A1BC2B1F8AE80096346A /* EventErrorHandler.swift in Sources */,
 				D4C23E3F2B148B31002B0E10 /* Aqua_Guard.xcdatamodeld in Sources */,
 				D4BFF9872B15005D0050DC80 /* Participation.swift in Sources */,
 				E8ABB35E2B1D0FCA0051B72F /* ForgotPasswordScreen.swift in Sources */,
+				E818059B2B222743008F78FD /* UpdatePostView.swift in Sources */,
 				E8F5FA3A2B19199800F5B9E0 /* LikeCardView.swift in Sources */,
 				76E9BDDD2B1972D300B512A9 /* ReclamationListView.swift in Sources */,
 				E8C391F82B188C6100EA3872 /* PostViewModel.swift in Sources */,
@@ -538,6 +557,7 @@
 				E8B083892B1E76D700CDCFD9 /* PostErrorHandler.swift in Sources */,
 				D45E7A962B14B290000F0A9C /* SplashScreen4View.swift in Sources */,
 				D4BFF98C2B15020C0050DC80 /* EventCardView.swift in Sources */,
+				E81805992B2203D0008F78FD /* AddPostView.swift in Sources */,
 				E8B083872B1E74FF00CDCFD9 /* PostWebService.swift in Sources */,
 				76E9BDD82B19527800B512A9 /* Actualite.swift in Sources */,
 				E857A6C82B17E5BD00EC62DE /* PostModel.swift in Sources */,
@@ -878,6 +898,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E83A72E12B1F9C5E00A9F955 /* XCRemoteSwiftPackageReference "SimpleToast" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sanzaru/SimpleToast";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.8.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E83A72E22B1F9C5E00A9F955 /* SimpleToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E83A72E12B1F9C5E00A9F955 /* XCRemoteSwiftPackageReference "SimpleToast" */;
+			productName = SimpleToast;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		D4C23E3D2B148B31002B0E10 /* Aqua_Guard.xcdatamodeld */ = {

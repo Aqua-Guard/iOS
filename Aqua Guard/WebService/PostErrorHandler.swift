@@ -11,6 +11,7 @@ enum PostErrorHandler: LocalizedError {
     case invalidURL
        case invalidResponse
        case invalidData
+       case postNotFound
        case inappropriateLanguage(Data)
        
        var errorDescription: String? {
@@ -23,7 +24,8 @@ enum PostErrorHandler: LocalizedError {
                
            case .invalidData:
                return "Invalid data"
-            
+           case .postNotFound:
+               return "Post Not found"
         
                
            case .inappropriateLanguage(let data):

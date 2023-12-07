@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PostListView: View {
     @ObservedObject var postViewModel = PostViewModel()
-   // @EnvironmentObject var postViewModel : PostViewModel
+    // @EnvironmentObject var postViewModel : PostViewModel
     var body: some View {
         NavigationView{
             ScrollView {
@@ -30,14 +30,33 @@ struct PostListView: View {
                         .scaledToFill() // Fill the space without distorting aspect ratio
                         .edgesIgnoringSafeArea(.all) // Ignore safe area to extend to edges
                 )
-            
-
+                
+                
             }.onAppear{
                 Task{
                     await postViewModel.getPosts()
                 }
             }
-            
+            .overlay(
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            // add Forum action 
+                        }) {
+                            Image(systemName: "plus") // System plus icon
+                                .font(.largeTitle)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.blue)
+                                .clipShape(Circle())
+                                .shadow(radius: 10)
+                        }
+                        .padding()
+                    }
+                }
+            )
         }
         
     }
