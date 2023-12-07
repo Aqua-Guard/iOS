@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Event: Identifiable  {
+struct Event: Identifiable,Codable  {
     var idEvent: String
     var userName: String
     var userImage: String

@@ -18,6 +18,7 @@
 		822CBECD2B18008F00769D45 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822CBECB2B18008F00769D45 /* LoginView.swift */; };
 		822CBED32B18025800769D45 /* PasswordInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822CBED12B18025800769D45 /* PasswordInputField.swift */; };
 		822CBED42B18025800769D45 /* TextInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822CBED22B18025800769D45 /* TextInputField.swift */; };
+		D438AE7E2B2224E100D6DE7D /* EventRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D438AE7D2B2224E100D6DE7D /* EventRequest.swift */; };
 		D44CD79E2B173C0D002294CE /* EventEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CD79D2B173C0D002294CE /* EventEditView.swift */; };
 		D44CD7A02B174490002294CE /* EventAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CD79F2B174490002294CE /* EventAddView.swift */; };
 		D44CD7A22B174EF2002294CE /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CD7A12B174EF2002294CE /* EventViewModel.swift */; };
@@ -97,6 +98,7 @@
 		822CBECB2B18008F00769D45 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		822CBED12B18025800769D45 /* PasswordInputField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordInputField.swift; sourceTree = "<group>"; };
 		822CBED22B18025800769D45 /* TextInputField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputField.swift; sourceTree = "<group>"; };
+		D438AE7D2B2224E100D6DE7D /* EventRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRequest.swift; sourceTree = "<group>"; };
 		D44CD79D2B173C0D002294CE /* EventEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditView.swift; sourceTree = "<group>"; };
 		D44CD79F2B174490002294CE /* EventAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAddView.swift; sourceTree = "<group>"; };
 		D44CD7A12B174EF2002294CE /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				E857A6C92B17E5E900EC62DE /* Like.swift */,
 				E857A6CB2B17E5FA00EC62DE /* Comment.swift */,
 				76E9BDD72B19527800B512A9 /* Actualite.swift */,
+				D438AE7D2B2224E100D6DE7D /* EventRequest.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -539,6 +542,7 @@
 				D45E7A962B14B290000F0A9C /* SplashScreen4View.swift in Sources */,
 				D4BFF98C2B15020C0050DC80 /* EventCardView.swift in Sources */,
 				E8B083872B1E74FF00CDCFD9 /* PostWebService.swift in Sources */,
+				D438AE7E2B2224E100D6DE7D /* EventRequest.swift in Sources */,
 				76E9BDD82B19527800B512A9 /* Actualite.swift in Sources */,
 				E857A6C82B17E5BD00EC62DE /* PostModel.swift in Sources */,
 				E8ABB35C2B1D0F670051B72F /* ForgotPasswordEmailScreen.swift in Sources */,

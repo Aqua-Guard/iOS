@@ -116,7 +116,7 @@ final class EventWebService {
              }
     
     
-    func addEvent(token: String,event: Event, image: URL, completion: @escaping (Result<Void, Error>) -> Void) {
+    func addEvent(token: String,event: EventRequest, image: Data, completion: @escaping (Result<Void, Error>) -> Void) {
         let urlString = "\(baseURL)/events"
             guard let url = URL(string: urlString)
         else {
@@ -136,11 +136,11 @@ final class EventWebService {
             var body = Data()
 
             // Append image data
-            body.append(convertFileData(fieldName: "image",
-                                        fileName: image.lastPathComponent,
-                                        mimeType: "image/jpeg", // Adjust MIME type as needed
-                                        fileUrl: image,
-                                        boundary: boundary))
+        body.append("--\(boundary)\r\n")
+        body.append("Content-Disposition: form-data; name=\"image\"; filename=\"image.jpg\"\r\n")
+        body.append("Content-Type: image/jpeg\r\n\r\n")
+        body.append(image)
+        body.append("\r\n")
 
             // Append other fields
         body.append(convertFormField(named: "name", value: event.eventName, boundary: boundary))
@@ -167,6 +167,60 @@ final class EventWebService {
             }.resume()
         }
     
+    
+    func updateEvent(token: String, eventId: String, event: EventRequest, image: Data?, completion: @escaping (Result<Void, Error>) -> Void) {
+        guard let url = URL(string: "\(baseURL)/events/\(eventId)") else {
+            print("Invalid URL")
+            completion(.failure(URLError(.badURL)))
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+
+        let boundary = "Boundary-\(UUID().uuidString)"
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
+        var body = Data()
+
+        // Append image data if available
+        if let image = image {
+            body.append("--\(boundary)\r\n")
+            body.append("Content-Disposition: form-data; name=\"image\"; filename=\"image.jpg\"\r\n")
+            body.append("Content-Type: image/jpeg\r\n\r\n")
+            body.append(image)
+            body.append("\r\n")
+        }
+
+        // Append other fields
+        body.append(convertFormField(named: "name", value: event.eventName, boundary: boundary))
+        body.append(convertDateField(named: "DateDebut", date: event.dateDebut, boundary: boundary))
+        body.append(convertDateField(named: "DateFin", date: event.dateFin, boundary: boundary))
+        body.append(convertFormField(named: "Description", value: event.description, boundary: boundary))
+        body.append(convertFormField(named: "lieu", value: event.lieu, boundary: boundary))
+
+        body.append("--\(boundary)--".data(using: .utf8)!)
+
+        request.httpBody = body
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+                completion(.failure(URLError(.badServerResponse)))
+                return
+            }
+            completion(.success(()))
+        }.resume()
+    }
+
+
+    
+    
+    
     func convertFormField(named name: String, value: String, boundary: String) -> Data {
             var fieldData = Data()
             fieldData.append("--\(boundary)\r\n".data(using: .utf8)!)
@@ -175,20 +229,8 @@ final class EventWebService {
             return fieldData
         }
     
-    func convertFileData(fieldName: String, fileName: String, mimeType: String, fileUrl: URL, boundary: String) -> Data {
-            var data = Data()
+  
 
-            data.append("--\(boundary)\r\n".data(using: .utf8)!)
-            data.append("Content-Disposition: form-data; name=\"\(fieldName)\"; filename=\"\(fileName)\"\r\n".data(using: .utf8)!)
-            data.append("Content-Type: \(mimeType)\r\n\r\n".data(using: .utf8)!)
-            if let fileData = try? Data(contentsOf: fileUrl) {
-                data.append(fileData)
-            }
-            data.append("\r\n".data(using: .utf8)!)
-
-            return data
-        }
-    
     func convertDateField(named name: String, date: Date, boundary: String) -> Data {
         var body = Data()
 

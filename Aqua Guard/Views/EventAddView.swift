@@ -6,6 +6,53 @@
 //
 
 import SwiftUI
+import UIKit
+
+struct ImagePicker: UIViewControllerRepresentable {
+    class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+        var parent: ImagePicker
+        var didImagePicked: (UIImage) -> Void
+
+        init(parent: ImagePicker, didImagePicked: @escaping (UIImage) -> Void) {
+            self.parent = parent
+            self.didImagePicked = didImagePicked
+        }
+
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+            if let uiImage = info[.originalImage] as? UIImage {
+                didImagePicked(uiImage)
+            }
+
+            parent.isImagePickerPresented = false
+        }
+
+        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            parent.isImagePickerPresented = false
+        }
+    }
+
+    var didImagePicked: (UIImage) -> Void
+    @Binding var isImagePickerPresented: Bool
+
+    init(didImagePicked: @escaping (UIImage) -> Void, isImagePickerPresented: Binding<Bool>) {
+        self.didImagePicked = didImagePicked
+        self._isImagePickerPresented = isImagePickerPresented
+    }
+
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(parent: self, didImagePicked: didImagePicked)
+    }
+
+    func makeUIViewController(context: Context) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.delegate = context.coordinator
+        picker.sourceType = .photoLibrary
+        return picker
+    }
+
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
+}
+
 
 struct EventAddView: View {
     @EnvironmentObject var viewModel: MyEventViewModel
@@ -15,6 +62,10 @@ struct EventAddView: View {
      @State private var endDate = Date()
        @State private var eventLocation = ""
        @State private var errorMessage = ""
+    @State private var selectedImage: UIImage?
+
+    @State private var isImagePickerPresented: Bool = false
+
     @Environment(\.presentationMode) var presentationMode
     @State private var isDatePickerPresented = false
     
@@ -30,18 +81,26 @@ struct EventAddView: View {
                     
                     ScrollView {
                         VStack(alignment: .leading, spacing: 10) {
-                            Image(systemName: "photo")
+                            Image(uiImage: selectedImage ?? UIImage(systemName: "photo")!)
                                 .resizable()
                                 .frame(width: 150, height: 150)
                                 .foregroundColor(.darkBlue)
-                            
+
                             Button(action: {
                                 // Action for updating event image
-                                print("Add Event Image")
+                                self.isImagePickerPresented.toggle() // Toggle the boolean state to open/close the image picker
                             }) {
                                 Label("Add Event image", systemImage: "photo.on.rectangle")
                                     .foregroundColor(.darkBlue)
                             }
+                            .sheet(isPresented: $isImagePickerPresented) {
+                                ImagePicker(didImagePicked: { image in
+                                    self.selectedImage = image
+                                }, isImagePickerPresented: $isImagePickerPresented)
+                            }
+
+                                 
+                       
                             
                             TextField("Event Name", text: $eventName)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -129,7 +188,16 @@ struct EventAddView: View {
                             Button(action: {
                                 // Action for submitting event
                                 print("Submit Event")
-                              /*  viewModel.createEvent(userName: "String", userImage: "String", eventName: eventName, description: eventDescription, eventImage: "sidi_bou_said", dateDebut: startDate, dateFin: endDate, lieu: eventLocation)*/
+                                // Assuming uiImage is your UIImage
+                                if let imageData = selectedImage?.jpegData(compressionQuality: 0.8) {
+                                    
+                                    print("Base64 representation of UIImage: \(imageData)")
+                                    viewModel.createEvent( eventName: eventName, description: eventDescription, eventImage: imageData, dateDebut: startDate, dateFin: endDate, lieu: eventLocation)
+                                } else {
+                                    print("Failed to convert UIImage to data")
+                                }
+
+                               
                                 // Show alert
                                             alertMessage = "Event added successfully"
                                             showAlert = true
@@ -164,12 +232,19 @@ struct EventAddView: View {
                                          .resizable()
                                          .scaledToFill()
                                          .edgesIgnoringSafeArea(.all))
+                
             }
         }
     }
+
 }
 
+
+
+
+ 
+/*
 #Preview {
     EventAddView()
 }
-
+*/
