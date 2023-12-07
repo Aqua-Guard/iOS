@@ -77,21 +77,16 @@ final class ParticipationWebService {
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization") // Add the token to the request header
 
         // Perform the request
-        let (_, response) = try await URLSession.shared.data(for: request)
+        let (data, response) = try await URLSession.shared.data(for: request)
         
-        // Check for a successful HTTP response
-        guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 404 {
-                // User is not participating (status code 404)
-                return false
-            } else {
-                // Other status codes indicate an error
-                throw URLError(.badServerResponse)
-            }
+     
+
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 200 else {
+            throw EventErrorHandler.invalidResponse
         }
-        
-        // User is participating
-        return true
+
+        return try JSONDecoder().decode(Bool.self, from: data)
     }
 
 

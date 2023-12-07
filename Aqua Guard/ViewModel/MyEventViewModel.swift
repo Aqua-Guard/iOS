@@ -13,7 +13,7 @@ class MyEventViewModel: ObservableObject {
     @Published var eventToUpdate: Event? = nil
     @Published var isPresented: Bool = false
     
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTRkZjE4YjUzNWVjMDRlZmVkYWJiMGIiLCJ1c2VybmFtZSI6Im1hbGVrIiwiaWF0IjoxNzAxOTc0MzM4LCJleHAiOjE3MDE5ODE1Mzh9.64C_kBmyHxhNbEjzSLodm4Mt9O6_3U2V3mCT6cPinqk"
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTRkZjE4YjUzNWVjMDRlZmVkYWJiMGIiLCJ1c2VybmFtZSI6Im1hbGVrIiwiaWF0IjoxNzAxOTg0MDE2LCJleHAiOjE3MDE5OTEyMTZ9.NXM27qCADSr5I7rOUqxhXHhhXAIamGMkdtBcSDCj2pU"
 
     init()  {
       /*  let event1 = Event(idEvent: UUID().uuidString, userName: "John Doe", userImage: "john_image", eventName: "Event 1", description: "Une initiative communautaire pour nettoyer les plages et protéger l'environnement.", eventImage: "sidi_bou_said", dateDebut: Date(), dateFin: Date(), lieu: "Location 1")
