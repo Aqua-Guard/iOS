@@ -68,14 +68,18 @@ struct MySinglePostView: View {
                 
                 Spacer()
     
-                    
+                
+                NavigationLink(destination: UpdatePostView(post: post)) {
+                    Image(systemName: "pencil")
+                        .foregroundColor(.darkBlue) // Make sure .darkBlue is defined in your Color extension
+                }
                     Image(systemName: "trash")
                         .foregroundColor(.red)
                         .onTapGesture {
                             self.postToDeleteId = self.post.idPost
                             self.showingDeleteAlert = true
                         }
-                   
+              
                 
                 
                 
@@ -177,7 +181,6 @@ struct MySinglePostView: View {
                         primaryButton: .destructive(Text("Delete")) {
                             if let postId = postToDeleteId {
                                 Task {
-                                    print("----------",postId)
                                     await viewModel.deletePost(postId: postId)
                                 }
                             }

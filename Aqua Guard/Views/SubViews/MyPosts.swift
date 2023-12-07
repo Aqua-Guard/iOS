@@ -8,12 +8,28 @@
 import SwiftUI
 
 struct MyPosts: View {
+    
     @ObservedObject var postViewModel = PostViewModel()
+    
+    private var toastView: some View {
+        Text("Post Created Successfully")
+            .padding()
+            .background(Color.black.opacity(0.7))
+            .foregroundColor(Color.white)
+            .cornerRadius(10)
+    }
+    
     var body: some View {
         
         NavigationView{
             ScrollView {
                 VStack(spacing: 0) {
+                    if postViewModel.createdwithSucsess {
+                                   toastView
+                                       .transition(.opacity)
+                                       .zIndex(1) // Make sure it's above other content
+                               }
+                    
                     if let posts = postViewModel.posts, !posts.isEmpty {
                         // Display the list of posts
                         ForEach(postViewModel.posts ?? [], id: \.idPost) { post in
@@ -56,7 +72,14 @@ struct MyPosts: View {
                 }
             }
             
-        }
+        }.navigationBarItems(trailing:
+                                NavigationLink(destination: AddPostView(viewModel: postViewModel)
+                                              ) {
+                                    Image(systemName: "plus.circle")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 24, height: 24)
+                })
         
     }
     
@@ -66,4 +89,5 @@ struct MyPosts: View {
     
     
     MyPosts().environmentObject(PostViewModel())
+    
 }

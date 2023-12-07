@@ -10,6 +10,75 @@ import Foundation
 final class PostWebService{
     
     
+    static func createPost(token: String, description: String, imageData: Data) async throws -> Bool {
+        let boundary = "Boundary-\(UUID().uuidString)"
+        var request = URLRequest(url: URL(string: "http://localhost:9090/posts/")!)
+        request.httpMethod = "POST"
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+
+        var body = Data()
+
+        // Description part
+        body.append("--\(boundary)\r\n")
+        body.append("Content-Disposition: form-data; name=\"description\"\r\n\r\n")
+        body.append("\(description)\r\n")
+
+        // Image part
+        body.append("--\(boundary)\r\n")
+        body.append("Content-Disposition: form-data; name=\"image\"; filename=\"image.jpg\"\r\n")
+        body.append("Content-Type: image/jpeg\r\n\r\n")
+        body.append(imageData)
+        body.append("\r\n")
+
+        // End boundary
+        body.append("--\(boundary)--\r\n")
+
+        request.httpBody = body
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 201 else {
+            // Handle server errors here
+            throw URLError(.badServerResponse)
+        }
+        // Decode response if needed or just return true to indicate success
+        return true
+    }
+
+    
+    static func updatePost(postId: String,token: String, description: String) async throws -> Bool {
+        print("heeeeeeeyyyy")
+        let boundary = "Boundary-\(UUID().uuidString)"
+        var request = URLRequest(url: URL(string: "http://localhost:9090/posts/\(postId)")!)
+        request.httpMethod = "PUT"
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+
+        var body = Data()
+
+        // Description part
+        body.append("--\(boundary)\r\n")
+        body.append("Content-Disposition: form-data; name=\"description\"\r\n\r\n")
+        body.append("\(description)\r\n")
+
+
+        // End boundary
+        body.append("--\(boundary)--\r\n")
+
+        request.httpBody = body
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 201 else {
+            // Handle server errors here
+            return true
+        }
+        // Decode response if needed or just return true to indicate success
+        return true
+    }
     static func getPostsData(token: String) async throws -> [PostModel] {
             let urlString = "http://127.0.0.1:9090/posts/"
             guard let url = URL(string: urlString) else {
@@ -229,4 +298,6 @@ final class PostWebService{
            }
        }
 
+    
+    
 }

@@ -21,8 +21,70 @@ class PostViewModel : ObservableObject {
     @Published var isError = false // Track if an error occurred
     @Published var errorMessage = ""
     
+    @Published var alertMessageCreationPost: String = ""
+    @Published var createdPostAlert: Bool = false
+    @Published var createdwithSucsess: Bool = false
     
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTZlMzQ4MDJiNTA3YzgyNTVmZmQ5YzYiLCJ1c2VybmFtZSI6InlvdXNzZWYiLCJpYXQiOjE3MDE4Mjc2MzcsImV4cCI6MTcwMTgzNDgzN30.7Hv5iPwUD6VDHNO5S_gsb6KfVikArmvZrgDwZCwpm8A"
+    @Published var updatedwithSucsess: Bool = false
+    @Published var alertMessageUpdatePost: String = ""
+    @Published var updatePostAlert: Bool = false
+    
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTZlMzQ4MDJiNTA3YzgyNTVmZmQ5YzYiLCJ1c2VybmFtZSI6InlvdXNzZWYiLCJpYXQiOjE3MDE5NjM0NzYsImV4cCI6MTcwMTk3MDY3Nn0.jVnvAZXfskJnLEI63uKAJjVMWJTo0xaP6qSUXtaAPsY"
+    
+    func updatePost(postId : String ,description: String) async {
+            do {
+                let success = try await PostWebService.updatePost(postId : postId ,token: token, description: description)
+            
+                if success {
+                    
+                    // Assuming getPosts() is already implemented and it updates the 'posts' array.
+                    // await getPosts()
+                    DispatchQueue.main.async {
+                        print("the new desss" ,description)
+                        self.updatedwithSucsess = true
+                    }
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    if (description.split(separator: " ").count < 3) {
+                        self.alertMessageUpdatePost = "Description is too short."
+                    }
+                    else{
+                        self.alertMessageUpdatePost = "The description contains inappropriate language."
+                    }
+                  
+                    self.updatePostAlert = true
+                    
+                }
+            }
+        }
+    func createPost(description: String, image: Data) async {
+            do {
+                let success = try await PostWebService.createPost(token: token, description: description, imageData: image)
+            
+                if success {
+                    
+                    // Assuming getPosts() is already implemented and it updates the 'posts' array.
+                    await getPosts()
+                    DispatchQueue.main.async {
+                                   self.createdwithSucsess = true
+                    }
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    if (description.split(separator: " ").count < 3) {
+                        self.alertMessageCreationPost = "Description is too short."
+                    }
+                    else{
+                        self.alertMessageCreationPost = "The description contains inappropriate language."
+                    }
+                  
+                    self.createdPostAlert = true
+                    
+                }
+            }
+        }
+    
     func getPosts() async {
         do {
             let posts = try await PostWebService.getPostsData(token: token)
