@@ -110,7 +110,7 @@ struct UpdatePostView: View {
                     }
                     .sheet(isPresented: $isImagePickerDisplayed) {
                         // Present the image picker
-                        ImagePicker(selectedUIImage: $selectedUIImage)
+                       /* ImagePicker(selectedUIImage: $selectedUIImage)*/
                         
                     }
                     .navigationBarTitle("Update Post", displayMode: .inline)

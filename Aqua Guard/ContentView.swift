@@ -11,6 +11,8 @@ import CoreData
 struct ContentView: View {
     @StateObject var postViewModel = PostViewModel()
     @StateObject var eventViewModel = EventViewModel()
+    @StateObject var actualiteViewModel = ActualiteViewModel()
+
     @Environment(\.managedObjectContext) private var viewContext
     
     var body: some View {
@@ -20,7 +22,7 @@ struct ContentView: View {
                ActualiteListView()
                     .tabItem {
                         Label("Home", systemImage: "house")
-                    }
+                    }.environmentObject(actualiteViewModel)
                 EventListView()
                     .tabItem {
                         Label("Events", systemImage: "calendar")

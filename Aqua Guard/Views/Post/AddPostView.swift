@@ -106,7 +106,7 @@ struct AddPostView: View {
                     }
                     .sheet(isPresented: $isImagePickerDisplayed) {
                         // Present the image picker
-                        ImagePicker(selectedUIImage: $selectedUIImage)
+                       /* ImagePicker(selectedUIImage: $selectedUIImage)*/
                         
                     }
                     .navigationBarTitle("Add Post", displayMode: .inline)
@@ -144,7 +144,7 @@ struct AddPostView: View {
 }
 
 // ImagePicker to handle image selection
-struct ImagePicker: UIViewControllerRepresentable {
+/*struct ImagePicker: UIViewControllerRepresentable {
     @Binding var selectedUIImage: UIImage?
     @Environment(\.presentationMode) var presentationMode
     
@@ -174,7 +174,7 @@ struct ImagePicker: UIViewControllerRepresentable {
             parent.presentationMode.wrappedValue.dismiss()
         }
     }
-}
+}*/
 
 // Preview
 #Preview {
