@@ -14,6 +14,8 @@ extension Data {
         }
     }
 }
+
+
 final class EventWebService {
     static let shared = EventWebService()
     private let baseURL = "http://127.0.0.1:9090"
