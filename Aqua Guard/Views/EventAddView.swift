@@ -188,20 +188,25 @@ struct EventAddView: View {
                             Button(action: {
                                 // Action for submitting event
                                 print("Submit Event")
-                                // Assuming uiImage is your UIImage
-                                if let imageData = selectedImage?.jpegData(compressionQuality: 0.8) {
-                                    
-                                    print("Base64 representation of UIImage: \(imageData)")
-                                    viewModel.createEvent( eventName: eventName, description: eventDescription, eventImage: imageData, dateDebut: startDate, dateFin: endDate, lieu: eventLocation)
-                                } else {
-                                    print("Failed to convert UIImage to data")
-                                }
 
-                               
-                                // Show alert
+                                Task {
+                                    do {
+                                        // Assuming uiImage is your UIImage
+                                        if let imageData = selectedImage?.jpegData(compressionQuality: 0.8) {
+                                            print("Base64 representation of UIImage: \(imageData)")
+                                            try await viewModel.createEvent(eventName: eventName, description: eventDescription, eventImage: imageData, dateDebut: startDate, dateFin: endDate, lieu: eventLocation)
+
+                                            // Show alert
                                             alertMessage = "Event added successfully"
                                             showAlert = true
-                              
+                                        } else {
+                                            print("Failed to convert UIImage to data")
+                                        }
+                                    } catch {
+                                        print("Error adding event: \(error)")
+                                        // Handle error if needed
+                                    }
+                                }
                             }) {
                                 Text("Submit")
                                     .frame(maxWidth: .infinity)

@@ -157,16 +157,33 @@ struct EventEditView: View {
                                Button(action: {
                                    // Action for submitting event
                                    print("Submit Event")
-                                   if let imageData = selectedImage?.jpegData(compressionQuality: 0.8) {
-                                       
-                                       print("Base64 representation of UIImage: \(imageData)")
-                                       viewModel.updateEvent(eventId: event.idEvent,  eventName: eventName, description: eventDescription, eventImage: imageData, dateDebut: startDate, dateFin: endDate, lieu: eventLocation)
-                                   } else {
-                                       print("Failed to convert UIImage to data")
-                                   }
-                                   // Show alert
-                                               alertMessage = "Event Updated successfully !"
+
+                                   Task {
+                                       do {
+                                           // Assuming uiImage is your UIImage
+                                           if let imageData = selectedImage?.jpegData(compressionQuality: 0.8) {
+                                               print("Base64 representation of UIImage: \(imageData)")
+                                               try await viewModel.updateEvent(
+                                                   eventId: event.idEvent,
+                                                   eventName: eventName,
+                                                   description: eventDescription,
+                                                   eventImage: imageData,
+                                                   dateDebut: startDate,
+                                                   dateFin: endDate,
+                                                   lieu: eventLocation
+                                               )
+
+                                               // Show alert
+                                               alertMessage = "Event Updated successfully!"
                                                showAlert = true
+                                           } else {
+                                               print("Failed to convert UIImage to data")
+                                           }
+                                       } catch {
+                                           print("Error updating event: \(error)")
+                                           // Handle error if needed
+                                       }
+                                   }
                                }) {
                                    Text("Submit")
                                        .frame(maxWidth: .infinity)
