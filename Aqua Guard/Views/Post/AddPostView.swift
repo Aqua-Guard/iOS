@@ -174,7 +174,7 @@ struct ImagePickerPost: UIViewControllerRepresentable {
             parent.presentationMode.wrappedValue.dismiss()
         }
     }
-}
+}*/
 
 // Preview
 #Preview {

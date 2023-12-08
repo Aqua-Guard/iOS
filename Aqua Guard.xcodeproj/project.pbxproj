@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7641CCFB2B22534700CC9BB8 /* ActualiteWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7641CCFA2B22534700CC9BB8 /* ActualiteWebService.swift */; };
+		7641CCFD2B2253B500CC9BB8 /* ActualiteErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7641CCFC2B2253B500CC9BB8 /* ActualiteErrorHandler.swift */; };
+		7641CCFF2B22556600CC9BB8 /* ActualiteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7641CCFE2B22556600CC9BB8 /* ActualiteViewModel.swift */; };
+		76A18A5B2B22E98200F71965 /* Avis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A18A5A2B22E98200F71965 /* Avis.swift */; };
 		76E3ED812B19B3C900464B7F /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E3ED802B19B3C900464B7F /* Conversation.swift */; };
 		76E9BDD22B194E4000B512A9 /* ActualiteCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E9BDD12B194E4000B512A9 /* ActualiteCardView.swift */; };
 		76E9BDD42B194E7C00B512A9 /* ActualiteDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E9BDD32B194E7C00B512A9 /* ActualiteDetailsView.swift */; };
@@ -91,6 +95,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7641CCFA2B22534700CC9BB8 /* ActualiteWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualiteWebService.swift; sourceTree = "<group>"; };
+		7641CCFC2B2253B500CC9BB8 /* ActualiteErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualiteErrorHandler.swift; sourceTree = "<group>"; };
+		7641CCFE2B22556600CC9BB8 /* ActualiteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualiteViewModel.swift; sourceTree = "<group>"; };
+		76A18A5A2B22E98200F71965 /* Avis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avis.swift; sourceTree = "<group>"; };
 		76E3ED802B19B3C900464B7F /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		76E9BDD12B194E4000B512A9 /* ActualiteCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualiteCardView.swift; sourceTree = "<group>"; };
 		76E9BDD32B194E7C00B512A9 /* ActualiteDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualiteDetailsView.swift; sourceTree = "<group>"; };
@@ -236,6 +244,7 @@
 				E857A6CB2B17E5FA00EC62DE /* Comment.swift */,
 				76E9BDD72B19527800B512A9 /* Actualite.swift */,
 				D438AE7D2B2224E100D6DE7D /* EventRequest.swift */,
+				76A18A5A2B22E98200F71965 /* Avis.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -342,6 +351,7 @@
 				E8C391F72B188C6100EA3872 /* PostViewModel.swift */,
 				E8ABB3592B1D0EA80051B72F /* LoginViewModell.swift */,
 				D4BD65962B1FDAF500AA5722 /* ParticipationViewModel.swift */,
+				7641CCFE2B22556600CC9BB8 /* ActualiteViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -381,6 +391,8 @@
 				D4F5A1B52B1F782B0096346A /* EventWebService.swift */,
 				D4F5A1BB2B1F8AE80096346A /* EventErrorHandler.swift */,
 				D4BD65942B1FD82F00AA5722 /* ParticipationWebService.swift */,
+				7641CCFA2B22534700CC9BB8 /* ActualiteWebService.swift */,
+				7641CCFC2B2253B500CC9BB8 /* ActualiteErrorHandler.swift */,
 			);
 			path = WebService;
 			sourceTree = "<group>";
@@ -534,7 +546,9 @@
 				D4C23E3F2B148B31002B0E10 /* Aqua_Guard.xcdatamodeld in Sources */,
 				D4BFF9872B15005D0050DC80 /* Participation.swift in Sources */,
 				E8ABB35E2B1D0FCA0051B72F /* ForgotPasswordScreen.swift in Sources */,
+				7641CCFF2B22556600CC9BB8 /* ActualiteViewModel.swift in Sources */,
 				E818059B2B222743008F78FD /* UpdatePostView.swift in Sources */,
+				7641CCFB2B22534700CC9BB8 /* ActualiteWebService.swift in Sources */,
 				E8F5FA3A2B19199800F5B9E0 /* LikeCardView.swift in Sources */,
 				76E9BDDD2B1972D300B512A9 /* ReclamationListView.swift in Sources */,
 				E8C391F82B188C6100EA3872 /* PostViewModel.swift in Sources */,
@@ -542,6 +556,7 @@
 				E816FF742B164938007538BF /* MyEvents.swift in Sources */,
 				D45E7A942B14B16D000F0A9C /* SplashScreen3View.swift in Sources */,
 				D4BD65972B1FDAF500AA5722 /* ParticipationViewModel.swift in Sources */,
+				7641CCFD2B2253B500CC9BB8 /* ActualiteErrorHandler.swift in Sources */,
 				D4BFF9852B14FE710050DC80 /* Event.swift in Sources */,
 				E8C391FA2B1899FB00EA3872 /* PostDetailView.swift in Sources */,
 				E857A6CF2B17E66000EC62DE /* PostCardView.swift in Sources */,
@@ -560,6 +575,7 @@
 				E8B083892B1E76D700CDCFD9 /* PostErrorHandler.swift in Sources */,
 				D45E7A962B14B290000F0A9C /* SplashScreen4View.swift in Sources */,
 				D4BFF98C2B15020C0050DC80 /* EventCardView.swift in Sources */,
+				76A18A5B2B22E98200F71965 /* Avis.swift in Sources */,
 				E81805992B2203D0008F78FD /* AddPostView.swift in Sources */,
 				E8B083872B1E74FF00CDCFD9 /* PostWebService.swift in Sources */,
 				D438AE7E2B2224E100D6DE7D /* EventRequest.swift in Sources */,
