@@ -8,7 +8,7 @@
 import Foundation
 class ParticipationViewModel: ObservableObject {
     
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTRkZjE4YjUzNWVjMDRlZmVkYWJiMGIiLCJ1c2VybmFtZSI6Im1hbGVrIiwiaWF0IjoxNzAxOTg0MDE2LCJleHAiOjE3MDE5OTEyMTZ9.NXM27qCADSr5I7rOUqxhXHhhXAIamGMkdtBcSDCj2pU"
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTZlMzQ4MDJiNTA3YzgyNTVmZmQ5YzYiLCJ1c2VybmFtZSI6InlvdXNzZWYiLCJpYXQiOjE3MDE5ODk1NDgsImV4cCI6MTcwMTk5Njc0OH0.9BkayOlbhiUY1lX0XzHXz0-hFEsQfCAblLXQ9mv33EA"
     
     func addParticipation(eventId : String) {
        

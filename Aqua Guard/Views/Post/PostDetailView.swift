@@ -214,6 +214,8 @@ struct CommentBottomSheetView: View {
     @State private var showToastComment: Bool = false
     
     
+    @State private var showingNotAllowedAlert = false
+    
     @State private var isEditing: Bool = false
     @State private var editingCommentId: String? = nil
     @State private var editingCommentText: String = ""
@@ -242,41 +244,61 @@ struct CommentBottomSheetView: View {
                 List {
                     ForEach(comments ?? [],id: \.idComment) { comment in
                         CommentCardView(comment: comment)
-                            .swipeActions(edge: .trailing) {
-                                Button(role: .destructive) {
-                                    commentIdToDelete = comment.idComment
-                                    showingDeleteConfirmation = true
-                                } label: {
-                                    Label("Delete", systemImage: "trash")
-                                }
-                            }
                         
-                            .swipeActions(edge: .leading) {
-                                Button(role: .none) {
-                                    editingCommentText = comment.comment ?? ""
-                                    editingCommentId = comment.idComment
-                                    isEditing = true
-                                } label: {
-                                    Label("Edit", systemImage: "pencil")
-                                }.tint(.blue)
-                            }
-                    }
-                }.listStyle(PlainListStyle())
-                    .confirmationDialog("Are you sure you want to delete this comment?",
-                                        isPresented: $showingDeleteConfirmation,titleVisibility: .visible) {
-                        Button("Delete", role: .destructive) {
-                            if let commentId = commentIdToDelete {
-                                Task {
-                                    await viewModel.deleteComment(postId: postId, commentId: commentId)
-                                    toastMessage = "Comment deleted successfully"
-                                    showToast = true
+                            .swipeActions(edge: .trailing) {
+                                if comment.idUser == viewModel.CurrentUserId {
+                                    Button(role: .destructive) {
+                                        commentIdToDelete = comment.idComment
+                                        showingDeleteConfirmation = true
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
+                                } else {
+                                    Button(role: .destructive) {
+                                        showingNotAllowedAlert = true
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
                                 }
                             }
-                            commentIdToDelete = nil // Reset the selected comment
-                            // i want to distuctive this comment after the delete
-                        }
-                        Button("Cancel", role: .cancel) {}
+                            .swipeActions(edge: .leading) {
+                                if comment.idUser == viewModel.CurrentUserId {
+                                    Button(role: .none) {
+                                        // Your editing logic here
+                                    } label: {
+                                        Label("Edit", systemImage: "pencil")
+                                    }.tint(.blue)
+                                } else {
+                                    Button(role: .none) {
+                                        showingNotAllowedAlert = true
+                                    } label: {
+                                        Label("Edit", systemImage: "pencil")
+                                    }.tint(.blue)
+                                }
+                            }
                     }
+                }.alert("Not Allowed", isPresented: $showingNotAllowedAlert) {
+                    Button("OK", role: .cancel) { }
+                } message: {
+                    Text("You are not allowed to delete or edit this comment.")
+                }
+                //
+                .listStyle(PlainListStyle())
+                .confirmationDialog("Are you sure you want to delete this comment?",
+                                    isPresented: $showingDeleteConfirmation,titleVisibility: .visible) {
+                    Button("Delete", role: .destructive) {
+                        if let commentId = commentIdToDelete {
+                            Task {
+                                await viewModel.deleteComment(postId: postId, commentId: commentId)
+                                toastMessage = "Comment deleted successfully"
+                                showToast = true
+                            }
+                        }
+                        commentIdToDelete = nil // Reset the selected comment
+                        // i want to distuctive this comment after the delete
+                    }
+                    Button("Cancel", role: .cancel) {}
+                }
                 
                 
             } else {
@@ -294,13 +316,13 @@ struct CommentBottomSheetView: View {
                         // Implement the save action
                         Task {
                             
-                      
-                                await viewModel.updateComment(postId: postId, commentId: editingCommentId!, newCommentText: editingCommentText)
-                                                         
-                          
-                              
-            
-                                    }
+                            
+                            await viewModel.updateComment(postId: postId, commentId: editingCommentId!, newCommentText: editingCommentText)
+                            
+                            
+                            
+                            
+                        }
                         
                         isEditing = false
                     },
