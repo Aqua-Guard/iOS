@@ -14,11 +14,26 @@ struct EventCardView: View {
        
         VStack(alignment: .leading, spacing: 8) {
             // Event image
-            Image(event.eventImage)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(height: 200)
-                .clipped()
+            AsyncImage(url: URL(string: "http://127.0.0.1:9090/images/event/\(event.eventImage)")) { phase in
+                     switch phase {
+                     case .empty:
+                         ProgressView()
+                     case .success(let image):
+                         image
+                             .resizable()
+                             .aspectRatio(contentMode: .fill)
+                             .frame(height: 200)
+                             .clipped()
+                     case .failure:
+                         Image(systemName: "photo") // You can use a placeholder image here
+                             .resizable()
+                             .aspectRatio(contentMode: .fill)
+                             .frame(height: 200)
+                             .clipped()
+                     @unknown default:
+                         EmptyView()
+                     }
+                 }
 
             // event details
             VStack(alignment: .leading, spacing: 8) {
@@ -77,7 +92,7 @@ func formatDate(_ date: Date) -> String {
 }
 
 
-
+/*
 struct EventCardView_Previews: PreviewProvider {
     static var previews: some View {
         let sampleEvent = Event(
@@ -96,4 +111,4 @@ struct EventCardView_Previews: PreviewProvider {
             .previewLayout(.sizeThatFits)
             .padding()
     }
-}
+}*/

@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct PostListView: View {
-    
-    @EnvironmentObject var postViewModel : PostViewModel
+    @ObservedObject var postViewModel = PostViewModel()
+    // @EnvironmentObject var postViewModel : PostViewModel
     var body: some View {
         NavigationView{
             ScrollView {
+                
                 VStack(spacing: 0) {
-                    ForEach(postViewModel.posts,id: \.id){post in
-                        PostCardView(post: post) // it show me alway the first post1
+                    ForEach(postViewModel.posts!.indices, id: \.self) { index in
+                        PostCardView(viewModel: postViewModel, postIndex: index)
                             .listRowInsets(EdgeInsets())
                             .listRowBackground(Color.clear)
                             .listRowSeparator(.hidden)
                             .padding(.vertical, 4)
-                        
                     }.listStyle(PlainListStyle())
                         .navigationTitle("Forum").navigationBarTitleDisplayMode(.inline)
                         .padding()
@@ -31,10 +31,31 @@ struct PostListView: View {
                         .scaledToFill() // Fill the space without distorting aspect ratio
                         .edgesIgnoringSafeArea(.all) // Ignore safe area to extend to edges
                 )
-            
-
-        }
-            
+                
+                
+            }.onAppear{
+                Task{
+                    await postViewModel.getPosts()
+                }
+            }
+            .overlay(
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        NavigationLink(destination: AddPostView()) {
+                            Image(systemName: "plus") // System plus icon
+                                .font(.largeTitle)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.blue)
+                                .clipShape(Circle())
+                                .shadow(radius: 10)
+                        }
+                        .padding()
+                    }
+                }
+            )
         }
         
     }

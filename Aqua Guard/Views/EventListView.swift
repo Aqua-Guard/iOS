@@ -13,24 +13,27 @@ struct EventListView: View {
     var body: some View {
         NavigationView {
             List {
-                Section(header: Text("No Events").font(.title).foregroundColor(Color.darkBlue), footer: Text("")) {
-                    Image("calendar_amico")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 250, height: 250)
-                        .padding(.top, 5)
-                    
-                    Text("No Events exists")
-                        .font(.system(size: 20))
-                        .foregroundColor(Color.darkBlue)
-                        .multilineTextAlignment(.center)
-                        .padding(.top, 5)
+                if viewModel.events.isEmpty {
+                    Section(header: Text("No Events").font(.title).foregroundColor(Color.darkBlue), footer: Text("")) {
+                        Image("calendar_amico")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 250, height: 250)
+                            .padding(.top, 5)
+                        
+                        Text("No Events exists")
+                            .font(.system(size: 20))
+                            .foregroundColor(Color.darkBlue)
+                            .multilineTextAlignment(.center)
+                            .padding(.top, 5)
+                    }
+                } else {
+                    ForEach(viewModel.events) { event in
+                        EventCardView(event: event)
+                            .listRowInsets(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
+                    }
                 }
-                
-                ForEach(viewModel.events) { event in
-                    EventCardView(event: event)
-                        .listRowInsets(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
-                }
+
             }
             .navigationBarTitle("Events", displayMode: .inline) // Fix the typo here
             .background(

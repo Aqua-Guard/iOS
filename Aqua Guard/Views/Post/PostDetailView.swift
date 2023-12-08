@@ -6,15 +6,20 @@
 //
 
 import SwiftUI
+import SimpleToast
 
 struct PostDetailView: View {
-    let post: Post
+    let post: PostModel
+    @StateObject var viewModel = PostViewModel()
     @State private var isLiked = false
     @State private var likeCount: Int = 0
     @State private var commentText: String = ""
     @State var showingLikeBottomSeet = false
     @State var showingCommentBottomSeet = false
-    init(post: Post) {
+    
+    
+    
+    init(post: PostModel) {
         self.post = post
         // Initialize the likeCount state with the initial like count of the post
         _likeCount = State(initialValue: post.nbLike)
@@ -27,13 +32,24 @@ struct PostDetailView: View {
         VStack(alignment: .leading) {
             // User info and post image
             HStack {
-                // User image
-                Image(post.userImage)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 65, height: 65)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.darkBlue, lineWidth: 2))
+                
+                AsyncImage(url: URL(string: "http://127.0.0.1:9090/images/user/\(post.userImage ?? "")")) { phase in
+                    switch phase {
+                    case .success(let image):
+                        image.resizable() // Make the image resizable
+                            .aspectRatio(contentMode: .fill) // Fill the frame while maintaining aspect ratio
+                    case .failure(_):
+                        Image(systemName: "photo") // A fallback image in case of failure
+                            .foregroundColor(.gray)
+                    case .empty:
+                        ProgressView() // An activity indicator while the image is loading
+                    @unknown default:
+                        EmptyView() // A default view for unknown phase
+                    }
+                }
+                .frame(width: 65, height: 65) // Set the frame size for the image
+                .clipShape(Circle()) // Clip the image to a circle
+                .overlay(Circle().stroke(Color.darkBlue, lineWidth: 2)) // Add a border around the image
                 
                 // User name and role
                 VStack(alignment: .leading, spacing: 8) {
@@ -57,12 +73,30 @@ struct PostDetailView: View {
                 .foregroundColor(.secondary)
             
             //  i want ti center this image
-            Image(post.postImage)
-                .resizable()
-                .scaledToFit()
-                .frame(height: 200)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .padding(.bottom)
+            AsyncImage(url: URL(string: "http://127.0.0.1:9090/images/post/\(post.postImage)")) { phase in
+                switch phase {
+                case .success(let image):
+                    image.resizable() // Make the image resizable
+                        .aspectRatio(contentMode: .fit) // Fit the content in the current view size
+                        .frame(height: 200) // Set the frame height
+                        .frame(maxWidth: .infinity, alignment: .center) // Set the frame width to be as wide as possible and align it to the center
+                case .failure(_):
+                    Image(systemName: "photo") // An image to display in case of failure to load
+                        .foregroundColor(.gray)
+                        .frame(height: 200)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                case .empty:
+                    ProgressView() // An activity indicator until the image loads
+                        .frame(height: 200)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                @unknown default:
+                    EmptyView() // Default view in case of unknown phase
+                }
+            }
+            .padding(.bottom)
+            
+            
+            
             Divider()
                 .background(Color.darkBlue)
             
@@ -74,8 +108,8 @@ struct PostDetailView: View {
                     showingLikeBottomSeet.toggle()
                 })
                 {
-                    Image(systemName: isLiked ? "heart.fill" : "heart")
-                        .foregroundColor(isLiked ? .pink : .pink)
+                    Image(systemName: post.nbLike > 0 ? "heart.fill" : "heart")
+                        .foregroundColor(.pink)
                     Text("Like \(post.nbLike)")
                         .foregroundStyle(Color.black)
                 }
@@ -97,7 +131,7 @@ struct PostDetailView: View {
                     Text("Comment \(commentCount)")
                         .foregroundStyle(Color.black)
                 } .sheet(isPresented: $showingCommentBottomSeet){
-                    CommentBottomSheetView(comments: post.comments)
+                    CommentBottomSheetView(comments: post.comments, viewModel: viewModel , postId: post.idPost)
                         .presentationDetents([.medium,.large])
                 }
                 Spacer()
@@ -112,13 +146,6 @@ struct PostDetailView: View {
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
-            
-            
-            
-            
-            
-            
-            
         }
         .padding()
         .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
@@ -155,7 +182,7 @@ struct LikeBottomSheetView: View {
             
             // Display like card views if there are likes
             if likes.count > 0 {
-                ForEach(likes, id: \.id) { like in // Assuming 'Like' has an 'id' property
+                ForEach(likes ?? [],id: \.idLike) { like in
                     LikeCardView(like: like)
                 }
             } else {
@@ -167,6 +194,7 @@ struct LikeBottomSheetView: View {
                     .foregroundColor(Color.pink)
                     .font(.title)
             }
+            
         }
         //.padding(.top,2)
         .background(Color.white)
@@ -176,8 +204,30 @@ struct LikeBottomSheetView: View {
 
 struct CommentBottomSheetView: View {
     let comments: [Comment]
+    @ObservedObject var viewModel: PostViewModel
+    let postId: String
+    @State private var showingDeleteConfirmation: Bool = false
+    @State private var commentIdToDelete: String?
+    @State private var toastMessage: String = ""
+    @State private var showToast: Bool = false
+    
+    @State private var showToastComment: Bool = false
     
     
+    @State private var showingNotAllowedAlert = false
+    
+    @State private var isEditing: Bool = false
+    @State private var editingCommentId: String? = nil
+    @State private var editingCommentText: String = ""
+    
+    
+    
+    private let toastOptions = SimpleToastOptions(
+        
+        alignment:  .bottom, // Position the toast at the bottom
+        hideAfter:  3 // Auto hide after 3 seconds, adjust as needed
+        // Add more options as required for
+    )
     var body: some View {
         VStack {
             Image(systemName: "text.bubble.fill")
@@ -192,23 +242,65 @@ struct CommentBottomSheetView: View {
             
             if comments.count > 0 {
                 List {
-                    ForEach(comments) { comment in
+                    ForEach(comments ?? [],id: \.idComment) { comment in
                         CommentCardView(comment: comment)
+                        
                             .swipeActions(edge: .trailing) {
-                                Button(role: .destructive) {
-                                } label: {
-                                    Label("Delete", systemImage: "trash")
+                                if comment.idUser == viewModel.CurrentUserId {
+                                    Button(role: .destructive) {
+                                        commentIdToDelete = comment.idComment
+                                        showingDeleteConfirmation = true
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
+                                } else {
+                                    Button(role: .destructive) {
+                                        showingNotAllowedAlert = true
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
                                 }
                             }
                             .swipeActions(edge: .leading) {
-                                Button(role: .cancel) {
-                                } label: {
-                                    Label("Edit", systemImage: "pencil")
-                                }.tint(.blue)
+                                if comment.idUser == viewModel.CurrentUserId {
+                                    Button(role: .none) {
+                                        // Your editing logic here
+                                    } label: {
+                                        Label("Edit", systemImage: "pencil")
+                                    }.tint(.blue)
+                                } else {
+                                    Button(role: .none) {
+                                        showingNotAllowedAlert = true
+                                    } label: {
+                                        Label("Edit", systemImage: "pencil")
+                                    }.tint(.blue)
+                                }
                             }
                     }
+                }.alert("Not Allowed", isPresented: $showingNotAllowedAlert) {
+                    Button("OK", role: .cancel) { }
+                } message: {
+                    Text("You are not allowed to delete or edit this comment.")
                 }
+                //
                 .listStyle(PlainListStyle())
+                .confirmationDialog("Are you sure you want to delete this comment?",
+                                    isPresented: $showingDeleteConfirmation,titleVisibility: .visible) {
+                    Button("Delete", role: .destructive) {
+                        if let commentId = commentIdToDelete {
+                            Task {
+                                await viewModel.deleteComment(postId: postId, commentId: commentId)
+                                toastMessage = "Comment deleted successfully"
+                                showToast = true
+                            }
+                        }
+                        commentIdToDelete = nil // Reset the selected comment
+                        // i want to distuctive this comment after the delete
+                    }
+                    Button("Cancel", role: .cancel) {}
+                }
+                
+                
             } else {
                 Spacer()
                 Text("No Comment")
@@ -216,6 +308,47 @@ struct CommentBottomSheetView: View {
                     .font(.title)
                 Spacer()
             }
+            if isEditing {
+                
+                EditCommentView(
+                    text: $editingCommentText,
+                    onSave: {
+                        // Implement the save action
+                        Task {
+                            
+                            
+                            await viewModel.updateComment(postId: postId, commentId: editingCommentId!, newCommentText: editingCommentText)
+                            
+                            
+                            
+                            
+                        }
+                        
+                        isEditing = false
+                    },
+                    onCancel: {
+                        isEditing = false
+                    }
+                )
+                
+                .transition(.scale) // Add a nice transition effect
+                
+                
+            }
+        }.simpleToast(isPresented: $showToast, options: toastOptions) {
+            Label(toastMessage, systemImage: "info.circle")
+                .padding()
+                .background(Color.green)
+                .foregroundColor(Color.white)
+                .cornerRadius(10)
+            //.padding(.top)
+        }
+        .simpleToast(isPresented: $viewModel.showToastComment , options: toastOptions) {
+            Label(viewModel.toastMessageComment , systemImage: "info.circle")
+                .padding()
+                .background(viewModel.toastMessageComment == "Comment updated successfully" ? Color.green : Color.red)
+                .foregroundColor(Color.white)
+                .cornerRadius(10)
         }
         .padding()
         // nothing epear
@@ -233,6 +366,67 @@ struct CommentBottomSheetView: View {
     
     
 }
+// Custom Edit Comment View
+struct EditCommentView: View {
+    @Binding var text: String
+    var onSave: () -> Void
+    var onCancel: () -> Void
+    let darkBlue = Color("darkBlue") // Ensure this color is defined in your asset catalog
+    
+    var body: some View {
+        VStack(spacing: 20) {
+            HStack {
+                Image(systemName: "pencil.circle.fill")
+                    .foregroundColor(darkBlue).font(.title2)
+                Text("Edit Comment")
+                    .font(.title2)
+                    .bold()
+                    .foregroundColor(darkBlue)
+            }
+            .padding(.top, 20)
+            
+            TextEditor(text: $text)
+                .frame(minHeight: 100) // Set the desired height
+                .padding(4)
+                .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 1))
+                .padding(.horizontal, 20)
+            
+            Divider()
+            
+            HStack {
+                Button(action: onCancel) {
+                    HStack {
+                        Image(systemName: "xmark.circle.fill")
+                        Text("Cancel")
+                    }
+                }
+                .buttonStyle(PlainButtonStyle())
+                .foregroundColor(.red)
+                
+                Spacer()
+                
+                Button(action: onSave) {
+                    HStack {
+                        Image(systemName: "checkmark.circle.fill")
+                        Text("Save")
+                    }
+                }
+                .buttonStyle(PlainButtonStyle())
+                .foregroundColor(.green)
+            }
+            .padding()
+            
+            
+        }
+        .frame(minWidth: 300, minHeight: 200)
+        .background(Color(UIColor.systemBackground)) // Use dynamic colors for light/dark mode
+        .cornerRadius(20)
+        .shadow(radius: 10)
+        .padding() // Add padding around the entire view for better spacing
+    }
+}
+
+
 
 #Preview {
     PostDetailView(post: post1)
