@@ -44,7 +44,7 @@ struct ContentView: View {
                     }
                 
             }
-            .accentColor(.white)
+            .accentColor(.darkBlue)
             
             
             

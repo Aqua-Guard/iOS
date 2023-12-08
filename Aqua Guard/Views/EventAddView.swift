@@ -8,12 +8,12 @@
 import SwiftUI
 import UIKit
 
-struct ImagePicker: UIViewControllerRepresentable {
+struct ImagePickerEvent: UIViewControllerRepresentable {
     class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-        var parent: ImagePicker
+        var parent: ImagePickerEvent
         var didImagePicked: (UIImage) -> Void
 
-        init(parent: ImagePicker, didImagePicked: @escaping (UIImage) -> Void) {
+        init(parent: ImagePickerEvent, didImagePicked: @escaping (UIImage) -> Void) {
             self.parent = parent
             self.didImagePicked = didImagePicked
         }
@@ -94,7 +94,7 @@ struct EventAddView: View {
                                     .foregroundColor(.darkBlue)
                             }
                             .sheet(isPresented: $isImagePickerPresented) {
-                                ImagePicker(didImagePicked: { image in
+                                ImagePickerEvent(didImagePicked: { image in
                                     self.selectedImage = image
                                 }, isImagePickerPresented: $isImagePickerPresented)
                             }
@@ -188,20 +188,25 @@ struct EventAddView: View {
                             Button(action: {
                                 // Action for submitting event
                                 print("Submit Event")
-                                // Assuming uiImage is your UIImage
-                                if let imageData = selectedImage?.jpegData(compressionQuality: 0.8) {
-                                    
-                                    print("Base64 representation of UIImage: \(imageData)")
-                                    viewModel.createEvent( eventName: eventName, description: eventDescription, eventImage: imageData, dateDebut: startDate, dateFin: endDate, lieu: eventLocation)
-                                } else {
-                                    print("Failed to convert UIImage to data")
-                                }
 
-                               
-                                // Show alert
+                                Task {
+                                    do {
+                                        // Assuming uiImage is your UIImage
+                                        if let imageData = selectedImage?.jpegData(compressionQuality: 0.8) {
+                                            print("Base64 representation of UIImage: \(imageData)")
+                                            try await viewModel.createEvent(eventName: eventName, description: eventDescription, eventImage: imageData, dateDebut: startDate, dateFin: endDate, lieu: eventLocation)
+
+                                            // Show alert
                                             alertMessage = "Event added successfully"
                                             showAlert = true
-                              
+                                        } else {
+                                            print("Failed to convert UIImage to data")
+                                        }
+                                    } catch {
+                                        print("Error adding event: \(error)")
+                                        // Handle error if needed
+                                    }
+                                }
                             }) {
                                 Text("Submit")
                                     .frame(maxWidth: .infinity)

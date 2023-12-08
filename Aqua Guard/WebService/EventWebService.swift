@@ -7,9 +7,6 @@
 
 import Foundation
 
-
-
-
 extension Data {
     mutating func append(_ string: String) {
         if let data = string.data(using: .utf8) {
@@ -17,9 +14,11 @@ extension Data {
         }
     }
 }
+
+
 final class EventWebService {
     static let shared = EventWebService()
-    private let baseURL = "http://192.168.43.253:9090"
+    private let baseURL = "http://127.0.0.1:9090"
 
     func fetchEvents(token: String,completion: @escaping ([Event]?) -> Void) {
          let url = URL(string: "\(baseURL)/events")!
@@ -95,34 +94,27 @@ final class EventWebService {
                  request.httpMethod = "DELETE"
                  request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
 
-                 let (data, response) = try await URLSession.shared.data(for: request)
-                 guard let httpResponse = response as? HTTPURLResponse else {
-                     throw EventErrorHandler.invalidResponse
-                 }
+                let (data, response) = try await URLSession.shared.data(for: request)
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    throw PostErrorHandler.invalidResponse
+                }
 
-                 switch httpResponse.statusCode {
-                 case 204:
-                     // Successfully deleted the event
-                     return
-
-                 case 403:
-                     // If the server returns a 403 status, throw an appropriate error
-                     throw EventErrorHandler.inappropriateLanguage(data)
-
-                 default:
-                     // Handle other status codes as general errors
-                     throw EventErrorHandler.invalidResponse
-                 }
+                switch httpResponse.statusCode {
+                case 200:
+                    print("Event deleted successfully")
+                default:
+                    // Handle other status codes appropriately
+                    throw PostErrorHandler.invalidResponse
+                }
              }
     
     
-    func addEvent(token: String,event: EventRequest, image: Data, completion: @escaping (Result<Void, Error>) -> Void) {
+    func addEvent(token: String,event: EventRequest, image: Data)async throws -> Bool {
         let urlString = "\(baseURL)/events"
             guard let url = URL(string: urlString)
         else {
                 print("Invalid URL")
-                completion(.failure(URLError(.badURL)))
-                return
+                return false
             }
 
             var request = URLRequest(url: url)
@@ -153,26 +145,23 @@ final class EventWebService {
             body.append("--\(boundary)--".data(using: .utf8)!)
 
             request.httpBody = body
+        let (data, response) = try await URLSession.shared.data(for: request)
 
-            URLSession.shared.dataTask(with: request) { data, response, error in
-                if let error = error {
-                    completion(.failure(error))
-                    return
-                }
-                guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
-                    completion(.failure(URLError(.badServerResponse)))
-                    return
-                }
-                completion(.success(()))
-            }.resume()
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 201 else {
+            // Handle server errors here
+            throw URLError(.badServerResponse)
+        }
+        // Decode response if needed or just return true to indicate success
+        return true
         }
     
     
-    func updateEvent(token: String, eventId: String, event: EventRequest, image: Data?, completion: @escaping (Result<Void, Error>) -> Void) {
+    func updateEvent(token: String, eventId: String, event: EventRequest, image: Data?)async throws -> Bool {
         guard let url = URL(string: "\(baseURL)/events/\(eventId)") else {
             print("Invalid URL")
-            completion(.failure(URLError(.badURL)))
-            return
+           
+            return false
         }
 
         var request = URLRequest(url: url)
@@ -204,17 +193,15 @@ final class EventWebService {
 
         request.httpBody = body
 
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
-                completion(.failure(URLError(.badServerResponse)))
-                return
-            }
-            completion(.success(()))
-        }.resume()
+        let (data, response) = try await URLSession.shared.data(for: request)
+
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 201 else {
+            // Handle server errors here
+            throw URLError(.badServerResponse)
+        }
+        // Decode response if needed or just return true to indicate success
+        return true
     }
 
 

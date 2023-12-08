@@ -50,7 +50,7 @@ struct EventEditView: View {
                        ScrollView {
                            VStack(alignment: .leading, spacing: 10) {
                                
-                                       Image(uiImage: selectedImage ?? (URL(string: "http://192.168.43.253:9090/images/event/\(event.eventImage)")
+                                       Image(uiImage: selectedImage ?? (URL(string: "http://127.0.0.1:9090/images/event/\(event.eventImage)")
                                                                    .flatMap { try? Data(contentsOf: $0) }
                                                                    .flatMap { UIImage(data: $0) }
                                                                    ?? UIImage(systemName: "photo"))!)
@@ -66,7 +66,7 @@ struct EventEditView: View {
                                                .foregroundColor(.darkBlue)
                                        }
                                        .sheet(isPresented: $isImagePickerPresented) {
-                                           ImagePicker(didImagePicked: { image in
+                                           ImagePickerEvent(didImagePicked: { image in
                                                self.selectedImage = image
                                            }, isImagePickerPresented: $isImagePickerPresented)
                                        }
@@ -157,16 +157,33 @@ struct EventEditView: View {
                                Button(action: {
                                    // Action for submitting event
                                    print("Submit Event")
-                                   if let imageData = selectedImage?.jpegData(compressionQuality: 0.8) {
-                                       
-                                       print("Base64 representation of UIImage: \(imageData)")
-                                       viewModel.updateEvent(eventId: event.idEvent,  eventName: eventName, description: eventDescription, eventImage: imageData, dateDebut: startDate, dateFin: endDate, lieu: eventLocation)
-                                   } else {
-                                       print("Failed to convert UIImage to data")
-                                   }
-                                   // Show alert
-                                               alertMessage = "Event Updated successfully !"
+
+                                   Task {
+                                       do {
+                                           // Assuming uiImage is your UIImage
+                                           if let imageData = selectedImage?.jpegData(compressionQuality: 0.8) {
+                                               print("Base64 representation of UIImage: \(imageData)")
+                                               try await viewModel.updateEvent(
+                                                   eventId: event.idEvent,
+                                                   eventName: eventName,
+                                                   description: eventDescription,
+                                                   eventImage: imageData,
+                                                   dateDebut: startDate,
+                                                   dateFin: endDate,
+                                                   lieu: eventLocation
+                                               )
+
+                                               // Show alert
+                                               alertMessage = "Event Updated successfully!"
                                                showAlert = true
+                                           } else {
+                                               print("Failed to convert UIImage to data")
+                                           }
+                                       } catch {
+                                           print("Error updating event: \(error)")
+                                           // Handle error if needed
+                                       }
+                                   }
                                }) {
                                    Text("Submit")
                                        .frame(maxWidth: .infinity)

@@ -9,20 +9,28 @@ import SwiftUI
 
 struct EventDetailsView: View {
     let event: Event
-    
+    @Environment(\.presentationMode) var presentationMode
+
     @StateObject var participationViewModel = ParticipationViewModel()
 
     @State private var showAlertadd = false
     @State private var showAlertdelete = false
 
+    @State private var isParticipated = false
     @State private var showSnackbar = false
     @State private var snackbarText = ""
+    
+    private func checkIfParticipated() {
+        Task {
+            isParticipated = try await participationViewModel.isParticipated(eventId: event.idEvent)
+        }
+    }
 
     var body: some View {
 
         VStack(alignment: .leading, spacing: 8) {
             // Event image
-            AsyncImage(url: URL(string: "http://192.168.43.253:9090/images/event/\(event.eventImage)")) { phase in
+            AsyncImage(url: URL(string: "http://127.0.0.1:9090/images/event/\(event.eventImage)")) { phase in
                 switch phase {
                 case .empty:
                     ProgressView()
@@ -78,59 +86,68 @@ struct EventDetailsView: View {
                     
                     
                 }
-              
+                if (isParticipated == true){
+                    Button(action: {
+                        showAlertdelete = true
+                    }) {
+                        Text("Cancel Participation")
+                            .font(.system(size: 20))
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 50)
+                            .background(Color.red)
+                            .cornerRadius(50)
+                            .padding(.leading,0)
+                    }
+                    .alert(isPresented: $showAlertdelete) {
+                        Alert(
+                            title: Text("Confirm Cancellation"),
+                            message: Text("Are you sure you want to cancel your participation in this event?"),
+                            primaryButton: .default(Text("Yes")) {
+                                participationViewModel.deleteParticipation(eventId: event.idEvent)
+                                showSnackbar = true
+                                snackbarText = "Participation canceled!"
+                                presentationMode.wrappedValue.dismiss()
+
+                                
+                            },
+                            secondaryButton: .cancel()
+                        )
+                    }
+                    .padding()
+                }else{
+                    Button(action: {
+                        showAlertadd = true
+                    }) {
+                        Text("Participate")
+                            .font(.system(size: 20))
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 50)
+                            .background(Color.lightBlue)
+                            .cornerRadius(50)
+                            .padding(.leading,0)
+                    }
+                    .alert(isPresented: $showAlertadd) {
+                        Alert(
+                            title: Text("Confirm Participation"),
+                            message: Text("Are you sure you want to participate in this event?"),
+                            primaryButton: .default(Text("Yes")) {
+                                participationViewModel.addParticipation(eventId: event.idEvent)
+                                showSnackbar = true
+                                snackbarText = "Participation successful!"
+                                presentationMode.wrappedValue.dismiss()
+
+                            },
+                            secondaryButton: .cancel()
+                        )
+                    }
+                    .padding()
+                    
+                }
                 
-                Button(action: {
-                    showAlertadd = true
-                }) {
-                    Text("Participate")
-                        .font(.system(size: 20))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 50)
-                        .background(Color.lightBlue)
-                        .cornerRadius(50)
-                        .padding(.leading,0)
-                }
-                .alert(isPresented: $showAlertadd) {
-                    Alert(
-                        title: Text("Confirm Participation"),
-                        message: Text("Are you sure you want to participate in this event?"),
-                        primaryButton: .default(Text("Yes")) {
-                            participationViewModel.addParticipation(eventId: event.idEvent)
-                            showSnackbar = true
-                            snackbarText = "Participation successful!"
-                        },
-                        secondaryButton: .cancel()
-                    )
-                }
-                .padding()
-                
-                Button(action: {
-                    showAlertdelete = true
-                }) {
-                    Text("Cancel")
-                        .font(.system(size: 20))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 50)
-                        .background(Color.red)
-                        .cornerRadius(50)
-                        .padding(.leading,0)
-                }
-                .alert(isPresented: $showAlertdelete) {
-                    Alert(
-                        title: Text("Confirm Cancellation"),
-                        message: Text("Are you sure you want to cancel your participation in this event?"),
-                        primaryButton: .default(Text("Yes")) {
-                            participationViewModel.deleteParticipation(eventId: event.idEvent)
-                            showSnackbar = true
-                            snackbarText = "Participation canceled!"
-                        },
-                        secondaryButton: .cancel()
-                    )
-                }
-                .padding()
+               
+             
             
             
         
@@ -147,7 +164,14 @@ struct EventDetailsView: View {
         .shadow(radius: 4)
         .padding(8)
         .navigationBarTitle("Event Details", displayMode: .inline)
+        .onAppear{
+            checkIfParticipated()
+        }
+           
+        
+       
     }
+    
 }
 /*
 struct Snackbar: View {

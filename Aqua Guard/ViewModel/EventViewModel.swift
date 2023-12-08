@@ -24,13 +24,19 @@ class EventViewModel: ObservableObject {
    
 
       func fetchEvents() {
-          let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTRkZjE4YjUzNWVjMDRlZmVkYWJiMGIiLCJ1c2VybmFtZSI6Im1hbGVrIiwiaWF0IjoxNzAxOTc0MzM4LCJleHAiOjE3MDE5ODE1Mzh9.64C_kBmyHxhNbEjzSLodm4Mt9O6_3U2V3mCT6cPinqk"
+          let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTcyOGViNTgxMTI3NDRjYzg3MDc5OWUiLCJ1c2VybmFtZSI6ImFtaXJhIiwiaWF0IjoxNzAyMDA2NTMxLCJleHAiOjE3MDIwMTM3MzF9.InEBmy5BV7SJ5NkGoSNo4ZnvgAy9kZ8gwIEuknapkK0"
+          
+          do{
           EventWebService.shared.fetchEvents(token: token) { [weak self] events in
               // Update the events array on the main thread
               DispatchQueue.main.async {
                   self?.events = events ?? []
               }
           }
+          
+      }catch (let error){
+      print(error.localizedDescription)
+  }
       }
 
    

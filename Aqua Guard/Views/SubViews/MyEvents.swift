@@ -76,6 +76,11 @@ struct MyEvents: View {
             
             }
                 .navigationBarTitle("My Events").navigationBarTitleDisplayMode(.inline)
+                .onAppear{
+                    Task{
+                        await viewModel.fetchMyEvents()
+                    }
+                }
                 .navigationBarItems(trailing:
                                 NavigationLink(destination: EventAddView()) {
                                     Image(systemName: "plus.circle")

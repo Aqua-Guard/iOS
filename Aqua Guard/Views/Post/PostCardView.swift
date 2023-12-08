@@ -16,6 +16,10 @@ struct PostCardView: View {
     @State private var likeCount: Int = 0
     @State private var commentText: String = ""
     
+    
+    @State private var showShareSheet = false
+        @State private var shareItems: [Any] = ["Shared content goes here"]
+    
     private var post: PostModel {
         viewModel.posts![postIndex]
     }
@@ -149,16 +153,22 @@ struct PostCardView: View {
                 Spacer()
                 
                 
-                // Share icon with label and count
-                Image(systemName: "square.and.arrow.up") .foregroundColor(Color("babyBlue"))
-                    .padding(.trailing, -6)
-                Text("Share 0")
+                Button(action: {
+                               self.shareItems = ["This is what I want to share from my post."] // Set your sharing content here
+                               self.showShareSheet = true
+                           }) {
+                               Image(systemName: "square.and.arrow.up")
+                                   .foregroundColor(Color("babyBlue"))
+                               Text("Share 0")
+                           }
                 
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
-            
+            .sheet(isPresented: $showShareSheet) {
+                        ShareSheet(items: shareItems)
+                    }
             
             
             
@@ -246,6 +256,19 @@ struct PostCardView: View {
     }
     
     
+}
+
+struct ShareSheet: UIViewControllerRepresentable {
+    var items: [Any]
+    
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        let controller = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        return controller
+    }
+    
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
+        // No need to update the controller in this case
+    }
 }
 struct RoundedButtonStyle: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
