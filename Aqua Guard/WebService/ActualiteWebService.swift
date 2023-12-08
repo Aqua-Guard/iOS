@@ -45,9 +45,6 @@ final class ActualiteWebService{
     }
     
     
-    
-    
-    
     func searchActualites(about: String, completion: @escaping ([Actualite]?) -> Void) {
         let urlString = "http://192.168.178.190:9090/act/search"
         guard let url = URL(string: urlString) else {
@@ -67,9 +64,7 @@ final class ActualiteWebService{
             completion(nil)
             return
         }
-/////////////////////
-        ///
-        ///
+
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
                 print("Error searching actualites:", error?.localizedDescription ?? "Unknown error")
