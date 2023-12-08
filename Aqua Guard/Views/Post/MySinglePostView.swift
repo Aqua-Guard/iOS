@@ -173,7 +173,7 @@ struct MySinglePostView: View {
         .cornerRadius(8)
         .shadow(radius: 4)
         .padding(10)
-        .navigationBarTitle("Post Details").navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitle("My Posts").navigationBarTitleDisplayMode(.inline)
         .alert(isPresented: $showingDeleteAlert) {
                     Alert(
                         title: Text("Confirm Delete"),

@@ -16,28 +16,28 @@ final class PostWebService{
         request.httpMethod = "POST"
         request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-
+        
         var body = Data()
-
+        
         // Description part
         body.append("--\(boundary)\r\n")
         body.append("Content-Disposition: form-data; name=\"description\"\r\n\r\n")
         body.append("\(description)\r\n")
-
+        
         // Image part
         body.append("--\(boundary)\r\n")
         body.append("Content-Disposition: form-data; name=\"image\"; filename=\"image.jpg\"\r\n")
         body.append("Content-Type: image/jpeg\r\n\r\n")
         body.append(imageData)
         body.append("\r\n")
-
+        
         // End boundary
         body.append("--\(boundary)--\r\n")
-
+        
         request.httpBody = body
-
+        
         let (data, response) = try await URLSession.shared.data(for: request)
-
+        
         guard let httpResponse = response as? HTTPURLResponse,
               httpResponse.statusCode == 201 else {
             // Handle server errors here
@@ -46,31 +46,31 @@ final class PostWebService{
         // Decode response if needed or just return true to indicate success
         return true
     }
-
+    
     
     static func updatePost(postId: String,token: String, description: String) async throws -> Bool {
-       
+        
         let boundary = "Boundary-\(UUID().uuidString)"
         var request = URLRequest(url: URL(string: "http://localhost:9090/posts/\(postId)")!)
         request.httpMethod = "PUT"
         request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-
+        
         var body = Data()
-
+        
         // Description part
         body.append("--\(boundary)\r\n")
         body.append("Content-Disposition: form-data; name=\"description\"\r\n\r\n")
         body.append("\(description)\r\n")
-
-
+        
+        
         // End boundary
         body.append("--\(boundary)--\r\n")
-
+        
         request.httpBody = body
-
+        
         let (data, response) = try await URLSession.shared.data(for: request)
-
+        
         guard let httpResponse = response as? HTTPURLResponse,
               httpResponse.statusCode == 201 else {
             // Handle server errors here
@@ -81,63 +81,63 @@ final class PostWebService{
     }
     
     static func getPostsData(token: String) async throws -> [PostModel] {
-            let urlString = "http://127.0.0.1:9090/posts/"
-            guard let url = URL(string: urlString) else {
-                throw PostErrorHandler.invalidURL
-            }
-
-            var request = URLRequest(url: url)
-            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-
-            let (data, response) = try await URLSession.shared.data(for: request)
-
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                throw PostErrorHandler.invalidResponse
-            }
-
-            do {
-                let decoder = JSONDecoder()
-                return try decoder.decode([PostModel].self, from: data)
-            } catch {
-                throw PostErrorHandler.invalidData
-            }
+        let urlString = "http://127.0.0.1:9090/posts/"
+        guard let url = URL(string: urlString) else {
+            throw PostErrorHandler.invalidURL
         }
+        
+        var request = URLRequest(url: url)
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+            throw PostErrorHandler.invalidResponse
+        }
+        
+        do {
+            let decoder = JSONDecoder()
+            return try decoder.decode([PostModel].self, from: data)
+        } catch {
+            throw PostErrorHandler.invalidData
+        }
+    }
     
     static func getMyPostsData(token: String) async throws -> [PostModel] {
-            let urlString = "http://127.0.0.1:9090/posts/postByCurrentUser"
-            guard let url = URL(string: urlString) else {
-                throw PostErrorHandler.invalidURL
-            }
-
-            var request = URLRequest(url: url)
-            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-
-            let (data, response) = try await URLSession.shared.data(for: request)
-
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                throw PostErrorHandler.invalidResponse
-            }
-
-            do {
-                let decoder = JSONDecoder()
-                return try decoder.decode([PostModel].self, from: data)
-            } catch {
-                throw PostErrorHandler.invalidData
-            }
+        let urlString = "http://127.0.0.1:9090/posts/postByCurrentUser"
+        guard let url = URL(string: urlString) else {
+            throw PostErrorHandler.invalidURL
         }
+        
+        var request = URLRequest(url: url)
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+            throw PostErrorHandler.invalidResponse
+        }
+        
+        do {
+            let decoder = JSONDecoder()
+            return try decoder.decode([PostModel].self, from: data)
+        } catch {
+            throw PostErrorHandler.invalidData
+        }
+    }
     
     static func addComment(postId: String, comment: String, token: String) async throws -> Comment {
         let urlString = "http://127.0.0.1:9090/posts/\(postId)/comments"
         guard let url = URL(string: urlString) else {
             throw PostErrorHandler.invalidURL
         }
-
+        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try JSONEncoder().encode(["comment": comment])
-
+        
         let (data, response) = try await URLSession.shared.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse else {
             throw PostErrorHandler.invalidResponse
@@ -156,52 +156,52 @@ final class PostWebService{
             throw PostErrorHandler.invalidResponse
         }
     }
-
+    
     static func deleteComment(commentId: String, token: String) async throws {
-            let urlString = "http://localhost:9090/comments/\(commentId)"
-            guard let url = URL(string: urlString) else {
-                throw PostErrorHandler.invalidURL
-            }
-
-            var request = URLRequest(url: url)
-            request.httpMethod = "DELETE"
-            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-
-            let (data, response) = try await URLSession.shared.data(for: request)
-            guard let httpResponse = response as? HTTPURLResponse else {
-                throw PostErrorHandler.invalidResponse
-            }
-
-            switch httpResponse.statusCode {
-            case 200:
-                print("Comment deleted successfully")
-            default:
-                // Handle other status codes appropriately
-                throw PostErrorHandler.invalidResponse
-            }
+        let urlString = "http://localhost:9090/comments/\(commentId)"
+        guard let url = URL(string: urlString) else {
+            throw PostErrorHandler.invalidURL
         }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw PostErrorHandler.invalidResponse
+        }
+        
+        switch httpResponse.statusCode {
+        case 200:
+            print("Comment deleted successfully")
+        default:
+            // Handle other status codes appropriately
+            throw PostErrorHandler.invalidResponse
+        }
+    }
     
     static func updateComment(commentId: String, newComment: String, token: String) async throws {
         let urlString = "http://localhost:9090/comments/\(commentId)"
         guard let url = URL(string: urlString) else {
             throw PostErrorHandler.invalidURL
         }
-
+        
         var request = URLRequest(url: url)
         request.httpMethod = "PUT" // Use PUT method for update
         request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
+        
         // Encode the new comment text into JSON
         let body = ["comment": newComment]
         request.httpBody = try JSONEncoder().encode(body)
-
+        
         // Perform the network task
         let (data, response) = try await URLSession.shared.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse else {
             throw PostErrorHandler.invalidResponse
         }
-
+        
         // Check for success status code and handle it
         switch httpResponse.statusCode {
         case 200:
@@ -214,91 +214,91 @@ final class PostWebService{
             throw PostErrorHandler.invalidResponse
         }
     }
-
+    
     static func addLike(to postId: String, withToken token: String) async throws {
-            let likeURL = "http://localhost:9090/posts/like/\(postId)"
-            guard let url = URL(string: likeURL) else {
-                throw PostErrorHandler.invalidURL
-            }
-            
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-            
-            let (_, response) = try await URLSession.shared.data(for: request)
-            
-            guard let httpResponse = response as? HTTPURLResponse,
-                  httpResponse.statusCode == 201 else {
-                throw PostErrorHandler.invalidResponse
-            }
-            
-            // Handle the successful response here if needed
+        let likeURL = "http://localhost:9090/posts/like/\(postId)"
+        guard let url = URL(string: likeURL) else {
+            throw PostErrorHandler.invalidURL
         }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        let (_, response) = try await URLSession.shared.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 201 else {
+            throw PostErrorHandler.invalidResponse
+        }
+        
+        // Handle the successful response here if needed
+    }
     static func dislikePost(with postId: String, andToken token: String) async throws {
-            let dislikeURL = "http://localhost:9090/posts/dislike/\(postId)"
-            guard let url = URL(string: dislikeURL) else {
-                throw PostErrorHandler.invalidURL
-            }
-            
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-            
-            let (_, response) = try await URLSession.shared.data(for: request)
-            
-            guard let httpResponse = response as? HTTPURLResponse,
-                  httpResponse.statusCode == 200 else {
-                throw PostErrorHandler.invalidResponse
-            }
-            
-            // Handle the successful response here if needed
+        let dislikeURL = "http://localhost:9090/posts/dislike/\(postId)"
+        guard let url = URL(string: dislikeURL) else {
+            throw PostErrorHandler.invalidURL
         }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        let (_, response) = try await URLSession.shared.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 200 else {
+            throw PostErrorHandler.invalidResponse
+        }
+        
+        // Handle the successful response here if needed
+    }
     
     static func isPostLiked(by postId: String, withToken token: String) async throws -> Bool {
-           let checkLikeURL = "http://localhost:9090/posts/isLiked/\(postId)"
-           guard let url = URL(string: checkLikeURL) else {
-               throw PostErrorHandler.invalidURL
-           }
-
-           var request = URLRequest(url: url)
-           request.httpMethod = "GET"
-           request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-
-           let (data, response) = try await URLSession.shared.data(for: request)
-
-           guard let httpResponse = response as? HTTPURLResponse,
-                 httpResponse.statusCode == 200 else {
-               throw PostErrorHandler.invalidResponse
-           }
-
-           return try JSONDecoder().decode(Bool.self, from: data)
-       }
+        let checkLikeURL = "http://localhost:9090/posts/isLiked/\(postId)"
+        guard let url = URL(string: checkLikeURL) else {
+            throw PostErrorHandler.invalidURL
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 200 else {
+            throw PostErrorHandler.invalidResponse
+        }
+        
+        return try JSONDecoder().decode(Bool.self, from: data)
+    }
     static func deletePost(postId: String, token: String) async throws {
-           let urlString = "http://127.0.0.1:9090/posts/\(postId)"
-           guard let url = URL(string: urlString) else {
-               throw PostErrorHandler.invalidURL
-           }
-
-           var request = URLRequest(url: url)
-           request.httpMethod = "DELETE"
-           request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-
-           let (data, response) = try await URLSession.shared.data(for: request)
-
-           guard let httpResponse = response as? HTTPURLResponse else {
-               throw PostErrorHandler.invalidResponse
-           }
-
-           switch httpResponse.statusCode {
-           case 200:
-               // Successfully deleted the post
-               break
-           default:
-               // Handle other status codes as needed
-               throw PostErrorHandler.postNotFound
-           }
-       }
-
+        let urlString = "http://127.0.0.1:9090/posts/\(postId)"
+        guard let url = URL(string: urlString) else {
+            throw PostErrorHandler.invalidURL
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw PostErrorHandler.invalidResponse
+        }
+        
+        switch httpResponse.statusCode {
+        case 200:
+            // Successfully deleted the post
+            break
+        default:
+            // Handle other status codes as needed
+            throw PostErrorHandler.postNotFound
+        }
+    }
+    
     
     
 }

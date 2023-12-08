@@ -9,7 +9,8 @@ import SwiftUI
 
 struct EventDetailsView: View {
     let event: Event
-    
+    @Environment(\.presentationMode) var presentationMode
+
     @StateObject var participationViewModel = ParticipationViewModel()
 
     @State private var showAlertadd = false
@@ -106,6 +107,9 @@ struct EventDetailsView: View {
                                 participationViewModel.deleteParticipation(eventId: event.idEvent)
                                 showSnackbar = true
                                 snackbarText = "Participation canceled!"
+                                presentationMode.wrappedValue.dismiss()
+
+                                
                             },
                             secondaryButton: .cancel()
                         )
@@ -132,6 +136,8 @@ struct EventDetailsView: View {
                                 participationViewModel.addParticipation(eventId: event.idEvent)
                                 showSnackbar = true
                                 snackbarText = "Participation successful!"
+                                presentationMode.wrappedValue.dismiss()
+
                             },
                             secondaryButton: .cancel()
                         )
