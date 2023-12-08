@@ -13,6 +13,7 @@ struct PostListView: View {
     var body: some View {
         NavigationView{
             ScrollView {
+                
                 VStack(spacing: 0) {
                     ForEach(postViewModel.posts!.indices, id: \.self) { index in
                         PostCardView(viewModel: postViewModel, postIndex: index)
@@ -42,9 +43,7 @@ struct PostListView: View {
                     Spacer()
                     HStack {
                         Spacer()
-                        Button(action: {
-                            // add Forum action 
-                        }) {
+                        NavigationLink(destination: AddPostView()) {
                             Image(systemName: "plus") // System plus icon
                                 .font(.largeTitle)
                                 .foregroundColor(.white)

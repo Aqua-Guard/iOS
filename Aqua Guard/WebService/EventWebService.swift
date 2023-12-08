@@ -7,9 +7,6 @@
 
 import Foundation
 
-
-
-
 extension Data {
     mutating func append(_ string: String) {
         if let data = string.data(using: .utf8) {
@@ -17,9 +14,11 @@ extension Data {
         }
     }
 }
+
+
 final class EventWebService {
     static let shared = EventWebService()
-    private let baseURL = "http://192.168.43.253:9090"
+    private let baseURL = "http://127.0.0.1:9090"
 
     func fetchEvents(token: String,completion: @escaping ([Event]?) -> Void) {
          let url = URL(string: "\(baseURL)/events")!
