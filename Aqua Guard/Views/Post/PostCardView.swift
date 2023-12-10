@@ -167,7 +167,7 @@ struct PostCardView: View {
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
             .sheet(isPresented: $showShareSheet) {
-                        ShareSheet(items: shareItems)
+                        ShareSheetPost(items: shareItems)
                     }
             
             
@@ -258,7 +258,7 @@ struct PostCardView: View {
     
 }
 
-struct ShareSheet: UIViewControllerRepresentable {
+struct ShareSheetPost: UIViewControllerRepresentable {
     var items: [Any]
     
     func makeUIViewController(context: Context) -> UIActivityViewController {

@@ -24,7 +24,7 @@ class EventViewModel: ObservableObject {
    
 
       func fetchEvents() {
-          let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTcyOGViNTgxMTI3NDRjYzg3MDc5OWUiLCJ1c2VybmFtZSI6ImFtaXJhIiwiaWF0IjoxNzAyMDA2NTMxLCJleHAiOjE3MDIwMTM3MzF9.InEBmy5BV7SJ5NkGoSNo4ZnvgAy9kZ8gwIEuknapkK0"
+          let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTcyOGRhYzgxMTI3NDRjYzg3MDc5OTgiLCJ1c2VybmFtZSI6Im1hbGVrIiwiaWF0IjoxNzAyMDI1MDUxLCJleHAiOjE3MDIwMzIyNTF9.JN31pJJQHgV29pAio2xa8L2q_jWZsKyVEtNj_0WBESE"
           
           do{
           EventWebService.shared.fetchEvents(token: token) { [weak self] events in
