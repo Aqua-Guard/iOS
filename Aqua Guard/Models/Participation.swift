@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Participation {
+struct Participation :Decodable {
     let id: String
     let dateEvent: Date
     let eventName: String

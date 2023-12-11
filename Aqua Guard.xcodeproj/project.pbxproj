@@ -50,6 +50,7 @@
 		D4C23E662B14A8A3002B0E10 /* SplashScreen1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E652B14A8A3002B0E10 /* SplashScreen1View.swift */; };
 		D4F5A1B62B1F782B0096346A /* EventWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F5A1B52B1F782B0096346A /* EventWebService.swift */; };
 		D4F5A1BC2B1F8AE80096346A /* EventErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F5A1BB2B1F8AE80096346A /* EventErrorHandler.swift */; };
+		D4FDEF292B2776FE00533816 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = D4FDEF282B2776FE00533816 /* FSCalendar */; };
 		E816FF702B1648E8007538BF /* MyCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF6F2B1648E8007538BF /* MyCalendar.swift */; };
 		E816FF722B164905007538BF /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF712B164905007538BF /* Notification.swift */; };
 		E816FF742B164938007538BF /* MyEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF732B164938007538BF /* MyEvents.swift */; };
@@ -173,6 +174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E83A72E32B1F9C5E00A9F955 /* SimpleToast in Frameworks */,
+				D4FDEF292B2776FE00533816 /* FSCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +417,7 @@
 			name = "Aqua Guard";
 			packageProductDependencies = (
 				E83A72E22B1F9C5E00A9F955 /* SimpleToast */,
+				D4FDEF282B2776FE00533816 /* FSCalendar */,
 			);
 			productName = "Aqua Guard";
 			productReference = D4C23E2F2B148B30002B0E10 /* Aqua Guard.app */;
@@ -490,6 +493,7 @@
 			mainGroup = D4C23E262B148B30002B0E10;
 			packageReferences = (
 				E83A72E12B1F9C5E00A9F955 /* XCRemoteSwiftPackageReference "SimpleToast" */,
+				D4FDEF272B2776FE00533816 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = D4C23E302B148B30002B0E10 /* Products */;
 			projectDirPath = "";
@@ -920,6 +924,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D4FDEF272B2776FE00533816 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.4;
+			};
+		};
 		E83A72E12B1F9C5E00A9F955 /* XCRemoteSwiftPackageReference "SimpleToast" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sanzaru/SimpleToast";
@@ -931,6 +943,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D4FDEF282B2776FE00533816 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D4FDEF272B2776FE00533816 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
+		};
 		E83A72E22B1F9C5E00A9F955 /* SimpleToast */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E83A72E12B1F9C5E00A9F955 /* XCRemoteSwiftPackageReference "SimpleToast" */;

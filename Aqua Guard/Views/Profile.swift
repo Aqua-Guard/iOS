@@ -80,6 +80,8 @@ struct Profile: View {
     private func destinationView(for menuItem: MenuItem) -> some View {
         Group {
             switch menuItem.name {
+            case "My Calendar":
+                MyCalendar()
             case "My Events":
                 MyEvents()
                     .environmentObject(eventViewModel)
