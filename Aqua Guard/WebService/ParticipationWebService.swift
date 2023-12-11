@@ -8,7 +8,7 @@
 import Foundation
 final class ParticipationWebService {
     static let shared = ParticipationWebService()
-    private let baseURL = "http://127.0.0.1:9090"
+    private let baseURL = "http://192.168.43.253:9090"
     
     func addParticipation(eventId: String, token: String) {
         // Define the API endpoint URL with the eventId as a query parameter
@@ -89,6 +89,25 @@ final class ParticipationWebService {
         return try JSONDecoder().decode(Bool.self, from: data)
     }
 
+    
+     func getAllByUser(token: String) async throws -> [Participation] {
+           let apiUrlString = "\(baseURL)/participations/user"
+           guard let url = URL(string: apiUrlString) else {
+               throw NSError(domain: "Invalid URL", code: 0, userInfo: nil)
+           }
+
+           var request = URLRequest(url: url)
+           request.httpMethod = "GET"
+           request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
+           do {
+               let (data, _) = try await URLSession.shared.data(for: request)
+               let decodedData = try JSONDecoder().decode([Participation].self, from: data)
+               return decodedData
+           } catch {
+               throw error
+           }
+       }
 
     
 

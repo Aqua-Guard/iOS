@@ -8,7 +8,9 @@
 import Foundation
 class ParticipationViewModel: ObservableObject {
     
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTcyOGRhYzgxMTI3NDRjYzg3MDc5OTgiLCJ1c2VybmFtZSI6Im1hbGVrIiwiaWF0IjoxNzAyMDI1MDUxLCJleHAiOjE3MDIwMzIyNTF9.JN31pJJQHgV29pAio2xa8L2q_jWZsKyVEtNj_0WBESE"
+    @Published var participations: [Participation] = []
+    
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTRkZjE4YjUzNWVjMDRlZmVkYWJiMGIiLCJ1c2VybmFtZSI6Im1hbGVrIiwiaWF0IjoxNzAyMzE5NjgzLCJleHAiOjE3MDIzMjY4ODN9.gbQQ2oFFn6P-xdCQrf3XgOvA0zyogQV0KkejLBHCG8c"
     
     func addParticipation(eventId : String) {
        
@@ -27,6 +29,17 @@ class ParticipationViewModel: ObservableObject {
                throw error
            }
        }
-
+    
+    
+    func getAllParticipations() async {
+        do {
+            let participations = try await ParticipationWebService.shared.getAllByUser(token: token)
+            DispatchQueue.main.async {
+                self.participations = participations
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
     
 }
