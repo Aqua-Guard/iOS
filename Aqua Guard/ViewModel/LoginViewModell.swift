@@ -10,73 +10,77 @@ import LocalAuthentication
 import SwiftUI
 
 class LoginViewModell: ObservableObject {
-    @Published var email:String = ""
+    @Published var username:String = ""
     @Published var password:String = ""
-    @Published var emailError:String = ""
+    @Published var usernameError:String = ""
     @Published var passwordError:String = ""
     @Published private(set) var error: String?
     @Published var loggingIn: Bool = false
     let emailValidationRegex = "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,7})+$"
-/*
+
     func login() async {
 
         var json = [String:Any]()
-        json["email"] = email
+        json["username"] = username
         json["password"] = password
+        
+        print(username);
+        print(password);
         
         do {
             
             await MainActor.run {
                 self.loggingIn = true
+                ContentView()
             }
             
-        let (responseData, response) = try await NetworkManager.makeRequest(endpoint: "/login", method: "POST", body: json)
-        let httpResponse = (response as? HTTPURLResponse)
+        let (responseData, response) = try await UserService.makeRequest(endpoint: "/login", method: "POST", body: json)
+
+            print(responseData)
+            print("az(yèui")
+            print(response)
+            let httpResponse = (response as? HTTPURLResponse)
         
         if(type(of: httpResponse!) != HTTPURLResponse.self){
-                            await MainActor.run {
-                                self.error = "Unexpected error!"
-                                self.loggingIn = false
+            await MainActor.run {
+                self.error = "Unexpected error!"
+                self.loggingIn = false
 
-                            }
-                        }
+            }
+        }
         
         if (httpResponse!.statusCode == 200) {
-                            if let decodedResponse = try? JSONDecoder().decode(LoginResponseModel.self, from: responseData) {
-                                    await MainActor.run {
-                                        self.error = ""
-                                        self.loggingIn = false
-                                    }
+            if (try? JSONDecoder().decode(LoginResponse.self, from: responseData)) != nil {
+                await MainActor.run {
+                self.error = ""
+                self.loggingIn = false
+                }
                                 
-                            }
-                        }
-                        else {
-                            await MainActor.run {
-                                self.error = "Invalid Credientials!"
-                                self.loggingIn = false
-
-                            }
-                        }
-                        
-                    }
-                    catch {
-                        await MainActor.run {
-                            self.error = "Unexpected error!"
-                            self.loggingIn = false
-
-                        }
-                    }
-        
-    }*/
-    
-    func validate() {
-        if (email == ""){
-            emailError = "This field is required!"
-        } else if (email != emailValidationRegex){
-            emailError = "Invalid email!"
+            }
         }
         else {
-            emailError = ""
+            await MainActor.run {
+                self.error = "Invalid Credentials!"
+                self.loggingIn = false
+                }
+            }
+                        
+        }
+        catch {
+            await MainActor.run {
+                self.error = "Unexpected error!"
+                self.loggingIn = false
+            }
+        }
+        
+    }
+    
+    func validate() {
+        if (username == ""){
+            usernameError = "This field is required!"
+        }
+        else {
+            usernameError = ""
         }
         
         if (password == ""){

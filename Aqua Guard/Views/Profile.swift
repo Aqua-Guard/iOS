@@ -45,7 +45,7 @@ struct Profile: View {
             )
         }.accentColor(.white)
         .navigationBarColor(.darkBlue, textColor: UIColor.white)
-        
+        .navigationBarBackButtonHidden(true)
     }
 
     var profileHeader: some View {
@@ -66,7 +66,7 @@ struct Profile: View {
                     .font(.title)
                     .fontWeight(.heavy)
                     .foregroundColor(.white)
-                Text("Youssef.farhat@esprit. tn")
+                Text("Youssef.farhat@esprit.tn")
                     .font(.title3)
                     .fontWeight(.light)
                     .foregroundColor(.white)
@@ -88,6 +88,10 @@ struct Profile: View {
                     .environmentObject(postViewModel)
             case "My Reclamtion":
                 ReclamationListView()
+            case "Settings":
+                SettingsView()
+            case "Logout":
+                LoginView()
             default:
                 Text("Placeholder")
             }
@@ -107,6 +111,9 @@ let menuItems: [MenuItem] = [
     MenuItem(name: "My Events", icon: "calendar.badge.clock"),
     MenuItem(name: "My Posts", icon: "rectangle.3.group.bubble"),
     MenuItem(name: "My Reclamtion", icon: "exclamationmark.triangle.fill"),
+    MenuItem(name: "My Orders", icon: "cart"),
+    MenuItem(name: "Settings", icon: "gear"),
+    MenuItem(name: "Logout", icon: "rectangle.portrait.and.arrow.right"),
 ]
 
 #Preview {

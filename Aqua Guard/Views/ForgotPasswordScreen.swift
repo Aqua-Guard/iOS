@@ -23,16 +23,23 @@ struct ForgotPasswordScreen: View {
                 }
                 .padding(.top)
                 .frame(width: screenWidth)
-                Spacer()
+                //Spacer()
                 VStack {
                     VStack {
+                        
+                        Text("Type your new password")
+                            .font(.system(size: 20))
+                            .fontWeight (.semibold)
+                            .foregroundColor(.lightBlue)
+                            .padding(.all)
+                        
                         TextInputField("Password", text: $textValue, error: $errorValue)
                             .padding(.bottom)
                         
                         TextInputField("Confirm password", text: $textValue, error: $errorValue)
                             .padding(.bottom)
                         
-                        Spacer()
+                        //Spacer()
                             Button(action: {
                                
                             }, label: {
@@ -42,7 +49,7 @@ struct ForgotPasswordScreen: View {
                                     .font(.system(size:22))
                                     .frame(minWidth: 0, maxWidth: .infinity)
                                 
-                                .frame(width: screenWidth * 0.91, height: screenWidth * 0.13)
+                                .frame(width: screenWidth * 0.88, height: screenWidth * 0.13)
                             }
                                 
                             )

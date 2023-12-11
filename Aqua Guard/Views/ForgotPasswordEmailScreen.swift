@@ -18,18 +18,25 @@ struct ForgotPasswordEmailScreen: View {
                 VStack {
                     Image("forgot_password2")
                         .aspectRatio(contentMode: .fit)
-                        .padding(.bottom)
+
                     
                 }
-                .padding(.top)
+                .padding(.all)
                 .frame(width: screenWidth)
-                Spacer()
+                //Spacer()
                 VStack {
                     VStack {
+                        
+                        Text("Write your email here to receive a code")
+                            .font(.system(size: 20))
+                            .fontWeight (.semibold)
+                            .foregroundColor(.lightBlue)
+                            .padding(.all)
+
                         TextInputField("Email", text: $textValue, error: $errorValue)
                             .padding(.bottom)
                         
-                        Spacer()
+                        //Spacer()
                         
                         
                             //Button(action: {
@@ -42,7 +49,7 @@ struct ForgotPasswordEmailScreen: View {
                                 .font(.system(size:22))
                                 .frame(minWidth: 0, maxWidth: .infinity)
                             
-                            .frame(width: screenWidth * 0.91, height: screenWidth * 0.13)
+                            .frame(width: screenWidth * 0.88, height: screenWidth * 0.13)
                         }
                             //}
                                 
