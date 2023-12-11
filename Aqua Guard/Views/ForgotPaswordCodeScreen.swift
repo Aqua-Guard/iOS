@@ -18,18 +18,26 @@ struct ForgotPaswordCodeScreen: View {
                 VStack {
                     Image("activation_code")
                         .aspectRatio(contentMode: .fit)
-                        .padding(.bottom)
+                        .padding(.all)
                     
                 }
-                .padding(.top)
+                .padding(.all)
                 .frame(width: screenWidth)
-                Spacer()
+                //Spacer()
                 VStack {
                     VStack {
+                        
+                        
+                        Text("Write your code below")
+                            .font(.system(size: 20))
+                            .fontWeight (.semibold)
+                            .foregroundColor(.lightBlue)
+                            .padding(.all)
+                        
                         TextInputField("Code", text: $textValue, error: $errorValue)
                             .padding(.bottom)
                         
-                        Spacer()
+                        //Spacer()
                             //Button(action: {
                                
                             //}, label: {
@@ -40,7 +48,7 @@ struct ForgotPaswordCodeScreen: View {
                                 .font(.system(size:22))
                                 .frame(minWidth: 0, maxWidth: .infinity)
                             
-                                .frame(width: screenWidth * 0.91, height: screenWidth * 0.13)
+                                .frame(width: screenWidth * 0.88, height: screenWidth * 0.13)
                         }
                             //}
                                 

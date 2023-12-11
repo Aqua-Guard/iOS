@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct RegisterView: View {
     var screenWidth = UIScreen.main.bounds.width
@@ -13,6 +14,10 @@ struct RegisterView: View {
     @State var textValue: String = ""
     @State var errorValue: String = ""
     @State private var isActive = false
+    @StateObject var viewModel: RegisterViewModel = RegisterViewModel()
+    
+    @State var selectedItem: PhotosPickerItem? = nil;
+    @State var selectedImageData: Data?
 
     var body: some View {
         NavigationView {
@@ -23,27 +28,78 @@ struct RegisterView: View {
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
                     .frame(width: screenWidth * 1, height: screenWidth * 1)
-                
+                ScrollView {
                 VStack {
                     Image("logo")
                         .resizable()
                         .frame(width: screenWidth * 0.6, height: screenWidth * 0.6)
                     VStack {
-                        TextInputField("Email", text: $textValue, error: $errorValue)
-                        TextInputField("Username", text: $textValue, error: $errorValue)
-                        TextInputField("First name", text: $textValue, error: $errorValue)
-                        TextInputField("Last name", text: $textValue, error: $errorValue)
                         
-                        PasswordInputField("Password", text: $textValue, error: $errorValue)
-                        PasswordInputField("Confirm password", text: $textValue, error: $errorValue)
+                        
+                        TextInputField("Email", text: $viewModel.email, error: $viewModel.emailError)
+                        
+                        TextInputField("Username", text: $viewModel.username, error: $viewModel.usernameError)
+                        
+                        
+                        HStack{
+                            
+                            Text("Select Profile Picture")
+                                .foregroundColor(.blue)
+                                .font(.system(size: 20))
+
+                            
+                            PhotosPicker(selection:$selectedItem, matching: .images, photoLibrary: .shared()){
+                                if let selectedImageData, let image = UIImage(data: selectedImageData){
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .frame(width: screenWidth * 0.1, height: screenWidth * 0.1)
+                                        .scaledToFit()
+                                        .clipShape(Circle())
+                                    
+                                } else {
+                                    Image(systemName: "person.circle.fill")
+                                        .resizable()
+                                        .frame(width: screenWidth * 0.1, height: screenWidth * 0.1)
+
+                                        .scaledToFit()
+                                        .clipShape(Circle())
+                                }
+                            }
+                            
+                            .onChange(of: selectedItem) { newValue in
+                                Task{
+                                    if let data = try? await newValue?.loadTransferable(type: Data.self) {
+                                        selectedImageData = data
+                                        
+                                    }
+                                    self.viewModel.image = selectedImageData
+                                }
+                            }
+                        }
+                        
+                        TextInputField("First name", text: $viewModel.firstName, error: $viewModel.firstNameError)
+                        
+                        TextInputField("Last name", text: $viewModel.lastName, error: $viewModel.lastNameError)
+                        
+                        PasswordInputField("Password", text: $viewModel.password, error: $viewModel.passwordError)
+                        
+                        PasswordInputField("Confirm password", text: $viewModel.confirmPassword, error: $viewModel.confirmPasswordError)
                         //Spacer()
                         Button(action: {
+                            self.viewModel.validate()
+                            Task {
+                                await viewModel.signup()
+                                NavigationLink(destination: LoginView(), isActive: $viewModel.isLoading) {
+                                }
+                            }
                         }, label: {
-                            Text("Sign in")
-                                .foregroundColor(.white)
-                                .fontWeight(.semibold)
-                                .font(.system(size: 20))
-                                .frame(width: screenWidth * 0.91, height: screenWidth * 0.13)
+                            /*NavigationLink(destination: LoginView(), isActive: $viewModel.isLoading) {*/
+                                Text("Sign in")
+                                    .foregroundColor(.white)
+                                    .fontWeight(.semibold)
+                                    .font(.system(size: 20))
+                                    .frame(width: screenWidth * 0.91, height: screenWidth * 0.13)
+                            //}
                         })
                         .background(Color.lightBlue)
                         .cornerRadius(30)
@@ -53,16 +109,17 @@ struct RegisterView: View {
                         Text("Already have an account?")
                             .font(.system(size: 20))
                             .foregroundColor(Color.black)
-
-                            NavigationLink(destination: LoginView()) {
+                        
+                        NavigationLink(destination: LoginView()) {
                             Text("Sign in")
                                 .font(.system(size: 20))
                                 .foregroundColor(Color.lightBlue)
-                            }
-
+                        }
+                        
                     }
                     .padding(.bottom)
                 }
+            }
             }
         }
         .navigationBarBackButtonHidden(true)

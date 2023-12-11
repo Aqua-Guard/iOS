@@ -31,20 +31,30 @@ struct LoginView: View {
                         .resizable()
                         .frame(width: screenWidth * 0.8, height: screenWidth * 0.8)
                     VStack {
-                        TextInputField("Email", text: $modelView.email, error: $modelView.emailError)
+                        TextInputField("Username", text: $modelView.username, error: $modelView.usernameError)
                         //.padding(.top)
+                        
+                        
                         
                         PasswordInputField("Password", text: $modelView.password, error: $modelView.passwordError)
                         Spacer()
                         
                         Button(action: {
                             self.modelView.validate()
+                            Task {
+                                await modelView.login()
+                                /*NavigationLink(destination: ContentView(), isActive: $modelView.loggingIn) {
+                                    
+                                }*/
+                            }
                         }, label: {
-                            Text("Login")
-                                .foregroundColor(.white)
-                                .fontWeight(.semibold)
-                                .font(.system(size: 20))
-                                .frame(width: screenWidth * 0.91, height: screenWidth * 0.13)
+                            NavigationLink(destination: ContentView(), isActive: $modelView.loggingIn) {
+                                Text("Login")
+                                    .foregroundColor(.white)
+                                    .fontWeight(.semibold)
+                                    .font(.system(size: 20))
+                                    .frame(width: screenWidth * 0.91, height: screenWidth * 0.13)
+                            }
                             
                         })
                         .background(Color.lightBlue)
