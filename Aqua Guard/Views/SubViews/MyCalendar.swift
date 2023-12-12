@@ -8,9 +8,17 @@
 import SwiftUI
 import FSCalendar
 
+extension Participation: Equatable {
+    static func == (lhs: Participation, rhs: Participation) -> Bool {
+        return lhs._id == rhs._id
+    }
+}
+
+
+
 struct MyCalendar: View {
     @State private var selectedDate = Date()
-    @State private var participations: [Participation] = ParticipationViewModel().participations
+    @State private var participations: [Participation] = []
 
     var body: some View {
         NavigationView {
@@ -42,6 +50,7 @@ struct MyCalendar: View {
                         Button(action: {
                             // Action for going to the next month
                             selectedDate = Calendar.current.date(byAdding: .month, value: 1, to: selectedDate) ?? selectedDate
+                           
                         }) {
                             Image(systemName: "chevron.right")
                                 .foregroundColor(.white)
@@ -52,6 +61,7 @@ struct MyCalendar: View {
                     CalendarView(selectedDate: $selectedDate, participations: $participations)
                         .frame(height: 300)
                         .padding()
+
                     
                     Spacer()
                 }
@@ -59,12 +69,14 @@ struct MyCalendar: View {
            
         } .navigationBarTitle("My Calendar")
             .onAppear {
-                Task{
-                    
-                   await ParticipationViewModel().getAllParticipations()
+                Task {
+                    let viewModel = ParticipationViewModel()
+                    await viewModel.getAllParticipations()
+                    participations = viewModel.participations
+                   
                 }
-               
             }
+
     }
     
     private func getFormattedMonthAndYear(from date: Date) -> String {
@@ -83,8 +95,10 @@ struct CalendarView: UIViewRepresentable {
     func makeUIView(context: Context) -> FSCalendar {
         let calendar = FSCalendar()
         calendar.delegate = context.coordinator
+        calendar.dataSource = context.coordinator
         return calendar
     }
+
 
     func updateUIView(_ uiView: FSCalendar, context: Context) {
         uiView.setCurrentPage(selectedDate, animated: true)
@@ -98,13 +112,19 @@ struct CalendarView: UIViewRepresentable {
         var parent: CalendarView
 
         init(parent: CalendarView) {
-            self.parent = parent
-        }
+                self.parent = parent
+            }
 
+       
         func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-            // Check if there are participations for the given date
+            var calendarWithTimeZone = Calendar.current
+            calendarWithTimeZone.timeZone = TimeZone(secondsFromGMT: 0) ?? TimeZone.current 
+            print("Calendar Date: \(date)")
+
             let count = parent.participations.filter { (event: Participation) -> Bool in
-                return Calendar.current.isDate(event.dateEvent, inSameDayAs: date)
+                let isInSameDay = calendarWithTimeZone.isDate(event.DateEvent, inSameDayAs: date)
+                print("Event: \(event.Eventname), Date: \(event.DateEvent), isInSameDay: \(isInSameDay)")
+                return isInSameDay
             }.count
             return count
         }
@@ -112,21 +132,20 @@ struct CalendarView: UIViewRepresentable {
         func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
             // Set the color for the event markers
             let events = parent.participations.filter { (event: Participation) -> Bool in
-                return Calendar.current.isDate(date, inSameDayAs: event.dateEvent)
+                return Calendar.current.isDate(date, inSameDayAs: event.DateEvent)
             }
-            if events.isEmpty {
-                return nil
-            } else {
+            if !events.isEmpty {
                 return [UIColor.systemBlue]
+            } else {
+                return nil
             }
         }
-
-
     }
-}
 
+}
+/*
 struct MyCalendar_Previews: PreviewProvider {
     static var previews: some View {
         MyCalendar()
     }
-}
+}*/
