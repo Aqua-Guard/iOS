@@ -95,14 +95,20 @@ final class ParticipationWebService {
            guard let url = URL(string: apiUrlString) else {
                throw NSError(domain: "Invalid URL", code: 0, userInfo: nil)
            }
-
+         
            var request = URLRequest(url: url)
            request.httpMethod = "GET"
            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
 
            do {
                let (data, _) = try await URLSession.shared.data(for: request)
+               print(String(data: data, encoding: .utf8) ?? "Data not in UTF-8")
+
+               print("test")
                let decodedData = try JSONDecoder().decode([Participation].self, from: data)
+               print("dataaaa")
+               print(decodedData)
+               
                return decodedData
            } catch {
                throw error
