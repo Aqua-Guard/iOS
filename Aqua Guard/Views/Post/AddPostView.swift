@@ -5,6 +5,8 @@
 //  Created by Youssef Farhat on 7/12/2023.
 //
 import SwiftUI
+import InstantSearchVoiceOverlay
+
 
 struct AddPostView: View {
     @ObservedObject var viewModel = PostViewModel()
@@ -14,8 +16,12 @@ struct AddPostView: View {
     
     @State private var showToast = false
     @State private var navigateBack = false
-
+    
+    @State private var isChatSheetPresented = false
+    
     @Environment(\.presentationMode) var presentationMode
+    
+    let voiceOverlayController = VoiceOverlayController()
     
     var body: some View {
         NavigationView {
@@ -27,63 +33,96 @@ struct AddPostView: View {
                     
                     ScrollView {
                         VStack(alignment: .leading, spacing: 10) {
-                            Spacer()
                             
-                            ZStack {
-                                              if let selectedUIImage = selectedUIImage {
-                                                  Image(uiImage: selectedUIImage)
-                                                      .resizable()
-                                                      .scaledToFit()
-                                                      .frame(width: 300, height: 300)
-                                                      .foregroundColor(.blue) // Adjust this color if you have a custom color set
-                                              } else {
-                                                  Image(systemName: "photo")
-                                                      .resizable()
-                                                      .scaledToFit()
-                                                      .frame(width: 300, height: 300)
-                                                      .foregroundColor(.darkBlue) // Adjust this color if you have a custom color set
-                                              }
-                                          }
-                                          
-                            
-                            // Button to choose an image
-                            Button(action: {
-                                isImagePickerDisplayed = true
-                            }) {
-                                Text("Choose Image")
-                                    .foregroundColor(.white)
-                                    .padding()
-                                    .background(Color.darkBlue)
-                                    .clipShape(Capsule())
+                            Text("Please fill in the following details to create a post:")
+                                .font(.headline)
+                                .foregroundColor(.black)
+                                .padding(.bottom, 10)
+                            VStack{
+                                ZStack {
+                                    if let selectedUIImage = selectedUIImage {
+                                        Image(uiImage: selectedUIImage)
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 300, height: 300)
+                                            .foregroundColor(.blue) // Adjust this color if you have a custom color set
+                                    } else {
+                                        Image(systemName: "photo")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 300, height: 200)
+                                            .foregroundColor(.darkBlue) // Adjust this color if you have a custom color set
+                                    }
+                                }
+                                HStack{
+                                    Spacer()
+                                    // Button to choose an image
+                                    Button(action: {
+                                        isImagePickerDisplayed = true
+                                    }) {
+                                        Text("Choose Image")
+                                            .foregroundColor(.white)
+                                            .padding()
+                                            .background(Color.darkBlue)
+                                            .clipShape(Capsule())
+                                    }
+                                    Spacer()
+                                }
                             }
-                            //.padding()
                             
                             
                             // Description Label
-                            descriptionTxtVw
-                            
+                            Text("Description")
+                                .font(.headline)
+                                .foregroundColor(.black)
                             
                             // Text editor for the post description
-                            textEditorVw
+                            TextEditor(text: $postDescription)
+                                .frame(height: 150)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+                                )
+                            HStack {
+                                Text("")
+                                Spacer()
+                                VStack {
+                                    Spacer()
+                                    Button(action: {
+                                        voiceButtonTapped()
+                                    }) {
+                                        HStack {
+                                            Image(systemName: "mic")
+                                            Text("Voice Recorder")
+                                        }
+                                        
+                                    }
+                                    Spacer()
+                                }
+                                // Add this Spacer to push the VStack to the left
+                                
+                            }
+                            
+                            
                             
                             HStack{
                                 Button(action: {
                                     Task {
                                         if let selectedUIImage = selectedUIImage {
-                                                   if let imageData = selectedUIImage.jpegData(compressionQuality: 0.8) {
-                                                       await viewModel.createPost(description: postDescription, image: imageData)
-                                                       
-                                                   } else {
-                                                       // Handle the error - could not convert image to Data
-                                                   }
-                                               }
-                                       
+                                            if let imageData = selectedUIImage.jpegData(compressionQuality: 0.8) {
+                                                await viewModel.createPost(description: postDescription, image: imageData)
+                                                
+                                            } else {
+                                                // Handle the error - could not convert image to Data
+                                            }
+                                        }
+                                        
                                     }
                                 }) {
                                     Text("Submit Post")
                                         .foregroundColor(.white)
                                         .padding()
-                                        .background(Color.darkBlue)
+                                        .background(Color.blue)
                                         .clipShape(Capsule())
                                     // i want to make this bottom on the left
                                     
@@ -118,7 +157,9 @@ struct AddPostView: View {
             }
             .alert(isPresented: $viewModel.createdPostAlert) {
                 Alert(title: Text("Post Creation"), message: Text(viewModel.alertMessageCreationPost), dismissButton: .default(Text("OK")))
-            }}
+            }
+        
+        }
         .onChange(of: viewModel.createdwithSucsess) { success in
             if success {
                 presentationMode.wrappedValue.dismiss()
@@ -126,21 +167,26 @@ struct AddPostView: View {
         }
         
     }
-    private var textEditorVw: some View {
-        TextEditor(text: $postDescription)
-            .frame(height: 150)
-            .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color.gray.opacity(0.2), lineWidth: 1)
-            )
+    
+    
+   
+    
+    func voiceButtonTapped() {
+        if let rootViewController = UIApplication.shared.windows.first?.rootViewController {
+            voiceOverlayController.start(on: rootViewController, textHandler: { (text, final, _) in
+                if final {
+                    // Handle the final voice recording result
+                    postDescription += text // text is a non-optional String
+                }
+            }, errorHandler: { (error) in
+                print("Voice recording error: \(error?.localizedDescription ?? "")")
+            })
+        }
     }
     
-    // Description text view
-    private var descriptionTxtVw: some View {
-        Text("Description")
-            .font(.headline)
-            .foregroundColor(.gray)
-    }
+    
+    
+  
 }
 
 // ImagePicker to handle image selection
@@ -178,12 +224,10 @@ struct ImagePickerPost: UIViewControllerRepresentable {
 
 // Preview
 #Preview {
-  
-
-   // let previewViewModel = PostViewModel()
-
-           // Now provide the view model to the AddPostView
-           AddPostView().environmentObject(PostViewModel())
-       
+    
+    // let previewViewModel = PostViewModel()
+    
+    // Now provide the view model to the AddPostView
+    AddPostView().environmentObject(PostViewModel())
+    
 }
-

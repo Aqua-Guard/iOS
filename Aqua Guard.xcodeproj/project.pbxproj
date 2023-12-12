@@ -58,6 +58,7 @@
 		E816FF782B16496E007538BF /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF772B16496E007538BF /* Command.swift */; };
 		E81805992B2203D0008F78FD /* AddPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81805982B2203D0008F78FD /* AddPostView.swift */; };
 		E818059B2B222743008F78FD /* UpdatePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E818059A2B222743008F78FD /* UpdatePostView.swift */; };
+		E83996032B27E274001CED10 /* InstantSearchVoiceOverlay in Frameworks */ = {isa = PBXBuildFile; productRef = E83996022B27E274001CED10 /* InstantSearchVoiceOverlay */; };
 		E83A72E32B1F9C5E00A9F955 /* SimpleToast in Frameworks */ = {isa = PBXBuildFile; productRef = E83A72E22B1F9C5E00A9F955 /* SimpleToast */; };
 		E857A6C82B17E5BD00EC62DE /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857A6C72B17E5BD00EC62DE /* PostModel.swift */; };
 		E857A6CA2B17E5E900EC62DE /* Like.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857A6C92B17E5E900EC62DE /* Like.swift */; };
@@ -175,6 +176,7 @@
 			files = (
 				E83A72E32B1F9C5E00A9F955 /* SimpleToast in Frameworks */,
 				D4FDEF292B2776FE00533816 /* FSCalendar in Frameworks */,
+				E83996032B27E274001CED10 /* InstantSearchVoiceOverlay in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,6 +420,7 @@
 			packageProductDependencies = (
 				E83A72E22B1F9C5E00A9F955 /* SimpleToast */,
 				D4FDEF282B2776FE00533816 /* FSCalendar */,
+				E83996022B27E274001CED10 /* InstantSearchVoiceOverlay */,
 			);
 			productName = "Aqua Guard";
 			productReference = D4C23E2F2B148B30002B0E10 /* Aqua Guard.app */;
@@ -494,6 +497,7 @@
 			packageReferences = (
 				E83A72E12B1F9C5E00A9F955 /* XCRemoteSwiftPackageReference "SimpleToast" */,
 				D4FDEF272B2776FE00533816 /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				E83996012B27E274001CED10 /* XCRemoteSwiftPackageReference "voice-overlay-ios" */,
 			);
 			productRefGroup = D4C23E302B148B30002B0E10 /* Products */;
 			projectDirPath = "";
@@ -764,6 +768,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Aqua Guard/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need the Mic for audio to text";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Need the speech recognition capabilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -792,6 +798,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Aqua Guard/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need the Mic for audio to text";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Need the speech recognition capabilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -932,6 +940,14 @@
 				minimumVersion = 2.8.4;
 			};
 		};
+		E83996012B27E274001CED10 /* XCRemoteSwiftPackageReference "voice-overlay-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/algolia/voice-overlay-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
 		E83A72E12B1F9C5E00A9F955 /* XCRemoteSwiftPackageReference "SimpleToast" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sanzaru/SimpleToast";
@@ -947,6 +963,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D4FDEF272B2776FE00533816 /* XCRemoteSwiftPackageReference "FSCalendar" */;
 			productName = FSCalendar;
+		};
+		E83996022B27E274001CED10 /* InstantSearchVoiceOverlay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E83996012B27E274001CED10 /* XCRemoteSwiftPackageReference "voice-overlay-ios" */;
+			productName = InstantSearchVoiceOverlay;
 		};
 		E83A72E22B1F9C5E00A9F955 /* SimpleToast */ = {
 			isa = XCSwiftPackageProductDependency;
