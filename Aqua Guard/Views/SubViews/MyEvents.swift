@@ -122,7 +122,7 @@ struct MyEvents: View {
                           )
         } .navigationBarTitle("My Events").navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(trailing:
-                            NavigationLink(destination: EventAddView()) {
+                                    NavigationLink(destination: EventAddView(viewModel: viewModel)) {
                                 Image(systemName: "plus.circle")
                                     .resizable()
                                     .scaledToFit()

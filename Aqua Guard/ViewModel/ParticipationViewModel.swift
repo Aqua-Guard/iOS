@@ -10,7 +10,7 @@ class ParticipationViewModel: ObservableObject {
     
     @Published var participations: [Participation] = []
     
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTRkZjE4YjUzNWVjMDRlZmVkYWJiMGIiLCJ1c2VybmFtZSI6Im1hbGVrIiwiaWF0IjoxNzAyNDA1MDQyLCJleHAiOjE3MDI0MTIyNDJ9.8Ga4d0na1WAjKNIts3LS5HpuZHyj_sjd6uNwbIRBHG8"
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTRkZjE4YjUzNWVjMDRlZmVkYWJiMGIiLCJ1c2VybmFtZSI6Im1hbGVrIiwiaWF0IjoxNzAyNDY1ODUyLCJleHAiOjE3MDI0NzMwNTJ9.8YrSoS0hhDABGguHAiHOim7pQYn11erTe1ERbty6G40"
     
     func addParticipation(eventId : String) {
        

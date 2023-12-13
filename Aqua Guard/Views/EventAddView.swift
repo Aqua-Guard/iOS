@@ -17,6 +17,7 @@ struct ImagePickerEvent: UIViewControllerRepresentable {
             self.parent = parent
             self.didImagePicked = didImagePicked
         }
+       
 
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
             if let uiImage = info[.originalImage] as? UIImage {
@@ -55,7 +56,9 @@ struct ImagePickerEvent: UIViewControllerRepresentable {
 
 
 struct EventAddView: View {
-    @EnvironmentObject var viewModel: MyEventViewModel
+    @State private var isSnackbarShowing = false
+    @State private var snackbarMessage = ""
+    @StateObject var viewModel: MyEventViewModel
     @State private var eventName = ""
        @State private var eventDescription = ""
     @State private var startDate = Date()
@@ -106,9 +109,10 @@ struct EventAddView: View {
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .padding(.top, 10)
                             
-                            TextField("Event Description", text: $eventDescription)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .padding(.top, 10)
+                            TextEditor(text: $eventDescription)
+                                           .frame(height: 100) // Set the desired height
+                                           .border(Color.gray, width: 1) // Optional: Add a border for visual separation
+                                           .padding(.top, 10)
                             
                             VStack {
                                         TextField("Start Date", text: Binding(
@@ -180,14 +184,48 @@ struct EventAddView: View {
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .padding(.top, 10)
                             
-                            Text(errorMessage)
+                           /* Text(errorMessage)
                                 .foregroundColor(.red)
                                 .padding(.top, 10)
-                                .hidden() // You may need to handle the visibility based on your logic.
+                                .hidden() // You may need to handle the visibility based on your logic.*/
+                            SnackbarView(message: snackbarMessage, isShowing: $isSnackbarShowing)
+                                  .onChange(of: isSnackbarShowing) { newValue in
+                                      if newValue {
+                                          DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                              withAnimation {
+                                                  isSnackbarShowing = false
+                                              }
+                                          }
+                                      }
+                                  }
                             
                             Button(action: {
                                 // Action for submitting event
                                 print("Submit Event")
+                                guard startDate < endDate else {
+                                        errorMessage = "End date should be after start date"
+                                        showSnackbar(message: errorMessage)
+                                        return
+                                    }
+
+                                    // Validate description
+                                    guard eventDescription.count >= 10 && eventDescription.count <= 100 else {
+                                        errorMessage = "Event description should be between 10 and 100 characters"
+                                        showSnackbar(message: errorMessage)
+                                        return
+                                    }
+                                // Validate name
+                                guard eventName.count >= 3 && eventName.count <= 30 else {
+                                    errorMessage = "Event name should be between 3 and 30 characters"
+                                    showSnackbar(message: errorMessage)
+                                    return
+                                }
+                                // Validate lieu
+                                guard eventLocation.count >= 3 && eventLocation.count <= 30 else {
+                                    errorMessage = "Event location should be between 3 and 30 characters"
+                                    showSnackbar(message: errorMessage)
+                                    return
+                                }
 
                                 Task {
                                     do {
@@ -241,9 +279,41 @@ struct EventAddView: View {
             }
         }
     }
+    
 
+    private func showSnackbar(message: String) {
+        snackbarMessage = message
+        withAnimation {
+            isSnackbarShowing = true
+        }
+    }
 }
 
+struct SnackbarView: View {
+    var message: String
+    @Binding var isShowing: Bool
+
+    var body: some View {
+        VStack {
+            Spacer()
+
+            Text(message)
+                .foregroundColor(.white)
+                .padding()
+                .background(Color.red)
+                .cornerRadius(8)
+                .onTapGesture {
+                    withAnimation {
+                        isShowing = false
+                    }
+                }
+                .padding(.bottom, 16)
+                .padding(.horizontal, 16)
+                .opacity(isShowing ? 1 : 0)
+                .offset(y: isShowing ? 0 : 100)
+        }
+    }
+}
 
 
 
