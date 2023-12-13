@@ -61,6 +61,20 @@ struct MyCalendar: View {
                     CalendarView(selectedDate: $selectedDate, participations: $participations)
                         .frame(height: 300)
                         .padding()
+                    Text("Events")
+                        .foregroundColor(.black)
+                                            .font(.headline)
+                    if let selectedEvent = selectedEvent(for: selectedDate) {
+                        Text(selectedEvent.Eventname)
+                            .foregroundColor(.white)
+                            .font(.headline)
+                            .background(Color.black)  // Add a background color
+                    } else {
+                        Text("No event selected")
+                            .foregroundColor(.white)
+                            .font(.headline)
+                            .background(Color.black)  // Add a background color
+                    }
 
                     
                     Spacer()
@@ -84,6 +98,10 @@ struct MyCalendar: View {
         dateFormatter.dateFormat = "MMMM yyyy"
         return dateFormatter.string(from: date)
     }
+    
+    private func selectedEvent(for date: Date) -> Participation? {
+          return participations.first { Calendar.current.isDate($0.DateEvent, inSameDayAs: date) }
+      }
 }
 
 struct CalendarView: UIViewRepresentable {
