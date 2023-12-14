@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2978D3E02B273FD500A1A378 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978D3DF2B273FD500A1A378 /* UserService.swift */; };
-		2978D3E22B273FFE00A1A378 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978D3E12B273FFE00A1A378 /* RegisterViewModel.swift */; };
-		2978D3E42B27405B00A1A378 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978D3E32B27405B00A1A378 /* SettingsView.swift */; };
+		2924D05D2B287C1300536A67 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2924D05B2B287C1300536A67 /* ImagePicker.swift */; };
+		2924D05E2B287C1300536A67 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2924D05C2B287C1300536A67 /* EventService.swift */; };
 		2978D3EB2B2741B600A1A378 /* UsersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978D3E92B2741B600A1A378 /* UsersModel.swift */; };
 		2978D3EC2B2741B600A1A378 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978D3EA2B2741B600A1A378 /* LoginResponse.swift */; };
 		7641CCFB2B22534700CC9BB8 /* ActualiteWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7641CCFA2B22534700CC9BB8 /* ActualiteWebService.swift */; };
@@ -27,6 +26,10 @@
 		822CBECD2B18008F00769D45 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822CBECB2B18008F00769D45 /* LoginView.swift */; };
 		822CBED32B18025800769D45 /* PasswordInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822CBED12B18025800769D45 /* PasswordInputField.swift */; };
 		822CBED42B18025800769D45 /* TextInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822CBED22B18025800769D45 /* TextInputField.swift */; };
+		B291B8C52B29B16500345BA9 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291B8C42B29B16500345BA9 /* UserService.swift */; };
+		B291B8C72B29DB5800345BA9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291B8C62B29DB5800345BA9 /* SettingsView.swift */; };
+		B291B8CB2B29DE9600345BA9 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291B8CA2B29DE9600345BA9 /* RegisterViewModel.swift */; };
+		B291B8CD2B29EF1800345BA9 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291B8CC2B29EF1800345BA9 /* UserViewModel.swift */; };
 		D438AE7E2B2224E100D6DE7D /* EventRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D438AE7D2B2224E100D6DE7D /* EventRequest.swift */; };
 		D44CD79E2B173C0D002294CE /* EventEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CD79D2B173C0D002294CE /* EventEditView.swift */; };
 		D44CD7A02B174490002294CE /* EventAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44CD79F2B174490002294CE /* EventAddView.swift */; };
@@ -100,9 +103,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2978D3DF2B273FD500A1A378 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserService.swift; path = "../../../../Downloads/iOS/Aqua Guard/WebService/UserService.swift"; sourceTree = "<group>"; };
-		2978D3E12B273FFE00A1A378 /* RegisterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewModel.swift; path = "../../../../Downloads/iOS/Aqua Guard/ViewModel/RegisterViewModel.swift"; sourceTree = "<group>"; };
-		2978D3E32B27405B00A1A378 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = "../../../../Downloads/iOS/Aqua Guard/Views/SettingsView.swift"; sourceTree = "<group>"; };
+		2924D05B2B287C1300536A67 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		2924D05C2B287C1300536A67 /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		2978D3E92B2741B600A1A378 /* UsersModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersModel.swift; sourceTree = "<group>"; };
 		2978D3EA2B2741B600A1A378 /* LoginResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		7641CCFA2B22534700CC9BB8 /* ActualiteWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualiteWebService.swift; sourceTree = "<group>"; };
@@ -120,6 +122,10 @@
 		822CBECB2B18008F00769D45 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		822CBED12B18025800769D45 /* PasswordInputField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordInputField.swift; sourceTree = "<group>"; };
 		822CBED22B18025800769D45 /* TextInputField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputField.swift; sourceTree = "<group>"; };
+		B291B8C42B29B16500345BA9 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		B291B8C62B29DB5800345BA9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B291B8CA2B29DE9600345BA9 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		B291B8CC2B29EF1800345BA9 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		D438AE7D2B2224E100D6DE7D /* EventRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRequest.swift; sourceTree = "<group>"; };
 		D44CD79D2B173C0D002294CE /* EventEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditView.swift; sourceTree = "<group>"; };
 		D44CD79F2B174490002294CE /* EventAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAddView.swift; sourceTree = "<group>"; };
@@ -276,10 +282,10 @@
 				D44CD79F2B174490002294CE /* EventAddView.swift */,
 				822CBECB2B18008F00769D45 /* LoginView.swift */,
 				E8ABB35B2B1D0F670051B72F /* ForgotPasswordEmailScreen.swift */,
-				2978D3E32B27405B00A1A378 /* SettingsView.swift */,
 				822CBECA2B18008F00769D45 /* RegisterView.swift */,
 				E8ABB35D2B1D0FCA0051B72F /* ForgotPasswordScreen.swift */,
 				E8ABB35F2B1D10680051B72F /* ForgotPaswordCodeScreen.swift */,
+				B291B8C62B29DB5800345BA9 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -360,12 +366,13 @@
 			isa = PBXGroup;
 			children = (
 				D44CD7A12B174EF2002294CE /* EventViewModel.swift */,
-				2978D3E12B273FFE00A1A378 /* RegisterViewModel.swift */,
 				D44CD7A32B175D23002294CE /* MyEventViewModel.swift */,
 				E8C391F72B188C6100EA3872 /* PostViewModel.swift */,
 				E8ABB3592B1D0EA80051B72F /* LoginViewModell.swift */,
 				D4BD65962B1FDAF500AA5722 /* ParticipationViewModel.swift */,
 				7641CCFE2B22556600CC9BB8 /* ActualiteViewModel.swift */,
+				B291B8CA2B29DE9600345BA9 /* RegisterViewModel.swift */,
+				B291B8CC2B29EF1800345BA9 /* UserViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -400,7 +407,9 @@
 		E8B083822B1E745500CDCFD9 /* WebService */ = {
 			isa = PBXGroup;
 			children = (
-				2978D3DF2B273FD500A1A378 /* UserService.swift */,
+				B291B8C42B29B16500345BA9 /* UserService.swift */,
+				2924D05C2B287C1300536A67 /* EventService.swift */,
+				2924D05B2B287C1300536A67 /* ImagePicker.swift */,
 				E8B083862B1E74FF00CDCFD9 /* PostWebService.swift */,
 				E8B083882B1E76D700CDCFD9 /* PostErrorHandler.swift */,
 				D4F5A1B52B1F782B0096346A /* EventWebService.swift */,
@@ -551,8 +560,9 @@
 				76E9BDDB2B19558500B512A9 /* ReclamationCardView.swift in Sources */,
 				E8ABB35A2B1D0EA80051B72F /* LoginViewModell.swift in Sources */,
 				D45E7A922B14B0F2000F0A9C /* SplashScreen2View.swift in Sources */,
-				2978D3E22B273FFE00A1A378 /* RegisterViewModel.swift in Sources */,
+				2924D05E2B287C1300536A67 /* EventService.swift in Sources */,
 				76E3ED812B19B3C900464B7F /* Conversation.swift in Sources */,
+				B291B8C72B29DB5800345BA9 /* SettingsView.swift in Sources */,
 				76E9BDD62B194EDB00B512A9 /* ActualiteListView.swift in Sources */,
 				822CBECD2B18008F00769D45 /* LoginView.swift in Sources */,
 				E864C6752B1FF8FB0099E99A /* MySinglePostView.swift in Sources */,
@@ -569,22 +579,24 @@
 				E8F5FA3A2B19199800F5B9E0 /* LikeCardView.swift in Sources */,
 				76E9BDDD2B1972D300B512A9 /* ReclamationListView.swift in Sources */,
 				E8C391F82B188C6100EA3872 /* PostViewModel.swift in Sources */,
+				B291B8CB2B29DE9600345BA9 /* RegisterViewModel.swift in Sources */,
 				E816FF762B164956007538BF /* MyPosts.swift in Sources */,
 				E816FF742B164938007538BF /* MyEvents.swift in Sources */,
 				D45E7A942B14B16D000F0A9C /* SplashScreen3View.swift in Sources */,
 				D4BD65972B1FDAF500AA5722 /* ParticipationViewModel.swift in Sources */,
 				7641CCFD2B2253B500CC9BB8 /* ActualiteErrorHandler.swift in Sources */,
-				2978D3E42B27405B00A1A378 /* SettingsView.swift in Sources */,
 				2978D3EB2B2741B600A1A378 /* UsersModel.swift in Sources */,
 				D4BFF9852B14FE710050DC80 /* Event.swift in Sources */,
 				E8C391FA2B1899FB00EA3872 /* PostDetailView.swift in Sources */,
 				E857A6CF2B17E66000EC62DE /* PostCardView.swift in Sources */,
 				E8ABB3602B1D10680051B72F /* ForgotPaswordCodeScreen.swift in Sources */,
+				B291B8CD2B29EF1800345BA9 /* UserViewModel.swift in Sources */,
 				D44CD79E2B173C0D002294CE /* EventEditView.swift in Sources */,
 				D4BFF9902B1507510050DC80 /* EventDetailsView.swift in Sources */,
 				D4C23E642B149FDC002B0E10 /* SplashScreenView.swift in Sources */,
 				E857A6D32B17EA4600EC62DE /* PostListView.swift in Sources */,
 				D4C23E352B148B30002B0E10 /* ContentView.swift in Sources */,
+				2924D05D2B287C1300536A67 /* ImagePicker.swift in Sources */,
 				E8ABB3622B1DD7C80051B72F /* Profile.swift in Sources */,
 				D4BFF98E2B15059D0050DC80 /* EventListView.swift in Sources */,
 				D4F5A1B62B1F782B0096346A /* EventWebService.swift in Sources */,
@@ -599,6 +611,7 @@
 				E8B083872B1E74FF00CDCFD9 /* PostWebService.swift in Sources */,
 				D438AE7E2B2224E100D6DE7D /* EventRequest.swift in Sources */,
 				76E9BDD82B19527800B512A9 /* Actualite.swift in Sources */,
+				B291B8C52B29B16500345BA9 /* UserService.swift in Sources */,
 				E857A6C82B17E5BD00EC62DE /* PostModel.swift in Sources */,
 				E8ABB35C2B1D0F670051B72F /* ForgotPasswordEmailScreen.swift in Sources */,
 				E816FF702B1648E8007538BF /* MyCalendar.swift in Sources */,
@@ -608,7 +621,6 @@
 				D44CD7A42B175D23002294CE /* MyEventViewModel.swift in Sources */,
 				D4C23E332B148B30002B0E10 /* Aqua_GuardApp.swift in Sources */,
 				D4BD65952B1FD82F00AA5722 /* ParticipationWebService.swift in Sources */,
-				2978D3E02B273FD500A1A378 /* UserService.swift in Sources */,
 				E857A6CC2B17E5FA00EC62DE /* Comment.swift in Sources */,
 				D44CD7A22B174EF2002294CE /* EventViewModel.swift in Sources */,
 				76E9BDD22B194E4000B512A9 /* ActualiteCardView.swift in Sources */,

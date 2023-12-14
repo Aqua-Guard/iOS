@@ -9,6 +9,7 @@ import SwiftUI
 struct Profile: View {
     @StateObject var eventViewModel = MyEventViewModel()
     @StateObject var postViewModel = PostViewModel()
+    @State private var navigateToLogin = false
     var body: some View {
         NavigationView {
             List {
@@ -46,6 +47,15 @@ struct Profile: View {
         }.accentColor(.white)
         .navigationBarColor(.darkBlue, textColor: UIColor.white)
         .navigationBarBackButtonHidden(true)
+        .background(
+                  NavigationLink(
+                      destination: LoginView(),
+                      isActive: $navigateToLogin
+                  ) {
+                      EmptyView()
+                  }
+                  .hidden()
+              )
     }
 
     var profileHeader: some View {
@@ -92,6 +102,12 @@ struct Profile: View {
                 SettingsView()
             case "Logout":
                 LoginView()
+                                   .onAppear {
+                                       // Handle the logout action
+                                       // This is where you perform any necessary cleanup, like resetting user data, authentication status, etc.
+                                       // After performing the logout actions, set navigateToLogin to true to trigger NavigationLink
+                                       navigateToLogin = true
+                                   }
             default:
                 Text("Placeholder")
             }

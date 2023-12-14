@@ -50,6 +50,7 @@ struct ContentView: View {
             
             // .environmentObject(forumDetailsViewModel)
         }.navigationBarColor(.darkBlue, textColor: UIColor.white)
+            .navigationBarBackButtonHidden(true)
         
             .background(Image("background_splash_screen")
                 .resizable()

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "7175C07A-FFCF-47DE-868C-ADB6C824846B"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E4B203EC-7294-411D-BF5D-EA37B731D002"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Aqua Guard/ViewModel/LoginViewModell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "login()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E4B203EC-7294-411D-BF5D-EA37B731D002 - 80c601903de7a172"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Aqua_Guard.LoginViewModell.login() async -&gt; ()"
+                  moduleName = "Aqua Guard"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/amirabenmbarek/Desktop/iOS/Aqua%20Guard/ViewModel/LoginViewModell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "104">
+               </Location>
+               <Location
+                  uuid = "E4B203EC-7294-411D-BF5D-EA37B731D002 - 4ea2405f2936b31b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Aqua_Guard.LoginViewModell.login() async -&gt; ()"
+                  moduleName = "Aqua Guard"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/amirabenmbarek/Desktop/iOS/Aqua%20Guard/ViewModel/LoginViewModell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "104">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

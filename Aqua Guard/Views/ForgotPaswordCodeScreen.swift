@@ -11,7 +11,8 @@ struct ForgotPaswordCodeScreen: View {
     var screenWidth = UIScreen.main.bounds.width
     @State var textValue: String = ""
     @State var errorValue: String = ""
-    
+    @StateObject var viewModel: UserViewModel = UserViewModel()
+
     var body: some View {
         ZStack {
             VStack {
@@ -34,13 +35,13 @@ struct ForgotPaswordCodeScreen: View {
                             .foregroundColor(.lightBlue)
                             .padding(.all)
                         
-                        TextInputField("Code", text: $textValue, error: $errorValue)
+                        TextInputField("Code", text: $viewModel.code, error: $viewModel.error)
                             .padding(.bottom)
                         
                         //Spacer()
-                            //Button(action: {
+                            Button(action: {
                                
-                            //}, label: {
+                            }, label: {
                         NavigationLink(destination: ForgotPasswordScreen()) {
                             Text ("Reset Password")
                                 .foregroundColor (.white)
@@ -50,9 +51,9 @@ struct ForgotPaswordCodeScreen: View {
                             
                                 .frame(width: screenWidth * 0.88, height: screenWidth * 0.13)
                         }
-                            //}
+                            }
                                 
-                            //)
+                            )
                             .buttonStyle(.borderedProminent)
                             .buttonBorderShape(.roundedRectangle)
                             .tint(Color.blue)

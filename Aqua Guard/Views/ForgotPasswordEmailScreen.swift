@@ -11,7 +11,8 @@ struct ForgotPasswordEmailScreen: View {
     var screenWidth = UIScreen.main.bounds.width
     @State var textValue: String = ""
     @State var errorValue: String = ""
-    
+    @StateObject var viewModel: UserViewModel = UserViewModel()
+
     var body: some View {
         ZStack {
             VStack {
@@ -33,16 +34,16 @@ struct ForgotPasswordEmailScreen: View {
                             .foregroundColor(.lightBlue)
                             .padding(.all)
 
-                        TextInputField("Email", text: $textValue, error: $errorValue)
+                        TextInputField("Email", text: $viewModel.email, error: $viewModel.error)
                             .padding(.bottom)
                         
                         //Spacer()
                         
-                        
-                            //Button(action: {
-                               
-                            //}, label: {
-                        NavigationLink(destination: ForgotPaswordCodeScreen()) {
+                            Button(action: {
+                                Task{
+                                    await viewModel.sendEmail()
+                                }
+                            }, label: {
                             Text ("Send Code")
                                 .foregroundColor (.white)
                                 .fontWeight (.semibold)
@@ -51,14 +52,16 @@ struct ForgotPasswordEmailScreen: View {
                             
                             .frame(width: screenWidth * 0.88, height: screenWidth * 0.13)
                         }
-                            //}
                                 
-                            //)
+                            )
                             .buttonStyle(.borderedProminent)
                             .buttonBorderShape(.roundedRectangle)
                             .tint(Color.blue)
                             .cornerRadius(30)
                             .padding(.horizontal)
+                            .background(
+                                NavigationLink(destination: ForgotPaswordCodeScreen()) {
+                                })
                     }
                     
                     
