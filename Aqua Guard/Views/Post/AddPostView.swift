@@ -21,12 +21,19 @@ struct AddPostView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
+    @State private var text = "Type something..."
+    @State private var isBold = false
+    @State private var isItalic = false
+    @State private var fontName = "Helvetica"
+    
+    @State private var showingFontPicker = false
+    
     let voiceOverlayController = VoiceOverlayController()
     
+    @State private var previousErrorMessage: String? = nil
     var body: some View {
         NavigationView {
             ZStack {
-                
                 
                 VStack {
                     Spacer()
@@ -38,51 +45,90 @@ struct AddPostView: View {
                                 .font(.headline)
                                 .foregroundColor(.black)
                                 .padding(.bottom, 10)
-                            VStack{
-                                ZStack {
-                                    if let selectedUIImage = selectedUIImage {
-                                        Image(uiImage: selectedUIImage)
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 300, height: 300)
-                                            .foregroundColor(.blue) // Adjust this color if you have a custom color set
-                                    } else {
-                                        Image(systemName: "photo")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 300, height: 200)
-                                            .foregroundColor(.darkBlue) // Adjust this color if you have a custom color set
+                            // Image Selection
+                            HStack{
+                                Spacer()
+                                Button(action: {
+                                    isImagePickerDisplayed = true
+                                }) {
+                                    VStack {
+                                        
+                                        if let selectedUIImage = selectedUIImage {
+                                            Image(uiImage: selectedUIImage )
+                                                .resizable()
+                                                .scaledToFit()
+                                        } else {
+                                            Image(systemName: "photo.on.rectangle.angled")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .foregroundColor(.blue)
+                                                .padding()
+                                        }
                                     }
+                                    .frame(height: 200)
+                                    .background(selectedUIImage == nil ? Color.gray.opacity(0.2) : Color.clear)
+                                    .cornerRadius(12)
                                 }
-                                HStack{
-                                    Spacer()
-                                    // Button to choose an image
-                                    Button(action: {
-                                        isImagePickerDisplayed = true
-                                    }) {
-                                        Text("Choose Image")
-                                            .foregroundColor(.white)
-                                            .padding()
-                                            .background(Color.darkBlue)
-                                            .clipShape(Capsule())
-                                    }
-                                    Spacer()
+                                .sheet(isPresented: $isImagePickerDisplayed) {
+                                    ImagePickerPost(selectedUIImage: $selectedUIImage)
                                 }
+                                Spacer()
+                                    
                             }
-                            
-                            
+                            .padding()
+                            HStack{
+                                Text("Description :")
+                                    .font(.headline)
+                                    .foregroundColor(.black)
+                                Spacer()
+                                Button(action: {
+                                    isBold.toggle()
+                                }) {
+                                    Label {
+                                        Text("Bold")
+                                    } icon: {
+                                        Image(systemName: "bold")
+                                    }
+                                }
+                                .buttonStyle(.plain)
+
+                                Button(action: {
+                                    isItalic.toggle()
+                                }) {
+                                    Label {
+                                        Text("Italic")
+                                    } icon: {
+                                        Image(systemName: "italic")
+                                    }
+                                }
+                                .buttonStyle(.plain)
+
+                                Button(action: {
+                                    showingFontPicker = true
+                                }) {
+                                    Label {
+                                        Text("Font")
+                                    } icon: {
+                                        Image(systemName: "f.circle")
+                                    }
+                                }
+                                .buttonStyle(.plain)
+                            }
                             // Description Label
-                            Text("Description")
-                                .font(.headline)
-                                .foregroundColor(.black)
-                            
-                            // Text editor for the post description
-                            TextEditor(text: $postDescription)
-                                .frame(height: 150)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .stroke(Color.gray.opacity(0.2), lineWidth: 1)
-                                )
+                           
+                            VStack {
+                                RichTextEditor(text: $postDescription, isBold: isBold, isItalic: isItalic, fontName: fontName)
+                                    .frame(height: 150)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+                                    )
+                                
+                               
+                            }
+                            .sheet(isPresented: $showingFontPicker) {
+                                FontPickerView(fontName: $fontName)
+                            }
                             HStack {
                                 Text("")
                                 Spacer()
@@ -119,11 +165,13 @@ struct AddPostView: View {
                                         
                                     }
                                 }) {
+                                    
                                     Text("Submit Post")
-                                        .foregroundColor(.white)
-                                        .padding()
-                                        .background(Color.blue)
-                                        .clipShape(Capsule())
+                                                           .foregroundColor(.white)
+                                                           .frame(maxWidth: .infinity)
+                                                           .padding()
+                                                           .background(Color.blue)
+                                                           .cornerRadius(10)
                                     // i want to make this bottom on the left
                                     
                                 }
@@ -158,7 +206,7 @@ struct AddPostView: View {
             .alert(isPresented: $viewModel.createdPostAlert) {
                 Alert(title: Text("Post Creation"), message: Text(viewModel.alertMessageCreationPost), dismissButton: .default(Text("OK")))
             }
-        
+            
         }
         .onChange(of: viewModel.createdwithSucsess) { success in
             if success {
@@ -169,24 +217,37 @@ struct AddPostView: View {
     }
     
     
-   
     
     func voiceButtonTapped() {
-        if let rootViewController = UIApplication.shared.windows.first?.rootViewController {
-            voiceOverlayController.start(on: rootViewController, textHandler: { (text, final, _) in
-                if final {
-                    // Handle the final voice recording result
-                    postDescription += text // text is a non-optional String
-                }
-            }, errorHandler: { (error) in
-                print("Voice recording error: \(error?.localizedDescription ?? "")")
-            })
+        guard let rootViewController = UIApplication.shared.windows.first?.rootViewController else {
+            print("Could not retrieve the root view controller.")
+            return
         }
+        
+        voiceOverlayController.start(on: rootViewController, textHandler: { (text, final, _) in
+            if final {
+                // Handle the final voice recording result
+                DispatchQueue.main.async {
+                    self.postDescription += text // Append the recognized text
+                }
+            }
+        }, errorHandler: { (error) in
+            // Use DispatchQueue.main.async to update any UI components or state
+            DispatchQueue.main.async {
+                if let errorDescription = error?.localizedDescription {
+                    // Avoid printing the same error message multiple times
+                    if self.previousErrorMessage != errorDescription {
+                        print("Voice recording error: \(errorDescription)")
+                        self.previousErrorMessage = errorDescription
+                    }
+                } else {
+                    print("An unknown error occurred in voice recording.")
+                }
+            }
+        })
     }
     
     
-    
-  
 }
 
 // ImagePicker to handle image selection

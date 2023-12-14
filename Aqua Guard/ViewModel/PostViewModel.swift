@@ -30,7 +30,7 @@ class PostViewModel : ObservableObject {
     @Published var updatePostAlert: Bool = false
 
     @Published var CurrentUserId : String = "65728dac8112744cc8707998"
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTZlMzQ4MDJiNTA3YzgyNTVmZmQ5YzYiLCJ1c2VybmFtZSI6InlvdXNzZWYiLCJpYXQiOjE3MDIzNDA4MjIsImV4cCI6MTcwMjM0ODAyMn0.oWPmfe1CERUQW8cOa8A3_MxGEJP5ngZEE5Hcm9S20Xw"
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTZlMzQ4MDJiNTA3YzgyNTVmZmQ5YzYiLCJ1c2VybmFtZSI6InlvdXNzZWYiLCJpYXQiOjE3MDI1MDY1MDYsImV4cCI6MTcwMjUxMzcwNn0.RiGr3R6fjWK8wf52K7QXeFWpFsS6XyWbzvq9reX8nLk"
     
     func updatePost(postId : String ,description: String) async {
             do {

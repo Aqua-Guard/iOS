@@ -74,6 +74,8 @@
 		E8ABB3622B1DD7C80051B72F /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ABB3612B1DD7C80051B72F /* Profile.swift */; };
 		E8B083872B1E74FF00CDCFD9 /* PostWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B083862B1E74FF00CDCFD9 /* PostWebService.swift */; };
 		E8B083892B1E76D700CDCFD9 /* PostErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B083882B1E76D700CDCFD9 /* PostErrorHandler.swift */; };
+		E8BDA88B2B29C765008BC786 /* RichTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BDA88A2B29C765008BC786 /* RichTextEditor.swift */; };
+		E8BDA88D2B29C8C8008BC786 /* FontPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BDA88C2B29C8C8008BC786 /* FontPickerView.swift */; };
 		E8C391F82B188C6100EA3872 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C391F72B188C6100EA3872 /* PostViewModel.swift */; };
 		E8C391FA2B1899FB00EA3872 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C391F92B1899FB00EA3872 /* PostDetailView.swift */; };
 		E8F5FA3A2B19199800F5B9E0 /* LikeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F5FA392B19199800F5B9E0 /* LikeCardView.swift */; };
@@ -164,6 +166,9 @@
 		E8ABB3612B1DD7C80051B72F /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		E8B083862B1E74FF00CDCFD9 /* PostWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWebService.swift; sourceTree = "<group>"; };
 		E8B083882B1E76D700CDCFD9 /* PostErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostErrorHandler.swift; sourceTree = "<group>"; };
+		E8BDA88A2B29C765008BC786 /* RichTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextEditor.swift; sourceTree = "<group>"; };
+		E8BDA88C2B29C8C8008BC786 /* FontPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontPickerView.swift; sourceTree = "<group>"; };
+		E8C242A52B2A4E4E009B272D /* Aqua-Guard-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Aqua-Guard-Info.plist"; sourceTree = SOURCE_ROOT; };
 		E8C391F72B188C6100EA3872 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		E8C391F92B1899FB00EA3872 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
 		E8F5FA392B19199800F5B9E0 /* LikeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCardView.swift; sourceTree = "<group>"; };
@@ -299,6 +304,7 @@
 		D4C23E312B148B30002B0E10 /* Aqua Guard */ = {
 			isa = PBXGroup;
 			children = (
+				E8C242A52B2A4E4E009B272D /* Aqua-Guard-Info.plist */,
 				E8B083822B1E745500CDCFD9 /* WebService */,
 				822CBED52B18026000769D45 /* Components */,
 				E816FF622B1645FC007538BF /* ViewModel */,
@@ -383,6 +389,8 @@
 				E864C6742B1FF8FB0099E99A /* MySinglePostView.swift */,
 				E81805982B2203D0008F78FD /* AddPostView.swift */,
 				E818059A2B222743008F78FD /* UpdatePostView.swift */,
+				E8BDA88A2B29C765008BC786 /* RichTextEditor.swift */,
+				E8BDA88C2B29C8C8008BC786 /* FontPickerView.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -577,6 +585,7 @@
 				E8ABB3622B1DD7C80051B72F /* Profile.swift in Sources */,
 				D4BFF98E2B15059D0050DC80 /* EventListView.swift in Sources */,
 				D4F5A1B62B1F782B0096346A /* EventWebService.swift in Sources */,
+				E8BDA88B2B29C765008BC786 /* RichTextEditor.swift in Sources */,
 				822CBECC2B18008F00769D45 /* RegisterView.swift in Sources */,
 				822CBED42B18025800769D45 /* TextInputField.swift in Sources */,
 				76E9BDD42B194E7C00B512A9 /* ActualiteDetailsView.swift in Sources */,
@@ -603,6 +612,7 @@
 				D4C23E662B14A8A3002B0E10 /* SplashScreen1View.swift in Sources */,
 				E857A6CA2B17E5E900EC62DE /* Like.swift in Sources */,
 				822CBED32B18025800769D45 /* PasswordInputField.swift in Sources */,
+				E8BDA88D2B29C8C8008BC786 /* FontPickerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -766,8 +776,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Aqua Guard/Preview Content\"";
+				DEVELOPMENT_TEAM = 62LC6UKFQG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Aqua-Guard-Info.plist";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need the Mic for audio to text";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Need the speech recognition capabilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -796,8 +808,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Aqua Guard/Preview Content\"";
+				DEVELOPMENT_TEAM = 62LC6UKFQG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Aqua-Guard-Info.plist";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need the Mic for audio to text";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Need the speech recognition capabilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
