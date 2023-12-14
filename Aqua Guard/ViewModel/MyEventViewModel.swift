@@ -13,11 +13,7 @@ class MyEventViewModel: ObservableObject {
     @Published var isCreatingEvent: Bool = false
     @Published var eventToUpdate: Event? = nil
     @Published var isPresented: Bool = false
-    
-   /* @Published var mapRegion: MKCoordinateRegion = MKCoordinateRegion(
-               center: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194), // Default coordinates
-               span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05) // Default span
-           )*/
+
     
     let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTUxMTM1MjY3ZjkyM2Q1NDg3OGFmYTkiLCJ1c2VybmFtZSI6InlvdXNzZWYiLCJpYXQiOjE3MDI1ODE1MzQsImV4cCI6MTcwMjU4ODczNH0.NHtHaPhmaAvh8de-60i_14OzGM-bIW6GI9AoN6pcSaE"
 
