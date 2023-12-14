@@ -74,80 +74,42 @@ struct EventEditView: View {
                                        }
                                    
 
+                               Text("Event Name")
+                                       .font(.headline)
                                TextField("Event Name", text: $eventName)
                                    .textFieldStyle(RoundedBorderTextFieldStyle())
                                    .padding(.top, 10)
-                               
+                               Text("Description")
+                                       .font(.headline)
                                TextEditor(text: $eventDescription)
                                               .frame(height: 100) // Set the desired height
                                               .border(Color.gray, width: 1) // Optional: Add a border for visual separation
                                               .padding(.top, 10)
                                
-                               VStack {
-                                   TextField("Start Date", text: Binding(
-                                       get: {
-                                           let dateFormatter = DateFormatter()
-                                           dateFormatter.dateFormat = "yyyy-MM-dd"
-                                           return dateFormatter.string(from: startDate)
-                                       },
-                                       set: { newDateString in
-                                           let dateFormatter = DateFormatter()
-                                           dateFormatter.dateFormat = "yyyy-MM-dd"
-                                           if let newDate = dateFormatter.date(from: newDateString) {
-                                               startDate = newDate
-                                           }
-                                       }
-                                   ))
-                                   .textFieldStyle(RoundedBorderTextFieldStyle())
-                                   .padding(.top, 10)
+                               VStack  (alignment: .leading, spacing: 10){
+                                   Text("Start Date")
+                                       .font(.headline)
 
-                                   Button(action: {
-                                       // Show the DatePicker with confirmation
-                                       isStartDatePickerPresented.toggle()
-                                   }) {
-                                       Text("Select Start Date")
-                                   }
-                                   .padding()
-
-                                   // Present the DatePicker in a sheet
-                                   if isStartDatePickerPresented {
-                                       DatePickerSheet(selectedDate: $startDate, isPresented: $isStartDatePickerPresented)
-                                   }
+                                   DatePicker("Select Start Date", selection: $startDate, displayedComponents: [.date])
+                                       .labelsHidden()
+                                       .textFieldStyle(RoundedBorderTextFieldStyle())
+                                       .padding(.top, 10)
+                                       .accentColor(.darkBlue)
                                }
 
-                               VStack {
-                                   TextField("End Date", text: Binding(
-                                       get: {
-                                           let dateFormatter = DateFormatter()
-                                           dateFormatter.dateFormat = "yyyy-MM-dd"
-                                           return dateFormatter.string(from: endDate)
-                                       },
-                                       set: { newDateString in
-                                           let dateFormatter = DateFormatter()
-                                           dateFormatter.dateFormat = "yyyy-MM-dd"
-                                           if let newDate = dateFormatter.date(from: newDateString) {
-                                               endDate = newDate
-                                           }
-                                       }
-                                   ))
-                                   .textFieldStyle(RoundedBorderTextFieldStyle())
-                                   .padding(.top, 10)
+                               VStack (alignment: .leading, spacing: 10){
+                                   Text("End Date")
+                                       .font(.headline)
 
-                                   Button(action: {
-                                       // Show the DatePicker with confirmation
-                                       isEndDatePickerPresented.toggle()
-                                   }) {
-                                       Text("Select End Date")
-                                   }
-                                   .padding()
-
-                                   // Present the DatePicker in a sheet
-                                   if isEndDatePickerPresented {
-                                       DatePickerSheet(selectedDate: $endDate, isPresented: $isEndDatePickerPresented)
-                                   }
+                                   DatePicker("Select End Date", selection: $endDate, displayedComponents: [.date])
+                                       .labelsHidden()
+                                       .textFieldStyle(RoundedBorderTextFieldStyle())
+                                       .padding(.top, 10)
+                                       .accentColor(.darkBlue)
                                }
 
-                               
+                               Text("Location")
+                                       .font(.headline)
                                TextField("Event Location", text: $eventLocation)
                                    .textFieldStyle(RoundedBorderTextFieldStyle())
                                    .padding(.top, 10)
@@ -190,8 +152,8 @@ struct EventEditView: View {
                                        return
                                    }
                                    // Validate lieu
-                                   guard eventLocation.count >= 3 && eventLocation.count <= 30 else {
-                                       errorMessage = "Event location should be between 3 and 30 characters"
+                                   guard eventLocation.count >= 3 && eventLocation.count <= 50 else {
+                                       errorMessage = "Event location should be between 3 and 50 characters"
                                        showSnackbar(message: errorMessage)
                                        return
                                    }

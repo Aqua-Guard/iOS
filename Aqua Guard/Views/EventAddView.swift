@@ -7,11 +7,17 @@
 
 import SwiftUI
 import UIKit
+import MapKit
 
 struct ImagePickerEvent: UIViewControllerRepresentable {
     class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         var parent: ImagePickerEvent
         var didImagePicked: (UIImage) -> Void
+        
+        @State private var region = MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194),
+            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        )
 
         init(parent: ImagePickerEvent, didImagePicked: @escaping (UIImage) -> Void) {
             self.parent = parent
@@ -65,7 +71,16 @@ struct EventAddView: View {
      @State private var endDate = Date()
        @State private var eventLocation = ""
        @State private var errorMessage = ""
+    
+    @State private var isStartDatePickerPresented = false
+    @State private var isEndDatePickerPresented = false
+    
     @State private var selectedImage: UIImage?
+    @State private var mapRegion = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 36.8065, longitude: 10.1815), // Tunis coordinates
+        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+    )
+    @State private var selectedCoordinate: CLLocationCoordinate2D?
 
     @State private var isImagePickerPresented: Bool = false
 
@@ -104,86 +119,78 @@ struct EventAddView: View {
 
                                  
                        
-                            
+                            Text("Event Name")
+                                  .font(.headline)
                             TextField("Event Name", text: $eventName)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .padding(.top, 10)
-                            
+                            Text("Description")
+                                  .font(.headline)
                             TextEditor(text: $eventDescription)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
                                            .frame(height: 100) // Set the desired height
                                            .border(Color.gray, width: 1) // Optional: Add a border for visual separation
                                            .padding(.top, 10)
+                                        
                             
-                            VStack {
-                                        TextField("Start Date", text: Binding(
-                                            get: {
-                                                // Convert the Date to String with the desired format
-                                                let dateFormatter = DateFormatter()
-                                                dateFormatter.dateFormat = "yyyy-MM-dd"
-                                                return dateFormatter.string(from: startDate)
-                                            },
-                                            set: { newDateString in
-                                                // Convert the String to Date with the desired format
-                                                let dateFormatter = DateFormatter()
-                                                dateFormatter.dateFormat = "yyyy-MM-dd"
-                                                if let newDate = dateFormatter.date(from: newDateString) {
-                                                    startDate = newDate
-                                                }
-                                            }
-                                        ))
-                                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                                            .padding(.top, 10)
+                            VStack(alignment: .leading, spacing: 10) {
+                                Text("Start Date")
+                                    .font(.headline)
 
-                                        Button(action: {
-                                            // Show the DatePicker with confirmation
-                                            isDatePickerPresented.toggle()
-                                        }) {
-                                            Text("Select Start Date")
-                                        }
-                                        .padding()
+                                DatePicker("Select Start Date", selection: $startDate, displayedComponents: [.date])
+                                    .labelsHidden()
+                                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                                    .padding(.top, 10)
+                                    .accentColor(.darkBlue)
+                            }
 
-                                        // Present the DatePicker in a sheet
-                                        if isDatePickerPresented {
-                                            DatePickerSheet(selectedDate: $startDate, isPresented: $isDatePickerPresented)
-                                        }
-                                    }
-                            VStack {
-                                        TextField("End Date", text: Binding(
-                                            get: {
-                                                // Convert the Date to String with the desired format
-                                                let dateFormatter = DateFormatter()
-                                                dateFormatter.dateFormat = "yyyy-MM-dd"
-                                                return dateFormatter.string(from: endDate)
-                                            },
-                                            set: { newDateString in
-                                                // Convert the String to Date with the desired format
-                                                let dateFormatter = DateFormatter()
-                                                dateFormatter.dateFormat = "yyyy-MM-dd"
-                                                if let newDate = dateFormatter.date(from: newDateString) {
-                                                    endDate = newDate
-                                                }
-                                            }
-                                        ))
-                                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                                            .padding(.top, 10)
+                            VStack (alignment: .leading, spacing: 10){
+                                Text("End Date")
+                                    .font(.headline)
 
-                                        Button(action: {
-                                            // Show the DatePicker with confirmation
-                                            isDatePickerPresented.toggle()
-                                        }) {
-                                            Text("Select End Date")
-                                        }
-                                        .padding()
-
-                                        // Present the DatePicker in a sheet
-                                        if isDatePickerPresented {
-                                            DatePickerSheet(selectedDate: $endDate, isPresented: $isDatePickerPresented)
-                                        }
-                                    }
+                                DatePicker("Select End Date", selection: $endDate, displayedComponents: [.date])
+                                    .labelsHidden()
+                                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                                    .padding(.top, 10)
+                                    .accentColor(.darkBlue)
+                                    
+                            }
+                            Text("Location")
+                                  .font(.headline)
                             TextField("Event Location", text: $eventLocation)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .padding(.top, 10)
                             
+                            CustomMapView(
+                                region: $mapRegion,
+                                coordinate: $selectedCoordinate,
+                                onCoordinateChanged: { newCoordinate in
+                                    selectedCoordinate = newCoordinate
+
+                                    // Perform reverse geocoding to get the address from the selectedCoordinate
+                                    if let latitude = selectedCoordinate?.latitude, let longitude = selectedCoordinate?.longitude {
+                                        let location = CLLocation(latitude: latitude, longitude: longitude)
+                                        let geocoder = CLGeocoder()
+                                        geocoder.reverseGeocodeLocation(location) { placemarks, error in
+                                            if let placemark = placemarks?.first {
+                                                eventLocation = "\(placemark.thoroughfare ?? "") \(placemark.subThoroughfare ?? ""), \(placemark.locality ?? "")"
+                                            }
+                                        }
+                                    }
+                                },
+                                onZoomIn: {
+                                    // Handle zoom in action
+                                    print("Zoom In")
+                                },
+                                onZoomOut: {
+                                    // Handle zoom out action
+                                    print("Zoom Out")
+                                }
+                            )
+                            .frame(height: 200)
+                            .cornerRadius(10)
+                            .padding()
+
                            /* Text(errorMessage)
                                 .foregroundColor(.red)
                                 .padding(.top, 10)
@@ -221,8 +228,8 @@ struct EventAddView: View {
                                     return
                                 }
                                 // Validate lieu
-                                guard eventLocation.count >= 3 && eventLocation.count <= 30 else {
-                                    errorMessage = "Event location should be between 3 and 30 characters"
+                                guard eventLocation.count >= 3 && eventLocation.count <= 50 else {
+                                    errorMessage = "Event location should be between 3 and 50 characters"
                                     showSnackbar(message: errorMessage)
                                     return
                                 }
@@ -279,7 +286,6 @@ struct EventAddView: View {
             }
         }
     }
-    
 
     private func showSnackbar(message: String) {
         snackbarMessage = message
@@ -314,6 +320,60 @@ struct SnackbarView: View {
         }
     }
 }
+struct CustomMapView: UIViewRepresentable {
+    @Binding var region: MKCoordinateRegion
+    @Binding var coordinate: CLLocationCoordinate2D?
+    var onCoordinateChanged: (CLLocationCoordinate2D) -> Void
+    var onZoomIn: (() -> Void)?
+    var onZoomOut: (() -> Void)?
+
+    func makeUIView(context: Context) -> MKMapView {
+        let mapView = MKMapView()
+        mapView.delegate = context.coordinator
+        return mapView
+    }
+
+    func updateUIView(_ uiView: MKMapView, context: Context) {
+        uiView.setRegion(region, animated: true)
+
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate ?? CLLocationCoordinate2D(latitude: 0, longitude: 0)
+
+        uiView.removeAnnotations(uiView.annotations)
+        uiView.addAnnotation(annotation)
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    class Coordinator: NSObject, MKMapViewDelegate {
+        var parent: CustomMapView
+
+        init(_ parent: CustomMapView) {
+            self.parent = parent
+        }
+
+        func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+            parent.region = mapView.region
+            parent.coordinate = mapView.centerCoordinate
+            parent.onCoordinateChanged(mapView.centerCoordinate)
+        }
+
+        // Function to zoom in
+        func zoomIn() {
+            parent.onZoomIn?()
+        }
+
+        // Function to zoom out
+        func zoomOut() {
+            parent.onZoomOut?()
+        }
+    }
+}
+
+
+
 
 
 

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MapKit
 class MyEventViewModel: ObservableObject {
     let eventWebService = EventWebService()
     @Published var events: [Event] = []
@@ -13,7 +14,12 @@ class MyEventViewModel: ObservableObject {
     @Published var eventToUpdate: Event? = nil
     @Published var isPresented: Bool = false
     
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTRkZjE4YjUzNWVjMDRlZmVkYWJiMGIiLCJ1c2VybmFtZSI6Im1hbGVrIiwiaWF0IjoxNzAyNDY1ODUyLCJleHAiOjE3MDI0NzMwNTJ9.8YrSoS0hhDABGguHAiHOim7pQYn11erTe1ERbty6G40"
+   /* @Published var mapRegion: MKCoordinateRegion = MKCoordinateRegion(
+               center: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194), // Default coordinates
+               span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05) // Default span
+           )*/
+    
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTUxMTM1MjY3ZjkyM2Q1NDg3OGFmYTkiLCJ1c2VybmFtZSI6InlvdXNzZWYiLCJpYXQiOjE3MDI1ODE1MzQsImV4cCI6MTcwMjU4ODczNH0.NHtHaPhmaAvh8de-60i_14OzGM-bIW6GI9AoN6pcSaE"
 
     /*init() async  {
       /*  let event1 = Event(idEvent: UUID().uuidString, userName: "John Doe", userImage: "john_image", eventName: "Event 1", description: "Une initiative communautaire pour nettoyer les plages et protéger l'environnement.", eventImage: "sidi_bou_said", dateDebut: Date(), dateFin: Date(), lieu: "Location 1")
