@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		76285D9C2B2A7AE60032E635 /* AddReclamation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76285D9B2B2A7AE60032E635 /* AddReclamation.swift */; };
 		7641CCFB2B22534700CC9BB8 /* ActualiteWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7641CCFA2B22534700CC9BB8 /* ActualiteWebService.swift */; };
 		7641CCFD2B2253B500CC9BB8 /* ActualiteErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7641CCFC2B2253B500CC9BB8 /* ActualiteErrorHandler.swift */; };
 		7641CCFF2B22556600CC9BB8 /* ActualiteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7641CCFE2B22556600CC9BB8 /* ActualiteViewModel.swift */; };
@@ -96,6 +97,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		76285D9B2B2A7AE60032E635 /* AddReclamation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReclamation.swift; sourceTree = "<group>"; };
 		7641CCFA2B22534700CC9BB8 /* ActualiteWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualiteWebService.swift; sourceTree = "<group>"; };
 		7641CCFC2B2253B500CC9BB8 /* ActualiteErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualiteErrorHandler.swift; sourceTree = "<group>"; };
 		7641CCFE2B22556600CC9BB8 /* ActualiteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualiteViewModel.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				76E9BDDA2B19558500B512A9 /* ReclamationCardView.swift */,
 				76E9BDDC2B1972D300B512A9 /* ReclamationListView.swift */,
 				76E3ED802B19B3C900464B7F /* Conversation.swift */,
+				76285D9B2B2A7AE60032E635 /* AddReclamation.swift */,
 			);
 			path = Reclamation;
 			sourceTree = "<group>";
@@ -565,6 +568,7 @@
 				E8C391FA2B1899FB00EA3872 /* PostDetailView.swift in Sources */,
 				E857A6CF2B17E66000EC62DE /* PostCardView.swift in Sources */,
 				E8ABB3602B1D10680051B72F /* ForgotPaswordCodeScreen.swift in Sources */,
+				76285D9C2B2A7AE60032E635 /* AddReclamation.swift in Sources */,
 				D44CD79E2B173C0D002294CE /* EventEditView.swift in Sources */,
 				D4BFF9902B1507510050DC80 /* EventDetailsView.swift in Sources */,
 				D4C23E642B149FDC002B0E10 /* SplashScreenView.swift in Sources */,
