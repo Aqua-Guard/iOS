@@ -69,7 +69,10 @@ struct RegisterView: View {
     @State private var selectedImage = UIImage()
     @State private var showSheet = false
     @State private var isImagePickerPresented: Bool = false
+    @State private var shouldNavigateToLogin = false
 
+    @State private var captchaText = ""
+    @State private var userInput = ""
     @State var selectedItem: PhotosPickerItem? = nil;
     @State var selectedImageData: Data?
 
@@ -121,13 +124,33 @@ struct RegisterView: View {
                         PasswordInputField("Password", text: $password, error: $viewModel.passwordError)
                         
                         PasswordInputField("Confirm password", text: $viewModel.confirmPassword, error: $viewModel.confirmPasswordError)
+                        
+                        Text(captchaText)
+                            .font(.title)
+                            .padding()
+                            .foregroundColor(.gray)
+
+                        TextInputField("Enter CAPTCHA", text: $userInput, error: $errorValue)
+                                   
+                        
                         //Spacer()
                         Button(action: {
                             //self.viewModel.validate()
+                            
                             Task {
-                                await viewModel.signup()
+                                if userInput == captchaText {
+                                    await viewModel.signup()
+                                } else {
+                                    showAlert(title: "Error", message: "CAPTCHA verification failed!")
+                                }
                                 if let imageData = selectedImage.jpegData(compressionQuality: 0.8) {
                                     try await viewModel.register(email: email, firstName: firstName, lastName: lastName, image: imageData, username: username, password: password)
+                                    shouldNavigateToLogin = true
+                                    if self.viewModel.isLoading {
+                                        shouldNavigateToLogin = true
+                                    }
+                                    
+
                                 }
                                 else{
                                     print("errrrrrrrror")
@@ -143,7 +166,7 @@ struct RegisterView: View {
                         
                             .navigationBarHidden(true) // Hide the navigation bar
                             .background(
-                                NavigationLink(destination: LoginView(), isActive: $viewModel.isLoading) {
+                                NavigationLink(destination: LoginView(), isActive: $shouldNavigateToLogin) {
                                     EmptyView()
                                 }
                             )
@@ -166,10 +189,32 @@ struct RegisterView: View {
                     .padding(.bottom)
                 }
             }
+            }.onAppear {
+                captchaText = generateRandomText()
             }
         }
         .navigationBarBackButtonHidden(true)
     }
+    func showAlert(title: String, message: String) {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            UIApplication.shared.windows.first?.rootViewController?.present(alert, animated: true, completion: nil)
+        }
+    
+    func generateRandomText() -> String {
+            let possibleCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+            let length = 6
+            
+            var randomString = ""
+            for _ in 0..<length {
+                let randomIndex = Int.random(in: 0..<possibleCharacters.count)
+                let character = possibleCharacters[possibleCharacters.index(possibleCharacters.startIndex, offsetBy: randomIndex)]
+                randomString.append(character)
+            }
+            
+            return randomString
+        }
+    
 }
 
 #Preview {
