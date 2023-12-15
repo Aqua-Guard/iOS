@@ -27,7 +27,9 @@ struct AddPostView: View {
     @State private var fontName = "Helvetica"
     
     @State private var showingFontPicker = false
-    
+   
+    @State private var isLoading = false
+
     let voiceOverlayController = VoiceOverlayController()
     
     @State private var previousErrorMessage: String? = nil
@@ -73,7 +75,7 @@ struct AddPostView: View {
                                     ImagePickerPost(selectedUIImage: $selectedUIImage)
                                 }
                                 Spacer()
-                                    
+                                
                             }
                             .padding()
                             HStack{
@@ -91,7 +93,7 @@ struct AddPostView: View {
                                     }
                                 }
                                 .buttonStyle(.plain)
-
+                                
                                 Button(action: {
                                     isItalic.toggle()
                                 }) {
@@ -102,7 +104,7 @@ struct AddPostView: View {
                                     }
                                 }
                                 .buttonStyle(.plain)
-
+                                
                                 Button(action: {
                                     showingFontPicker = true
                                 }) {
@@ -115,7 +117,7 @@ struct AddPostView: View {
                                 .buttonStyle(.plain)
                             }
                             // Description Label
-                           
+                            
                             VStack {
                                 RichTextEditor(text: $postDescription, isBold: isBold, isItalic: isItalic, fontName: fontName)
                                     .frame(height: 150)
@@ -124,22 +126,51 @@ struct AddPostView: View {
                                             .stroke(Color.gray.opacity(0.2), lineWidth: 1)
                                     )
                                 
-                               
+                                
                             }
                             .sheet(isPresented: $showingFontPicker) {
                                 FontPickerView(fontName: $fontName)
                             }
                             HStack {
-                                Text("")
+                                if isLoading {
+                                    ProgressView()
+                                        .progressViewStyle(CircularProgressViewStyle())
+                                } else {
+                                    Button(action: {
+                                        isLoading = true // Start loading
+                                        Task {
+                                            await viewModel.fetchAIDescription(prompt: postDescription)
+                                            DispatchQueue.main.async {
+                                                postDescription = viewModel.aiDescription
+                                                isLoading = false // Stop loading once finished
+                                            }
+                                        }
+                                    }) {
+                                        Image("ChatGPT-Logo") // Replace with your actual image name
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 50, height: 50)
+                                        Text("Use Chatgpt")
+                                            .foregroundColor(.black)
+                                            .padding(.leading, -15)
+                                    }
+                                }
+
                                 Spacer()
                                 VStack {
                                     Spacer()
+                                    
+                                    
+                                    
+                                    
+                                    
                                     Button(action: {
                                         voiceButtonTapped()
                                     }) {
                                         HStack {
                                             Image(systemName: "mic")
-                                            Text("Voice Recorder")
+                                                .foregroundColor(.black)
+                                            Text("Voice Recorder").foregroundColor(.black)
                                         }
                                         
                                     }
@@ -157,21 +188,22 @@ struct AddPostView: View {
                                         if let selectedUIImage = selectedUIImage {
                                             if let imageData = selectedUIImage.jpegData(compressionQuality: 0.8) {
                                                 await viewModel.createPost(description: postDescription, image: imageData)
-                                                
+                                                scheduleNotification(title: "New Post", contentt: "Check out the latest post by", username:viewModel.CurrentUserName ,userImage: viewModel.CurrentUserImage)
                                             } else {
                                                 // Handle the error - could not convert image to Data
                                             }
                                         }
                                         
                                     }
+                                    
                                 }) {
                                     
                                     Text("Submit Post")
-                                                           .foregroundColor(.white)
-                                                           .frame(maxWidth: .infinity)
-                                                           .padding()
-                                                           .background(Color.blue)
-                                                           .cornerRadius(10)
+                                        .foregroundColor(.white)
+                                        .frame(maxWidth: .infinity)
+                                        .padding()
+                                        .background(Color.blue)
+                                        .cornerRadius(10)
                                     // i want to make this bottom on the left
                                     
                                 }
@@ -216,7 +248,49 @@ struct AddPostView: View {
         
     }
     
+    func downloadImage(from url: URL, completion: @escaping (URL?) -> Void) {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                completion(nil)
+                return
+            }
+            let tempDirURL = FileManager.default.temporaryDirectory
+            let localURL = tempDirURL.appendingPathComponent(url.lastPathComponent)
+            do {
+                try data.write(to: localURL)
+                completion(localURL)
+            } catch {
+                completion(nil)
+            }
+        }.resume()
+    }
     
+    func scheduleNotification( title : String, contentt: String ,  username: String, userImage: String) {
+        guard let imageUrl = URL(string: "http://127.0.0.1:9090/images/user/\(userImage)") else { return }
+        
+        downloadImage(from: imageUrl) { localURL in
+            guard let localURL = localURL else { return }
+            
+            let content = UNMutableNotificationContent()
+            content.title = title
+            content.body = "\(contentt) \(username)"
+            
+            
+            if let attachment = try? UNNotificationAttachment(identifier: "image", url: localURL, options: nil) {
+                content.attachments = [attachment]
+            }
+            
+            content.sound = UNNotificationSound.default
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+            
+            UNUserNotificationCenter.current().add(request) { error in
+                if let error = error {
+                    print("Error scheduling notification: \(error)")
+                }
+            }
+        }
+    }
     
     func voiceButtonTapped() {
         guard let rootViewController = UIApplication.shared.windows.first?.rootViewController else {

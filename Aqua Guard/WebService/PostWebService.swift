@@ -299,6 +299,33 @@ final class PostWebService{
         }
     }
     
-    
+    static func fetchAIDescription(for prompt: String, withToken token: String) async throws -> String {
+        let encodedPrompt = prompt.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        let descriptionURL = "http://localhost:9090/posts/generateDescriptionWithChat/\(encodedPrompt)"
+        guard let url = URL(string: descriptionURL) else {
+            throw PostErrorHandler.invalidURL
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET" // Changed to GET
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw PostErrorHandler.invalidResponse
+        }
+
+        // Decode the JSON response to get the description
+        let description = try JSONDecoder().decode(AIDescriptionResponse.self, from: data).description
+
+        return description
+    }
+
     
 }
+struct AIDescriptionResponse: Decodable {
+    let description: String
+}
+
+

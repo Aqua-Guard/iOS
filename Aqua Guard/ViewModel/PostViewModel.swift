@@ -29,8 +29,12 @@ class PostViewModel : ObservableObject {
     @Published var alertMessageUpdatePost: String = ""
     @Published var updatePostAlert: Bool = false
 
-    @Published var CurrentUserId : String = "65728dac8112744cc8707998"
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTZlMzQ4MDJiNTA3YzgyNTVmZmQ5YzYiLCJ1c2VybmFtZSI6InlvdXNzZWYiLCJpYXQiOjE3MDI1MDY1MDYsImV4cCI6MTcwMjUxMzcwNn0.RiGr3R6fjWK8wf52K7QXeFWpFsS6XyWbzvq9reX8nLk"
+    @Published var CurrentUserId : String = "656e34802b507c8255ffd9c6"
+    @Published var CurrentUserName : String = "youssef farhat"
+    @Published var CurrentUserImage : String = "1701721216200.jpg"
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTZlMzQ4MDJiNTA3YzgyNTVmZmQ5YzYiLCJ1c2VybmFtZSI6InlvdXNzZWYiLCJpYXQiOjE3MDI1OTc4MzIsImV4cCI6MTcwMjYwNTAzMn0.0yAsAs-wo-QvZqmZZSCnP4dHZ_tjYtwONTczkgDJjKY"
+    
+    @Published var aiDescription: String = ""
     
     func updatePost(postId : String ,description: String) async {
             do {
@@ -208,7 +212,21 @@ class PostViewModel : ObservableObject {
             }
         }
         
-        
+    func fetchAIDescription(prompt: String) async {
+           do {
+               
+               // Call the network service to fetch the AI description
+               let description = try await PostWebService.fetchAIDescription(for: prompt, withToken: self.token) // the problem here 
+          
+               // Update the UI on the main thread
+               DispatchQueue.main.async {
+                   self.aiDescription = description
+               }
+           } catch {
+               // Handle any errors, e.g., show an error message
+               print("Error fetching AI description: \(error.localizedDescription)")
+           }
+       }
         
         //
         //    init(){
