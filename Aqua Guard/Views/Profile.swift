@@ -9,6 +9,8 @@ import SwiftUI
 struct Profile: View {
     @StateObject var eventViewModel = MyEventViewModel()
     @StateObject var postViewModel = PostViewModel()
+    @StateObject var reclamationViewModel = ReclamationViewModel()
+
     var body: some View {
         NavigationView {
             List {
@@ -90,6 +92,7 @@ struct Profile: View {
                     .environmentObject(postViewModel)
             case "My Reclamtion":
                 ReclamationListView()
+                    .environmentObject(reclamationViewModel)
             default:
                 Text("Placeholder")
             }

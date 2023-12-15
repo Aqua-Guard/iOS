@@ -9,7 +9,7 @@ struct ActualiteCardView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            AsyncImage(url: URL(string: "http://127.0.0.1:9090/images/actualite/\(actualite.image)")) { phase in
+            AsyncImage(url: URL(string: "http://192.168.93.190:9090/images/actualite/\(actualite.image)")) { phase in
                 switch phase {
                 case .empty:
                     ProgressView()

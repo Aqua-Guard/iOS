@@ -1,30 +1,29 @@
 import SwiftUI
 
-struct Message: Identifiable {
-    var id = UUID()
-    var content: String
-    var isUser: Bool
-}
-
 struct Conversation: View {
-    @State private var messages: [Message] = [
-        Message(content: "reclamation1!", isUser: false),
-        Message(content: "reponse de reclamation1", isUser: true),
-        Message(content: "How are you?", isUser: false),
-        Message(content: "I'm good, thanks!", isUser: true),
-    ]
+    var reclamationId: String // Pass the reclamationId to the view
+    @ObservedObject var viewModel: ReclamationViewModel
+    
+    init(reclamationId: String, viewModel: ReclamationViewModel) {
+        self.reclamationId = reclamationId
+        self.viewModel = viewModel
+    }
 
     @State private var newMessage = ""
 
     var body: some View {
         VStack {
-            List(messages) { message in
-                MessageView(message: message)
-            }.padding(8)
-                .listStyle(PlainListStyle()) // Use PlainListStyle to remove the default list appearance
-                .navigationTitle("Reclamation Title").navigationBarTitleDisplayMode(.inline)
+            List(viewModel.discussions, id: \.createdAt) { discussion in
+                DiscussionView(discussion: discussion)
+            }
+            .padding(8)
+            .listStyle(PlainListStyle()) // Use PlainListStyle to remove the default list appearance
+            .navigationTitle("Reclamation Title")
+            .navigationBarTitleDisplayMode(.inline)
             .onAppear {
-                scrollToLastMessage()
+                viewModel.fetchDiscussions(reclamationId: reclamationId)
+                print("Fetched discussions for reclamationId: \(reclamationId)")
+                print("Discussions count: \(viewModel.discussions.count)")
             }
 
             HStack {
@@ -33,8 +32,8 @@ struct Conversation: View {
                     .padding()
 
                 Button(action: sendMessage) {
-                    Text("Send")
-                        .padding()
+                                    Text("Send")
+                                        .padding()
                 }
             }
         }
@@ -42,48 +41,44 @@ struct Conversation: View {
     }
 
     func sendMessage() {
-        messages.append(Message(content: newMessage, isUser: true))
-        newMessage = ""
+        Task {
+            do {
+                let success = try await viewModel.sendMessage(message: newMessage, userRole: "user", reclamationId: reclamationId)
+                newMessage = ""
+                
+              
+                    await viewModel.fetchDiscussions(reclamationId: reclamationId)
+               
 
-        // Scroll to the last message after sending a new message
-        scrollToLastMessage()
-    }
-
-    func scrollToLastMessage() {
-        // Scroll to the last message in the list
-        if let lastMessage = messages.last {
-            withAnimation {
-                // Scroll to the last message
+            } catch {
+                // Handle errors if needed
+                print("Failed to send message:", error)
             }
         }
     }
+
+
 }
 
-struct MessageView: View {
-    var message: Message
+struct DiscussionView: View {
+    var discussion: Discussion
 
     var body: some View {
         HStack {
-            if message.isUser {
+            if discussion.userRole == "user" {
                 Spacer()
             }
 
-            Text(message.content)
+            Text(discussion.message)
                 .padding(10)
-                .background(message.isUser ? Color.blue : Color.gray)
+                .background(discussion.userRole == "user" ? Color.blue : Color.gray)
                 .foregroundColor(.white)
                 .cornerRadius(10)
 
-            if !message.isUser {
+            if discussion.userRole != "user" {
                 Spacer()
             }
         }
         .padding(.vertical, 5)
-    }
-}
-
-struct Conversation_Previews: PreviewProvider {
-    static var previews: some View {
-        Conversation()
     }
 }

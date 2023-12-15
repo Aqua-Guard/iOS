@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A9E8E932B2B73F5008D174B /* Reclamation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E8E922B2B73F5008D174B /* Reclamation.swift */; };
+		4A9E8E952B2B753C008D174B /* ReclamationWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E8E942B2B753C008D174B /* ReclamationWebService.swift */; };
+		4A9E8E972B2B7567008D174B /* ReclamationErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E8E962B2B7567008D174B /* ReclamationErrorHandler.swift */; };
+		4A9E8E992B2B7719008D174B /* ReclamationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E8E982B2B7719008D174B /* ReclamationViewModel.swift */; };
+		4A9E8E9B2B2BFBF0008D174B /* ConversationWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E8E9A2B2BFBF0008D174B /* ConversationWebService.swift */; };
+		4A9E8E9D2B2BFC07008D174B /* ConversationErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E8E9C2B2BFC07008D174B /* ConversationErrorHandler.swift */; };
+		4A9E8E9F2B2C0856008D174B /* Discussion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E8E9E2B2C0856008D174B /* Discussion.swift */; };
 		76285D9C2B2A7AE60032E635 /* AddReclamation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76285D9B2B2A7AE60032E635 /* AddReclamation.swift */; };
 		7641CCFB2B22534700CC9BB8 /* ActualiteWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7641CCFA2B22534700CC9BB8 /* ActualiteWebService.swift */; };
 		7641CCFD2B2253B500CC9BB8 /* ActualiteErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7641CCFC2B2253B500CC9BB8 /* ActualiteErrorHandler.swift */; };
@@ -97,6 +104,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4A9E8E922B2B73F5008D174B /* Reclamation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reclamation.swift; sourceTree = "<group>"; };
+		4A9E8E942B2B753C008D174B /* ReclamationWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReclamationWebService.swift; sourceTree = "<group>"; };
+		4A9E8E962B2B7567008D174B /* ReclamationErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReclamationErrorHandler.swift; sourceTree = "<group>"; };
+		4A9E8E982B2B7719008D174B /* ReclamationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReclamationViewModel.swift; sourceTree = "<group>"; };
+		4A9E8E9A2B2BFBF0008D174B /* ConversationWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationWebService.swift; sourceTree = "<group>"; };
+		4A9E8E9C2B2BFC07008D174B /* ConversationErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationErrorHandler.swift; sourceTree = "<group>"; };
+		4A9E8E9E2B2C0856008D174B /* Discussion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discussion.swift; sourceTree = "<group>"; };
 		76285D9B2B2A7AE60032E635 /* AddReclamation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReclamation.swift; sourceTree = "<group>"; };
 		7641CCFA2B22534700CC9BB8 /* ActualiteWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualiteWebService.swift; sourceTree = "<group>"; };
 		7641CCFC2B2253B500CC9BB8 /* ActualiteErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualiteErrorHandler.swift; sourceTree = "<group>"; };
@@ -250,6 +264,8 @@
 				76E9BDD72B19527800B512A9 /* Actualite.swift */,
 				D438AE7D2B2224E100D6DE7D /* EventRequest.swift */,
 				76A18A5A2B22E98200F71965 /* Avis.swift */,
+				4A9E8E922B2B73F5008D174B /* Reclamation.swift */,
+				4A9E8E9E2B2C0856008D174B /* Discussion.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -357,6 +373,7 @@
 				E8ABB3592B1D0EA80051B72F /* LoginViewModell.swift */,
 				D4BD65962B1FDAF500AA5722 /* ParticipationViewModel.swift */,
 				7641CCFE2B22556600CC9BB8 /* ActualiteViewModel.swift */,
+				4A9E8E982B2B7719008D174B /* ReclamationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -398,6 +415,10 @@
 				D4BD65942B1FD82F00AA5722 /* ParticipationWebService.swift */,
 				7641CCFA2B22534700CC9BB8 /* ActualiteWebService.swift */,
 				7641CCFC2B2253B500CC9BB8 /* ActualiteErrorHandler.swift */,
+				4A9E8E942B2B753C008D174B /* ReclamationWebService.swift */,
+				4A9E8E962B2B7567008D174B /* ReclamationErrorHandler.swift */,
+				4A9E8E9A2B2BFBF0008D174B /* ConversationWebService.swift */,
+				4A9E8E9C2B2BFC07008D174B /* ConversationErrorHandler.swift */,
 			);
 			path = WebService;
 			sourceTree = "<group>";
@@ -545,6 +566,7 @@
 				D45E7A922B14B0F2000F0A9C /* SplashScreen2View.swift in Sources */,
 				76E3ED812B19B3C900464B7F /* Conversation.swift in Sources */,
 				76E9BDD62B194EDB00B512A9 /* ActualiteListView.swift in Sources */,
+				4A9E8E9D2B2BFC07008D174B /* ConversationErrorHandler.swift in Sources */,
 				822CBECD2B18008F00769D45 /* LoginView.swift in Sources */,
 				E864C6752B1FF8FB0099E99A /* MySinglePostView.swift in Sources */,
 				D44CD7A02B174490002294CE /* EventAddView.swift in Sources */,
@@ -557,6 +579,7 @@
 				E818059B2B222743008F78FD /* UpdatePostView.swift in Sources */,
 				7641CCFB2B22534700CC9BB8 /* ActualiteWebService.swift in Sources */,
 				E8F5FA3A2B19199800F5B9E0 /* LikeCardView.swift in Sources */,
+				4A9E8E972B2B7567008D174B /* ReclamationErrorHandler.swift in Sources */,
 				76E9BDDD2B1972D300B512A9 /* ReclamationListView.swift in Sources */,
 				E8C391F82B188C6100EA3872 /* PostViewModel.swift in Sources */,
 				E816FF762B164956007538BF /* MyPosts.swift in Sources */,
@@ -567,6 +590,8 @@
 				D4BFF9852B14FE710050DC80 /* Event.swift in Sources */,
 				E8C391FA2B1899FB00EA3872 /* PostDetailView.swift in Sources */,
 				E857A6CF2B17E66000EC62DE /* PostCardView.swift in Sources */,
+				4A9E8E932B2B73F5008D174B /* Reclamation.swift in Sources */,
+				4A9E8E9F2B2C0856008D174B /* Discussion.swift in Sources */,
 				E8ABB3602B1D10680051B72F /* ForgotPaswordCodeScreen.swift in Sources */,
 				76285D9C2B2A7AE60032E635 /* AddReclamation.swift in Sources */,
 				D44CD79E2B173C0D002294CE /* EventEditView.swift in Sources */,
@@ -583,6 +608,7 @@
 				E8B083892B1E76D700CDCFD9 /* PostErrorHandler.swift in Sources */,
 				D45E7A962B14B290000F0A9C /* SplashScreen4View.swift in Sources */,
 				D4BFF98C2B15020C0050DC80 /* EventCardView.swift in Sources */,
+				4A9E8E9B2B2BFBF0008D174B /* ConversationWebService.swift in Sources */,
 				76A18A5B2B22E98200F71965 /* Avis.swift in Sources */,
 				E81805992B2203D0008F78FD /* AddPostView.swift in Sources */,
 				E8B083872B1E74FF00CDCFD9 /* PostWebService.swift in Sources */,
@@ -593,6 +619,7 @@
 				E816FF702B1648E8007538BF /* MyCalendar.swift in Sources */,
 				E816FF722B164905007538BF /* Notification.swift in Sources */,
 				E816FF782B16496E007538BF /* Command.swift in Sources */,
+				4A9E8E992B2B7719008D174B /* ReclamationViewModel.swift in Sources */,
 				E857A6D12B17E69500EC62DE /* CommentCardView.swift in Sources */,
 				D44CD7A42B175D23002294CE /* MyEventViewModel.swift in Sources */,
 				D4C23E332B148B30002B0E10 /* Aqua_GuardApp.swift in Sources */,
@@ -603,6 +630,7 @@
 				D4C23E662B14A8A3002B0E10 /* SplashScreen1View.swift in Sources */,
 				E857A6CA2B17E5E900EC62DE /* Like.swift in Sources */,
 				822CBED32B18025800769D45 /* PasswordInputField.swift in Sources */,
+				4A9E8E952B2B753C008D174B /* ReclamationWebService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
