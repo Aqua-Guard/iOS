@@ -55,6 +55,7 @@ struct ContentView: View {
                 .resizable()
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all))
+            .navigationBarBackButtonHidden(true)
     }
     
 }

@@ -209,6 +209,11 @@ struct EventAddView: View {
                             Button(action: {
                                 // Action for submitting event
                                 print("Submit Event")
+                                guard Date() < startDate else {
+                                        errorMessage = "Start date should be after today date"
+                                        showSnackbar(message: errorMessage)
+                                        return
+                                    }
                                 guard startDate < endDate else {
                                         errorMessage = "End date should be after start date"
                                         showSnackbar(message: errorMessage)
@@ -216,8 +221,8 @@ struct EventAddView: View {
                                     }
 
                                     // Validate description
-                                    guard eventDescription.count >= 10 && eventDescription.count <= 100 else {
-                                        errorMessage = "Event description should be between 10 and 100 characters"
+                                    guard eventDescription.count >= 10 && eventDescription.count <= 500 else {
+                                        errorMessage = "Event description should be between 10 and 500 characters"
                                         showSnackbar(message: errorMessage)
                                         return
                                     }

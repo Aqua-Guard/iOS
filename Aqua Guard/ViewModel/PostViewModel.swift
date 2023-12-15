@@ -29,10 +29,10 @@ class PostViewModel : ObservableObject {
     @Published var alertMessageUpdatePost: String = ""
     @Published var updatePostAlert: Bool = false
 
-    @Published var CurrentUserId : String = "656e34802b507c8255ffd9c6"
-    @Published var CurrentUserName : String = "youssef farhat"
-    @Published var CurrentUserImage : String = "1701721216200.jpg"
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTZlMzQ4MDJiNTA3YzgyNTVmZmQ5YzYiLCJ1c2VybmFtZSI6InlvdXNzZWYiLCJpYXQiOjE3MDI1OTc4MzIsImV4cCI6MTcwMjYwNTAzMn0.0yAsAs-wo-QvZqmZZSCnP4dHZ_tjYtwONTczkgDJjKY"
+    @Published var CurrentUserId : String = LoginViewModell.defaults.string(forKey: "id") ?? ""
+    @Published var CurrentUserName : String = (LoginViewModell.defaults.string(forKey: "firstName") ?? "") + " " + (LoginViewModell.defaults.string(forKey: "lastName") ?? "")
+    @Published var CurrentUserImage : String = (LoginViewModell.defaults.string(forKey: "image") ?? "")
+    let token = LoginViewModell.defaults.string(forKey: "token") ?? ""
     
     @Published var aiDescription: String = ""
     
