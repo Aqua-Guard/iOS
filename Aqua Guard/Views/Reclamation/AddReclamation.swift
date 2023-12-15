@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct AddReclamation: View {
+    @ObservedObject var viewModel = ReclamationViewModel()
+    @State private var navigateToReclamationList = false
     @State private var title = ""
     @State private var description = ""
     @State private var selectedUIImage: UIImage?
@@ -53,6 +55,7 @@ struct AddReclamation: View {
                 Text("Choose Image")
                     .foregroundColor(.white)
                     .padding()
+                    .frame(width: 330)
                     .background(Color.darkBlue)
                     .clipShape(Capsule())
             }
@@ -86,7 +89,30 @@ struct AddReclamation: View {
                         }
                     }, alignment: .topLeading
                 )
+            Button(action: {
+                Task {
+                    if let selectedUIImage = selectedUIImage {
+                               if let imageData = selectedUIImage.jpegData(compressionQuality: 0.8) {
+                                   await viewModel.AddReclamation(title: title, description: description, image: imageData)
+                                   navigateToReclamationList = true
 
+                               } else {
+                                   // Handle the error - could not convert image to Data
+                               }
+                           }
+                   
+                }
+            }) {
+                Text("Save")
+                    .frame(width: 300)
+                    .foregroundColor(.white)
+                    .padding()
+
+                    .background(Color.red)
+                    .clipShape(Capsule())
+            }  .fullScreenCover(isPresented: $navigateToReclamationList, content: {
+                ReclamationListView()
+            })
             Spacer()
         }
         .padding()
@@ -147,7 +173,7 @@ struct ImagePickerReclamation: UIViewControllerRepresentable {
     struct AddReclamation_Previews: PreviewProvider {
         static var previews: some View {
             NavigationView {
-                AddReclamation()
+                AddReclamation().environmentObject(ReclamationViewModel())
             }
         }
     }

@@ -9,6 +9,8 @@ import SwiftUI
 struct Profile: View {
     @StateObject var eventViewModel = MyEventViewModel()
     @StateObject var postViewModel = PostViewModel()
+    @StateObject var reclamationViewModel = ReclamationViewModel()
+
     @State private var navigateToLogin = false
     var body: some View {
         NavigationView {
@@ -119,6 +121,7 @@ struct Profile: View {
                     .environmentObject(postViewModel)
             case "My Reclamtion":
                 ReclamationListView()
+                    .environmentObject(reclamationViewModel)
             case "Settings":
                 SettingsView()
             case "Logout":

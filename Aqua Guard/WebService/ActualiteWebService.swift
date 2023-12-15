@@ -9,7 +9,7 @@ import Foundation
 
 final class ActualiteWebService{
     static let shared = ActualiteWebService()
-    private let baseURL = "http://127.0.0.1:9090"
+    private let baseURL = "http://192.168.93.190:9090"
     
     
     
@@ -46,7 +46,7 @@ final class ActualiteWebService{
     
     
     func searchActualites(about: String, completion: @escaping ([Actualite]?) -> Void) {
-        let urlString = "http://127.0.0.1:9090/act/search"
+        let urlString = "http://192.168.93.190:9090/act/search"
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
             completion(nil)
@@ -91,7 +91,7 @@ final class ActualiteWebService{
         }.resume()
     }
     func addOrUpdateAvis(userId: String, actualiteTitle: String, avis: String, completion: @escaping (Bool, Error?) -> Void) {
-        let url = URL(string: "http://127.0.0.1:9090/avis/addupdates")!
+        let url = URL(string: "http://192.168.93.190:9090/avis/addupdates")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
