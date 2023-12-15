@@ -17,6 +17,15 @@
         "revision" : "8dbc2e7c33cda25c0b2efafd59716cb9820c83eb",
         "version" : "0.8.1"
       }
+    },
+    {
+      "identity" : "voice-overlay-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/algolia/voice-overlay-ios",
+      "state" : {
+        "revision" : "55a1047be9e0d9e4d4295ef127cc31b3ef7b8b54",
+        "version" : "1.2.0"
+      }
     }
   ],
   "version" : 2
