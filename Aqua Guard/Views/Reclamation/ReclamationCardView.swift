@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct ReclamationCardView: View {
+    var reclamation: Reclamation
+    @StateObject var viewModel: ReclamationViewModel
+
     @State private var isDetailVisible = false
+    @State private var isConversationSheetPresented = false
 
     @State private var isDetailExpanded = false
 
@@ -21,7 +25,19 @@ struct ReclamationCardView: View {
                   LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.1333333333, green: 0.6235294118, blue: 0.9176470588, alpha: 1)), Color(#colorLiteral(red: 0.9490196078, green: 0.9803921569, blue: 1, alpha: 1))]), startPoint: .top, endPoint: .bottom)
                       .frame(height:77)
                       .padding(-70)
-                  
+                  AsyncImage(url: URL(string: "http://192.168.93.190:9090/images/reclamation/\(reclamation.image)")) { phase in
+                      switch phase {
+                      case .empty:
+                          ProgressView()
+                      case .success(let image):
+                          image
+                              .resizable()
+                              .scaledToFill()
+                              .frame(width: 60, height: 70)
+                              .clipShape(Circle())
+                              .overlay(Circle().stroke(Color.white, lineWidth: 5))
+                              .padding(EdgeInsets(top: 10, leading: 290, bottom: 0, trailing: 10))
+                      case .failure:
                   Image("moi")
                       .resizable()
                       .scaledToFill()
@@ -29,8 +45,11 @@ struct ReclamationCardView: View {
                       .clipShape(Circle())
                       .overlay(Circle().stroke(Color.white, lineWidth: 5))
                       .padding(EdgeInsets(top: 10, leading: 290, bottom: 0, trailing: 10))
-                  
-                  Text("this is the message of reclamation ")
+                      @unknown default:
+                          EmptyView()
+                      }
+                  }
+                  Text(reclamation.title)
                       .font(.system(size: 14, weight: .bold))
                       .foregroundColor(.black)
                       .multilineTextAlignment(.leading) // Align text to the left
@@ -48,7 +67,7 @@ struct ReclamationCardView: View {
 
           
               VStack {
-                  Text("« Texte « Texte » est issu du mot latin « textum », dérivé du ve«« Texte » est issu du mot latin « textum », dérivé du ve« Texte » est issu du mot latin « textum », dérivé du verbe « texere » qui signifie « tisser »..« Texte » est issu du mot latin « textum », dérivé du verbe « texere » qui signifie « tisser »..rbe « texere » qui signifie « tisser ».. Texte » est issu du mot latin « textum », dérivé du verbe « texere » qui signifie « tisser »..rbe « texere » qui signifie « tisser »..» est issu du mot latin « textum », dérivé du verbe « texere » qui signifie « tisser »...")
+                  Text(reclamation.description)
                       .id("detail")
                       .opacity(isDetailVisible ? 1 : 0)
                       .padding(EdgeInsets(top: isDetailExpanded ? -5 : -110, leading: isDetailExpanded ? 15:-15000, bottom: isDetailExpanded ? 50 : 0, trailing:isDetailExpanded ? 15:-30000))
@@ -63,20 +82,28 @@ struct ReclamationCardView: View {
                       .multilineTextAlignment(.leading) // Align text to the left
                       .padding(.leading, -160)
                   
-                 
-                  NavigationLink(destination: Conversation()) {
-                                      Text("Conversation")
-                                      
-                                          .background(Color.darkBlue)
-                                          .foregroundColor(.white)
-                                          .cornerRadius(8)
-                                          .opacity(isDetailVisible ? 1 : 0)
-                                          .padding(EdgeInsets(top: isDetailExpanded ? 7 : -100, leading: isDetailExpanded ? 15:-15000, bottom: isDetailExpanded ? 10 : 0, trailing:isDetailExpanded ? 15:-30000))
-                       
-                           .frame(maxWidth: .infinity)
-                           
-                           .background(Color.darkBlue)
-                                  }
+         
+                  
+                  Button(action: {
+                      isConversationSheetPresented.toggle()
+                  }) {
+                      Text("Conversation")
+                          .background(Color.darkBlue)
+                          .foregroundColor(.white)
+                          .cornerRadius(8)
+                          .opacity(isDetailVisible ? 1 : 0)
+                          .padding(EdgeInsets(top: isDetailExpanded ? 7 : -100, leading: isDetailExpanded ? 15 : -15000, bottom: isDetailExpanded ? 10 : 0, trailing: isDetailExpanded ? 15 : -30000))
+                          .frame(maxWidth: .infinity)
+                          .background(Color.darkBlue)
+                  }
+                  .sheet(isPresented: $isConversationSheetPresented) {
+                      NavigationView {
+                          Conversation(reclamationId: reclamation.id, viewModel: viewModel)
+                              .navigationBarHidden(true)
+                              .navigationBarBackButtonHidden(true)
+                      }
+                  }
+
                   
               }
               .background(Color.white)
@@ -91,8 +118,4 @@ struct ReclamationCardView: View {
     
   }
 
-  struct ReclamationCardView_Previews: PreviewProvider {
-      static var previews: some View {
-          ReclamationCardView()
-      }
-  }
+  

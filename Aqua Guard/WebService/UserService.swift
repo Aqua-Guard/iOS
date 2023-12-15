@@ -7,7 +7,7 @@
 
 import Foundation
 
-let URLString:String = "http://127.0.0.1:9090/user"
+let URLString:String = "http://192.168.93.190:9090/user"
 
 
 class UserService{
