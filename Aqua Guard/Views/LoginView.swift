@@ -15,7 +15,9 @@ struct LoginView: View {
     @State var textValue: String = ""
     @State var errorValue: String = ""
     @State private var isActive = false
+    @State private var navigationActive: Bool = false
 
+    
     var body: some View {
         NavigationView {
             
@@ -31,25 +33,50 @@ struct LoginView: View {
                         .resizable()
                         .frame(width: screenWidth * 0.8, height: screenWidth * 0.8)
                     VStack {
-                        TextInputField("Email", text: $modelView.email, error: $modelView.emailError)
-                        //.padding(.top)
+                        TextInputField("Username", text: $modelView.username, error: $modelView.usernameError)
+                        
                         
                         PasswordInputField("Password", text: $modelView.password, error: $modelView.passwordError)
                         Spacer()
                         
-                        Button(action: {
-                            self.modelView.validate()
-                        }, label: {
-                            Text("Login")
-                                .foregroundColor(.white)
-                                .fontWeight(.semibold)
-                                .font(.system(size: 20))
-                                .frame(width: screenWidth * 0.91, height: screenWidth * 0.13)
-                            
-                        })
-                        .background(Color.lightBlue)
-                        .cornerRadius(30)
-                        .padding(.top)
+                        ZStack {
+                                NavigationLink(
+                                    destination: ContentView(),
+                                    isActive: $navigationActive
+                                ) {
+                                    EmptyView()
+                                }
+                                .opacity(0) // Hide the NavigationLink by setting opacity to 0
+
+                                Button(action: {
+                                    self.modelView.validate()
+                                    Task {
+                                        print("amiraaaa")
+                                        await self.modelView.login()
+
+                                        // Activate the NavigationLink after successful login
+                                        if self.modelView.loggingIn {
+                                            // Use isActive to trigger the NavigationLink
+                                            navigationActive = true
+                                        }
+                                    }
+                                }) {
+                                    if self.modelView.loggingIn {
+                                        ProgressView()
+                                    } else {
+                                        Text("Login")
+                                            .foregroundColor(.white)
+                                            .fontWeight(.semibold)
+                                            .font(.system(size: 20))
+                                            .frame(width: screenWidth * 0.91, height: screenWidth * 0.13)
+                                    }
+                                }
+                            }
+                            .navigationBarHidden(true)
+                            .background(Color.lightBlue)
+                            .cornerRadius(30)
+                            .padding(.top)
+                        
                         
                         //Button(action: {
                         

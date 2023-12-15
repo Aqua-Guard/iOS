@@ -7,6 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		423C655E2B2BF60D00A85767 /* changePassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C65572B2BF60D00A85767 /* changePassword.swift */; };
+		423C655F2B2BF60D00A85767 /* ForgotPasswordEmailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C65582B2BF60D00A85767 /* ForgotPasswordEmailScreen.swift */; };
+		423C65602B2BF60D00A85767 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C65592B2BF60D00A85767 /* LoginView.swift */; };
+		423C65612B2BF60D00A85767 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C655A2B2BF60D00A85767 /* SettingsView.swift */; };
+		423C65622B2BF60D00A85767 /* ForgotPaswordCodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C655B2B2BF60D00A85767 /* ForgotPaswordCodeScreen.swift */; };
+		423C65632B2BF60D00A85767 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C655C2B2BF60D00A85767 /* RegisterView.swift */; };
+		423C65642B2BF60D00A85767 /* ForgotPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C655D2B2BF60D00A85767 /* ForgotPasswordScreen.swift */; };
+		423C65682B2BF63200A85767 /* LoginViewModell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C65652B2BF63200A85767 /* LoginViewModell.swift */; };
+		423C65692B2BF63200A85767 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C65662B2BF63200A85767 /* RegisterViewModel.swift */; };
+		423C656A2B2BF63200A85767 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C65672B2BF63200A85767 /* UserViewModel.swift */; };
+		423C656D2B2BF65E00A85767 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C656B2B2BF65E00A85767 /* LoginResponse.swift */; };
+		423C656E2B2BF65E00A85767 /* UsersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C656C2B2BF65E00A85767 /* UsersModel.swift */; };
+		423C65702B2BF66F00A85767 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C656F2B2BF66F00A85767 /* UserService.swift */; };
+		4A9E8EA12B2C34AF008D174B /* ReclamationWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E8EA02B2C34AF008D174B /* ReclamationWebService.swift */; };
+		4A9E8EA32B2C34D3008D174B /* ReclamationErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E8EA22B2C34D3008D174B /* ReclamationErrorHandler.swift */; };
+		4A9E8EA52B2C3587008D174B /* ReclamationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E8EA42B2C3587008D174B /* ReclamationViewModel.swift */; };
+		4A9E8EA72B2C35B6008D174B /* ConversationWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E8EA62B2C35B6008D174B /* ConversationWebService.swift */; };
+		4A9E8EA92B2C35EA008D174B /* ConversationErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E8EA82B2C35EA008D174B /* ConversationErrorHandler.swift */; };
+		4A9E8EAB2B2C3613008D174B /* Discussion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E8EAA2B2C3613008D174B /* Discussion.swift */; };
+		4A9E8EAD2B2C3632008D174B /* Reclamation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E8EAC2B2C3632008D174B /* Reclamation.swift */; };
+		76285D9C2B2A7AE60032E635 /* AddReclamation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76285D9B2B2A7AE60032E635 /* AddReclamation.swift */; };
+		7641CCFB2B22534700CC9BB8 /* ActualiteWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7641CCFA2B22534700CC9BB8 /* ActualiteWebService.swift */; };
+		7641CCFD2B2253B500CC9BB8 /* ActualiteErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7641CCFC2B2253B500CC9BB8 /* ActualiteErrorHandler.swift */; };
+		7641CCFF2B22556600CC9BB8 /* ActualiteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7641CCFE2B22556600CC9BB8 /* ActualiteViewModel.swift */; };
+		76A18A5B2B22E98200F71965 /* Avis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A18A5A2B22E98200F71965 /* Avis.swift */; };
 		76E3ED812B19B3C900464B7F /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E3ED802B19B3C900464B7F /* Conversation.swift */; };
 		76E9BDD22B194E4000B512A9 /* ActualiteCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E9BDD12B194E4000B512A9 /* ActualiteCardView.swift */; };
 		76E9BDD42B194E7C00B512A9 /* ActualiteDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E9BDD32B194E7C00B512A9 /* ActualiteDetailsView.swift */; };
@@ -14,8 +39,6 @@
 		76E9BDD82B19527800B512A9 /* Actualite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E9BDD72B19527800B512A9 /* Actualite.swift */; };
 		76E9BDDB2B19558500B512A9 /* ReclamationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E9BDDA2B19558500B512A9 /* ReclamationCardView.swift */; };
 		76E9BDDD2B1972D300B512A9 /* ReclamationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E9BDDC2B1972D300B512A9 /* ReclamationListView.swift */; };
-		822CBECC2B18008F00769D45 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822CBECA2B18008F00769D45 /* RegisterView.swift */; };
-		822CBECD2B18008F00769D45 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822CBECB2B18008F00769D45 /* LoginView.swift */; };
 		822CBED32B18025800769D45 /* PasswordInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822CBED12B18025800769D45 /* PasswordInputField.swift */; };
 		822CBED42B18025800769D45 /* TextInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822CBED22B18025800769D45 /* TextInputField.swift */; };
 		D438AE7E2B2224E100D6DE7D /* EventRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D438AE7D2B2224E100D6DE7D /* EventRequest.swift */; };
@@ -46,6 +69,7 @@
 		D4C23E662B14A8A3002B0E10 /* SplashScreen1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C23E652B14A8A3002B0E10 /* SplashScreen1View.swift */; };
 		D4F5A1B62B1F782B0096346A /* EventWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F5A1B52B1F782B0096346A /* EventWebService.swift */; };
 		D4F5A1BC2B1F8AE80096346A /* EventErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F5A1BB2B1F8AE80096346A /* EventErrorHandler.swift */; };
+		D4FDEF292B2776FE00533816 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = D4FDEF282B2776FE00533816 /* FSCalendar */; };
 		E816FF702B1648E8007538BF /* MyCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF6F2B1648E8007538BF /* MyCalendar.swift */; };
 		E816FF722B164905007538BF /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF712B164905007538BF /* Notification.swift */; };
 		E816FF742B164938007538BF /* MyEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF732B164938007538BF /* MyEvents.swift */; };
@@ -53,6 +77,7 @@
 		E816FF782B16496E007538BF /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = E816FF772B16496E007538BF /* Command.swift */; };
 		E81805992B2203D0008F78FD /* AddPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81805982B2203D0008F78FD /* AddPostView.swift */; };
 		E818059B2B222743008F78FD /* UpdatePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E818059A2B222743008F78FD /* UpdatePostView.swift */; };
+		E83996032B27E274001CED10 /* InstantSearchVoiceOverlay in Frameworks */ = {isa = PBXBuildFile; productRef = E83996022B27E274001CED10 /* InstantSearchVoiceOverlay */; };
 		E83A72E32B1F9C5E00A9F955 /* SimpleToast in Frameworks */ = {isa = PBXBuildFile; productRef = E83A72E22B1F9C5E00A9F955 /* SimpleToast */; };
 		E857A6C82B17E5BD00EC62DE /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857A6C72B17E5BD00EC62DE /* PostModel.swift */; };
 		E857A6CA2B17E5E900EC62DE /* Like.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857A6C92B17E5E900EC62DE /* Like.swift */; };
@@ -61,13 +86,11 @@
 		E857A6D12B17E69500EC62DE /* CommentCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857A6D02B17E69500EC62DE /* CommentCardView.swift */; };
 		E857A6D32B17EA4600EC62DE /* PostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E857A6D22B17EA4600EC62DE /* PostListView.swift */; };
 		E864C6752B1FF8FB0099E99A /* MySinglePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E864C6742B1FF8FB0099E99A /* MySinglePostView.swift */; };
-		E8ABB35A2B1D0EA80051B72F /* LoginViewModell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ABB3592B1D0EA80051B72F /* LoginViewModell.swift */; };
-		E8ABB35C2B1D0F670051B72F /* ForgotPasswordEmailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ABB35B2B1D0F670051B72F /* ForgotPasswordEmailScreen.swift */; };
-		E8ABB35E2B1D0FCA0051B72F /* ForgotPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ABB35D2B1D0FCA0051B72F /* ForgotPasswordScreen.swift */; };
-		E8ABB3602B1D10680051B72F /* ForgotPaswordCodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ABB35F2B1D10680051B72F /* ForgotPaswordCodeScreen.swift */; };
 		E8ABB3622B1DD7C80051B72F /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ABB3612B1DD7C80051B72F /* Profile.swift */; };
 		E8B083872B1E74FF00CDCFD9 /* PostWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B083862B1E74FF00CDCFD9 /* PostWebService.swift */; };
 		E8B083892B1E76D700CDCFD9 /* PostErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B083882B1E76D700CDCFD9 /* PostErrorHandler.swift */; };
+		E8BDA88B2B29C765008BC786 /* RichTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BDA88A2B29C765008BC786 /* RichTextEditor.swift */; };
+		E8BDA88D2B29C8C8008BC786 /* FontPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BDA88C2B29C8C8008BC786 /* FontPickerView.swift */; };
 		E8C391F82B188C6100EA3872 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C391F72B188C6100EA3872 /* PostViewModel.swift */; };
 		E8C391FA2B1899FB00EA3872 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C391F92B1899FB00EA3872 /* PostDetailView.swift */; };
 		E8F5FA3A2B19199800F5B9E0 /* LikeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F5FA392B19199800F5B9E0 /* LikeCardView.swift */; };
@@ -91,6 +114,31 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		423C65572B2BF60D00A85767 /* changePassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = changePassword.swift; sourceTree = "<group>"; };
+		423C65582B2BF60D00A85767 /* ForgotPasswordEmailScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordEmailScreen.swift; sourceTree = "<group>"; };
+		423C65592B2BF60D00A85767 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		423C655A2B2BF60D00A85767 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		423C655B2B2BF60D00A85767 /* ForgotPaswordCodeScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPaswordCodeScreen.swift; sourceTree = "<group>"; };
+		423C655C2B2BF60D00A85767 /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		423C655D2B2BF60D00A85767 /* ForgotPasswordScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordScreen.swift; sourceTree = "<group>"; };
+		423C65652B2BF63200A85767 /* LoginViewModell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModell.swift; sourceTree = "<group>"; };
+		423C65662B2BF63200A85767 /* RegisterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		423C65672B2BF63200A85767 /* UserViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		423C656B2B2BF65E00A85767 /* LoginResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
+		423C656C2B2BF65E00A85767 /* UsersModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersModel.swift; sourceTree = "<group>"; };
+		423C656F2B2BF66F00A85767 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		4A9E8EA02B2C34AF008D174B /* ReclamationWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReclamationWebService.swift; sourceTree = "<group>"; };
+		4A9E8EA22B2C34D3008D174B /* ReclamationErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReclamationErrorHandler.swift; sourceTree = "<group>"; };
+		4A9E8EA42B2C3587008D174B /* ReclamationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReclamationViewModel.swift; sourceTree = "<group>"; };
+		4A9E8EA62B2C35B6008D174B /* ConversationWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationWebService.swift; sourceTree = "<group>"; };
+		4A9E8EA82B2C35EA008D174B /* ConversationErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationErrorHandler.swift; sourceTree = "<group>"; };
+		4A9E8EAA2B2C3613008D174B /* Discussion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discussion.swift; sourceTree = "<group>"; };
+		4A9E8EAC2B2C3632008D174B /* Reclamation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reclamation.swift; sourceTree = "<group>"; };
+		76285D9B2B2A7AE60032E635 /* AddReclamation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReclamation.swift; sourceTree = "<group>"; };
+		7641CCFA2B22534700CC9BB8 /* ActualiteWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualiteWebService.swift; sourceTree = "<group>"; };
+		7641CCFC2B2253B500CC9BB8 /* ActualiteErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualiteErrorHandler.swift; sourceTree = "<group>"; };
+		7641CCFE2B22556600CC9BB8 /* ActualiteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualiteViewModel.swift; sourceTree = "<group>"; };
+		76A18A5A2B22E98200F71965 /* Avis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avis.swift; sourceTree = "<group>"; };
 		76E3ED802B19B3C900464B7F /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		76E9BDD12B194E4000B512A9 /* ActualiteCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualiteCardView.swift; sourceTree = "<group>"; };
 		76E9BDD32B194E7C00B512A9 /* ActualiteDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualiteDetailsView.swift; sourceTree = "<group>"; };
@@ -98,8 +146,6 @@
 		76E9BDD72B19527800B512A9 /* Actualite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actualite.swift; sourceTree = "<group>"; };
 		76E9BDDA2B19558500B512A9 /* ReclamationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReclamationCardView.swift; sourceTree = "<group>"; };
 		76E9BDDC2B1972D300B512A9 /* ReclamationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReclamationListView.swift; sourceTree = "<group>"; };
-		822CBECA2B18008F00769D45 /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
-		822CBECB2B18008F00769D45 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		822CBED12B18025800769D45 /* PasswordInputField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordInputField.swift; sourceTree = "<group>"; };
 		822CBED22B18025800769D45 /* TextInputField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputField.swift; sourceTree = "<group>"; };
 		D438AE7D2B2224E100D6DE7D /* EventRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRequest.swift; sourceTree = "<group>"; };
@@ -147,13 +193,12 @@
 		E857A6D02B17E69500EC62DE /* CommentCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCardView.swift; sourceTree = "<group>"; };
 		E857A6D22B17EA4600EC62DE /* PostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListView.swift; sourceTree = "<group>"; };
 		E864C6742B1FF8FB0099E99A /* MySinglePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySinglePostView.swift; sourceTree = "<group>"; };
-		E8ABB3592B1D0EA80051B72F /* LoginViewModell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModell.swift; sourceTree = "<group>"; };
-		E8ABB35B2B1D0F670051B72F /* ForgotPasswordEmailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordEmailScreen.swift; sourceTree = "<group>"; };
-		E8ABB35D2B1D0FCA0051B72F /* ForgotPasswordScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordScreen.swift; sourceTree = "<group>"; };
-		E8ABB35F2B1D10680051B72F /* ForgotPaswordCodeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPaswordCodeScreen.swift; sourceTree = "<group>"; };
 		E8ABB3612B1DD7C80051B72F /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		E8B083862B1E74FF00CDCFD9 /* PostWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWebService.swift; sourceTree = "<group>"; };
 		E8B083882B1E76D700CDCFD9 /* PostErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostErrorHandler.swift; sourceTree = "<group>"; };
+		E8BDA88A2B29C765008BC786 /* RichTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextEditor.swift; sourceTree = "<group>"; };
+		E8BDA88C2B29C8C8008BC786 /* FontPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontPickerView.swift; sourceTree = "<group>"; };
+		E8C242A52B2A4E4E009B272D /* Aqua-Guard-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Aqua-Guard-Info.plist"; sourceTree = SOURCE_ROOT; };
 		E8C391F72B188C6100EA3872 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		E8C391F92B1899FB00EA3872 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
 		E8F5FA392B19199800F5B9E0 /* LikeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCardView.swift; sourceTree = "<group>"; };
@@ -165,6 +210,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E83A72E32B1F9C5E00A9F955 /* SimpleToast in Frameworks */,
+				D4FDEF292B2776FE00533816 /* FSCalendar in Frameworks */,
+				E83996032B27E274001CED10 /* InstantSearchVoiceOverlay in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +248,7 @@
 				76E9BDDA2B19558500B512A9 /* ReclamationCardView.swift */,
 				76E9BDDC2B1972D300B512A9 /* ReclamationListView.swift */,
 				76E3ED802B19B3C900464B7F /* Conversation.swift */,
+				76285D9B2B2A7AE60032E635 /* AddReclamation.swift */,
 			);
 			path = Reclamation;
 			sourceTree = "<group>";
@@ -232,10 +280,15 @@
 				D4BFF9842B14FE710050DC80 /* Event.swift */,
 				D4BFF9862B15005D0050DC80 /* Participation.swift */,
 				E857A6C72B17E5BD00EC62DE /* PostModel.swift */,
+				423C656B2B2BF65E00A85767 /* LoginResponse.swift */,
+				423C656C2B2BF65E00A85767 /* UsersModel.swift */,
 				E857A6C92B17E5E900EC62DE /* Like.swift */,
 				E857A6CB2B17E5FA00EC62DE /* Comment.swift */,
 				76E9BDD72B19527800B512A9 /* Actualite.swift */,
 				D438AE7D2B2224E100D6DE7D /* EventRequest.swift */,
+				76A18A5A2B22E98200F71965 /* Avis.swift */,
+				4A9E8EAA2B2C3613008D174B /* Discussion.swift */,
+				4A9E8EAC2B2C3632008D174B /* Reclamation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -249,15 +302,17 @@
 				E816FF6E2B1648A4007538BF /* SubViews */,
 				D4BFF98B2B15020C0050DC80 /* EventCardView.swift */,
 				D4BFF98D2B15059D0050DC80 /* EventListView.swift */,
+				423C65572B2BF60D00A85767 /* changePassword.swift */,
+				423C65582B2BF60D00A85767 /* ForgotPasswordEmailScreen.swift */,
+				423C655D2B2BF60D00A85767 /* ForgotPasswordScreen.swift */,
+				423C655B2B2BF60D00A85767 /* ForgotPaswordCodeScreen.swift */,
+				423C65592B2BF60D00A85767 /* LoginView.swift */,
+				423C655C2B2BF60D00A85767 /* RegisterView.swift */,
+				423C655A2B2BF60D00A85767 /* SettingsView.swift */,
 				D4BFF98F2B1507510050DC80 /* EventDetailsView.swift */,
 				E8ABB3612B1DD7C80051B72F /* Profile.swift */,
 				D44CD79D2B173C0D002294CE /* EventEditView.swift */,
 				D44CD79F2B174490002294CE /* EventAddView.swift */,
-				822CBECB2B18008F00769D45 /* LoginView.swift */,
-				E8ABB35B2B1D0F670051B72F /* ForgotPasswordEmailScreen.swift */,
-				822CBECA2B18008F00769D45 /* RegisterView.swift */,
-				E8ABB35D2B1D0FCA0051B72F /* ForgotPasswordScreen.swift */,
-				E8ABB35F2B1D10680051B72F /* ForgotPaswordCodeScreen.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -286,6 +341,7 @@
 		D4C23E312B148B30002B0E10 /* Aqua Guard */ = {
 			isa = PBXGroup;
 			children = (
+				E8C242A52B2A4E4E009B272D /* Aqua-Guard-Info.plist */,
 				E8B083822B1E745500CDCFD9 /* WebService */,
 				822CBED52B18026000769D45 /* Components */,
 				E816FF622B1645FC007538BF /* ViewModel */,
@@ -340,8 +396,12 @@
 				D44CD7A12B174EF2002294CE /* EventViewModel.swift */,
 				D44CD7A32B175D23002294CE /* MyEventViewModel.swift */,
 				E8C391F72B188C6100EA3872 /* PostViewModel.swift */,
-				E8ABB3592B1D0EA80051B72F /* LoginViewModell.swift */,
 				D4BD65962B1FDAF500AA5722 /* ParticipationViewModel.swift */,
+				423C65652B2BF63200A85767 /* LoginViewModell.swift */,
+				423C65662B2BF63200A85767 /* RegisterViewModel.swift */,
+				423C65672B2BF63200A85767 /* UserViewModel.swift */,
+				7641CCFE2B22556600CC9BB8 /* ActualiteViewModel.swift */,
+				4A9E8EA42B2C3587008D174B /* ReclamationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -369,6 +429,8 @@
 				E864C6742B1FF8FB0099E99A /* MySinglePostView.swift */,
 				E81805982B2203D0008F78FD /* AddPostView.swift */,
 				E818059A2B222743008F78FD /* UpdatePostView.swift */,
+				E8BDA88A2B29C765008BC786 /* RichTextEditor.swift */,
+				E8BDA88C2B29C8C8008BC786 /* FontPickerView.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -378,9 +440,16 @@
 			children = (
 				E8B083862B1E74FF00CDCFD9 /* PostWebService.swift */,
 				E8B083882B1E76D700CDCFD9 /* PostErrorHandler.swift */,
+				423C656F2B2BF66F00A85767 /* UserService.swift */,
 				D4F5A1B52B1F782B0096346A /* EventWebService.swift */,
 				D4F5A1BB2B1F8AE80096346A /* EventErrorHandler.swift */,
 				D4BD65942B1FD82F00AA5722 /* ParticipationWebService.swift */,
+				7641CCFA2B22534700CC9BB8 /* ActualiteWebService.swift */,
+				7641CCFC2B2253B500CC9BB8 /* ActualiteErrorHandler.swift */,
+				4A9E8EA02B2C34AF008D174B /* ReclamationWebService.swift */,
+				4A9E8EA22B2C34D3008D174B /* ReclamationErrorHandler.swift */,
+				4A9E8EA62B2C35B6008D174B /* ConversationWebService.swift */,
+				4A9E8EA82B2C35EA008D174B /* ConversationErrorHandler.swift */,
 			);
 			path = WebService;
 			sourceTree = "<group>";
@@ -403,6 +472,8 @@
 			name = "Aqua Guard";
 			packageProductDependencies = (
 				E83A72E22B1F9C5E00A9F955 /* SimpleToast */,
+				D4FDEF282B2776FE00533816 /* FSCalendar */,
+				E83996022B27E274001CED10 /* InstantSearchVoiceOverlay */,
 			);
 			productName = "Aqua Guard";
 			productReference = D4C23E2F2B148B30002B0E10 /* Aqua Guard.app */;
@@ -478,6 +549,8 @@
 			mainGroup = D4C23E262B148B30002B0E10;
 			packageReferences = (
 				E83A72E12B1F9C5E00A9F955 /* XCRemoteSwiftPackageReference "SimpleToast" */,
+				D4FDEF272B2776FE00533816 /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				E83996012B27E274001CED10 /* XCRemoteSwiftPackageReference "voice-overlay-ios" */,
 			);
 			productRefGroup = D4C23E302B148B30002B0E10 /* Products */;
 			projectDirPath = "";
@@ -522,63 +595,84 @@
 			buildActionMask = 2147483647;
 			files = (
 				76E9BDDB2B19558500B512A9 /* ReclamationCardView.swift in Sources */,
-				E8ABB35A2B1D0EA80051B72F /* LoginViewModell.swift in Sources */,
 				D45E7A922B14B0F2000F0A9C /* SplashScreen2View.swift in Sources */,
+				423C65682B2BF63200A85767 /* LoginViewModell.swift in Sources */,
 				76E3ED812B19B3C900464B7F /* Conversation.swift in Sources */,
 				76E9BDD62B194EDB00B512A9 /* ActualiteListView.swift in Sources */,
-				822CBECD2B18008F00769D45 /* LoginView.swift in Sources */,
+				4A9E8EA72B2C35B6008D174B /* ConversationWebService.swift in Sources */,
 				E864C6752B1FF8FB0099E99A /* MySinglePostView.swift in Sources */,
 				D44CD7A02B174490002294CE /* EventAddView.swift in Sources */,
 				D4C23E3C2B148B31002B0E10 /* Persistence.swift in Sources */,
 				D4F5A1BC2B1F8AE80096346A /* EventErrorHandler.swift in Sources */,
+				4A9E8EA12B2C34AF008D174B /* ReclamationWebService.swift in Sources */,
 				D4C23E3F2B148B31002B0E10 /* Aqua_Guard.xcdatamodeld in Sources */,
+				423C656A2B2BF63200A85767 /* UserViewModel.swift in Sources */,
+				4A9E8EA52B2C3587008D174B /* ReclamationViewModel.swift in Sources */,
 				D4BFF9872B15005D0050DC80 /* Participation.swift in Sources */,
-				E8ABB35E2B1D0FCA0051B72F /* ForgotPasswordScreen.swift in Sources */,
+				7641CCFF2B22556600CC9BB8 /* ActualiteViewModel.swift in Sources */,
 				E818059B2B222743008F78FD /* UpdatePostView.swift in Sources */,
+				7641CCFB2B22534700CC9BB8 /* ActualiteWebService.swift in Sources */,
+				4A9E8EA92B2C35EA008D174B /* ConversationErrorHandler.swift in Sources */,
+				423C656E2B2BF65E00A85767 /* UsersModel.swift in Sources */,
 				E8F5FA3A2B19199800F5B9E0 /* LikeCardView.swift in Sources */,
+				4A9E8EAD2B2C3632008D174B /* Reclamation.swift in Sources */,
 				76E9BDDD2B1972D300B512A9 /* ReclamationListView.swift in Sources */,
 				E8C391F82B188C6100EA3872 /* PostViewModel.swift in Sources */,
 				E816FF762B164956007538BF /* MyPosts.swift in Sources */,
+				423C65702B2BF66F00A85767 /* UserService.swift in Sources */,
 				E816FF742B164938007538BF /* MyEvents.swift in Sources */,
 				D45E7A942B14B16D000F0A9C /* SplashScreen3View.swift in Sources */,
+				423C65642B2BF60D00A85767 /* ForgotPasswordScreen.swift in Sources */,
 				D4BD65972B1FDAF500AA5722 /* ParticipationViewModel.swift in Sources */,
+				7641CCFD2B2253B500CC9BB8 /* ActualiteErrorHandler.swift in Sources */,
+				423C65612B2BF60D00A85767 /* SettingsView.swift in Sources */,
 				D4BFF9852B14FE710050DC80 /* Event.swift in Sources */,
+				423C65602B2BF60D00A85767 /* LoginView.swift in Sources */,
 				E8C391FA2B1899FB00EA3872 /* PostDetailView.swift in Sources */,
 				E857A6CF2B17E66000EC62DE /* PostCardView.swift in Sources */,
-				E8ABB3602B1D10680051B72F /* ForgotPaswordCodeScreen.swift in Sources */,
+				76285D9C2B2A7AE60032E635 /* AddReclamation.swift in Sources */,
 				D44CD79E2B173C0D002294CE /* EventEditView.swift in Sources */,
 				D4BFF9902B1507510050DC80 /* EventDetailsView.swift in Sources */,
 				D4C23E642B149FDC002B0E10 /* SplashScreenView.swift in Sources */,
+				4A9E8EAB2B2C3613008D174B /* Discussion.swift in Sources */,
 				E857A6D32B17EA4600EC62DE /* PostListView.swift in Sources */,
+				423C656D2B2BF65E00A85767 /* LoginResponse.swift in Sources */,
 				D4C23E352B148B30002B0E10 /* ContentView.swift in Sources */,
 				E8ABB3622B1DD7C80051B72F /* Profile.swift in Sources */,
 				D4BFF98E2B15059D0050DC80 /* EventListView.swift in Sources */,
+				4A9E8EA32B2C34D3008D174B /* ReclamationErrorHandler.swift in Sources */,
 				D4F5A1B62B1F782B0096346A /* EventWebService.swift in Sources */,
-				822CBECC2B18008F00769D45 /* RegisterView.swift in Sources */,
+				E8BDA88B2B29C765008BC786 /* RichTextEditor.swift in Sources */,
+				423C65622B2BF60D00A85767 /* ForgotPaswordCodeScreen.swift in Sources */,
 				822CBED42B18025800769D45 /* TextInputField.swift in Sources */,
 				76E9BDD42B194E7C00B512A9 /* ActualiteDetailsView.swift in Sources */,
 				E8B083892B1E76D700CDCFD9 /* PostErrorHandler.swift in Sources */,
 				D45E7A962B14B290000F0A9C /* SplashScreen4View.swift in Sources */,
+				423C65692B2BF63200A85767 /* RegisterViewModel.swift in Sources */,
+				423C65632B2BF60D00A85767 /* RegisterView.swift in Sources */,
 				D4BFF98C2B15020C0050DC80 /* EventCardView.swift in Sources */,
+				76A18A5B2B22E98200F71965 /* Avis.swift in Sources */,
 				E81805992B2203D0008F78FD /* AddPostView.swift in Sources */,
 				E8B083872B1E74FF00CDCFD9 /* PostWebService.swift in Sources */,
 				D438AE7E2B2224E100D6DE7D /* EventRequest.swift in Sources */,
 				76E9BDD82B19527800B512A9 /* Actualite.swift in Sources */,
 				E857A6C82B17E5BD00EC62DE /* PostModel.swift in Sources */,
-				E8ABB35C2B1D0F670051B72F /* ForgotPasswordEmailScreen.swift in Sources */,
 				E816FF702B1648E8007538BF /* MyCalendar.swift in Sources */,
 				E816FF722B164905007538BF /* Notification.swift in Sources */,
+				423C655F2B2BF60D00A85767 /* ForgotPasswordEmailScreen.swift in Sources */,
 				E816FF782B16496E007538BF /* Command.swift in Sources */,
 				E857A6D12B17E69500EC62DE /* CommentCardView.swift in Sources */,
 				D44CD7A42B175D23002294CE /* MyEventViewModel.swift in Sources */,
 				D4C23E332B148B30002B0E10 /* Aqua_GuardApp.swift in Sources */,
 				D4BD65952B1FD82F00AA5722 /* ParticipationWebService.swift in Sources */,
+				423C655E2B2BF60D00A85767 /* changePassword.swift in Sources */,
 				E857A6CC2B17E5FA00EC62DE /* Comment.swift in Sources */,
 				D44CD7A22B174EF2002294CE /* EventViewModel.swift in Sources */,
 				76E9BDD22B194E4000B512A9 /* ActualiteCardView.swift in Sources */,
 				D4C23E662B14A8A3002B0E10 /* SplashScreen1View.swift in Sources */,
 				E857A6CA2B17E5E900EC62DE /* Like.swift in Sources */,
 				822CBED32B18025800769D45 /* PasswordInputField.swift in Sources */,
+				E8BDA88D2B29C8C8008BC786 /* FontPickerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -742,8 +836,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Aqua Guard/Preview Content\"";
+				DEVELOPMENT_TEAM = 62LC6UKFQG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Aqua-Guard-Info.plist";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need the Mic for audio to text";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Need the speech recognition capabilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -770,8 +868,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Aqua Guard/Preview Content\"";
+				DEVELOPMENT_TEAM = 62LC6UKFQG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Aqua-Guard-Info.plist";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need the Mic for audio to text";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Need the speech recognition capabilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -904,6 +1006,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D4FDEF272B2776FE00533816 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.4;
+			};
+		};
+		E83996012B27E274001CED10 /* XCRemoteSwiftPackageReference "voice-overlay-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/algolia/voice-overlay-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
 		E83A72E12B1F9C5E00A9F955 /* XCRemoteSwiftPackageReference "SimpleToast" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sanzaru/SimpleToast";
@@ -915,6 +1033,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D4FDEF282B2776FE00533816 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D4FDEF272B2776FE00533816 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
+		};
+		E83996022B27E274001CED10 /* InstantSearchVoiceOverlay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E83996012B27E274001CED10 /* XCRemoteSwiftPackageReference "voice-overlay-ios" */;
+			productName = InstantSearchVoiceOverlay;
+		};
 		E83A72E22B1F9C5E00A9F955 /* SimpleToast */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E83A72E12B1F9C5E00A9F955 /* XCRemoteSwiftPackageReference "SimpleToast" */;

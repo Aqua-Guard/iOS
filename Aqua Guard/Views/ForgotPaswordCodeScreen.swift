@@ -11,50 +11,95 @@ struct ForgotPaswordCodeScreen: View {
     var screenWidth = UIScreen.main.bounds.width
     @State var textValue: String = ""
     @State var errorValue: String = ""
-    
+    @StateObject var viewModel: UserViewModel = UserViewModel()
+    @State private var navigationActive: Bool = false
+
     var body: some View {
         ZStack {
             VStack {
                 VStack {
                     Image("activation_code")
                         .aspectRatio(contentMode: .fit)
-                        .padding(.bottom)
+                        .padding(.all)
                     
                 }
-                .padding(.top)
+                .padding(.all)
                 .frame(width: screenWidth)
-                Spacer()
+                //Spacer()
                 VStack {
                     VStack {
-                        TextInputField("Code", text: $textValue, error: $errorValue)
+                        
+                        
+                        Text("Write your code below")
+                            .font(.system(size: 20))
+                            .fontWeight (.semibold)
+                            .foregroundColor(.lightBlue)
+                            .padding(.all)
+                        
+                        TextInputField("Code", text: $viewModel.code, error: $viewModel.error)
                             .padding(.bottom)
                         
-                        Spacer()
-                            //Button(action: {
-                               
-                            //}, label: {
-                        NavigationLink(destination: ForgotPasswordScreen()) {
-                            Text ("Reset Password")
-                                .foregroundColor (.white)
-                                .fontWeight (.semibold)
-                                .font(.system(size:22))
-                                .frame(minWidth: 0, maxWidth: .infinity)
+                        //Spacer()
+                        
+                        ZStack {
+                            NavigationLink(
+                                destination: ForgotPasswordScreen(),
+                                isActive: $navigationActive
+                            ) {
+                                EmptyView()
+                            }
+                            .opacity(0)
                             
-                                .frame(width: screenWidth * 0.91, height: screenWidth * 0.13)
+                            Button(action: {
+                                Task {
+                                    await self.viewModel.verifyCode()
+                                    
+                                    if self.viewModel.verified {
+                                        navigationActive = true
+                                    }
+                                }
+                            }) {
+                                Text ("Reset Password")
+                                    .foregroundColor (.white)
+                                    .fontWeight (.semibold)
+                                    .font(.system(size:22))
+                                    .frame(minWidth: 0, maxWidth: .infinity)
+                                    .frame(width: screenWidth * 0.88, height: screenWidth * 0.13)
+                            }
                         }
-                            //}
+                        
+                        .buttonStyle(.borderedProminent)
+                        .buttonBorderShape(.roundedRectangle)
+                        .tint(Color.blue)
+                        .cornerRadius(30)
+                        .padding(.horizontal)
+                        
+                        /*
+                        Button(action: {
+                            
+                        }, label: {
+                            NavigationLink(destination: ForgotPasswordScreen()) {
+                                Text ("Reset Password")
+                                    .foregroundColor (.white)
+                                    .fontWeight (.semibold)
+                                    .font(.system(size:22))
+                                    .frame(minWidth: 0, maxWidth: .infinity)
                                 
-                            //)
-                            .buttonStyle(.borderedProminent)
-                            .buttonBorderShape(.roundedRectangle)
-                            .tint(Color.blue)
-                            .cornerRadius(30)
-                            .padding(.horizontal)
+                                    .frame(width: screenWidth * 0.88, height: screenWidth * 0.13)
+                            }
+                        }
+                               
+                        )
+                        .buttonStyle(.borderedProminent)
+                        .buttonBorderShape(.roundedRectangle)
+                        .tint(Color.blue)
+                        .cornerRadius(30)
+                        .padding(.horizontal)*/
                     }
                     
                     
                 }
-
+                
             }
         }.background(
             Image("background_splash_screen")

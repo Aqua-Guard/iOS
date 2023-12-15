@@ -264,7 +264,9 @@ struct CommentBottomSheetView: View {
                             .swipeActions(edge: .leading) {
                                 if comment.idUser == viewModel.CurrentUserId {
                                     Button(role: .none) {
-                                        // Your editing logic here
+                                        editingCommentText = comment.comment ?? ""
+                                                                            editingCommentId = comment.idComment
+                                                                            isEditing = true
                                     } label: {
                                         Label("Edit", systemImage: "pencil")
                                     }.tint(.blue)

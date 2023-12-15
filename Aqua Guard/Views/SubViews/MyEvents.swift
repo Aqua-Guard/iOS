@@ -75,19 +75,13 @@ struct MyEvents: View {
             
             
             }
-                .navigationBarTitle("My Events").navigationBarTitleDisplayMode(.inline)
+               
                 .onAppear{
                     Task{
                         await viewModel.fetchMyEvents()
                     }
                 }
-                .navigationBarItems(trailing:
-                                NavigationLink(destination: EventAddView()) {
-                                    Image(systemName: "plus.circle")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 24, height: 24)
-                })
+                
                 .alert(isPresented: $showAlert) {
                     Alert(
                                       title: Text("Confirm Deletion"),
@@ -126,7 +120,14 @@ struct MyEvents: View {
                               .padding(.bottom, 80)
                               , alignment: .bottom
                           )
-        }
+        } .navigationBarTitle("My Events").navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(trailing:
+                                    NavigationLink(destination: EventAddView(viewModel: viewModel)) {
+                                Image(systemName: "plus.circle")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 24, height: 24)
+            })
     }
 }
 /*
