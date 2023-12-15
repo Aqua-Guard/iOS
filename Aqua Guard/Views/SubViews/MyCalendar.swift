@@ -36,13 +36,13 @@ struct MyCalendar: View {
                             selectedDate = Calendar.current.date(byAdding: .month, value: -1, to: selectedDate) ?? selectedDate
                         }) {
                             Image(systemName: "chevron.left")
-                                .foregroundColor(.white)
+                                .foregroundColor(.darkBlue)
                         }
                         
                         Spacer()
                         
                         Text(getFormattedMonthAndYear(from: selectedDate))
-                            .foregroundColor(.white)
+                            .foregroundColor(.darkBlue)
                             .font(.headline)
                         
                         Spacer()
@@ -53,7 +53,7 @@ struct MyCalendar: View {
                            
                         }) {
                             Image(systemName: "chevron.right")
-                                .foregroundColor(.white)
+                                .foregroundColor(.darkBlue)
                         }
                     }
                     .padding()
@@ -61,20 +61,20 @@ struct MyCalendar: View {
                     CalendarView(selectedDate: $selectedDate, participations: $participations)
                         .frame(height: 300)
                         .padding()
-                    Text("Events")
-                        .foregroundColor(.black)
-                                            .font(.headline)
-                    if let selectedEvent = selectedEvent(for: selectedDate) {
-                        Text(selectedEvent.Eventname)
-                            .foregroundColor(.white)
-                            .font(.headline)
-                            .background(Color.black)  // Add a background color
-                    } else {
-                        Text("No event selected")
-                            .foregroundColor(.white)
-                            .font(.headline)
-                            .background(Color.black)  // Add a background color
-                    }
+//                    Text("Events")
+//                        .foregroundColor(.black)
+//                                            .font(.headline)
+//                     if let selectedEvent = selectedEvent(for: selectedDate) {
+//                        Text(selectedEvent.Eventname)
+//                            .foregroundColor(.white)
+//                            .font(.headline)
+//                            .background(Color.black)  // Add a background color
+//                    } else {
+//                        Text("No event selected")
+//                            .foregroundColor(.white)
+//                            .font(.headline)
+//                            .background(Color.black)  // Add a background color
+//                    }
 
                     
                     Spacer()

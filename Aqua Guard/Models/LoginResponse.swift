@@ -13,6 +13,8 @@ struct LoginResponse: Codable {
     var image: String
     var email: String
     var id: String
+    var firstName: String
+    var lastName: String
     var role: String
     var isActivated: Bool
     var nbPts: Int

@@ -24,8 +24,8 @@ class EventViewModel: ObservableObject {
    
 
       func fetchEvents() {
-          let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTUxMTM1MjY3ZjkyM2Q1NDg3OGFmYTkiLCJ1c2VybmFtZSI6InlvdXNzZWYiLCJpYXQiOjE3MDI1ODE1MzQsImV4cCI6MTcwMjU4ODczNH0.NHtHaPhmaAvh8de-60i_14OzGM-bIW6GI9AoN6pcSaE"
-          
+          let token = LoginViewModell.defaults.string(forKey: "token") ?? ""
+
           do{
           EventWebService.shared.fetchEvents(token: token) { [weak self] events in
               // Update the events array on the main thread

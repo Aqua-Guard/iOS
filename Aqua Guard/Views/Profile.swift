@@ -66,17 +66,36 @@ struct Profile: View {
                 .frame(height: 200)
                 .offset(y: -90)
             VStack {
-                Image("youssef")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100, height: 100)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.white, lineWidth: 2))
-                Text("Youssef Farhat")
+                AsyncImage(url: URL(string: "http://127.0.0.1:9090/images/user/\((LoginViewModell.defaults.string(forKey: "image") ?? ""))")) { phase in
+                         switch phase {
+                         case .empty:
+                             ProgressView()
+                         case .success(let image):
+                             image
+                                 .resizable()
+                                 .scaledToFit()
+                                 .frame(width: 100, height: 100)
+                                 .clipShape(Circle())
+                                 .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                         case .failure:
+                             Image(systemName: "photo") // You can use a placeholder image here
+                                 .resizable()
+                                 .scaledToFit()
+                                 .frame(width: 100, height: 100)
+                                 .clipShape(Circle())
+                                 .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                         @unknown default:
+                             EmptyView()
+                         }
+                     }
+                
+                
+                
+                Text((LoginViewModell.defaults.string(forKey: "firstName") ?? "") +  " " + (LoginViewModell.defaults.string(forKey: "lastName") ?? ""))
                     .font(.title)
                     .fontWeight(.heavy)
                     .foregroundColor(.white)
-                Text("Youssef.farhat@esprit.tn")
+                Text((LoginViewModell.defaults.string(forKey: "email") ?? ""))
                     .font(.title3)
                     .fontWeight(.light)
                     .foregroundColor(.white)
@@ -121,16 +140,24 @@ struct MenuItem: Hashable {
     let icon: String
 }
 
-let menuItems: [MenuItem] = [
-    MenuItem(name: "My Calendar", icon: "calendar"),
-    //MenuItem(name: "Notification", icon: "bell.fill"),
-    MenuItem(name: "My Events", icon: "calendar.badge.clock"),
-    MenuItem(name: "My Posts", icon: "rectangle.3.group.bubble"),
-    MenuItem(name: "My Reclamtion", icon: "exclamationmark.triangle.fill"),
-    MenuItem(name: "My Orders", icon: "cart"),
-    MenuItem(name: "Settings", icon: "gear"),
-    MenuItem(name: "Logout", icon: "rectangle.portrait.and.arrow.right"),
-]
+private var menuItems: [MenuItem] {
+      var items: [MenuItem] = [
+          MenuItem(name: "My Calendar", icon: "calendar"),
+          MenuItem(name: "My Posts", icon: "rectangle.3.group.bubble"),
+          MenuItem(name: "My Reclamtion", icon: "exclamationmark.triangle.fill"),
+          MenuItem(name: "My Orders", icon: "cart"),
+          MenuItem(name: "Settings", icon: "gear"),
+          MenuItem(name: "Logout", icon: "rectangle.portrait.and.arrow.right"),
+      ]
+    print("------ roleee " + (LoginViewModell.defaults.string(forKey: "role") ?? ""))
+    print("------ roleee ", LoginViewModell.defaults.string(forKey: "role")?.elementsEqual("partenaire"))
+
+    if ((LoginViewModell.defaults.string(forKey: "role")?.elementsEqual("partenaire"))! == true) {
+          items.insert(MenuItem(name: "My Events", icon: "calendar.badge.clock"), at: 1) // Insert at the desired position
+      }
+
+      return items
+  }
 
 #Preview {
     Profile()

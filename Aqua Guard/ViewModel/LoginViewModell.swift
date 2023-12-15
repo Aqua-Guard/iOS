@@ -52,6 +52,8 @@ class LoginViewModell: ObservableObject {
                     LoginViewModell.defaults.set(loginResponse.token, forKey: "token")
                     LoginViewModell.defaults.set(loginResponse.email, forKey: "email")
                     LoginViewModell.defaults.set(loginResponse.username, forKey: "username")
+                    LoginViewModell.defaults.set(loginResponse.firstName, forKey: "firstName")
+                    LoginViewModell.defaults.set(loginResponse.lastName, forKey: "lastName")
                     LoginViewModell.defaults.set(loginResponse.nbPts, forKey: "nbPts")
                     LoginViewModell.defaults.set(loginResponse.image, forKey: "image")
                     LoginViewModell.defaults.set(loginResponse.role, forKey: "role")
