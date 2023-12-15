@@ -9,6 +9,7 @@ import SwiftUI
 struct Profile: View {
     @StateObject var eventViewModel = MyEventViewModel()
     @StateObject var postViewModel = PostViewModel()
+    @State private var navigateToLogin = false
     var body: some View {
         NavigationView {
             List {
@@ -45,7 +46,16 @@ struct Profile: View {
             )
         }.accentColor(.white)
         .navigationBarColor(.darkBlue, textColor: UIColor.white)
-        
+        .navigationBarBackButtonHidden(true)
+        .background(
+                  NavigationLink(
+                      destination: LoginView(),
+                      isActive: $navigateToLogin
+                  ) {
+                      EmptyView()
+                  }
+                  .hidden()
+              )
     }
 
     var profileHeader: some View {
@@ -66,7 +76,7 @@ struct Profile: View {
                     .font(.title)
                     .fontWeight(.heavy)
                     .foregroundColor(.white)
-                Text("Youssef.farhat@esprit. tn")
+                Text("Youssef.farhat@esprit.tn")
                     .font(.title3)
                     .fontWeight(.light)
                     .foregroundColor(.white)
@@ -90,6 +100,14 @@ struct Profile: View {
                     .environmentObject(postViewModel)
             case "My Reclamtion":
                 ReclamationListView()
+            case "Settings":
+                SettingsView()
+            case "Logout":
+                LoginView()
+                    .onAppear {
+                        LoginViewModell.logout()
+                        navigateToLogin = true
+                        }
             default:
                 Text("Placeholder")
             }
@@ -109,6 +127,9 @@ let menuItems: [MenuItem] = [
     MenuItem(name: "My Events", icon: "calendar.badge.clock"),
     MenuItem(name: "My Posts", icon: "rectangle.3.group.bubble"),
     MenuItem(name: "My Reclamtion", icon: "exclamationmark.triangle.fill"),
+    MenuItem(name: "My Orders", icon: "cart"),
+    MenuItem(name: "Settings", icon: "gear"),
+    MenuItem(name: "Logout", icon: "rectangle.portrait.and.arrow.right"),
 ]
 
 #Preview {
