@@ -72,6 +72,7 @@ struct ActualiteListView: View {
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all))
             .navigationTitle("Actualites").navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
     } }
 struct ActualiteListView_Previews: PreviewProvider {
     static var previews: some View {
