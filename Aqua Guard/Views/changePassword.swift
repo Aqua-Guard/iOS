@@ -16,6 +16,7 @@ struct changePassword: View {
     let userImage = LoginViewModell.defaults.string(forKey: "image")
     @StateObject var viewModel: UserViewModel = UserViewModel()
     @State private var navigationActive: Bool = false
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     var body: some View {
         ScrollView {
@@ -23,12 +24,33 @@ struct changePassword: View {
                 LinearGradient(gradient: Gradient(colors: [isDarkModeEnabled ? Color.black : Color.white, isDarkModeEnabled ? Color.lightBlue : Color.lightBlue]), startPoint: .top, endPoint: .bottom)
                     .edgesIgnoringSafeArea(.all)
                 VStack{
+                        Spacer()
+                        
+                        VStack {
+                            HStack {
+                                Button(action: {
+                                    self.presentationMode.wrappedValue.dismiss()
+                                }) {
+                                    Image(systemName: "arrow.left.circle.fill")
+                                        .resizable()
+                                        .foregroundColor(.blue)
+                                        .frame(width: 25, height: 25)
+                                }
+                                
+                                Spacer()
+                            }
+                        }
+                        .alignmentGuide(.top) { _ in 0 }
+                        .alignmentGuide(.leading) { _ in 0 }
+                        .padding()
+                        
                     Image("reset_password")
                         .resizable()
                         .frame(width: screenWidth * 0.8, height: screenWidth * 0.8)
                         .padding(.bottom)
                     
                     VStack{
+                        
                         VStack {
                             
                             Text("Type your new password")
@@ -86,7 +108,7 @@ struct changePassword: View {
                     .listStyle(PlainListStyle())
                 }.accentColor(.white)
             }
-        }
+        }.navigationBarBackButtonHidden(true)
         .navigationBarColor(.darkBlue, textColor: UIColor.white)
     
         
