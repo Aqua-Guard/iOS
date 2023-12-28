@@ -15,6 +15,7 @@ struct SettingsView: View {
     @State private var deleteAlert = false
     let userImage = LoginViewModell.defaults.string(forKey: "image")
     @StateObject var viewModel: UserViewModel = UserViewModel()
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     var body: some View {
         NavigationView {
@@ -29,14 +30,45 @@ struct SettingsView: View {
                                     .frame(height: 200)
                                     .offset(y: -90)
                                 VStack {
+                                    
+                                            Spacer()
+                                            
+                                            VStack {
+                                                HStack {
+                                                    Button(action: {
+                                                        self.presentationMode.wrappedValue.dismiss()
+                                                    }) {
+                                                        Image(systemName: "arrow.left.circle.fill")
+                                                            .resizable()
+                                                            .foregroundColor(.blue)
+                                                            .frame(width: 25, height: 25)
+                                                    }
+                                                    
+                                                    Spacer()
+                                                }
+                                            }
+                                            .alignmentGuide(.top) { _ in 0 }
+                                            .alignmentGuide(.leading) { _ in 0 }
+                                            .padding()
                                     if let unwrappedUserImage = userImage {
-                                        let userImageURLString = "http://127.0.0.1:9090/images/user/\(unwrappedUserImage)"
+                                        let userImageURLString = "http://172.18.1.232:9090/images/user/\(unwrappedUserImage)"
                                         
-                                        AsyncImage(url: URL(string: userImageURLString))
-                                            .scaledToFit()
-                                            .frame(width: 100, height: 100)
-                                            .clipShape(Circle())
-                                            .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                                        GeometryReader { geometry in
+                                            AsyncImage(url: URL(string: userImageURLString)) { phase in
+                                                switch phase {
+                                                case .success(let image):
+                                                    image
+                                                        .resizable()
+                                                        .aspectRatio(contentMode: .fit)
+                                                        .frame(width: geometry.size.width, height: geometry.size.height)
+                                                        .clipShape(Circle())
+                                                        .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                                                @unknown default:
+                                                    EmptyView()
+                                                }
+                                            }
+                                        }
+                                        .frame(width: 100, height: 100)
                                     }
                                     
                                     Text(LoginViewModell.defaults.string(forKey: "username") ?? "username")
@@ -54,16 +86,20 @@ struct SettingsView: View {
                                 .listRowInsets(EdgeInsets())) {
                                     EmptyView()
                                 }
-                                                            
-                                HStack {
+                            
+                            NavigationLink(destination: AccountScreen()) {
+
+                            HStack {
+                                    
                                     Image(systemName: "person")
                                         .foregroundColor(.blue)
                                         .frame(width: screenWidth * 0.15, alignment: .center)
                                         .font(.system(size: 20))
-                                    Text("Edit Profile")
+                                    Text("Account")
                                         .foregroundColor(.blue)
                                         .font(.system(size: 20))
                                 }
+                            }
                                 .listRowBackground(Color.white.opacity(0))
                                 
                             NavigationLink(destination: changePassword()) {
@@ -79,7 +115,8 @@ struct SettingsView: View {
                                 }
                                 }
                                 .listRowBackground(Color.white.opacity(0))
-                                
+                            
+                                /*
                                 HStack {
                                     Image(systemName: "")
                                         .frame(width: screenWidth * 0.15, alignment: .center)
@@ -107,7 +144,7 @@ struct SettingsView: View {
                                         .foregroundColor(.blue)
                                 }
                                 .listRowBackground(Color.white.opacity(0))
-
+*/
                             
                             HStack {
                                 Image(systemName: "trash")
@@ -156,7 +193,8 @@ struct SettingsView: View {
                         
                     }
             .listStyle(PlainListStyle())
-        }.accentColor(.white)
+        }.navigationBarBackButtonHidden(true)
+        .accentColor(.white)
         
         .navigationBarColor(.darkBlue, textColor: UIColor.white)
         

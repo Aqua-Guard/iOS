@@ -7,10 +7,29 @@
 
 import Foundation
 
-let URLString:String = "http://192.168.93.190:9090/user"
+let URLString:String = "http://172.18.1.232:9090/user"
 
 
 class UserService{
+    /*
+    public static func desactivateAccount(endpoint:String, method:String, body:[String:Any]?) async throws -> (Data, URLResponse) {
+        var responseData:Data?, response:URLResponse
+        
+        let url = URLString+endpoint
+        let endpointUrl = URL(string: url)
+        var request = URLRequest(url: endpointUrl!)
+        
+        request.httpMethod = method
+        
+        (responseData, response) = try await URLSession.shared.data(for: request)
+        
+        let httpResponse = (response as? HTTPURLResponse)
+
+        
+        return (responseData!, response)
+        
+    }
+    */
     public static func makeRequest(endpoint:String, method:String, body:[String:Any]?) async throws -> (Data, URLResponse) {
         
         var responseData:Data?, response:URLResponse
@@ -75,6 +94,49 @@ class UserService{
         body.append(convertFormField(named: "lastName", value: user.lastName, boundary: boundary))
         body.append(convertFormField(named: "username", value: user.username, boundary: boundary))
         body.append(convertFormField(named: "password", value: user.password, boundary: boundary))
+
+
+            body.append("--\(boundary)--".data(using: .utf8)!)
+
+            request.httpBody = body
+        let (data, response) = try await URLSession.shared.data(for: request)
+
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 201 else {
+            throw URLError(.badServerResponse)
+        }
+        return true
+        }
+    
+    
+    func updateProfile(user: UpdateProfile, image: Data) async throws -> Bool {
+        let urlString = "\(URLString)/updateProfile/" + (LoginViewModell.defaults.string(forKey: "username") ?? "")
+            guard let url = URL(string: urlString)
+        else {
+                print("Invalid URL")
+                return false
+            }
+
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+
+            let boundary = "Boundary-\(UUID().uuidString)"
+            request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+
+
+            var body = Data()
+
+            // Append image data
+        body.append("--\(boundary)\r\n")
+        body.append("Content-Disposition: form-data; name=\"image\"; filename=\"image.jpg\"\r\n")
+        body.append("Content-Type: image/jpeg\r\n\r\n")
+        body.append(image)
+        body.append("\r\n")
+
+        body.append(convertFormField(named: "email", value: user.email, boundary: boundary))
+        body.append(convertFormField(named: "firstName", value: user.firstName, boundary: boundary))
+        body.append(convertFormField(named: "lastName", value: user.lastName, boundary: boundary))
+        body.append(convertFormField(named: "username", value: user.username, boundary: boundary))
 
 
             body.append("--\(boundary)--".data(using: .utf8)!)

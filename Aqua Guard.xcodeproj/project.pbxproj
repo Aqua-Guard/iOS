@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		298610662B3C2868005828C6 /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298610652B3C2868005828C6 /* EditProfile.swift */; };
+		2986D7D52B3C450B007375CF /* AccountScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2986D7D42B3C450B007375CF /* AccountScreen.swift */; };
+		2986D7D72B3C55F5007375CF /* UpdateProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2986D7D62B3C55F5007375CF /* UpdateProfile.swift */; };
 		423C655E2B2BF60D00A85767 /* changePassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C65572B2BF60D00A85767 /* changePassword.swift */; };
 		423C655F2B2BF60D00A85767 /* ForgotPasswordEmailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C65582B2BF60D00A85767 /* ForgotPasswordEmailScreen.swift */; };
 		423C65602B2BF60D00A85767 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C65592B2BF60D00A85767 /* LoginView.swift */; };
@@ -114,6 +117,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		298610652B3C2868005828C6 /* EditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfile.swift; sourceTree = "<group>"; };
+		2986D7D42B3C450B007375CF /* AccountScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountScreen.swift; sourceTree = "<group>"; };
+		2986D7D62B3C55F5007375CF /* UpdateProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfile.swift; sourceTree = "<group>"; };
 		423C65572B2BF60D00A85767 /* changePassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = changePassword.swift; sourceTree = "<group>"; };
 		423C65582B2BF60D00A85767 /* ForgotPasswordEmailScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordEmailScreen.swift; sourceTree = "<group>"; };
 		423C65592B2BF60D00A85767 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -289,6 +295,7 @@
 				76A18A5A2B22E98200F71965 /* Avis.swift */,
 				4A9E8EAA2B2C3613008D174B /* Discussion.swift */,
 				4A9E8EAC2B2C3632008D174B /* Reclamation.swift */,
+				2986D7D62B3C55F5007375CF /* UpdateProfile.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -313,6 +320,8 @@
 				E8ABB3612B1DD7C80051B72F /* Profile.swift */,
 				D44CD79D2B173C0D002294CE /* EventEditView.swift */,
 				D44CD79F2B174490002294CE /* EventAddView.swift */,
+				298610652B3C2868005828C6 /* EditProfile.swift */,
+				2986D7D42B3C450B007375CF /* AccountScreen.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -597,6 +606,7 @@
 				76E9BDDB2B19558500B512A9 /* ReclamationCardView.swift in Sources */,
 				D45E7A922B14B0F2000F0A9C /* SplashScreen2View.swift in Sources */,
 				423C65682B2BF63200A85767 /* LoginViewModell.swift in Sources */,
+				298610662B3C2868005828C6 /* EditProfile.swift in Sources */,
 				76E3ED812B19B3C900464B7F /* Conversation.swift in Sources */,
 				76E9BDD62B194EDB00B512A9 /* ActualiteListView.swift in Sources */,
 				4A9E8EA72B2C35B6008D174B /* ConversationWebService.swift in Sources */,
@@ -623,7 +633,9 @@
 				E816FF742B164938007538BF /* MyEvents.swift in Sources */,
 				D45E7A942B14B16D000F0A9C /* SplashScreen3View.swift in Sources */,
 				423C65642B2BF60D00A85767 /* ForgotPasswordScreen.swift in Sources */,
+				2986D7D52B3C450B007375CF /* AccountScreen.swift in Sources */,
 				D4BD65972B1FDAF500AA5722 /* ParticipationViewModel.swift in Sources */,
+				2986D7D72B3C55F5007375CF /* UpdateProfile.swift in Sources */,
 				7641CCFD2B2253B500CC9BB8 /* ActualiteErrorHandler.swift in Sources */,
 				423C65612B2BF60D00A85767 /* SettingsView.swift in Sources */,
 				D4BFF9852B14FE710050DC80 /* Event.swift in Sources */,

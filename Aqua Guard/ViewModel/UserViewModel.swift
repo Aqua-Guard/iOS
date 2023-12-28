@@ -6,6 +6,7 @@
 //
 
 import Foundation
+//import GoogleSignIn
 
 class UserViewModel: ObservableObject{
     @Published var isDeleted: Bool = false
@@ -20,6 +21,18 @@ class UserViewModel: ObservableObject{
     @Published var reset: Bool = false
     @Published var changed: Bool = false
 
+    @Published var firstName:String = ""
+    @Published var lastName:String = ""
+    @Published var image:Data!
+    @Published var username:String = ""
+    @Published var firstNameError:String = ""
+    @Published var lastNameError:String = ""
+    @Published var emailError:String = ""
+    @Published var usernameError:String = ""
+    @Published var isLoading: Bool = false
+    @Published var reqError: String = ""
+    let userService = UserService()
+    
     func deleteAccount(id: String)  {
         Task {
             do {
@@ -234,5 +247,47 @@ class UserViewModel: ObservableObject{
             }
         }
         
+    }
+    /*
+    func googleLog(){
+        guard let presentingViewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else {return}
+       
+        let signInConfig = GIDConfiguration.init(clientID: "530379865209-79okd7dct9g3j5kmt9q9fs3aa37r8m1n.apps.googleusercontent.com")
+        GIDSignIn.sharedInstance.signIn(
+            with: signInConfig,
+            presenting: presentingViewController,
+            callback: { user, error in
+                if let error = error {
+                    if(error.localizedDescription != "The user canceled the sign-in flow."){
+                        self.error = "error: \(error.localizedDescription)"
+                    }
+                }
+                if(GIDSignIn.sharedInstance.currentUser != nil){
+                    Task {
+                        await self.sendToken(token: GIDSignIn.sharedInstance.currentUser!.authentication.idToken!, social: "google")
+                        GIDSignIn.sharedInstance.signOut()
+                    }
+                }
+            }
+        )
+    }
+    */
+    
+    
+    func updateProfile(email: String, firstName: String, lastName: String, image: Data, username: String) async {
+        if let imageURL = URL(string: image.base64EncodedString()) {
+            
+            let User = UpdateProfile(id: UUID().uuidString, email: email, firstName: firstName, lastName: lastName, username: username, image: imageURL.path())
+            
+            do {
+                try await userService.updateProfile(user: User, image: image)
+                
+            } catch {
+                print("Error creating account: \(error)")
+            }
+
+        } else {
+            print("Invalid image URL")
+        }
     }
 }
