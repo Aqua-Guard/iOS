@@ -52,7 +52,7 @@ struct EventEditView: View {
                        ScrollView {
                            VStack(alignment: .leading, spacing: 10) {
                                
-                                       Image(uiImage: selectedImage ?? (URL(string: "http://127.0.0.1:9090/images/event/\(event.eventImage)")
+                                       Image(uiImage: selectedImage ?? (URL(string: "https://aquaguard-tux1.onrender.com/images/event/\(event.eventImage)")
                                                                    .flatMap { try? Data(contentsOf: $0) }
                                                                    .flatMap { UIImage(data: $0) }
                                                                    ?? UIImage(systemName: "photo"))!)

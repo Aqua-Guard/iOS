@@ -8,7 +8,7 @@
 import Foundation
 final class ParticipationWebService {
     static let shared = ParticipationWebService()
-    private let baseURL = "http://127.0.0.1:9090"
+    private let baseURL = "https://aquaguard-tux1.onrender.com"
     
     func addParticipation(eventId: String, token: String) {
         // Define the API endpoint URL with the eventId as a query parameter

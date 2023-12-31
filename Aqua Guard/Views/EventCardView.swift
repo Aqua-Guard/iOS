@@ -14,7 +14,7 @@ struct EventCardView: View {
        
         VStack(alignment: .leading, spacing: 8) {
             // Event image
-            AsyncImage(url: URL(string: "http://192.168.43.253:9090/images/event/\(event.eventImage)")) { phase in
+            AsyncImage(url: URL(string: "https://aquaguard-tux1.onrender.com/images/event/\(event.eventImage)")) { phase in
                      switch phase {
                      case .empty:
                          ProgressView()

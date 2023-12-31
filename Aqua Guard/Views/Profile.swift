@@ -68,7 +68,7 @@ struct Profile: View {
                 .frame(height: 200)
                 .offset(y: -90)
             VStack {
-                AsyncImage(url: URL(string: "http://172.18.1.232:9090/images/user/\((LoginViewModell.defaults.string(forKey: "image") ?? ""))")) { phase in
+                AsyncImage(url: URL(string: "https://aquaguard-tux1.onrender.com/images/user/\((LoginViewModell.defaults.string(forKey: "image") ?? ""))")) { phase in
                          switch phase {
                          case .empty:
                              ProgressView()
@@ -155,9 +155,9 @@ private var menuItems: [MenuItem] {
     print("------ roleee " + (LoginViewModell.defaults.string(forKey: "role") ?? ""))
     print("------ roleee ", LoginViewModell.defaults.string(forKey: "role")?.elementsEqual("partenaire"))
 
-    /*if ((LoginViewModell.defaults.string(forKey: "role")?.elementsEqual("partenaire"))! == true) {
+    if ((LoginViewModell.defaults.string(forKey: "role")?.elementsEqual("partenaire")) == true) {
           items.insert(MenuItem(name: "My Events", icon: "calendar.badge.clock"), at: 1) // Insert at the desired position
-      }*/
+      }
 
       return items
   }

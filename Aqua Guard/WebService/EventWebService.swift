@@ -18,7 +18,7 @@ extension Data {
 
 final class EventWebService {
     static let shared = EventWebService()
-    private let baseURL = "http://127.0.0.1:9090"
+    private let baseURL = "https://aquaguard-tux1.onrender.com"
 
     func fetchEvents(token: String,completion: @escaping ([Event]?) -> Void) {
          let url = URL(string: "\(baseURL)/events")!

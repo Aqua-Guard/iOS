@@ -95,7 +95,7 @@ class PostViewModel : ObservableObject {
             let posts = try await PostWebService.getPostsData(token: token)
             DispatchQueue.main.async {
                 self.posts = posts
-                
+                print("--------------------"+self.CurrentUserName)
             }
         }catch (let error){
             print(error.localizedDescription)
@@ -104,6 +104,7 @@ class PostViewModel : ObservableObject {
     func getMyPosts() async {
         do {
             let posts = try await PostWebService.getMyPostsData(token: token)
+            
             DispatchQueue.main.async {
                 self.posts = posts
                 self.isError = false // Reset error state

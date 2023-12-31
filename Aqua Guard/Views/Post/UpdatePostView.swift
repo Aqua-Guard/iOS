@@ -45,7 +45,7 @@ struct UpdatePostView: View {
                                         .scaledToFit()
                                         .frame(width: 300, height: 300)
                                 } else {
-                                    AsyncImage(url: URL(string: "http://127.0.0.1:9090/images/post/\(post.postImage)")) { image in
+                                    AsyncImage(url: URL(string: "https://aquaguard-tux1.onrender.com/images/post/\(post.postImage)")) { image in
                                         image
                                             .resizable()
                                             .scaledToFit()

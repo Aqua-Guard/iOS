@@ -266,7 +266,7 @@ struct AddPostView: View {
     }
     
     func scheduleNotification( title : String, contentt: String ,  username: String, userImage: String) {
-        guard let imageUrl = URL(string: "http://127.0.0.1:9090/images/user/\(userImage)") else { return }
+        guard let imageUrl = URL(string: "https://aquaguard-tux1.onrender.com/images/user/\(userImage)") else { return }
         
         downloadImage(from: imageUrl) { localURL in
             guard let localURL = localURL else { return }

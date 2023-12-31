@@ -49,7 +49,7 @@ struct PostCardView: View {
             // User info and post image
             HStack {
                 
-                AsyncImage(url: URL(string: "http://127.0.0.1:9090/images/user/\(post.userImage ?? "")")) { phase in
+                AsyncImage(url: URL(string: "https://aquaguard-tux1.onrender.com/images/user/\(post.userImage ?? "")")) { phase in
                     switch phase {
                     case .success(let image):
                         image.resizable() // Make the image resizable
@@ -91,7 +91,7 @@ struct PostCardView: View {
                 .foregroundColor(.secondary)
             
             //  i want ti center this image
-            AsyncImage(url: URL(string: "http://127.0.0.1:9090/images/post/\(post.postImage)")) { phase in
+            AsyncImage(url: URL(string: "https://aquaguard-tux1.onrender.com/images/post/\(post.postImage)")) { phase in
                 switch phase {
                 case .success(let image):
                     image.resizable() // Make the image resizable
@@ -133,6 +133,7 @@ struct PostCardView: View {
                         Task {
                             await viewModel.likePost(postId: post.idPost)
                             likeCount += 1
+                            print(post.userName, "------",viewModel.CurrentUserName,(post.userName == viewModel.CurrentUserName))
                             if(post.userName == viewModel.CurrentUserName){
                                 scheduleNotification(title: "Post Liked", contentt: "liked your post",postId: post.idPost,username: post.userName,userImage: post.userImage)
                             }
@@ -285,8 +286,8 @@ struct PostCardView: View {
     }
 
     func scheduleNotification( title : String, contentt: String , postId: String, username: String, userImage: String) {
-        guard let imageUrl = URL(string: "http://127.0.0.1:9090/images/user/\(userImage)") else { return }
-
+        guard let imageUrl = URL(string: "https://aquaguard-tux1.onrender.com/images/user/\(userImage)") else { return }
+print("zzaaaaa77 haya")
         downloadImage(from: imageUrl) { localURL in
             guard let localURL = localURL else { return }
 

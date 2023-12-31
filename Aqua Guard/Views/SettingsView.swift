@@ -51,7 +51,7 @@ struct SettingsView: View {
                                             .alignmentGuide(.leading) { _ in 0 }
                                             .padding()
                                     if let unwrappedUserImage = userImage {
-                                        let userImageURLString = "http://172.18.1.232:9090/images/user/\(unwrappedUserImage)"
+                                        let userImageURLString = "https://aquaguard-tux1.onrender.com/images/user/\(unwrappedUserImage)"
                                         
                                         GeometryReader { geometry in
                                             AsyncImage(url: URL(string: userImageURLString)) { phase in
