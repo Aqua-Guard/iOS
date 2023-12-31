@@ -33,11 +33,11 @@ struct ContentView: View {
                         Label("Forum", systemImage: "text.bubble.fill")
                     }.environmentObject(postViewModel)
               
-                
+                StoreView(viewModel: ProductViewModel())
                 Text("Store")
                     .tabItem {
                         Label("Store", systemImage: "bag")
-                    }
+                    }.environmentObject(CartManager())
                 Profile()
                     .tabItem {
                         Label("Profile", systemImage: "person.fill")
