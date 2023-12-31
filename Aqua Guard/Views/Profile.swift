@@ -157,7 +157,7 @@ private var menuItems: [MenuItem] {
 
     if ((LoginViewModell.defaults.string(forKey: "role")?.elementsEqual("partenaire")) == true) {
           items.insert(MenuItem(name: "My Events", icon: "calendar.badge.clock"), at: 1) // Insert at the desired position
-      }*/
+      }
 
       return items
   }

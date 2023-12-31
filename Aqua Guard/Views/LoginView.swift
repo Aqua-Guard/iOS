@@ -29,9 +29,16 @@ struct LoginView: View {
                     .edgesIgnoringSafeArea(.all)
                     .frame(width: screenWidth * 1, height: screenWidth * 1)
                 
-                
-                    ScrollView{
-                        VStack {
+                VStack {
+                    Image("logo")
+                        .resizable()
+                        .frame(width: screenWidth * 0.8, height: screenWidth * 0.8)
+                    VStack {
+                        TextInputField("Username", text: $modelView.username, error: $modelView.usernameError)
+                        
+                        
+                        PasswordInputField("Password", text: $modelView.password, error: $modelView.passwordError)
+                        Spacer()
                         
                         ZStack {
                                     NavigationLink(
@@ -131,64 +138,14 @@ struct LoginView: View {
                                 Text("Sign up")
                                     .font(.system(size: 20))
                                     .foregroundColor(Color.lightBlue)
-                                //
-                            }
-                            .padding(.top)
-                            
-                            HStack {
-                                Text("- Or Sign in with -")
-                                    .font(.system(size: 18))
-                                    .foregroundColor(Color.black)
-                                
-                            }
-                            .padding(.all)
-                            HStack {
-                                Button(action: {
-                                    
-                                }) {
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 25)
-                                            .fill(.white)
-                                            .frame(width: screenWidth * 0.17, height: screenWidth * 0.17)
-                                        Image("google")
-                                            .resizable()
-                                            .frame(width: screenWidth * 0.1, height: screenWidth * 0.1)
-                                    }
                                 }
-                                Button(action: {
-                                    
-                                }) {
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 25)
-                                            .fill(.blue)
-                                            .frame(width: screenWidth * 0.17, height: screenWidth * 0.17)
-                                        Image("facebook")
-                                            .resizable()
-                                            .frame(width: screenWidth * 0.1, height: screenWidth * 0.1)
-                                    }
-                                }
-                                .padding(.horizontal)
-                            }
-                            .padding(.all)
-                            
-                            HStack {
-                                Text("Don’t have an account?")
-                                    .font(.system(size: 20))
-                                    .foregroundColor(Color.black)
-                                
-                                NavigationLink(destination: RegisterView()) {
-                                    Text("Sign up")
-                                        .font(.system(size: 20))
-                                        .foregroundColor(Color.lightBlue)
-                                }
-                                
-                            }
-                            .padding(.bottom)
+
                         }
+                        .padding(.bottom)
                     }
                 }
-            }.navigationBarBackButtonHidden(true)
-        }
+            }
+        }.navigationBarBackButtonHidden(true)
     }
 }
 
