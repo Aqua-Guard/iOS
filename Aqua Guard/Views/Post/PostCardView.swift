@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct PostCardView: View {
+    let notificationDelegate = NotificationDelegate()
+    
     
     @ObservedObject var viewModel = PostViewModel()
     //let post: PostModel
@@ -29,7 +32,7 @@ struct PostCardView: View {
         self.viewModel = viewModel
         self.postIndex = postIndex
         self._likeCount = State(initialValue: viewModel.posts![postIndex].nbLike)
-        
+        UNUserNotificationCenter.current().delegate = notificationDelegate
         
     }
     private func checkIfLiked() {
@@ -46,7 +49,7 @@ struct PostCardView: View {
             // User info and post image
             HStack {
                 
-                AsyncImage(url: URL(string: "http://127.0.0.1:9090/images/user/\(post.userImage ?? "")")) { phase in
+                AsyncImage(url: URL(string: "https://aquaguard-tux1.onrender.com/images/user/\(post.userImage ?? "")")) { phase in
                     switch phase {
                     case .success(let image):
                         image.resizable() // Make the image resizable
@@ -88,7 +91,7 @@ struct PostCardView: View {
                 .foregroundColor(.secondary)
             
             //  i want ti center this image
-            AsyncImage(url: URL(string: "http://127.0.0.1:9090/images/post/\(post.postImage)")) { phase in
+            AsyncImage(url: URL(string: "https://aquaguard-tux1.onrender.com/images/post/\(post.postImage)")) { phase in
                 switch phase {
                 case .success(let image):
                     image.resizable() // Make the image resizable
@@ -123,12 +126,18 @@ struct PostCardView: View {
                         Task {
                             await viewModel.dislikePost(postId: post.idPost)
                             likeCount -= 1
+                           
                         }
                     } else {
                         // Like the post
                         Task {
                             await viewModel.likePost(postId: post.idPost)
                             likeCount += 1
+                            print(post.userName, "------",viewModel.CurrentUserName,(post.userName == viewModel.CurrentUserName))
+                            if(post.userName == viewModel.CurrentUserName){
+                                scheduleNotification(title: "Post Liked", contentt: "liked your post",postId: post.idPost,username: post.userName,userImage: post.userImage)
+                            }
+                            
                         }
                     }
                     isLiked.toggle()
@@ -167,7 +176,7 @@ struct PostCardView: View {
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
             .sheet(isPresented: $showShareSheet) {
-                        ShareSheet(items: shareItems)
+                        ShareSheetPost(items: shareItems)
                     }
             
             
@@ -192,6 +201,10 @@ struct PostCardView: View {
                         await viewModel.addComment(postId:post.idPost, comment: commentText)
                         // static user id
                         commentText = "" // Clear the text field on send
+                        if(post.userName == viewModel.CurrentUserName){
+                            scheduleNotification(title: "Post Commented", contentt: "comment your post",postId: post.idPost,username: post.userName,userImage: post.userImage)
+                        }
+                        
                     }
                     
                 }) {
@@ -255,10 +268,53 @@ struct PostCardView: View {
         
     }
     
-    
+    func downloadImage(from url: URL, completion: @escaping (URL?) -> Void) {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                completion(nil)
+                return
+            }
+            let tempDirURL = FileManager.default.temporaryDirectory
+            let localURL = tempDirURL.appendingPathComponent(url.lastPathComponent)
+            do {
+                try data.write(to: localURL)
+                completion(localURL)
+            } catch {
+                completion(nil)
+            }
+        }.resume()
+    }
+
+    func scheduleNotification( title : String, contentt: String , postId: String, username: String, userImage: String) {
+        guard let imageUrl = URL(string: "https://aquaguard-tux1.onrender.com/images/user/\(userImage)") else { return }
+print("zzaaaaa77 haya")
+        downloadImage(from: imageUrl) { localURL in
+            guard let localURL = localURL else { return }
+
+            let content = UNMutableNotificationContent()
+            content.title = title
+            content.body = "\(username) \(contentt)"
+
+
+            if let attachment = try? UNNotificationAttachment(identifier: "image", url: localURL, options: nil) {
+                content.attachments = [attachment]
+            }
+
+            content.sound = UNNotificationSound.default
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+            UNUserNotificationCenter.current().add(request) { error in
+                if let error = error {
+                    print("Error scheduling notification: \(error)")
+                }
+            }
+        }
+    }
+
 }
 
-struct ShareSheet: UIViewControllerRepresentable {
+struct ShareSheetPost: UIViewControllerRepresentable {
     var items: [Any]
     
     func makeUIViewController(context: Context) -> UIActivityViewController {
@@ -279,27 +335,10 @@ struct RoundedButtonStyle: ButtonStyle {
             .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 }
-#Preview {
-    let samplePost = PostModel(
-        idPost: "sampleID",
-        userName: "Sample User",
-        userRole: "User Role",
-        description: "Sample Description",
-        userImage: "sampleImage",
-        postImage: "sampleImage",
-        nbLike: 10,
-        nbComments: 5,
-        nbShare: 3,
-        likes: [],
-        comments: []
-    )
-    
-    let viewModel = PostViewModel()
-    viewModel.posts = [samplePost]
-    
-    
-    
-    
-    return PostCardView(viewModel: viewModel, postIndex: 0)
-        .previewLayout(.sizeThatFits)
+class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                               willPresent notification: UNNotification,
+                               withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.banner, .sound]) // Adjust as needed
+    }
 }

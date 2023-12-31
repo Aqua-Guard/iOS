@@ -1,53 +1,61 @@
-//
-//  ActualiteCardView.swift
-//  Aqua Guard
-//
-//  Created by adem on 1/12/2023.
-//
+// ActualiteCardView.swift
 
 import SwiftUI
 
 struct ActualiteCardView: View {
+    var actualite: Actualite
+
+    @State private var isShareSheetPresented: Bool = false
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            // Event image
-            Image("photo")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(height: 200)
-                .clipped()
+            AsyncImage(url: URL(string: "https://aquaguard-tux1.onrender.com/images/actualite/\(actualite.image)")) { phase in
+                switch phase {
+                case .empty:
+                    ProgressView()
+                case .success(let image):
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(height: 200)
+                        .clipped()
+                case .failure:
+                    Image(systemName: "photo")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(height: 200)
+                        .clipped()
+                @unknown default:
+                    EmptyView()
+                }
+            }
 
-            // event details
             VStack(alignment: .leading, spacing: 8) {
-                // Event title
-                Text("Title")
+                Text(actualite.title)
                     .font(.title)
                     .fontWeight(.medium)
 
-                // Event description
-                Text("Description")
+                Text(actualite.description)
                     .font(.body)
                     .foregroundColor(.secondary)
 
-                // HStack for date, location, and info icons
-                HStack (){
- 
-                    Spacer()     
-                    NavigationLink( destination: ActualiteDetailsView()) {
-                     }// Location icon and event location
+                HStack {
+                    Spacer()
                     Image(systemName: "square.and.arrow.up")
-                        .foregroundColor(.blue) // Customize the color if needed
+                        .foregroundColor(.blue)
                         .font(.largeTitle)
-                    
-           
+                        .onTapGesture {
+                            withAnimation {
+                                isShareSheetPresented.toggle()
+                            }
+                        }
+                        .sheet(isPresented: $isShareSheetPresented) {
+                            ShareSheet(activityItems: [actualite.title, actualite.description, actualite.image])
+                        }
 
-                 
-
-
-                    
-
-               
-                   
+                    NavigationLink(destination: ActualiteDetailsView(actualite: actualite)) {
+                        EmptyView()
+                    }
                 }
             }
             .padding(16)
@@ -59,6 +67,31 @@ struct ActualiteCardView: View {
     }
 }
 
-#Preview {
-    ActualiteCardView()
+// ShareSheet.swift
+
+import SwiftUI
+
+struct ShareSheet: UIViewControllerRepresentable {
+    let activityItems: [Any]
+
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        var sharingItems: [Any] = []
+
+        for item in activityItems {
+            if let image = item as? UIImage {
+                if let imageData = image.pngData() {
+                    sharingItems.append(imageData)
+                }
+            } else {
+                sharingItems.append(item)
+            }
+        }
+
+        let controller = UIActivityViewController(activityItems: sharingItems, applicationActivities: nil)
+        return controller
+    }
+
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
+        // Update the view controller if needed
+    }
 }

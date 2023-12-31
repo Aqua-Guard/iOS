@@ -29,8 +29,12 @@ class PostViewModel : ObservableObject {
     @Published var alertMessageUpdatePost: String = ""
     @Published var updatePostAlert: Bool = false
 
-    @Published var CurrentUserId : String = "656e34802b507c8255ffd9c6"
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTcyOGViNTgxMTI3NDRjYzg3MDc5OWUiLCJ1c2VybmFtZSI6ImFtaXJhIiwiaWF0IjoxNzAyMDA2NTMxLCJleHAiOjE3MDIwMTM3MzF9.InEBmy5BV7SJ5NkGoSNo4ZnvgAy9kZ8gwIEuknapkK0"
+    @Published var CurrentUserId : String = LoginViewModell.defaults.string(forKey: "id") ?? ""
+    @Published var CurrentUserName : String = (LoginViewModell.defaults.string(forKey: "firstName") ?? "") + " " + (LoginViewModell.defaults.string(forKey: "lastName") ?? "")
+    @Published var CurrentUserImage : String = (LoginViewModell.defaults.string(forKey: "image") ?? "")
+    let token = LoginViewModell.defaults.string(forKey: "token") ?? ""
+    
+    @Published var aiDescription: String = ""
     
     func updatePost(postId : String ,description: String) async {
             do {
@@ -91,7 +95,7 @@ class PostViewModel : ObservableObject {
             let posts = try await PostWebService.getPostsData(token: token)
             DispatchQueue.main.async {
                 self.posts = posts
-                
+                print("--------------------"+self.CurrentUserName)
             }
         }catch (let error){
             print(error.localizedDescription)
@@ -100,6 +104,7 @@ class PostViewModel : ObservableObject {
     func getMyPosts() async {
         do {
             let posts = try await PostWebService.getMyPostsData(token: token)
+            
             DispatchQueue.main.async {
                 self.posts = posts
                 self.isError = false // Reset error state
@@ -208,7 +213,21 @@ class PostViewModel : ObservableObject {
             }
         }
         
-        
+    func fetchAIDescription(prompt: String) async {
+           do {
+               
+               // Call the network service to fetch the AI description
+               let description = try await PostWebService.fetchAIDescription(for: prompt, withToken: self.token) // the problem here 
+          
+               // Update the UI on the main thread
+               DispatchQueue.main.async {
+                   self.aiDescription = description
+               }
+           } catch {
+               // Handle any errors, e.g., show an error message
+               print("Error fetching AI description: \(error.localizedDescription)")
+           }
+       }
         
         //
         //    init(){

@@ -14,7 +14,7 @@ struct LikeCardView: View {
             Divider()
                 .background(Color.gray.opacity(0.5))
             HStack {
-                if let avatarName = like.likeAvatar, let url = URL(string: "http://127.0.0.1:9090/images/user/" + avatarName) {
+                if let avatarName = like.likeAvatar, let url = URL(string: "https://aquaguard-tux1.onrender.com/images/user/" + avatarName) {
                     AsyncImage(url: url) { phase in
                         switch phase {
                         case .success(let image):

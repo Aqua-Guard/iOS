@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct EventDetailsView: View {
     let event: Event
@@ -19,6 +20,8 @@ struct EventDetailsView: View {
     @State private var isParticipated = false
     @State private var showSnackbar = false
     @State private var snackbarText = ""
+    @State private var isMapSheetPresented = false
+
     
     private func checkIfParticipated() {
         Task {
@@ -30,7 +33,7 @@ struct EventDetailsView: View {
 
         VStack(alignment: .leading, spacing: 8) {
             // Event image
-            AsyncImage(url: URL(string: "http://127.0.0.1:9090/images/event/\(event.eventImage)")) { phase in
+            AsyncImage(url: URL(string: "https://aquaguard-tux1.onrender.com/images/event/\(event.eventImage)")) { phase in
                 switch phase {
                 case .empty:
                     ProgressView()
@@ -74,13 +77,20 @@ struct EventDetailsView: View {
                                 .font(.body)
                                 .fontWeight(.medium)
                         }
-                        HStack {
-                            // Location icon and event location
-                            Image(systemName: "location")
-                            Text(event.lieu)
-                                .font(.body)
-                                .fontWeight(.medium)
-                        }
+                        Button(action: {
+                                 isMapSheetPresented.toggle()
+                             }) {
+                                 HStack {
+                                     Image(systemName: "location")
+                                     Text(event.lieu)
+                                         .font(.body)
+                                         .fontWeight(.medium)
+                                 }
+                             }
+                             .buttonStyle(PlainButtonStyle())
+                             .sheet(isPresented: $isMapSheetPresented) {
+                                 MapSheetView(eventLocation: event.lieu)
+                             }
                         
                     }
                     
@@ -197,6 +207,43 @@ struct Snackbar: View {
         .animation(.easeInOut)
     }
 }*/
+
+
+struct MapSheetView: View {
+    var eventLocation: String
+
+    @State private var region = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 0, longitude: 0), // Default coordinates
+        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+    )
+
+    var body: some View {
+        VStack {
+            Text("Event Location: \(eventLocation)")
+                .font(.headline)
+                .padding(.top, 10)
+
+            Map(coordinateRegion: $region, showsUserLocation: true)
+                .onAppear {
+                    // Perform geocoding to get coordinates from the location name
+                    let geocoder = CLGeocoder()
+                    geocoder.geocodeAddressString(eventLocation) { placemarks, error in
+                        if let placemark = placemarks?.first, let location = placemark.location {
+                            // Update the region with the obtained coordinates
+                            region.center = location.coordinate
+                        }
+                    }
+                }
+                .frame(height: 300)
+
+            Spacer()
+        }
+        .padding()
+        .navigationBarTitle("Map View")
+    }
+}
+
+
 
 struct Toast: View {
     @Binding var text: String

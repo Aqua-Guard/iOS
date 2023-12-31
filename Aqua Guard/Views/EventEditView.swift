@@ -28,6 +28,8 @@ struct EventEditView: View {
     @State private var isImagePickerPresented: Bool = false
 
     @State private var selectedImage: UIImage?
+    @State private var isSnackbarShowing = false
+    @State private var snackbarMessage = ""
 
         init(event: Event) {
             self.event = event
@@ -50,7 +52,7 @@ struct EventEditView: View {
                        ScrollView {
                            VStack(alignment: .leading, spacing: 10) {
                                
-                                       Image(uiImage: selectedImage ?? (URL(string: "http://127.0.0.1:9090/images/event/\(event.eventImage)")
+                                       Image(uiImage: selectedImage ?? (URL(string: "https://aquaguard-tux1.onrender.com/images/event/\(event.eventImage)")
                                                                    .flatMap { try? Data(contentsOf: $0) }
                                                                    .flatMap { UIImage(data: $0) }
                                                                    ?? UIImage(systemName: "photo"))!)
@@ -72,91 +74,95 @@ struct EventEditView: View {
                                        }
                                    
 
+                               Text("Event Name")
+                                       .font(.headline)
                                TextField("Event Name", text: $eventName)
                                    .textFieldStyle(RoundedBorderTextFieldStyle())
                                    .padding(.top, 10)
+                               Text("Description")
+                                       .font(.headline)
+                               TextEditor(text: $eventDescription)
+                                              .frame(height: 100) // Set the desired height
+                                              .border(Color.gray, width: 1) // Optional: Add a border for visual separation
+                                              .padding(.top, 10)
                                
-                               TextField("Event Description", text: $eventDescription)
-                                   .textFieldStyle(RoundedBorderTextFieldStyle())
-                                   .padding(.top, 10)
-                               
-                               VStack {
-                                   TextField("Start Date", text: Binding(
-                                       get: {
-                                           let dateFormatter = DateFormatter()
-                                           dateFormatter.dateFormat = "yyyy-MM-dd"
-                                           return dateFormatter.string(from: startDate)
-                                       },
-                                       set: { newDateString in
-                                           let dateFormatter = DateFormatter()
-                                           dateFormatter.dateFormat = "yyyy-MM-dd"
-                                           if let newDate = dateFormatter.date(from: newDateString) {
-                                               startDate = newDate
-                                           }
-                                       }
-                                   ))
-                                   .textFieldStyle(RoundedBorderTextFieldStyle())
-                                   .padding(.top, 10)
+                               VStack  (alignment: .leading, spacing: 10){
+                                   Text("Start Date")
+                                       .font(.headline)
 
-                                   Button(action: {
-                                       // Show the DatePicker with confirmation
-                                       isStartDatePickerPresented.toggle()
-                                   }) {
-                                       Text("Select Start Date")
-                                   }
-                                   .padding()
-
-                                   // Present the DatePicker in a sheet
-                                   if isStartDatePickerPresented {
-                                       DatePickerSheet(selectedDate: $startDate, isPresented: $isStartDatePickerPresented)
-                                   }
+                                   DatePicker("Select Start Date", selection: $startDate, displayedComponents: [.date])
+                                       .labelsHidden()
+                                       .textFieldStyle(RoundedBorderTextFieldStyle())
+                                       .padding(.top, 10)
+                                       .accentColor(.darkBlue)
                                }
 
-                               VStack {
-                                   TextField("End Date", text: Binding(
-                                       get: {
-                                           let dateFormatter = DateFormatter()
-                                           dateFormatter.dateFormat = "yyyy-MM-dd"
-                                           return dateFormatter.string(from: endDate)
-                                       },
-                                       set: { newDateString in
-                                           let dateFormatter = DateFormatter()
-                                           dateFormatter.dateFormat = "yyyy-MM-dd"
-                                           if let newDate = dateFormatter.date(from: newDateString) {
-                                               endDate = newDate
-                                           }
-                                       }
-                                   ))
-                                   .textFieldStyle(RoundedBorderTextFieldStyle())
-                                   .padding(.top, 10)
+                               VStack (alignment: .leading, spacing: 10){
+                                   Text("End Date")
+                                       .font(.headline)
 
-                                   Button(action: {
-                                       // Show the DatePicker with confirmation
-                                       isEndDatePickerPresented.toggle()
-                                   }) {
-                                       Text("Select End Date")
-                                   }
-                                   .padding()
-
-                                   // Present the DatePicker in a sheet
-                                   if isEndDatePickerPresented {
-                                       DatePickerSheet(selectedDate: $endDate, isPresented: $isEndDatePickerPresented)
-                                   }
+                                   DatePicker("Select End Date", selection: $endDate, displayedComponents: [.date])
+                                       .labelsHidden()
+                                       .textFieldStyle(RoundedBorderTextFieldStyle())
+                                       .padding(.top, 10)
+                                       .accentColor(.darkBlue)
                                }
 
-                               
+                               Text("Location")
+                                       .font(.headline)
                                TextField("Event Location", text: $eventLocation)
                                    .textFieldStyle(RoundedBorderTextFieldStyle())
                                    .padding(.top, 10)
                                
-                               Text(errorMessage)
+                              /* Text(errorMessage)
                                    .foregroundColor(.red)
                                    .padding(.top, 10)
-                                   .hidden() // You may need to handle the visibility based on your logic.
+                                   .hidden() // You may need to handle the visibility based on your logic.*/
+                               
+                               SnackbarView(message: snackbarMessage, isShowing: $isSnackbarShowing)
+                                     .onChange(of: isSnackbarShowing) { newValue in
+                                         if newValue {
+                                             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                                 withAnimation {
+                                                     isSnackbarShowing = false
+                                                 }
+                                             }
+                                         }
+                                     }
                                
                                Button(action: {
                                    // Action for submitting event
                                    print("Submit Event")
+                                   
+                                   guard Date() < startDate else {
+                                           errorMessage = "Start date should be after today date"
+                                           showSnackbar(message: errorMessage)
+                                           return
+                                       }
+                                   guard startDate < endDate else {
+                                           errorMessage = "End date should be after start date"
+                                           showSnackbar(message: errorMessage)
+                                           return
+                                       }
+
+                                       // Validate description
+                                       guard eventDescription.count >= 10 && eventDescription.count <= 500 else {
+                                           errorMessage = "Event description should be between 10 and 500 characters"
+                                           showSnackbar(message: errorMessage)
+                                           return
+                                       }
+                                   // Validate name
+                                   guard eventName.count >= 3 && eventName.count <= 30 else {
+                                       errorMessage = "Event name should be between 3 and 30 characters"
+                                       showSnackbar(message: errorMessage)
+                                       return
+                                   }
+                                   // Validate lieu
+                                   guard eventLocation.count >= 3 && eventLocation.count <= 50 else {
+                                       errorMessage = "Event location should be between 3 and 50 characters"
+                                       showSnackbar(message: errorMessage)
+                                       return
+                                   }
 
                                    Task {
                                        do {
@@ -217,6 +223,12 @@ struct EventEditView: View {
                                             .edgesIgnoringSafeArea(.all))
                }
            }
+    private func showSnackbar(message: String) {
+        snackbarMessage = message
+        withAnimation {
+            isSnackbarShowing = true
+        }
+    }
        
 }
 

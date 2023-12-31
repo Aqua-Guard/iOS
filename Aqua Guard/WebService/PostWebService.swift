@@ -9,10 +9,10 @@ import Foundation
 
 final class PostWebService{
     
-    
+        
     static func createPost(token: String, description: String, imageData: Data) async throws -> Bool {
         let boundary = "Boundary-\(UUID().uuidString)"
-        var request = URLRequest(url: URL(string: "http://localhost:9090/posts/")!)
+        var request = URLRequest(url: URL(string: "https://aquaguard-tux1.onrender.com/posts/")!)
         request.httpMethod = "POST"
         request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
@@ -51,7 +51,7 @@ final class PostWebService{
     static func updatePost(postId: String,token: String, description: String) async throws -> Bool {
         
         let boundary = "Boundary-\(UUID().uuidString)"
-        var request = URLRequest(url: URL(string: "http://localhost:9090/posts/\(postId)")!)
+        var request = URLRequest(url: URL(string: "https://aquaguard-tux1.onrender.com/posts/\(postId)")!)
         request.httpMethod = "PUT"
         request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
@@ -81,7 +81,7 @@ final class PostWebService{
     }
     
     static func getPostsData(token: String) async throws -> [PostModel] {
-        let urlString = "http://127.0.0.1:9090/posts/"
+        let urlString = "https://aquaguard-tux1.onrender.com/posts/"
         guard let url = URL(string: urlString) else {
             throw PostErrorHandler.invalidURL
         }
@@ -104,7 +104,7 @@ final class PostWebService{
     }
     
     static func getMyPostsData(token: String) async throws -> [PostModel] {
-        let urlString = "http://127.0.0.1:9090/posts/postByCurrentUser"
+        let urlString = "https://aquaguard-tux1.onrender.com/posts/postByCurrentUser"
         guard let url = URL(string: urlString) else {
             throw PostErrorHandler.invalidURL
         }
@@ -127,7 +127,7 @@ final class PostWebService{
     }
     
     static func addComment(postId: String, comment: String, token: String) async throws -> Comment {
-        let urlString = "http://127.0.0.1:9090/posts/\(postId)/comments"
+        let urlString = "https://aquaguard-tux1.onrender.com/posts/\(postId)/comments"
         guard let url = URL(string: urlString) else {
             throw PostErrorHandler.invalidURL
         }
@@ -158,7 +158,7 @@ final class PostWebService{
     }
     
     static func deleteComment(commentId: String, token: String) async throws {
-        let urlString = "http://localhost:9090/comments/\(commentId)"
+        let urlString = "https://aquaguard-tux1.onrender.com/comments/\(commentId)"
         guard let url = URL(string: urlString) else {
             throw PostErrorHandler.invalidURL
         }
@@ -182,7 +182,7 @@ final class PostWebService{
     }
     
     static func updateComment(commentId: String, newComment: String, token: String) async throws {
-        let urlString = "http://localhost:9090/comments/\(commentId)"
+        let urlString = "https://aquaguard-tux1.onrender.com/comments/\(commentId)"
         guard let url = URL(string: urlString) else {
             throw PostErrorHandler.invalidURL
         }
@@ -216,7 +216,7 @@ final class PostWebService{
     }
     
     static func addLike(to postId: String, withToken token: String) async throws {
-        let likeURL = "http://localhost:9090/posts/like/\(postId)"
+        let likeURL = "https://aquaguard-tux1.onrender.com/posts/like/\(postId)"
         guard let url = URL(string: likeURL) else {
             throw PostErrorHandler.invalidURL
         }
@@ -235,7 +235,7 @@ final class PostWebService{
         // Handle the successful response here if needed
     }
     static func dislikePost(with postId: String, andToken token: String) async throws {
-        let dislikeURL = "http://localhost:9090/posts/dislike/\(postId)"
+        let dislikeURL = "https://aquaguard-tux1.onrender.com/posts/dislike/\(postId)"
         guard let url = URL(string: dislikeURL) else {
             throw PostErrorHandler.invalidURL
         }
@@ -255,7 +255,7 @@ final class PostWebService{
     }
     
     static func isPostLiked(by postId: String, withToken token: String) async throws -> Bool {
-        let checkLikeURL = "http://localhost:9090/posts/isLiked/\(postId)"
+        let checkLikeURL = "https://aquaguard-tux1.onrender.com/posts/isLiked/\(postId)"
         guard let url = URL(string: checkLikeURL) else {
             throw PostErrorHandler.invalidURL
         }
@@ -274,7 +274,7 @@ final class PostWebService{
         return try JSONDecoder().decode(Bool.self, from: data)
     }
     static func deletePost(postId: String, token: String) async throws {
-        let urlString = "http://127.0.0.1:9090/posts/\(postId)"
+        let urlString = "https://aquaguard-tux1.onrender.com/posts/\(postId)"
         guard let url = URL(string: urlString) else {
             throw PostErrorHandler.invalidURL
         }
@@ -299,6 +299,33 @@ final class PostWebService{
         }
     }
     
-    
+    static func fetchAIDescription(for prompt: String, withToken token: String) async throws -> String {
+        let encodedPrompt = prompt.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        let descriptionURL = "https://aquaguard-tux1.onrender.com/posts/generateDescriptionWithChat/\(encodedPrompt)"
+        guard let url = URL(string: descriptionURL) else {
+            throw PostErrorHandler.invalidURL
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET" // Changed to GET
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw PostErrorHandler.invalidResponse
+        }
+
+        // Decode the JSON response to get the description
+        let description = try JSONDecoder().decode(AIDescriptionResponse.self, from: data).description
+
+        return description
+    }
+
     
 }
+struct AIDescriptionResponse: Decodable {
+    let description: String
+}
+
+

@@ -8,28 +8,80 @@
 import SwiftUI
 
 struct ActualiteListView: View {
+    @EnvironmentObject var viewModel: ActualiteViewModel
+    @State private var searchText = ""
+
     var body: some View {
+        
         VStack {
-        NavigationView {
-            List {
-             
-                ForEach(0..<5) { index in
-               
-                    ActualiteCardView()
-                        .listRowInsets(EdgeInsets(top: 5, leading: 0, bottom: 4, trailing: 0))
-                }
+            
+            Spacer()
+            
+            NavigationView {
+                
+                VStack {
+                    HStack {
+                        TextField("Search", text: $searchText){ isEditing in
+                            
+                        } onCommit: {
+                            viewModel.searchActualites(about: searchText)
+                        }
+                        .padding(8)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)
+                        .padding(.trailing, 8)
+                        
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.gray)
+                    }
+                    .padding(8)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(10)
+                    .padding(8)
+                    
+                    List {if viewModel.actualites.isEmpty {
+                        Section(header: Text("No actualites").font(.title).foregroundColor(Color.darkBlue), footer: Text("")) {
+                            Image("photo")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 250, height: 250)
+                                .padding(.top, 5)
+                            
+                            Text("No Actualite exists")
+                                .font(.system(size: 20))
+                                .foregroundColor(Color.darkBlue)
+                                .multilineTextAlignment(.center)
+                                .padding(.top, 5)
+                        }
+                    } else {
+                        
+                        ForEach(viewModel.actualites) { actualite in
+                            ActualiteCardView(actualite: actualite)
+                                .listRowInsets(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
+                        }
+                    }
+                    }
+                    
+                }.background(Image("background_splash_screen"))
             }
-            .padding(8)
-                       .listStyle(PlainListStyle()) // Use PlainListStyle to remove the default list appearance
-                       
+        }               .padding(8)
+            .listStyle(PlainListStyle())
+            
             .background(Image("background_splash_screen")
-                            .resizable()
-                            .scaledToFill()
-                            .edgesIgnoringSafeArea(.all))
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all))
             .navigationTitle("Actualites").navigationBarTitleDisplayMode(.inline)
-        }
-    }
+            .navigationBarBackButtonHidden(true)
     } }
-#Preview {
-    ActualiteListView()
+struct ActualiteListView_Previews: PreviewProvider {
+    static var previews: some View {
+        // Create an instance of EventViewModel
+        let viewModel = EventViewModel()
+
+        // Provide the viewModel as an environment object in the preview
+        ActualiteListView()
+            .environmentObject(viewModel)
+    }
 }
+
