@@ -25,7 +25,7 @@ struct ReclamationCardView: View {
                   LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.1333333333, green: 0.6235294118, blue: 0.9176470588, alpha: 1)), Color(#colorLiteral(red: 0.9490196078, green: 0.9803921569, blue: 1, alpha: 1))]), startPoint: .top, endPoint: .bottom)
                       .frame(height:77)
                       .padding(-70)
-                  AsyncImage(url: URL(string: "http://192.168.93.190:9090/images/reclamation/\(reclamation.image)")) { phase in
+                  AsyncImage(url: URL(string: "https://aquaguard-tux1.onrender.com/images/reclamation/\(reclamation.image)")) { phase in
                       switch phase {
                       case .empty:
                           ProgressView()

@@ -9,14 +9,14 @@ import Foundation
 
 final class ReclamationWebService{
     static let shared = ReclamationWebService()
-    private let baseURL = "http://192.168.93.190:9090"
+    private let baseURL = "https://aquaguard-tux1.onrender.com"
     
     
     
     static func AddReclamation(title: String, description: String, imageData: Data) async throws -> Bool {
         let boundary = "Boundary-\(UUID().uuidString)"
         var id = "6555d5c10f8bb38893f5be50"
-        var request = URLRequest(url: URL(string: "http://192.168.93.190:9090/reclamation")!)
+        var request = URLRequest(url: URL(string: "https://aquaguard-tux1.onrender.com/reclamation")!)
         request.httpMethod = "POST"
         request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
 
