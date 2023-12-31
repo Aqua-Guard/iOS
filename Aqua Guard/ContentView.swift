@@ -34,7 +34,7 @@ struct ContentView: View {
                     }.environmentObject(postViewModel)
               
                 StoreView(viewModel: ProductViewModel())
-                Text("Store")
+                
                     .tabItem {
                         Label("Store", systemImage: "bag")
                     }.environmentObject(CartManager())
