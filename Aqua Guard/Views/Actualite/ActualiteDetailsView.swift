@@ -10,7 +10,7 @@ struct ActualiteDetailsView: View {
 
     var body: some View {
         VStack {
-            AsyncImage(url: URL(string: "http://127.0.0.1:9090/images/actualite/\(actualite.image)")) { phase in
+            AsyncImage(url: URL(string: "https://aquaguard-tux1.onrender.com/images/actualite/\(actualite.image)")) { phase in
                 switch phase {
                 case .empty:
                     ProgressView()

@@ -30,7 +30,7 @@ struct SettingsView: View {
                                     .offset(y: -90)
                                 VStack {
                                     if let unwrappedUserImage = userImage {
-                                        let userImageURLString = "http://127.0.0.1:9090/images/user/\(unwrappedUserImage)"
+                                        let userImageURLString = "https://aquaguard-tux1.onrender.com/images/user/\(unwrappedUserImage)"
                                         
                                         AsyncImage(url: URL(string: userImageURLString))
                                             .scaledToFit()

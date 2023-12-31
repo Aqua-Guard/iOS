@@ -7,7 +7,7 @@
 
 import Foundation
 
-let URLString:String = "http://127.0.0.1:9090/user"
+let URLString:String = "https://aquaguard-tux1.onrender.com/user"
 
 
 class UserService{

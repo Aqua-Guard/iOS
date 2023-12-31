@@ -16,7 +16,7 @@ struct CommentCardView: View {
             
             HStack {
                 
-                if let avatarName = comment.commentAvatar, let url = URL(string: "http://127.0.0.1:9090/images/user/" + avatarName) {
+                if let avatarName = comment.commentAvatar, let url = URL(string: "https://aquaguard-tux1.onrender.com/images/user/" + avatarName) {
                     AsyncImage(url: url) { phase in
                         switch phase {
                         case .success(let image):

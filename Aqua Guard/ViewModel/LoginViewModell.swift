@@ -48,7 +48,8 @@ class LoginViewModell: ObservableObject {
             if (try? JSONDecoder().decode(LoginResponse.self, from: responseData)) != nil {
                 if let loginResponse = try? JSONDecoder().decode(LoginResponse.self, from: responseData) {
 
-
+print("----------")
+                    print(LoginViewModell.defaults.set(loginResponse.token, forKey: "token"))
                     LoginViewModell.defaults.set(loginResponse.token, forKey: "token")
                     LoginViewModell.defaults.set(loginResponse.email, forKey: "email")
                     LoginViewModell.defaults.set(loginResponse.username, forKey: "username")

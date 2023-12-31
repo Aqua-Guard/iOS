@@ -33,7 +33,7 @@ struct PostDetailView: View {
             // User info and post image
             HStack {
                 
-                AsyncImage(url: URL(string: "http://127.0.0.1:9090/images/user/\(post.userImage ?? "")")) { phase in
+                AsyncImage(url: URL(string: "https://aquaguard-tux1.onrender.com/images/user/\(post.userImage ?? "")")) { phase in
                     switch phase {
                     case .success(let image):
                         image.resizable() // Make the image resizable
@@ -73,7 +73,7 @@ struct PostDetailView: View {
                 .foregroundColor(.secondary)
             
             //  i want ti center this image
-            AsyncImage(url: URL(string: "http://127.0.0.1:9090/images/post/\(post.postImage)")) { phase in
+            AsyncImage(url: URL(string: "https://aquaguard-tux1.onrender.com/images/post/\(post.postImage)")) { phase in
                 switch phase {
                 case .success(let image):
                     image.resizable() // Make the image resizable
