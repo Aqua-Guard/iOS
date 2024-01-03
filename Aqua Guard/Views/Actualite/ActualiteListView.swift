@@ -24,6 +24,7 @@ struct ActualiteListView: View {
                         TextField("Search", text: $searchText){ isEditing in
                             
                         } onCommit: {
+                            print("---------fama7aja houni")
                             viewModel.searchActualites(about: searchText)
                         }
                         .padding(8)
@@ -31,8 +32,13 @@ struct ActualiteListView: View {
                         .cornerRadius(8)
                         .padding(.trailing, 8)
                         
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.gray)
+                        Button(action: {
+                                print("Search button clicked with text: \(searchText)")
+                                viewModel.searchActualites(about: searchText)
+                            }) {
+                                Image(systemName: "magnifyingglass")
+                                    .foregroundColor(.gray)
+                            }
                     }
                     .padding(8)
                     .background(Color(.systemGray6))
@@ -63,6 +69,8 @@ struct ActualiteListView: View {
                     }
                     
                 }.background(Image("background_splash_screen"))
+            }.onAppear {
+                viewModel.fetchActualite()
             }
         }               .padding(8)
             .listStyle(PlainListStyle())

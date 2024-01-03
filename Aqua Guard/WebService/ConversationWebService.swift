@@ -16,11 +16,13 @@ final class ConversationWebService{
     
     
     
-    static func sendmessage(message: String, userRole: String, reclamationid: String) async throws -> Bool {
+    static func sendmessage(token : String,message: String, userRole: String, reclamationid: String) async throws -> Bool {
         let boundary = "Boundary-\(UUID().uuidString)"
-        var id = "6555d5c10f8bb38893f5be50"
+       
         var request = URLRequest(url: URL(string: "https://aquaguard-tux1.onrender.com/discution")!)
         request.httpMethod = "POST"
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
         request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
 
         var body = Data()
@@ -58,36 +60,18 @@ final class ConversationWebService{
     
     
  
-    
-    func fetchDiscussions(reclamationId: String, completion: @escaping ([Discussion]?) -> Void) {
-            let url = URL(string: "\(baseURL)/reclamation/getdiscution")!
-            let boundary = "Boundary-\(UUID().uuidString)"
+    func fetchDiscussions(token: String, reclamationId: String, completion: @escaping ([Discussion]?) -> Void) {
+        guard let url = URL(string: "\(baseURL)/reclamation/getdiscution/\(reclamationId)") else {
+            print("Invalid URL")
+            completion(nil)
+            return
+        }
 
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-        request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST" // Adjusted to GET, assuming it's a fetch operation
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
 
-        var body = Data()
-        // iduser part
-        body.append("--\(boundary)\r\n")
-        body.append("Content-Disposition: form-data; name=\"reclamationId\"\r\n\r\n")
-        body.append("\(reclamationId)\r\n")
-        body.append("--\(boundary)--\r\n")
-        
-        request.httpBody = body
-        
-        
-            // Set the request body with the reclamationId
-          
-            do {
-                request.httpBody = body
-            } catch let error {
-                print("Error serializing request body:", error)
-                completion(nil)
-                return
-            }
-            
-            URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
                 print("Error fetching discussions:", error?.localizedDescription ?? "Unknown error")
                 completion(nil)
@@ -98,16 +82,15 @@ final class ConversationWebService{
                 if let jsonArray = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
                     print("jsonArray-----------")
                     print(jsonArray)
-                    let discussions = jsonArray.compactMap {
-                        Discussion(json: $0)
-                    }
+                    let discussions = jsonArray.compactMap { Discussion(json: $0) }
                     print("discussions---------------")
                     print(discussions)
                     completion(discussions)
                 } else {
+                    print("Unable to parse JSON as array of dictionaries")
                     completion(nil)
                 }
-            } catch let error {
+            } catch {
                 print("*****Discussion fetching failed with error: \(error)")
                 completion(nil)
             }
