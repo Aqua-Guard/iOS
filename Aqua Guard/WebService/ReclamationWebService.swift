@@ -13,18 +13,19 @@ final class ReclamationWebService{
     
     
     
-    static func AddReclamation(title: String, description: String, imageData: Data) async throws -> Bool {
+    static func AddReclamation(token : String ,userId : String ,title: String, description: String, imageData: Data) async throws -> Bool {
         let boundary = "Boundary-\(UUID().uuidString)"
-        var id = "6555d5c10f8bb38893f5be50"
+       
         var request = URLRequest(url: URL(string: "https://aquaguard-tux1.onrender.com/reclamation")!)
         request.httpMethod = "POST"
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
 
         var body = Data()
         // iduser part
         body.append("--\(boundary)\r\n")
         body.append("Content-Disposition: form-data; name=\"userId\"\r\n\r\n")
-        body.append("\(id)\r\n")
+        body.append("\(userId)\r\n")
         
         // title part
         body.append("--\(boundary)\r\n")
@@ -67,11 +68,12 @@ final class ReclamationWebService{
     
     
     
-    func fetchreclamation(completion: @escaping ([Reclamation]?) -> Void) {
-        let url = URL(string: "\(baseURL)/reclamation/get")!
+    func fetchreclamation(token : String , completion: @escaping ([Reclamation]?) -> Void) {
+        let url = URL(string: "\(baseURL)/reclamation/getbyuserId")!
         
         var request = URLRequest(url: url)
-        
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
                 print("Error fetching reclamation:", error?.localizedDescription ?? "Unknown error")

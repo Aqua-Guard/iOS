@@ -17,6 +17,13 @@ class ReclamationViewModel: ObservableObject {
     @Published var alertMessageaddingreclamation: String = ""
     @Published var addingreclamationAlert: Bool = false
 
+    
+    
+    @Published var CurrentUserId : String = LoginViewModell.defaults.string(forKey: "id") ?? ""
+  
+
+    let token = LoginViewModell.defaults.string(forKey: "token") ?? ""
+    
     init() {
         fetchreclamation()        // Initialize the list of Actualite with default data
     }
@@ -24,8 +31,7 @@ class ReclamationViewModel: ObservableObject {
 
     func fetchreclamation() {
        
-        ReclamationWebService.shared.fetchreclamation{ [weak self] reclamation in
-            
+        ReclamationWebService.shared.fetchreclamation(token: token) { [weak self] reclamation in
             DispatchQueue.main.async {
                 self?.reclamation = reclamation ?? []
             }
@@ -33,7 +39,7 @@ class ReclamationViewModel: ObservableObject {
     }
     
     func fetchDiscussions(reclamationId: String) {
-        ConversationWebService.shared.fetchDiscussions(reclamationId: reclamationId) { [weak self] discussions in
+        ConversationWebService.shared.fetchDiscussions(token: token,reclamationId: reclamationId) { [weak self] discussions in
             DispatchQueue.main.async {
                 self?.discussions = discussions ?? []
             }
@@ -41,7 +47,7 @@ class ReclamationViewModel: ObservableObject {
     }
     func sendMessage(message: String, userRole: String, reclamationId: String) async {
             do {
-                let success = try await ConversationWebService.sendmessage(message: message, userRole: userRole, reclamationid: reclamationId)
+                let success = try await ConversationWebService.sendmessage(token: token,message: message, userRole: userRole, reclamationid: reclamationId)
 
                 if success {
                     fetchDiscussions(reclamationId: reclamationId)
@@ -55,7 +61,7 @@ class ReclamationViewModel: ObservableObject {
         
         
             do {
-                let success = try await ReclamationWebService.AddReclamation(title: title, description: description, imageData: image)
+                let success = try await ReclamationWebService.AddReclamation(token: token , userId : CurrentUserId ,title: title, description: description, imageData: image)
 
                 if success {
                     
