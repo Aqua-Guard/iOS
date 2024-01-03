@@ -110,7 +110,7 @@ class UserService{
     
     
     func updateProfile(user: UpdateProfile, image: Data) async throws -> Bool {
-        let urlString = "\(URLString)/updateProfile/" + (LoginViewModell.defaults.string(forKey: "username") ?? "")
+        let urlString = "\(URLString)/updateProfile/" + (LoginViewModell.defaults.string(forKey: "id") ?? "")
             guard let url = URL(string: urlString)
         else {
                 print("Invalid URL")
@@ -118,7 +118,7 @@ class UserService{
             }
 
             var request = URLRequest(url: url)
-            request.httpMethod = "POST"
+            request.httpMethod = "PUT"
 
             let boundary = "Boundary-\(UUID().uuidString)"
             request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")

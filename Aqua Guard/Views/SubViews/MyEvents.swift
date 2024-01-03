@@ -18,64 +18,64 @@ struct MyEvents: View {
    
     var body: some View {
         NavigationView{
-             
-            List{
-                if viewModel.events.isEmpty {
-                    Section(header: Text("No Events").font(.title).foregroundColor(Color.darkBlue), footer: Text("")) {
+            ScrollView {
+                VStack(spacing: 0){
+                    if viewModel.events.isEmpty {
+                        Section(header: Text("No Events").font(.title).foregroundColor(Color.darkBlue), footer: Text("")) {
+                            
+                            Image("calendar_amico")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 250, height: 250)
+                                .padding(.all, 5)
+                            
+                            
+                            Text("No Events exists")
+                                .font(.system(size: 20))
+                                .foregroundColor(Color.darkBlue)
+                                .multilineTextAlignment(.center)
+                                .padding(.top, 5)
+                        }
+                    }else{
                         
-                        Image("calendar_amico")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 250, height: 250)
-                            .padding(.all, 5)
-                        
-                        
-                        Text("No Events exists")
-                            .font(.system(size: 20))
-                            .foregroundColor(Color.darkBlue)
-                            .multilineTextAlignment(.center)
-                            .padding(.top, 5)
+                        ForEach(viewModel.events) { event in
+                            EventCardView(event: event)
+                                .listRowInsets(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
+                            
+                                .swipeActions(edge: .leading) {
+                                    Button(action: {
+                                        selectedEvent = event
+                                        isEditing = true
+                                    }) {
+                                        Label("Edit", systemImage: "pencil")
+                                    }
+                                    .tint(.blue)
+                                }
+                                .swipeActions(edge: .trailing){
+                                    Button(action: {
+                                        eventToDelete = event
+                                        showAlert = true
+                                    }) {
+                                        Label("Delete", systemImage: "trash")
+                                    }
+                                    .tint(.red)
+                                }
+                            
+                        } 
+                        .id(deletionID)
+                        .sheet(isPresented: $isEditing) {
+                            if let unwrappedEvent = selectedEvent {
+                                EventEditView(event: unwrappedEvent)
+                            } else {
+                                // Handle the case where selectedEvent is nil
+                                // You might want to present an error or take other appropriate action
+                            }
+                        }
                     }
-                }else{
                     
-                    ForEach(viewModel.events) { event in
-                        EventCardView(event: event)
-                            .listRowInsets(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
-                        
-                            .swipeActions(edge: .leading) {
-                                Button(action: {
-                                    selectedEvent = event
-                                    isEditing = true
-                                }) {
-                                    Label("Edit", systemImage: "pencil")
-                                }
-                                .tint(.blue)
-                            }
-                            .swipeActions(edge: .trailing){
-                                Button(action: {
-                                    eventToDelete = event
-                                    showAlert = true
-                                }) {
-                                    Label("Delete", systemImage: "trash")
-                                }
-                                .tint(.red)
-                            }
-                        
-                    } 
-                    .id(deletionID)
-                    .sheet(isPresented: $isEditing) {
-                        if let unwrappedEvent = selectedEvent {
-                               EventEditView(event: unwrappedEvent)
-                           } else {
-                               // Handle the case where selectedEvent is nil
-                               // You might want to present an error or take other appropriate action
-                           }
-                    }
-            }
-            
-            
-            }
-               
+                    
+                }
+                }
                 .onAppear{
                     Task{
                         await viewModel.fetchMyEvents()
