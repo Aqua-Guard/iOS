@@ -23,7 +23,8 @@ struct EditProfile: View {
 
     @State var selectedItem: PhotosPickerItem? = nil;
     @State var selectedImageData: Data?
-    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
     
     @State var email: String = ""
     @State var username: String = ""
@@ -39,6 +40,25 @@ struct EditProfile: View {
                         .edgesIgnoringSafeArea(.all)
 
                         VStack{
+                            
+                            VStack {
+                                HStack {
+                                    Button(action: {
+                                        self.presentationMode.wrappedValue.dismiss()
+                                    }) {
+                                        Image(systemName: "arrow.left.circle.fill")
+                                            .resizable()
+                                            .foregroundColor(.blue)
+                                            .frame(width: 25, height: 25)
+                                    }
+                                    
+                                    Spacer()
+                                }
+                            }
+                            .alignmentGuide(.top) { _ in 0 }
+                            .alignmentGuide(.leading) { _ in 0 }
+                            .padding()
+                            
                             VStack {
                                 
                                 Image(uiImage: selectedImage)

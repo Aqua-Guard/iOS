@@ -8,7 +8,7 @@ struct ProductCard: View {
     var body: some View {
         VStack(spacing: 10) {
             ZStack(alignment: .topTrailing) {
-                AsyncImage(url: URL(string: "http://172.18.26.15:9090/images/produit/\(product.image)")) { image in
+                AsyncImage(url: URL(string: "https://aquaguard-tux1.onrender.com/images/produit/\(product.image)")) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)

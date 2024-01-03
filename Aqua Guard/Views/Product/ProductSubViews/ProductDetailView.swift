@@ -23,7 +23,7 @@ struct ProductDetailView: View {
                 Spacer()
                 
                 VStack(alignment: .center, spacing: 16) {
-                    AsyncImage(url: URL(string: "http://172.18.26.15:9090/images/produit/\(product.image)")) { image in
+                    AsyncImage(url: URL(string: "https://aquaguard-tux1.onrender.com/images/produit/\(product.image)")) { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fill)
