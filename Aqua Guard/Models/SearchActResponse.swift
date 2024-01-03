@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct Actualite : Identifiable , Decodable {
+struct SearchActResponse : Identifiable , Decodable {
     let idactualite: String
     let userId: String
     let title: String
@@ -14,8 +14,6 @@ struct Actualite : Identifiable , Decodable {
     let image: String
     let text: String
     let views: Int
-    let like : Int?
-    let dislike : Int?
     var id: String {
         return idactualite
     }
@@ -29,9 +27,8 @@ struct Actualite : Identifiable , Decodable {
             let description = json["description"] as? String,
             let image = json["image"] as? String,
             let text = json["text"] as? String,
-            let views = json["views"] as? Int,
-            let like = json["like"] as? Int,
-            let dislike = json["dislike"] as? Int
+            let views = json["views"] as? Int
+       
         else {
             print("Error converting attributs.")
 
@@ -44,8 +41,6 @@ struct Actualite : Identifiable , Decodable {
         self.image = image
         self.text = text
         self.views = views
-        self.like = like
-        self.dislike = dislike
  
 
     }

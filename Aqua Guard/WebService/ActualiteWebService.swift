@@ -13,39 +13,37 @@ final class ActualiteWebService{
     
     
     
-    func fetchactualite(completion: @escaping ([Actualite]?) -> Void) {
-        let url = URL(string: "\(baseURL)/act")!
-        
+    func fetchactualite(token: String, completion: @escaping ([Actualite]?) -> Void) {
+        guard let url = URL(string: "\(baseURL)/act") else {
+            print("Invalid URL")
+            completion(nil)
+            return
+        }
+
         var request = URLRequest(url: url)
-        
+        request.httpMethod = "GET"
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
-                print("Error fetching actualite:", error?.localizedDescription ?? "Unknown error")
+                print("Error fetching actualites:", error?.localizedDescription ?? "Unknown error")
                 completion(nil)
                 return
             }
-            
+
             do {
-                if let jsonArray = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
-                    print("jsonArray-----------")
-                    print(jsonArray)
-                    let actualite = jsonArray.compactMap {
-                        Actualite(json: $0) }
-                    print("actualite---------------")
-                    print(actualite)
-                    completion(actualite)
-                } else {
-                    completion(nil)
-                }
-            } catch let error{
-                print("*****User creation failed with error: \(error)")
+                let actualites = try JSONDecoder().decode([Actualite].self, from: data)
+                print("Actualites fetched successfully")
+                completion(actualites)
+            } catch {
+                print("*****Actualite fetching failed with error: \(error)")
                 completion(nil)
             }
         }.resume()
     }
+
     
-    
-    func searchActualites(about: String, completion: @escaping ([Actualite]?) -> Void) {
+    func searchActualites(token : String ,about: String, completion: @escaping ([Actualite]?) -> Void) {
         let urlString = "https://aquaguard-tux1.onrender.com/act/search"
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
@@ -55,6 +53,7 @@ final class ActualiteWebService{
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 
         do {

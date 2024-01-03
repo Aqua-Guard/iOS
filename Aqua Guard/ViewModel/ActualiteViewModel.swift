@@ -13,6 +13,7 @@ class ActualiteViewModel: ObservableObject {
 
     @Published var actualites :[Actualite] = []
     
+    let token = LoginViewModell.defaults.string(forKey: "token") ?? ""
 
     init() {
         fetchActualite()        // Initialize the list of Actualite with default data
@@ -21,7 +22,7 @@ class ActualiteViewModel: ObservableObject {
 
     func fetchActualite() {
        
-        ActualiteWebService.shared.fetchactualite() { [weak self] actualites in
+        ActualiteWebService.shared.fetchactualite(token: token) { [weak self] actualites in
             
             DispatchQueue.main.async {
                 self?.actualites = actualites ?? []
@@ -29,7 +30,7 @@ class ActualiteViewModel: ObservableObject {
         }
     }
     func searchActualites(about: String) {
-         ActualiteWebService.shared.searchActualites(about: about) { [weak self] actualites in
+         ActualiteWebService.shared.searchActualites(token: token,about: about) { [weak self] actualites in
              DispatchQueue.main.async {
                  self?.actualites = actualites ?? []
              }

@@ -28,7 +28,7 @@ struct StoreView: View {
                 // Search Bar
                 SearchBar(text: $searchText)
                     .padding(.horizontal)
-
+                Text("Your Points Balance:\(LoginViewModell.defaults.string(forKey: "nbPts")!)")
                 // Category Selector
                 Picker(selection: $selectedCategory, label: Text("Category")) {
                     Text("All Categories")

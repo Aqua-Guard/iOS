@@ -23,14 +23,8 @@ struct EditProfile: View {
 
     @State var selectedItem: PhotosPickerItem? = nil;
     @State var selectedImageData: Data?
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
     
-    @State var email: String = ""
-    @State var username: String = ""
-    @State var firstName: String = ""
-    @State var lastName: String = ""
-    @State var password: String = ""
+
     
     
         var body: some View {
@@ -40,25 +34,6 @@ struct EditProfile: View {
                         .edgesIgnoringSafeArea(.all)
 
                         VStack{
-                            
-                            VStack {
-                                HStack {
-                                    Button(action: {
-                                        self.presentationMode.wrappedValue.dismiss()
-                                    }) {
-                                        Image(systemName: "arrow.left.circle.fill")
-                                            .resizable()
-                                            .foregroundColor(.blue)
-                                            .frame(width: 25, height: 25)
-                                    }
-                                    
-                                    Spacer()
-                                }
-                            }
-                            .alignmentGuide(.top) { _ in 0 }
-                            .alignmentGuide(.leading) { _ in 0 }
-                            .padding()
-                            
                             VStack {
                                 
                                 Image(uiImage: selectedImage)
@@ -81,35 +56,35 @@ struct EditProfile: View {
                                 
                                 
                                 VStack {
-                                    TextInputField("", text: $username, error: $viewModel.error)
+                                    TextInputField("", text: $viewModel.username, error: $viewModel.error)
                                         .padding(.bottom)
                                 }
                                 .onAppear {
-                                    username = LoginViewModell.defaults.string(forKey: "username") ?? ""
+                                    viewModel.username = LoginViewModell.defaults.string(forKey: "username") ?? ""
                                 }
                                 
                                 VStack {
-                                    TextInputField("", text: $email, error: $viewModel.error)
+                                    TextInputField("", text: $viewModel.email, error: $viewModel.error)
                                         .padding(.bottom)
                                 }
                                 .onAppear {
-                                    email = LoginViewModell.defaults.string(forKey: "email") ?? ""
+                                    viewModel.email = LoginViewModell.defaults.string(forKey: "email") ?? ""
                                 }
                                 
                                 VStack {
-                                    TextInputField("", text: $firstName, error: $viewModel.error)
+                                    TextInputField("", text: $viewModel.firstName, error: $viewModel.error)
                                         .padding(.bottom)
                                 }
                                 .onAppear {
-                                    firstName = LoginViewModell.defaults.string(forKey: "firstName") ?? ""
+                                    viewModel.firstName = LoginViewModell.defaults.string(forKey: "firstName") ?? ""
                                 }
                                 
                                 VStack {
-                                    TextInputField("", text: $lastName, error: $viewModel.error)
+                                    TextInputField("", text: $viewModel.lastName, error: $viewModel.error)
                                         .padding(.bottom)
                                 }
                                 .onAppear {
-                                    lastName = LoginViewModell.defaults.string(forKey: "lastName") ?? ""
+                                    viewModel.lastName = LoginViewModell.defaults.string(forKey: "lastName") ?? ""
                                 }
                                 
                                 
@@ -132,10 +107,18 @@ struct EditProfile: View {
                                                 }
                                             }
                                             if let imageData = selectedImage.jpegData(compressionQuality: 0.8) {
-                                                await viewModel.updateProfile(email: email, firstName: firstName, lastName: lastName, image: imageData, username: username)
+                                                await viewModel.updateProfile(email: viewModel.email, firstName: viewModel.firstName, lastName: viewModel.lastName, image: imageData, username: viewModel.username)
                                                 navigationActive = true
+                                                /*LoginViewModell.defaults.set($viewModel.email, forKey: "email")
+                                                LoginViewModell.defaults.set($viewModel.username, forKey: "username")
+                                                LoginViewModell.defaults.set($viewModel.firstName, forKey: "firstName")
+                                                LoginViewModell.defaults.set($viewModel.lastName, forKey: "lastName")
+                                                print("imageData")*/
+                                                /*print(imageData)
+                                                LoginViewModell.defaults.set(URL(string: imageData.base64EncodedString())?.path(), forKey: "image")*/
                                                 if self.viewModel.isLoading {
                                                     //$navigationActive = true
+                                                    
                                                 }
                                                 
 
