@@ -44,7 +44,7 @@ struct AccountScreen: View {
                             
                             
                         
-                            let userImageURLString = "http://172.18.1.232:9090/images/user/\((LoginViewModell.defaults.string(forKey: "image") ?? ""))"
+                            let userImageURLString = "https://aquaguard-tux1.onrender.com/images/user/\((LoginViewModell.defaults.string(forKey: "image") ?? ""))"
                             
                             GeometryReader { geometry in
                                 AsyncImage(url: URL(string: userImageURLString)) { phase in
@@ -110,7 +110,7 @@ struct AccountScreen: View {
                             
                         
                         
-                        /*
+                        
                     ZStack {
                         NavigationLink(destination: EditProfile(), isActive: $isActive) {
                             
@@ -133,7 +133,7 @@ struct AccountScreen: View {
                         .tint(Color.blue)
                         .cornerRadius(30)
                         .padding(.horizontal)
-                            */
+                            
                         
                         
                     }

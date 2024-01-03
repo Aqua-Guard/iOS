@@ -9,7 +9,7 @@ import Foundation
 
 class ProductService {
     static let shared = ProductService()
-    private let baseURL = "http://172.18.26.15:9090"
+    private let baseURL = "https://aquaguard-tux1.onrender.com"
         
     func fetchProducts(completion: @escaping ([Product]?) -> Void) {
          let url = URL(string: "\(baseURL)/produit")!
