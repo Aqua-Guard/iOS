@@ -136,7 +136,7 @@ class UserService{
         body.append(convertFormField(named: "email", value: user.email, boundary: boundary))
         body.append(convertFormField(named: "firstName", value: user.firstName, boundary: boundary))
         body.append(convertFormField(named: "lastName", value: user.lastName, boundary: boundary))
-        body.append(convertFormField(named: "username", value: user.username, boundary: boundary))
+        body.append(convertFormField(named: "newUsername", value: user.username, boundary: boundary))
 
 
             body.append("--\(boundary)--".data(using: .utf8)!)

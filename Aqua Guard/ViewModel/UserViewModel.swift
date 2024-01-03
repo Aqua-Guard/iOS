@@ -280,7 +280,21 @@ class UserViewModel: ObservableObject{
             let User = UpdateProfile(id: UUID().uuidString, email: email, firstName: firstName, lastName: lastName, username: username, image: imageURL.path())
             
             do {
+                print("----------------------------------------------+++++++++++++")
+                print(email)
+                print(username)
+                print(firstName)
+                print(lastName)
+                LoginViewModell.defaults.set(email, forKey: "email")
+                LoginViewModell.defaults.set(username, forKey: "username")
+                LoginViewModell.defaults.set(firstName, forKey: "firstName")
+                LoginViewModell.defaults.set(lastName, forKey: "lastName")
+                
                 try await userService.updateProfile(user: User, image: image)
+                
+
+
+
                 
             } catch {
                 print("Error creating account: \(error)")
