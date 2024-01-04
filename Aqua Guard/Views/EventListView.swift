@@ -12,8 +12,7 @@ struct EventListView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(spacing: 0) {
+                List {
                     if viewModel.events.isEmpty {
                         Section(header: Text("No Events").font(.title).foregroundColor(Color.darkBlue), footer: Text("")) {
                             Image("calendar_amico")
@@ -43,7 +42,7 @@ struct EventListView: View {
                         .scaledToFill()
                         .edgesIgnoringSafeArea(.all)
                 )
-            }
+            
             }.onAppear {
                 Task {
                     await viewModel.fetchEvents()
